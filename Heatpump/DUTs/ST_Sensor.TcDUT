@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_Sensor" Id="{9e1f1cd0-bb8f-4424-a734-fa11366fbaf8}">
+    <Declaration><![CDATA[TYPE ST_Sensor :
+    STRUCT
+        temperatureEvaporatingIn: REAL;  (* Verdampfungstemperatur in °C (Eingang) *)
+        temperatureEvaporatingOut: REAL;  (* Verdampfungstemperatur in °C (Ausgang) *)
+        temperatureFlow: REAL;  (* Vorlauftemperatur in °C *)
+        temperatureReturn: REAL;  (* Rücklauftemperatur in °C *)
+        bufferTopTemperature: REAL;  (* Temperatur des Puffers oben in °C *)
+        temperatureOverheatedGas: REAL;  (* Saugtemperatur des überhitzten Gases *)
+        pressureHigh: REAL;  (* Hochdruck Kältekreis in bar *)
+        pressureLow: REAL;  (* Niederdruck Kältekreis in bar *)
+        pressureDifferenceEvaporator: REAL;  (* Druckdifferenz im Verdampfer in mbar *)
+        calculatedOverheatTemperature: REAL;  (* Berechnete Überhitzungstemperatur *)
+        heatRequest: BOOL;  (* Taster für Wärmeanforderung *)
+        userConfirmation: BOOL;  (* Taster für Ein-/Aus-Quittierung *)
+    END_STRUCT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

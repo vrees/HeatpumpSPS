@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_FailureMessage" Id="{44ed5e7c-f864-4263-92f1-3c99c3ddbb1e}">
+    <Declaration><![CDATA[TYPE ST_FailureMessage :
+    STRUCT
+        message: STRING[100];  (* Fehlermeldung *)
+        level: FailureLevel;  (* Fehlerstufe *)
+    END_STRUCT;
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

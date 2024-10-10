@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_Incident" Id="{bbb8154b-704a-43ea-9cc2-cef9d4f926cf}">
+    <Declaration><![CDATA[TYPE ST_Incident :
+    STRUCT
+        incidentTankLevelTooLow: BOOL;  (* Störung: Wasserstand des Tanks zu niedrig *)
+        incidentTankSensorDataMissing: BOOL;  (* Störung: Tanksensor sendet keine Daten mehr *)
+        warningLowPressure: BOOL;  (* Warnung: Niederdruck zu niedrig *)
+        warningHighPressure: BOOL;  (* Warnung: Hochdruck zu hoch *)
+        alarmExpansionValve: BOOL;  (* Alarm: Elektronisches Expansionsventil *)
+        incidentFlow: BOOL;  (* Störung: Durchfluss im Verdampfer zu niedrig *)
+        incidentCompressor: BOOL;  (* Störung: Verdichter / Motorschutzschalter *)
+        incidentLowPressure: BOOL;  (* Störung: Niederdruck zu niedrig *)
+        incidentHighPressure: BOOL;  (* Störung: Hochdruck zu hoch *)
+        incidentPressureDifferenceEvaporator: BOOL;  (* Störung: Druckverlust im Verdampfer überschritten *)
+        incidentMinTemperatureEvaporator: BOOL;  (* Störung: Minimale Temperatur im Verdampfer unterschritten *)
+    END_STRUCT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

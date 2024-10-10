@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_Actor" Id="{4250c58b-cb45-4ad1-becf-6a39481befe9}">
+    <Declaration><![CDATA[TYPE ST_Actor :
+    STRUCT
+        operatingStateWaterPump: BOOL;  (* Status der Heizungspumpe: Ein/Aus *)
+        operatingStateCompressor: BOOL;  (* Status des Verdichters: Ein/Aus *)
+    END_STRUCT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

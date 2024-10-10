@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_FailureLevel" Id="{b769e2ce-4487-4847-a8bd-77957b1d64c0}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE E_FailureLevel :
+( 
+    ERROR := 0,
+    WARNING := 1,
+    INFO := 2
+);
+END_TYPE
+
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

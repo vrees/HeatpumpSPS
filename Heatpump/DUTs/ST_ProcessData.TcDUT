@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_ProcessData" Id="{a35faa05-6e80-4943-a5d6-c56d0b7a641b}">
+    <Declaration><![CDATA[TYPE ST_ProcessData :
+    STRUCT
+        id: STRING[50];  (* Äquivalent zu String in Java *)
+        timestamp: TIME;  (* Äquivalent zu Instant in Java *)
+        state: States;  (* Enum States *)
+        sensor: ST_Sensor;  (* Instanz von Sensor *)
+        actor: ST_Actor;  (* Instanz von Actor *)
+        incident: ST_Incident;  (* Instanz von Incident *)
+        waitCounter: INT;  (* Integer *)
+        messages: ARRAY[1..10] OF ST_FailureMessage;  (* Set als Array, maximale Anzahl definieren *)
+    END_STRUCT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

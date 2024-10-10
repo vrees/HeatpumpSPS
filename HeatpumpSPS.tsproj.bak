@@ -10,23 +10,15 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{3E8EEEA4-1A11-0944-DDB1-03CC2558B12B}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
-							<Id>0</Id>
-							<Name>PlcTask</Name>
-							<ManualConfig>
-								<OTCID>#x02010030</OTCID>
-							</ManualConfig>
-							<Priority>20</Priority>
-							<CycleTime>10000000</CycleTime>
+							<Id>1</Id>
+							<Name>Default</Name>
 						</Context>
 					</Contexts>
-					<TaskPouOids>
-						<TaskPouOid Prio="20" OTCID="#x08502001"/>
-					</TaskPouOids>
 				</Instance>
 			</Project>
 		</Plc>
