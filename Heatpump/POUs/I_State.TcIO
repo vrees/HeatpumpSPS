@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_State" Id="{ebee4276-c4cf-4931-866b-4251da6de24d}">
+    <Declaration><![CDATA[INTERFACE I_State
+]]></Declaration>
+    <Property Name="Description" Id="{09fe3b11-4466-4002-a19f-d7f98022308d}">
+      <Declaration><![CDATA[PROPERTY Description : STRING]]></Declaration>
+      <Get Name="Get" Id="{fb376b64-5463-4c2d-a1bb-8dc6a8df688f}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="HeatIsRequested" Id="{bd7aa1f8-5748-4535-ba75-c3d1e68d26b3}">
+      <Declaration><![CDATA[METHOD HeatIsRequested : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="LimitValuesAreExceeded" Id="{00119294-6b09-4037-a5f2-bdd6e49bdada}">
+      <Declaration><![CDATA[METHOD LimitValuesAreExceeded  : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="TargetTemeperatureReached" Id="{6137e0ac-cc2f-4194-abc8-c58d06d8efb2}">
+      <Declaration><![CDATA[METHOD TargetTemeperatureReached : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="UserPressedConfirmationButton" Id="{b88189c9-53e3-4282-a4b8-58c626086e8a}">
+      <Declaration><![CDATA[METHOD UserPressedConfirmationButton : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="UserPressedSwitchOffButton" Id="{7f4f9871-0a9d-420a-9d6c-53cc58e2ab19}">
+      <Declaration><![CDATA[METHOD UserPressedSwitchOffButton : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="UserPressedSwitchOnButton" Id="{d09cf28e-8c67-4e8c-b208-ac82badb61d6}">
+      <Declaration><![CDATA[METHOD UserPressedSwitchOnButton : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="WaterHasCooledDown" Id="{e3917a29-80c1-4c55-b2b6-70e54206fcde}">
+      <Declaration><![CDATA[METHOD WaterHasCooledDown : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

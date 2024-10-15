@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_StateMachine" Id="{c349ad72-d78c-44d0-9319-bf272785d3c6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StateMachine
+VAR_INPUT
+	bButtonSwitchOn			: BOOL;
+	bButtonSwitchOff		: BOOL;
+	bButtonConfirmation		: BOOL;
+
+
+END_VAR
+VAR_OUTPUT
+		ipState					:	I_State := fbOffState;	
+END_VAR
+VAR
+	fbOffState					:	FB_OffState(THIS);
+	fbIdleState					:	FB_IdleState(THIS);
+	fbRunningState				:	FB_RunningState(THIS);
+	fbCoolDownState				:	FB_CoolDownState(THIS);
+	fbErrorState				:	FB_ErrorState(THIS);
+		
+	rtrigButtonSwitchOn			:	R_TRIG;
+	rtrigButtonSwitchOff		:	R_TRIG;
+	rtrigButtonConfirmation		:	R_TRIG;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[rtrigButtonSwitchOn(CLK := bButtonSwitchOn);
+rtrigButtonSwitchOff(CLK := bButtonSwitchOff);
+rtrigButtonConfirmation(CLK := bButtonConfirmation);
+
+
+IF (rtrigButtonSwitchOn.Q) THEN
+	ipState.UserPressedSwitchOnButton();
+END_IF
+
+IF (rtrigButtonSwitchOff.Q) THEN
+	ipState.UserPressedSwitchOffButton();
+END_IF
+
+IF (rtrigButtonConfirmation.Q) THEN
+	ipState.UserPressedConfirmationButton();
+END_IF]]></ST>
+    </Implementation>
+    <Property Name="CoolDownState" Id="{f97b0a89-973c-4c1a-a93f-bd53afa029ed}">
+      <Declaration><![CDATA[PROPERTY INTERNAL CoolDownState : I_State]]></Declaration>
+      <Get Name="Get" Id="{b6372e95-c683-40ad-a452-2ce707a937ae}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CoolDownState := THIS^.fbCoolDownState]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ErrorState" Id="{82bf1b50-5572-411a-a70d-536ddc4cc417}">
+      <Declaration><![CDATA[PROPERTY INTERNAL ErrorState : I_State]]></Declaration>
+      <Get Name="Get" Id="{b38f7974-de10-4e45-820b-f02c66d60dde}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ErrorState := THIS^.fbErrorState]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{6d3466aa-93d5-49ab-ba3a-3a7a40038459}">
+      <Declaration><![CDATA[//FB_Init ist immer implizit verfügbar und wird primär für die Initialisierung verwendet.
+//Der Rückgabewert wird nicht ausgewertet. Für gezielte Einflussnahme können Sie
+//die Methoden explizit deklarieren und darin mit dem Standard-Initialisierungscode 
+//zusätzlichen Code bereitstellen. Sie können den Rückgabewert auswerten.
+METHOD FB_Init: BOOL
+VAR_INPUT    
+	bInitRetains: BOOL; // TRUE: Die Retain-Variablen werden initialisiert (Reset warm / Reset kalt)    
+	bInCopyCode: BOOL;  // TRUE: Die Instanz wird danach in den Kopiercode kopiert (Online-Change)
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="IdleState" Id="{909b78a6-5091-4b36-9866-235bb070dd8d}">
+      <Declaration><![CDATA[PROPERTY INTERNAL IdleState : I_State]]></Declaration>
+      <Get Name="Get" Id="{e4d4815a-fc7b-4a73-9a7e-7c7f0b607f08}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IdleState := THIS^.fbIdleState]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="OffState" Id="{9baf72ca-9c89-4e21-8939-001a0e23445d}">
+      <Declaration><![CDATA[PROPERTY INTERNAL OffState : I_State]]></Declaration>
+      <Get Name="Get" Id="{4045de7f-9103-414f-ae85-7d8c9bbff5c4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[OffState := THIS^.fbOffState;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="RunningState" Id="{322a2666-716a-4153-b44f-a7d765f3afaa}">
+      <Declaration><![CDATA[PROPERTY INTERNAL RunningState : I_State]]></Declaration>
+      <Get Name="Get" Id="{5d6244d8-f12b-4996-a525-c240608b1a9f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RunningState := THIS^.fbRunningState]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
