@@ -5,7 +5,7 @@
     STRUCT
         operatingStateWaterPump: BOOL;  (* Status der Heizungspumpe: Ein/Aus *)
         operatingStateCompressor: BOOL;  (* Status des Verdichters: Ein/Aus *)
-    END_STRUCT;
+    END_STRUCT
 END_TYPE
 ]]></Declaration>
   </DUT>

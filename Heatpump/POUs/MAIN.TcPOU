@@ -3,30 +3,31 @@
   <POU Name="MAIN" Id="{e3e9ea5b-aaa6-4abd-9e50-1f99907708dc}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	fbStateMachine		:	FB_StateMachine();
-	sState				:	STRING;
-	bButtonSwitchOn		: 	BOOL;
-	bButtonSwitchOff	: 	BOOL;
-	bButtonConfirmation	: 	BOOL;
+	fbStateMachine				:	FB_StateMachine();
+	fbHeatPumpIO				:	FB_HeatpumpIO();
+	sState						:	STRING;
+	bOnButtonPressed    		: 	BOOL;
+	bOffButtonPressed			: 	BOOL;
+	bConfirmationButtonPressed	: 	BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbStateMachine(	
-	bButtonSwitchOn			:= bButtonSwitchOn,
-	bButtonSwitchOff		:= bButtonSwitchOff,
-	bButtonConfirmation		:= bButtonConfirmation);
+      <ST><![CDATA[fbStateMachine(	bOnButtonPressed				:= bOnButtonPressed,
+				bOffButtonPressed				:= bOffButtonPressed,
+				bConfirmationButtonPressed		:= bConfirmationButtonPressed);
+				
+fbHeatPumpIO();				
 	
 sState : fbStateMachine.ipState.Description;
-bButtonSwitchOn			:= FALSE;
-bButtonSwitchOff		:= FALSE;
-bButtonConfirmation		:= FALSE;	
+bOnButtonPressed			:= FALSE;
+bOffButtonPressed			:= FALSE;
+bConfirmationButtonPressed	:= FALSE;	
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="10" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="1" />
       <LineId Id="2" Count="0" />
+      <LineId Id="26" Count="1" />
       <LineId Id="16" Count="1" />
       <LineId Id="20" Count="1" />
       <LineId Id="18" Count="0" />

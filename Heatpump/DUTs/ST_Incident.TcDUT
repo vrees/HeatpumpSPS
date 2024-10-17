@@ -14,7 +14,7 @@
         incidentHighPressure: BOOL;  (* Störung: Hochdruck zu hoch *)
         incidentPressureDifferenceEvaporator: BOOL;  (* Störung: Druckverlust im Verdampfer überschritten *)
         incidentMinTemperatureEvaporator: BOOL;  (* Störung: Minimale Temperatur im Verdampfer unterschritten *)
-    END_STRUCT;
+    END_STRUCT
 END_TYPE
 ]]></Declaration>
   </DUT>

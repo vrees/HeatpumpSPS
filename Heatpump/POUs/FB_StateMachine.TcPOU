@@ -3,11 +3,9 @@
   <POU Name="FB_StateMachine" Id="{c349ad72-d78c-44d0-9319-bf272785d3c6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_StateMachine
 VAR_INPUT
-	bButtonSwitchOn			: BOOL;
-	bButtonSwitchOff		: BOOL;
-	bButtonConfirmation		: BOOL;
-
-
+	bOnButtonPressed			: BOOL;
+	bOffButtonPressed			: BOOL;
+	bConfirmationButtonPressed	: BOOL;
 END_VAR
 VAR_OUTPUT
 		ipState					:	I_State := fbOffState;	
@@ -25,9 +23,9 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[rtrigButtonSwitchOn(CLK := bButtonSwitchOn);
-rtrigButtonSwitchOff(CLK := bButtonSwitchOff);
-rtrigButtonConfirmation(CLK := bButtonConfirmation);
+      <ST><![CDATA[rtrigButtonSwitchOn(CLK := bOnButtonPressed);
+rtrigButtonSwitchOff(CLK := bOffButtonPressed);
+rtrigButtonConfirmation(CLK := bConfirmationButtonPressed);
 
 
 IF (rtrigButtonSwitchOn.Q) THEN
@@ -111,38 +109,14 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="SetState" Id="{ab5bafa0-2132-4b77-919e-816e14bcdd2c}">
+    <Method Name="SetState" Id="{d1b82ae6-b5f8-46df-b7d5-05a5b5812d18}">
       <Declaration><![CDATA[METHOD INTERNAL SetState : BOOL
 VAR_INPUT
 	newState : I_State;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <CFC>
-          <XmlArchive>
-            <Data>
-              <o xml:space="preserve" t="CFCImplementationObject">
-                <o n="Items" t="CFCItemList">
-                  <l2 n="InnerList" />
-                </o>
-                <n n="ParameterInitializationMethodGenerator" />
-                <o n="RoutingPathTable" t="CFCRoutingPathTable">
-                  <d2 n="InnerDictionary" />
-                </o>
-                <v n="AutoSizeCanvas">true</v>
-                <v n="CanvasWidth">2</v>
-                <v n="CanvasHeight">2</v>
-              </o>
-            </Data>
-            <TypeList>
-              <Type n="Boolean">System.Boolean</Type>
-              <Type n="CFCImplementationObject">{32d3375e-c010-41e2-9e43-b2fbf4f2b374}</Type>
-              <Type n="CFCItemList">{cd57ba20-558b-4b98-96c1-73c6000c3087}</Type>
-              <Type n="CFCRoutingPathTable">{4b8bcc79-5980-4868-b49e-005a8148859b}</Type>
-              <Type n="Int32">System.Int32</Type>
-            </TypeList>
-          </XmlArchive>
-        </CFC>
+        <ST><![CDATA[THIS^.ipState := newState;]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_StateMachine">
@@ -166,6 +140,9 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_StateMachine.RunningState.Get">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.SetState">
+      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

@@ -27,22 +27,45 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{2A1F7B76-1806-B6F4-54BE-142CC9CC31C2}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{42BE704B-31F5-8F40-87A3-80258957A24F}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.temperatureEvaporatingIn</Name>
+							<Comment><![CDATA[ Verdampfungstemperatur in °C (Eingang) ]]></Comment>
+							<Type>REAL</Type>
+						</Var>
+						<Var>
+							<Name>IO.nTemperature</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO.bInputN1</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>IO.bOutputN1</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
 					<Contexts>
 						<Context>
 							<Id>0</Id>
 							<Name>PlcTask</Name>
 							<ManualConfig>
-								<OTCID>#x02010030</OTCID>
+								<OTCID>#x03000011</OTCID>
 							</ManualConfig>
-							<Priority>20</Priority>
-							<CycleTime>10000000</CycleTime>
+							<Priority>11</Priority>
+							<CycleTime>1000000</CycleTime>
 						</Context>
 					</Contexts>
 					<TaskPouOids>
-						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+						<TaskPouOid Prio="11" OTCID="#x08502001"/>
 					</TaskPouOids>
 				</Instance>
 			</Project>

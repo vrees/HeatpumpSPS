@@ -4,8 +4,8 @@
     <Declaration><![CDATA[TYPE ST_FailureMessage :
     STRUCT
         message: STRING[100];  (* Fehlermeldung *)
-        level: FailureLevel;  (* Fehlerstufe *)
-    END_STRUCT;
+        level: E_FailureLevel;  (* Fehlerstufe *)
+    END_STRUCT
 END_TYPE]]></Declaration>
   </DUT>
 </TcPlcObject>

@@ -78,7 +78,8 @@ METHOD UserPressedConfirmationButton : BOOL
 METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Off Button pressed', '');
+pMachine^.SetState(pMachine^.CoolDownState);]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedSwitchOnButton" Id="{92d0b6bf-2822-477d-9e93-031fae1f4a37}">
@@ -97,5 +98,36 @@ METHOD WaterHasCooledDown : BOOL
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="FB_RunningState">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RunningState.Description.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RunningState.FB_init">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RunningState.HeatIsRequested">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RunningState.LimitValuesAreExceeded">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RunningState.TargetTemeperatureReached">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RunningState.UserPressedConfirmationButton">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RunningState.UserPressedSwitchOffButton">
+      <LineId Id="5" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RunningState.UserPressedSwitchOnButton">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RunningState.WaterHasCooledDown">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
