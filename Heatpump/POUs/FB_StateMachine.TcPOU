@@ -49,7 +49,7 @@ END_IF]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[CoolDownState := THIS^.fbCoolDownState]]></ST>
+          <ST><![CDATA[CoolDownState := THIS^.fbCoolDownState;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -60,7 +60,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[ErrorState := THIS^.fbErrorState]]></ST>
+          <ST><![CDATA[ErrorState := THIS^.fbErrorState;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -85,7 +85,7 @@ END_VAR]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IdleState := THIS^.fbIdleState]]></ST>
+          <ST><![CDATA[IdleState := THIS^.fbIdleState;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -107,9 +107,65 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[RunningState := THIS^.fbRunningState]]></ST>
+          <ST><![CDATA[RunningState := THIS^.fbRunningState;]]></ST>
         </Implementation>
       </Get>
     </Property>
+    <Method Name="SetState" Id="{ab5bafa0-2132-4b77-919e-816e14bcdd2c}">
+      <Declaration><![CDATA[METHOD INTERNAL SetState : BOOL
+VAR_INPUT
+	newState : I_State;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <CFC>
+          <XmlArchive>
+            <Data>
+              <o xml:space="preserve" t="CFCImplementationObject">
+                <o n="Items" t="CFCItemList">
+                  <l2 n="InnerList" />
+                </o>
+                <n n="ParameterInitializationMethodGenerator" />
+                <o n="RoutingPathTable" t="CFCRoutingPathTable">
+                  <d2 n="InnerDictionary" />
+                </o>
+                <v n="AutoSizeCanvas">true</v>
+                <v n="CanvasWidth">2</v>
+                <v n="CanvasHeight">2</v>
+              </o>
+            </Data>
+            <TypeList>
+              <Type n="Boolean">System.Boolean</Type>
+              <Type n="CFCImplementationObject">{32d3375e-c010-41e2-9e43-b2fbf4f2b374}</Type>
+              <Type n="CFCItemList">{cd57ba20-558b-4b98-96c1-73c6000c3087}</Type>
+              <Type n="CFCRoutingPathTable">{4b8bcc79-5980-4868-b49e-005a8148859b}</Type>
+              <Type n="Int32">System.Int32</Type>
+            </TypeList>
+          </XmlArchive>
+        </CFC>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_StateMachine">
+      <LineId Id="3" Count="14" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.CoolDownState.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.ErrorState.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.FB_init">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.IdleState.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.OffState.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.RunningState.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

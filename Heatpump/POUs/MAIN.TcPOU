@@ -1,13 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN" Id="{e3e9ea5b-aaa6-4abd-9e50-1f99907708dc}">
+  <POU Name="MAIN" Id="{e3e9ea5b-aaa6-4abd-9e50-1f99907708dc}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	fbStateMachine		:	FB_StateMachine();
+	sState				:	STRING;
+	bButtonSwitchOn		: 	BOOL;
+	bButtonSwitchOff	: 	BOOL;
+	bButtonConfirmation	: 	BOOL;
 END_VAR
-]]>
-    </Declaration>
+]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[fbStateMachine(	
+	bButtonSwitchOn			:= bButtonSwitchOn,
+	bButtonSwitchOff		:= bButtonSwitchOff,
+	bButtonConfirmation		:= bButtonConfirmation);
+	
+sState : fbStateMachine.ipState.Description;
+bButtonSwitchOn			:= FALSE;
+bButtonSwitchOff		:= FALSE;
+bButtonConfirmation		:= FALSE;	
+]]></ST>
     </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="10" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="22" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
