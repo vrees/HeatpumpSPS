@@ -3,6 +3,16 @@
   <GVL Name="IO" Id="{af4e1bfc-0b35-4beb-bd5d-7e6b1f6827b5}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
+	tPd : ST_ProcessData;
+	temperatureEvaporatingIn		AT %I*	: INT;  (* Verdampfungstemperatur in °C (Eingang) *)
+	temperatureEvaporatingOut		AT %I*	: INT;  (* Verdampfungstemperatur in °C (Ausgang) *)
+	temperatureFlow	 				AT %I*	: INT;  (* Vorlauftemperatur in °C *)
+	temperatureReturn				AT %I*	: INT;  (* Rücklauftemperatur in °C *)
+	bufferTopTemperature			AT %I*	: INT;  (* Temperatur des Puffers oben in °C *)
+	temperatureOverheatedGas		AT %I*	: INT;  (* Saugtemperatur des überhitzten Gases *)
+	pressureHigh					AT %I*	: INT;  (* Hochdruck Kältekreis in bar *)
+	pressureLow						AT %I*	: INT;  (* Niederdruck Kältekreis in bar *)
+	pressureDifferenceEvaporator	AT %I*	: INT;  (* Druckdifferenz im Verdampfer in mbar *)
 	nTemperature AT %I* : INT;
     bInputN1 AT %I* : BOOL;
     bOutputN1 AT %Q* : BOOL;	

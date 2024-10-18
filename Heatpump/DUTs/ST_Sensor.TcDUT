@@ -15,6 +15,7 @@
         calculatedOverheatTemperature	AT %I*	: REAL;  (* Berechnete Überhitzungstemperatur *)
         heatRequest						AT %I*	: BOOL;  (* Taster für Wärmeanforderung *)
         userConfirmation				AT %I*	: BOOL;  (* Taster für Ein-/Aus-Quittierung *)
+		intValue						AT %I*  : INT; (*for testing*)
     END_STRUCT
 END_TYPE
 ]]></Declaration>

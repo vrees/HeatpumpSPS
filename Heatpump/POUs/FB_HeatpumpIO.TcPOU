@@ -2,9 +2,6 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_HeatpumpIO" Id="{97d548f3-37ea-4aba-ae88-86175ac4851e}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_HeatpumpIO
-VAR_OUTPUT
-	stProcessData 		: 	ST_ProcessData;
-END_VAR
 VAR
 END_VAR
 ]]></Declaration>
