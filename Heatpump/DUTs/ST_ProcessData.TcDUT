@@ -3,13 +3,13 @@
   <DUT Name="ST_ProcessData" Id="{a35faa05-6e80-4943-a5d6-c56d0b7a641b}">
     <Declaration><![CDATA[TYPE ST_ProcessData :
     STRUCT
-        id: STRING[50];  (* Äquivalent zu String in Java *)
-        timestamp: TIME;  (* Äquivalent zu Instant in Java *)
-        sensor: ST_Sensor;  (* Instanz von Sensor *)
-        actor: ST_Actor;  (* Instanz von Actor *)
-        incident: ST_Incident;  (* Instanz von Incident *)
-        waitCounter: INT;  (* Integer *)
-        messages: ARRAY[1..10] OF ST_FailureMessage;  (* Set als Array, maximale Anzahl definieren *)
+        id					: STRING[50];  (* Äquivalent zu String in Java *)
+        timestamp			: TIME;  (* Äquivalent zu Instant in Java *)
+        sensor				: ST_Sensor;  (* Instanz von Sensor *)
+        actor				: ST_Actor;  (* Instanz von Actor *)
+        incident			: ST_Incident;  (* Instanz von Incident *)
+        waitCounter			: INT;  (* Integer *)
+        messages			: ARRAY[1..10] OF ST_FailureMessage;  (* Set als Array, maximale Anzahl definieren *)
     END_STRUCT
 END_TYPE
 ]]></Declaration>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_SensorRaw" Id="{946a79e1-c3d0-4e8b-887c-36a900db2305}">
+    <Declaration><![CDATA[TYPE ST_SensorRaw :
+    STRUCT
+        temperatureEvaporatingIn		AT %I*	: INT;  (* Verdampfungstemperatur in °C (Eingang) *)
+        temperatureEvaporatingOut		AT %I*	: INT;  (* Verdampfungstemperatur in °C (Ausgang) *)
+        temperatureFlow	 				AT %I*	: INT;  (* Vorlauftemperatur in °C *)
+        temperatureReturn				AT %I*	: INT;  (* Rücklauftemperatur in °C *)
+        bufferTopTemperature			AT %I*	: INT;  (* Temperatur des Puffers oben in °C *)
+        temperatureOverheatedGas		AT %I*	: INT;  (* Saugtemperatur des überhitzten Gases *)
+        pressureHigh					AT %I*	: INT;  (* Hochdruck Kältekreis in bar *)
+        pressureLow						AT %I*	: INT;  (* Niederdruck Kältekreis in bar *)
+        pressureDifferenceEvaporator	AT %I*	: INT;  (* Druckdifferenz im Verdampfer in mbar *)
+    END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -3,8 +3,8 @@
   <DUT Name="ST_Actor" Id="{4250c58b-cb45-4ad1-becf-6a39481befe9}">
     <Declaration><![CDATA[TYPE ST_Actor :
     STRUCT
-        operatingStateWaterPump1 	AT %Q* : BOOL;  (* Status der Heizungspumpe: Ein/Aus *)
-        operatingStateCompressor1 	AT %Q* : BOOL;  (* Status des Verdichters: Ein/Aus *)
+        operatingStateWaterPump 	AT %Q* : BOOL;  (* Status der Heizungspumpe: Ein/Aus *)
+        operatingStateCompressor 	AT %Q* : BOOL;  (* Status des Verdichters: Ein/Aus *)
     END_STRUCT
 END_TYPE
 ]]></Declaration>

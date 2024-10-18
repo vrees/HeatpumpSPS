@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Processdata" Id="{8d629261-798f-4877-9443-8dbcc04e3ba2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Processdata
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	pd 			: 	ST_ProcessData;
+	sensorRaw	:	ST_SensorRaw; 
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <LineIds Name="FB_Processdata">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

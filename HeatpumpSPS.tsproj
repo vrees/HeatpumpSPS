@@ -14,8 +14,7 @@
 	<ImageDatas>
 		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ff808080808080808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1001">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
-		<ImageData Id="1002">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000120b0000120b00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
-		<ImageData Id="1003">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1002">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 	</ImageDatas>
 	<Project ProjectGUID="{0FF30942-AD71-4634-8234-2B4524C10BBB}" TargetNetId="5.124.202.224.1.1" ShowHideConfigurations="#x3c7">
 		<System>
@@ -27,7 +26,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{77ABE5A9-5480-B401-95A9-01667E63FBBC}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{581B5BF0-BA85-9FE7-31E1-D1382A813392}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -41,68 +40,113 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.temperatureEvaporatingIn</Name>
+							<Name>IO.temperatureEvaporatingIn</Name>
+							<Comment><![CDATA[ Verdampfungstemperatur in °C (Eingang) ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO.temperatureEvaporatingOut</Name>
+							<Comment><![CDATA[ Verdampfungstemperatur in °C (Ausgang) ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO.temperatureFlow</Name>
+							<Comment><![CDATA[ Vorlauftemperatur in °C ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO.temperatureReturn</Name>
+							<Comment><![CDATA[ Rücklauftemperatur in °C ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO.bufferTopTemperature</Name>
+							<Comment><![CDATA[ Temperatur des Puffers oben in °C ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO.tPd.sensor.temperatureEvaporatingIn</Name>
 							<Comment><![CDATA[ Verdampfungstemperatur in °C (Eingang) ]]></Comment>
 							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.temperatureEvaporatingOut</Name>
+							<Name>IO.tPd.sensor.temperatureEvaporatingOut</Name>
 							<Comment><![CDATA[ Verdampfungstemperatur in °C (Ausgang) ]]></Comment>
 							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.temperatureFlow</Name>
+							<Name>IO.tPd.sensor.temperatureFlow</Name>
 							<Comment><![CDATA[ Vorlauftemperatur in °C ]]></Comment>
 							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.temperatureReturn</Name>
+							<Name>IO.tPd.sensor.temperatureReturn</Name>
 							<Comment><![CDATA[ Rücklauftemperatur in °C ]]></Comment>
 							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.bufferTopTemperature</Name>
+							<Name>IO.tPd.sensor.bufferTopTemperature</Name>
 							<Comment><![CDATA[ Temperatur des Puffers oben in °C ]]></Comment>
 							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.temperatureOverheatedGas</Name>
+							<Name>IO.tPd.sensor.temperatureOverheatedGas</Name>
 							<Comment><![CDATA[ Saugtemperatur des überhitzten Gases ]]></Comment>
 							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.pressureHigh</Name>
+							<Name>IO.tPd.sensor.pressureHigh</Name>
 							<Comment><![CDATA[ Hochdruck Kältekreis in bar ]]></Comment>
 							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.pressureLow</Name>
+							<Name>IO.tPd.sensor.pressureLow</Name>
 							<Comment><![CDATA[ Niederdruck Kältekreis in bar ]]></Comment>
 							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.pressureDifferenceEvaporator</Name>
+							<Name>IO.tPd.sensor.pressureDifferenceEvaporator</Name>
 							<Comment><![CDATA[ Druckdifferenz im Verdampfer in mbar ]]></Comment>
 							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.calculatedOverheatTemperature</Name>
+							<Name>IO.tPd.sensor.calculatedOverheatTemperature</Name>
 							<Comment><![CDATA[ Berechnete Überhitzungstemperatur ]]></Comment>
 							<Type>REAL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.heatRequest</Name>
+							<Name>IO.tPd.sensor.heatRequest</Name>
 							<Comment><![CDATA[ Taster für Wärmeanforderung ]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.userConfirmation</Name>
+							<Name>IO.tPd.sensor.userConfirmation</Name>
 							<Comment><![CDATA[ Taster für Ein-/Aus-Quittierung ]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.sensor.intValue</Name>
+							<Name>IO.tPd.sensor.intValue</Name>
 							<Comment><![CDATA[for testing]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO.temperatureOverheatedGas</Name>
+							<Comment><![CDATA[ Saugtemperatur des überhitzten Gases ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO.pressureHigh</Name>
+							<Comment><![CDATA[ Hochdruck Kältekreis in bar ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO.pressureLow</Name>
+							<Comment><![CDATA[ Niederdruck Kältekreis in bar ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>IO.pressureDifferenceEvaporator</Name>
+							<Comment><![CDATA[ Druckdifferenz im Verdampfer in mbar ]]></Comment>
 							<Type>INT</Type>
 						</Var>
 					</Vars>
@@ -113,16 +157,23 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.actor.operatingStateWaterPump1</Name>
+							<Name>IO.tPd.actor.operatingStateWaterPump1</Name>
 							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus ]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.fbHeatPumpIO.stProcessData.actor.operatingStateCompressor1</Name>
+							<Name>IO.tPd.actor.operatingStateCompressor1</Name>
 							<Comment><![CDATA[ Status des Verdichters: Ein/Aus ]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
+					<UnrestoredVarLinks ImportTime="2024-10-18T16:30:36">
+						<OwnerA Name="InputDst" Prefix="TIPC^Heatpump^Heatpump Instance" Type="1">
+							<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 2 (EL1008)">
+								<Link VarA="MAIN.fbHeatPumpIO.stProcessData.sensor.userConfirmation" TypeA="BOOL" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 1^Input" Size="1" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
 					<Contexts>
 						<Context>
 							<Id>0</Id>
@@ -777,57 +828,12 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 							<CoeProfile ProfileNo="20976521"/>
 						</EtherCAT>
 					</Box>
-					<Box Id="8" BoxType="9099">
-						<Name>Klemme 8 (EL2008)</Name>
-						<ImageId>1002</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07d83052" RevisionNo="#x00100000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2008 8K. Dig. Ausgang 24V, 0.5A" Desc="EL2008" PortABoxInfo="#x01000007">
-							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
-							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
-							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7000" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 3" Index="#x1602" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7020" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 4" Index="#x1603" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7030" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 5" Index="#x1604" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7040" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 6" Index="#x1605" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7050" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 7" Index="#x1606" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7060" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Channel 8" Index="#x1607" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7070" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-							</Pdo>
-						</EtherCAT>
+					<Box File="Klemme 8 (EL2008).xti" Id="8">
+						<EtherCAT PortABoxInfo="#x01000007"/>
 					</Box>
 					<Box Id="9" BoxType="9099">
 						<Name>Klemme 9 (EL9010)</Name>
-						<ImageId>1003</ImageId>
+						<ImageId>1002</ImageId>
 						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23323050" InfoDataState="false" PortPhys="3" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9010 Endklemme" Desc="EL9010" PortABoxInfo="#x01000008"/>
 					</Box>
 				</Box>
@@ -838,9 +844,6 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 	<Mappings>
 		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^Heatpump^Heatpump Instance">
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 2 (EL1008)">
-				<Link VarA="PlcTask Inputs^MAIN.fbHeatPumpIO.stProcessData.sensor.userConfirmation" VarB="Channel 1^Input"/>
-			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 7 (EL3204)">
 				<Link VarA="PlcTask Inputs^IO.nTemperature" VarB="RTD Inputs Channel 4^Value"/>
 			</OwnerB>

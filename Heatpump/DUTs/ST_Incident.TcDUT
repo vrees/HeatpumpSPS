@@ -3,17 +3,22 @@
   <DUT Name="ST_Incident" Id="{bbb8154b-704a-43ea-9cc2-cef9d4f926cf}">
     <Declaration><![CDATA[TYPE ST_Incident :
     STRUCT
-        incidentTankLevelTooLow: BOOL;  (* Störung: Wasserstand des Tanks zu niedrig *)
-        incidentTankSensorDataMissing: BOOL;  (* Störung: Tanksensor sendet keine Daten mehr *)
-        warningLowPressure: BOOL;  (* Warnung: Niederdruck zu niedrig *)
-        warningHighPressure: BOOL;  (* Warnung: Hochdruck zu hoch *)
-        alarmExpansionValve: BOOL;  (* Alarm: Elektronisches Expansionsventil *)
-        incidentFlow: BOOL;  (* Störung: Durchfluss im Verdampfer zu niedrig *)
-        incidentCompressor: BOOL;  (* Störung: Verdichter / Motorschutzschalter *)
-        incidentLowPressure: BOOL;  (* Störung: Niederdruck zu niedrig *)
-        incidentHighPressure: BOOL;  (* Störung: Hochdruck zu hoch *)
-        incidentPressureDifferenceEvaporator: BOOL;  (* Störung: Druckverlust im Verdampfer überschritten *)
-        incidentMinTemperatureEvaporator: BOOL;  (* Störung: Minimale Temperatur im Verdampfer unterschritten *)
+		(* Connected to IO Klemmen*)		
+        alarmExpansionValve		AT %I*	: BOOL;		(* Alarm: Elektronisches Expansionsventil - 2*)
+										 			(* operatingStateWaterPump	- 3*)
+        incidentCompressor		AT %I*	: BOOL; 	(* Störung: Verdichter / Motorschutzschalter 4*)
+        incidentFlow			AT %I*	: BOOL; 	(* Störung: Durchfluss im Verdampfer zu niedrig - 5*)
+        incidentHighPressure	AT %I*	: BOOL; 	(* Störung: Hochdruck zu hoch - 6*)
+        incidentLowPressure		AT %I*	: BOOL; 	(* Störung: Niederdruck zu niedrig - 7*) 
+
+
+		(* Calculated from Business Logic*)
+        incidentTankLevelTooLow					: BOOL;  (* Störung: Wasserstand des Tanks zu niedrig *)
+        incidentTankSensorDataMissing			: BOOL;  (* Störung: Tanksensor sendet keine Daten mehr *)
+        warningHighPressure						: BOOL;  (* Warnung: Hochdruck zu hoch *)
+        warningLowPressure						: BOOL;  (* Warnung: Niederdruck zu niedrig *)
+        incidentPressureDifferenceEvaporator	: BOOL;  (* Störung: Druckverlust im Verdampfer überschritten *)
+        incidentMinTemperatureEvaporator		: BOOL;  (* Störung: Minimale Temperatur im Verdampfer unterschritten *)
     END_STRUCT
 END_TYPE
 ]]></Declaration>

@@ -3,19 +3,18 @@
   <DUT Name="ST_Sensor" Id="{9e1f1cd0-bb8f-4424-a734-fa11366fbaf8}">
     <Declaration><![CDATA[TYPE ST_Sensor :
     STRUCT
-        temperatureEvaporatingIn		AT %I*	: REAL;  (* Verdampfungstemperatur in °C (Eingang) *)
-        temperatureEvaporatingOut		AT %I*	: REAL;  (* Verdampfungstemperatur in °C (Ausgang) *)
-        temperatureFlow	 				AT %I*	: REAL;  (* Vorlauftemperatur in °C *)
-        temperatureReturn				AT %I*	: REAL;  (* Rücklauftemperatur in °C *)
-        bufferTopTemperature			AT %I*	: REAL;  (* Temperatur des Puffers oben in °C *)
-        temperatureOverheatedGas		AT %I*	: REAL;  (* Saugtemperatur des überhitzten Gases *)
-        pressureHigh					AT %I*	: REAL;  (* Hochdruck Kältekreis in bar *)
-        pressureLow						AT %I*	: REAL;  (* Niederdruck Kältekreis in bar *)
-        pressureDifferenceEvaporator	AT %I*	: REAL;  (* Druckdifferenz im Verdampfer in mbar *)
-        calculatedOverheatTemperature	AT %I*	: REAL;  (* Berechnete Überhitzungstemperatur *)
+        temperatureEvaporatingIn				: REAL;  (* Verdampfungstemperatur in °C (Eingang) *)
+        temperatureEvaporatingOut				: REAL;  (* Verdampfungstemperatur in °C (Ausgang) *)
+        temperatureFlow	 						: REAL;  (* Vorlauftemperatur in °C *)
+        temperatureReturn						: REAL;  (* Rücklauftemperatur in °C *)
+        bufferTopTemperature					: REAL;  (* Temperatur des Puffers oben in °C *)
+        temperatureOverheatedGas				: REAL;  (* Saugtemperatur des überhitzten Gases *)
+        pressureHigh							: REAL;  (* Hochdruck Kältekreis in bar *)
+        pressureLow								: REAL;  (* Niederdruck Kältekreis in bar *)
+        pressureDifferenceEvaporator			: REAL;  (* Druckdifferenz im Verdampfer in mbar *)
+        calculatedOverheatTemperature			: REAL;  (* Berechnete Überhitzungstemperatur *)
         heatRequest						AT %I*	: BOOL;  (* Taster für Wärmeanforderung *)
         userConfirmation				AT %I*	: BOOL;  (* Taster für Ein-/Aus-Quittierung *)
-		intValue						AT %I*  : INT; (*for testing*)
     END_STRUCT
 END_TYPE
 ]]></Declaration>
