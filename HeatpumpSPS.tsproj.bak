@@ -26,9 +26,105 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{CE142104-E353-EDF5-FC42-1D76A4E08635}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{F1DBB14A-427A-B1BC-60F5-28F231FBA8E7}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.temperatureEvaporatingOut</Name>
+							<Comment><![CDATA[ Verdampfungstemperatur in °C (Ausgang) ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.temperatureEvaporatingIn</Name>
+							<Comment><![CDATA[ Verdampfungstemperatur in °C (Eingang) ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.temperatureFlow</Name>
+							<Comment><![CDATA[ Vorlauftemperatur in °C ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.temperatureReturn</Name>
+							<Comment><![CDATA[ Rücklauftemperatur in °C ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.temperatureOverheatedGas</Name>
+							<Comment><![CDATA[ Saugtemperatur des überhitzten Gases ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.bufferTopTemperature</Name>
+							<Comment><![CDATA[ Temperatur des Puffers oben in °C ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.pressureHigh</Name>
+							<Comment><![CDATA[ Hochdruck Kältekreis in bar ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.pressureLow</Name>
+							<Comment><![CDATA[ Niederdruck Kältekreis in bar ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.pressureDifferenceEvaporator</Name>
+							<Comment><![CDATA[ Druckdifferenz im Verdampfer in mbar ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.sensor.heatRequest</Name>
+							<Comment><![CDATA[ Taster für Wärmeanforderung - EL1008.1]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.sensor.userConfirmation</Name>
+							<Comment><![CDATA[ Taster für Ein-/Aus-Quittierung - EL1008.2]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.incident.alarmExpansionValve</Name>
+							<Comment><![CDATA[ Alarm: Elektronisches Expansionsventil - EL1008.3]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.incident.incidentCompressor</Name>
+							<Comment><![CDATA[ Störung: Verdichter / Motorschutzschalter - EL1008.5]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.incident.incidentFlow</Name>
+							<Comment><![CDATA[ Störung: Durchfluss im Verdampfer zu niedrig - EL1008.6]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.incident.incidentHighPressure</Name>
+							<Comment><![CDATA[ Störung: Hochdruck zu hoch - EL1008.7]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.incident.incidentLowPressure</Name>
+							<Comment><![CDATA[ Störung: Niederdruck zu niedrig - EL1008.8]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>MAIN.pd.actor.operatingStateCompressor</Name>
+							<Comment><![CDATA[ Status des Verdichters: Ein/Aus ]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.actor.operatingStateWaterPump</Name>
+							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus ]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
 					<UnrestoredVarLinks ImportTime="2024-10-18T16:30:36">
 						<OwnerA Name="InputDst" Prefix="TIPC^Heatpump^Heatpump Instance" Type="1">
 							<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 2 (EL1008)">
@@ -703,4 +799,39 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 			</Device>
 		</Io>
 	</Project>
+	<Mappings>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030010"/>
+		<OwnerA Name="TIPC^Heatpump^Heatpump Instance">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 2 (EL1008)">
+				<Link VarA="PlcTask Inputs^MAIN.pd.incident.alarmExpansionValve" VarB="Channel 3^Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentCompressor" VarB="Channel 5^Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentFlow" VarB="Channel 6^Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentHighPressure" VarB="Channel 7^Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentLowPressure" VarB="Channel 8^Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.pd.sensor.heatRequest" VarB="Channel 2^Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.pd.sensor.userConfirmation" VarB="Channel 1^Input"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 3 (EL3122)">
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.pressureHigh" VarB="Channel 1^Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.pressureLow" VarB="Channel 2^Value"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 4 (EL3204)">
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureEvaporatingIn" VarB="RTD Inputs Channel 2^Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureEvaporatingOut" VarB="RTD Inputs Channel 1^Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureFlow" VarB="RTD Inputs Channel 3^Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureReturn" VarB="RTD Inputs Channel 4^Value"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 5 (EL3064)">
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.pressureDifferenceEvaporator" VarB="AI Standard Channel 1^Value"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 7 (EL3204)">
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.bufferTopTemperature" VarB="RTD Inputs Channel 2^Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureOverheatedGas" VarB="RTD Inputs Channel 1^Value"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 8 (EL2008)">
+				<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateCompressor" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateWaterPump" VarB="Channel 2^Output"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
 </TcSmProject>

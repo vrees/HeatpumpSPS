@@ -57,6 +57,17 @@ METHOD LimitValuesAreExceeded : BOOL
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="State" Id="{145413ed-c790-4267-82eb-9a9ffe70ba62}">
+      <Declaration><![CDATA[PROPERTY State : E_State]]></Declaration>
+      <Get Name="Get" Id="{7228e2d1-54da-4346-af29-132743857a96}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[State := E_State.ERROR;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="TargetTemeperatureReached" Id="{24b8b0f1-8ac1-4afc-bc6f-4eb4ccc3d660}">
       <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
 METHOD TargetTemeperatureReached : BOOL
@@ -111,6 +122,9 @@ METHOD WaterHasCooledDown : BOOL
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ErrorState.LimitValuesAreExceeded">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ErrorState.State.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ErrorState.TargetTemeperatureReached">

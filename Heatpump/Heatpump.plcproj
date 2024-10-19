@@ -18,6 +18,12 @@
     <LibraryReferences>{2fc55ad9-b385-4c79-a527-647277861483}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\E_Event.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\E_State.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\ST_ConfigValues.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -57,7 +63,7 @@
     <Compile Include="POUs\FB_OffState.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FB_Processdata.TcPOU">
+    <Compile Include="POUs\FB_ProcessData.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FB_RunningState.TcPOU">

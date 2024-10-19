@@ -57,6 +57,17 @@ METHOD LimitValuesAreExceeded : BOOL
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="State" Id="{e9b35d77-403c-47b3-b5d5-c12b8407686e}">
+      <Declaration><![CDATA[PROPERTY State : E_State]]></Declaration>
+      <Get Name="Get" Id="{5cf49127-fb9c-4307-a0b0-382199956e67}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[State := E_State.OFF;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="TargetTemeperatureReached" Id="{03af484f-99f7-499a-bbd9-92b7758ce7e4}">
       <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
 METHOD TargetTemeperatureReached : BOOL
@@ -86,7 +97,7 @@ METHOD UserPressedSwitchOffButton : BOOL
 METHOD UserPressedSwitchOnButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'On Botton pressed', '');
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Einschalt Button wurde gedrückt', '');
 pMachine^.SetState(pMachine^.IdleState);]]></ST>
       </Implementation>
     </Method>
@@ -111,6 +122,9 @@ METHOD WaterHasCooledDown : BOOL
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_OffState.LimitValuesAreExceeded">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_OffState.State.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_OffState.TargetTemeperatureReached">

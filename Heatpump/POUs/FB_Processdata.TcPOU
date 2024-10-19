@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FB_Processdata" Id="{8d629261-798f-4877-9443-8dbcc04e3ba2}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_Processdata
-VAR_INPUT
-	configValues	:	ST_ConfigValues;
-END_VAR
-VAR_OUTPUT
+  <POU Name="FB_ProcessData" Id="{8d629261-798f-4877-9443-8dbcc04e3ba2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ProcessData
+VAR_IN_OUT
 	pd 				: 	ST_ProcessData;
+	configValues	:	ST_ConfigValues;
 END_VAR
 VAR
 	sensorRaw		:	ST_SensorRaw; 
@@ -61,7 +59,7 @@ END_VAR
         <ST><![CDATA[RawToTemperature :=  (INT_TO_REAL (raw)) / 10;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_Processdata">
+    <LineIds Name="FB_ProcessData">
       <LineId Id="63" Count="0" />
       <LineId Id="48" Count="9" />
       <LineId Id="64" Count="0" />
@@ -70,11 +68,11 @@ END_VAR
       <LineId Id="12" Count="0" />
       <LineId Id="61" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Processdata.RawToRealAnalog">
+    <LineIds Name="FB_ProcessData.RawToRealAnalog">
       <LineId Id="25" Count="1" />
       <LineId Id="19" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Processdata.RawToTemperature">
+    <LineIds Name="FB_ProcessData.RawToTemperature">
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

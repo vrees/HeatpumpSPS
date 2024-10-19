@@ -3,14 +3,21 @@
   <DUT Name="ST_SensorRaw" Id="{946a79e1-c3d0-4e8b-887c-36a900db2305}">
     <Declaration><![CDATA[TYPE ST_SensorRaw :
     STRUCT
-        temperatureEvaporatingIn		AT %I*	: INT;  (* Verdampfungstemperatur in °C (Eingang) *)
+		(* EL3204 - 1*)
         temperatureEvaporatingOut		AT %I*	: INT;  (* Verdampfungstemperatur in °C (Ausgang) *)
+        temperatureEvaporatingIn		AT %I*	: INT;  (* Verdampfungstemperatur in °C (Eingang) *)
         temperatureFlow	 				AT %I*	: INT;  (* Vorlauftemperatur in °C *)
         temperatureReturn				AT %I*	: INT;  (* Rücklauftemperatur in °C *)
-        bufferTopTemperature			AT %I*	: INT;  (* Temperatur des Puffers oben in °C *)
+		
+		(* EL3204 - 2*)
         temperatureOverheatedGas		AT %I*	: INT;  (* Saugtemperatur des überhitzten Gases *)
+        bufferTopTemperature			AT %I*	: INT;  (* Temperatur des Puffers oben in °C *)
+
+		(* EL3122 - 4-20mA*)
         pressureHigh					AT %I*	: INT;  (* Hochdruck Kältekreis in bar *)
         pressureLow						AT %I*	: INT;  (* Niederdruck Kältekreis in bar *)
+		
+		(* EL3064 - 0-10V* or EL3102 -  +/-10V *)
         pressureDifferenceEvaporator	AT %I*	: INT;  (* Druckdifferenz im Verdampfer in mbar *)
     END_STRUCT
 END_TYPE

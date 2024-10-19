@@ -11,34 +11,32 @@ VAR
 	sState						:	STRING;
 	bOnButtonPressed    		: 	BOOL;
 	bOffButtonPressed			: 	BOOL;
-	bConfirmationButtonPressed	: 	BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-fbProcessdata(configValues := configValues);
-pd := fbProcessdata.pd;
+fbProcessdata(pd := pd, configValues := configValues);
 
-fbStateMachine(	pd :=						:= pd,
+fbStateMachine(	pd 							:= pd,
+				configValues				:= configValues,
 				bOnButtonPressed			:= bOnButtonPressed,
-				bOffButtonPressed			:= bOffButtonPressed,
-				bConfirmationButtonPressed	:= bConfirmationButtonPressed);
+				bOffButtonPressed			:= bOffButtonPressed);
 				
 		
 	
-sState : fbStateMachine.ipState.Description;
+sState : fbStateMachine.iState.Description;
 bOnButtonPressed			:= FALSE;
 bOffButtonPressed			:= FALSE;
-bConfirmationButtonPressed	:= FALSE;	
+
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="37" Count="2" />
+      <LineId Id="37" Count="1" />
       <LineId Id="47" Count="0" />
       <LineId Id="10" Count="0" />
+      <LineId Id="50" Count="0" />
       <LineId Id="48" Count="0" />
       <LineId Id="11" Count="0" />
-      <LineId Id="2" Count="0" />
       <LineId Id="26" Count="1" />
       <LineId Id="16" Count="1" />
       <LineId Id="20" Count="1" />

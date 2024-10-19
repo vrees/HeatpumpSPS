@@ -46,7 +46,8 @@ END_VAR]]></Declaration>
 METHOD HeatIsRequested : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Heizung wurde angefordert', '');
+pMachine^.SetState(pMachine^.RunningState);]]></ST>
       </Implementation>
     </Method>
     <Method Name="LimitValuesAreExceeded" Id="{14c877c5-3616-4fde-8e7d-07cd27554d4a}">
@@ -57,6 +58,17 @@ METHOD LimitValuesAreExceeded : BOOL
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="State" Id="{3e6615a4-0b72-4744-aa4a-b8431f3a85b9}">
+      <Declaration><![CDATA[PROPERTY State : E_State]]></Declaration>
+      <Get Name="Get" Id="{cf43e076-33c9-47e4-8b60-ba518cf16a3b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[State := E_State.IDLE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="TargetTemeperatureReached" Id="{a8926a6b-0653-4ec9-9337-e0d5d6da7cc7}">
       <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
 METHOD TargetTemeperatureReached : BOOL
@@ -86,8 +98,7 @@ METHOD UserPressedSwitchOffButton : BOOL
 METHOD UserPressedSwitchOnButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'On Button pressed', '');
-pMachine^.SetState(pMachine^.IdleState);]]></ST>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="WaterHasCooledDown" Id="{0b5f95d5-71c8-41b3-9a09-8b178e27c447}">
@@ -108,9 +119,13 @@ METHOD WaterHasCooledDown : BOOL
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_IdleState.HeatIsRequested">
+      <LineId Id="5" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_IdleState.LimitValuesAreExceeded">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_IdleState.State.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_IdleState.TargetTemeperatureReached">
@@ -123,7 +138,6 @@ METHOD WaterHasCooledDown : BOOL
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_IdleState.UserPressedSwitchOnButton">
-      <LineId Id="5" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_IdleState.WaterHasCooledDown">

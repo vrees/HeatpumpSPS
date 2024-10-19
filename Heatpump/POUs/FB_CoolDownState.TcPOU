@@ -57,6 +57,17 @@ METHOD LimitValuesAreExceeded : BOOL
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="State" Id="{a82d8201-9208-4f93-83b5-3fa1aefa63ed}">
+      <Declaration><![CDATA[PROPERTY State : E_State]]></Declaration>
+      <Get Name="Get" Id="{a2871b6a-006c-421a-9886-583166f3d8ff}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[State := E_State.COOLDOWN;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="TargetTemeperatureReached" Id="{660c57e7-0ee7-4900-9c79-b8fdca4c4354}">
       <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
 METHOD TargetTemeperatureReached : BOOL
@@ -94,8 +105,43 @@ METHOD UserPressedSwitchOnButton : BOOL
 METHOD WaterHasCooledDown : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Abkühlungsphase beendet', '');
+pMachine^.SetState(pMachine^.IdleState);]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="FB_CoolDownState">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CoolDownState.Description.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CoolDownState.FB_init">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CoolDownState.HeatIsRequested">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CoolDownState.LimitValuesAreExceeded">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CoolDownState.State.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CoolDownState.TargetTemeperatureReached">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CoolDownState.UserPressedConfirmationButton">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CoolDownState.UserPressedSwitchOffButton">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CoolDownState.UserPressedSwitchOnButton">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CoolDownState.WaterHasCooledDown">
+      <LineId Id="5" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
