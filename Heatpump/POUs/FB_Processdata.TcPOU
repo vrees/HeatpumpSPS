@@ -3,19 +3,79 @@
   <POU Name="FB_Processdata" Id="{8d629261-798f-4877-9443-8dbcc04e3ba2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Processdata
 VAR_INPUT
+	configValues	:	ST_ConfigValues;
 END_VAR
 VAR_OUTPUT
-	pd 			: 	ST_ProcessData;
-	sensorRaw	:	ST_SensorRaw; 
+	pd 				: 	ST_ProcessData;
 END_VAR
 VAR
+	sensorRaw		:	ST_SensorRaw; 
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[(* Temperatur*)
+pd.sensor.temperatureEvaporatingIn 		:=	RawToTemperature(sensorRaw.temperatureEvaporatingIn);
+pd.sensor.temperatureEvaporatingOut 	:=	RawToTemperature(sensorRaw.temperatureEvaporatingOut);
+pd.sensor.temperatureFlow 				:=	RawToTemperature(sensorRaw.temperatureFlow);
+pd.sensor.temperatureReturn 			:=	RawToTemperature(sensorRaw.temperatureReturn);
+pd.sensor.bufferTopTemperature 			:=	RawToTemperature(sensorRaw.bufferTopTemperature);
+pd.sensor.temperatureOverheatedGas 		:=	RawToTemperature(sensorRaw.temperatureOverheatedGas);
+pd.sensor.temperatureEvaporatingIn 		:=	RawToTemperature(sensorRaw.temperatureEvaporatingIn);
+pd.sensor.temperatureEvaporatingIn 		:=	RawToTemperature(sensorRaw.temperatureEvaporatingIn);
+pd.sensor.temperatureEvaporatingIn 		:=	RawToTemperature(sensorRaw.temperatureEvaporatingIn);
+
+(* Pressure Difference im mBar -  0-10 Volt  or  -10V to +10V *)
+pd.sensor.pressureDifferenceEvaporator	:= 	RawToRealAnalog(sensorRaw.pressureDifferenceEvaporator, 0, 200, 10);
+
+(* Pressure in Bar - using 4-20mmA Sensors*)
+pd.sensor.pressureHigh	:= 	RawToRealAnalog(sensorRaw.pressureHigh, 0, 18, 10);			(* Range from 0 to 18.0 bar *)
+pd.sensor.pressureLow	:= 	RawToRealAnalog(sensorRaw.pressureLow, -0.5, 7, 10);		(* Range from -0.5 to 7.0 bar *)]]></ST>
     </Implementation>
+    <Method Name="RawToRealAnalog" Id="{355a4604-1918-414d-9adf-7ec3cdd623de}">
+      <Declaration><![CDATA[METHOD RawToRealAnalog : REAL
+VAR_INPUT
+	rawVal		: INT;
+	rawMin		: REAL;
+	rawMax		: REAL;	
+	roundFactor	: INT;
+END_VAR
+VAR CONSTANT
+	highValue 	: INT := 16#7FFF;  // Hexadezimale Zahl 0x7FFF
+END_VAR
+VAR
+	realVal		: REAL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[realVal := ((rawMax - rawMin) * rawVal) / highValue + rawMin;
+RawToRealAnalog := ScaleAndRound(realVal, roundFactor);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="RawToTemperature" Id="{8cedd837-1386-413c-9ce0-3d1e6ffcbdd0}">
+      <Declaration><![CDATA[METHOD INTERNAL RawToTemperature : REAL
+VAR_INPUT
+	raw : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[RawToTemperature :=  (INT_TO_REAL (raw)) / 10;]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="FB_Processdata">
-      <LineId Id="9" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="48" Count="9" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="66" Count="1" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="61" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Processdata.RawToRealAnalog">
+      <LineId Id="25" Count="1" />
+      <LineId Id="19" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Processdata.RawToTemperature">
+      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

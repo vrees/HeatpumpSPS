@@ -4,7 +4,10 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	fbStateMachine				:	FB_StateMachine();
-	fbHeatPumpIO				:	FB_HeatpumpIO();
+	fbProcessdata				:   FB_Processdata();
+	configValues				:	ST_ConfigValues;
+	pd 							: 	ST_ProcessData;
+	
 	sState						:	STRING;
 	bOnButtonPressed    		: 	BOOL;
 	bOffButtonPressed			: 	BOOL;
@@ -12,11 +15,16 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbStateMachine(	bOnButtonPressed				:= bOnButtonPressed,
-				bOffButtonPressed				:= bOffButtonPressed,
-				bConfirmationButtonPressed		:= bConfirmationButtonPressed);
+      <ST><![CDATA[
+fbProcessdata(configValues := configValues);
+pd := fbProcessdata.pd;
+
+fbStateMachine(	pd :=						:= pd,
+				bOnButtonPressed			:= bOnButtonPressed,
+				bOffButtonPressed			:= bOffButtonPressed,
+				bConfirmationButtonPressed	:= bConfirmationButtonPressed);
 				
-fbHeatPumpIO();				
+		
 	
 sState : fbStateMachine.ipState.Description;
 bOnButtonPressed			:= FALSE;
@@ -25,7 +33,11 @@ bConfirmationButtonPressed	:= FALSE;
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="10" Count="1" />
+      <LineId Id="37" Count="2" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="11" Count="0" />
       <LineId Id="2" Count="0" />
       <LineId Id="26" Count="1" />
       <LineId Id="16" Count="1" />

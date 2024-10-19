@@ -26,147 +26,9 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{581B5BF0-BA85-9FE7-31E1-D1382A813392}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{CE142104-E353-EDF5-FC42-1D76A4E08635}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
-					<Vars VarGrpType="1">
-						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>IO.nTemperature</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>IO.bInputN1</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.temperatureEvaporatingIn</Name>
-							<Comment><![CDATA[ Verdampfungstemperatur in °C (Eingang) ]]></Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>IO.temperatureEvaporatingOut</Name>
-							<Comment><![CDATA[ Verdampfungstemperatur in °C (Ausgang) ]]></Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>IO.temperatureFlow</Name>
-							<Comment><![CDATA[ Vorlauftemperatur in °C ]]></Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>IO.temperatureReturn</Name>
-							<Comment><![CDATA[ Rücklauftemperatur in °C ]]></Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>IO.bufferTopTemperature</Name>
-							<Comment><![CDATA[ Temperatur des Puffers oben in °C ]]></Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.temperatureEvaporatingIn</Name>
-							<Comment><![CDATA[ Verdampfungstemperatur in °C (Eingang) ]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.temperatureEvaporatingOut</Name>
-							<Comment><![CDATA[ Verdampfungstemperatur in °C (Ausgang) ]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.temperatureFlow</Name>
-							<Comment><![CDATA[ Vorlauftemperatur in °C ]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.temperatureReturn</Name>
-							<Comment><![CDATA[ Rücklauftemperatur in °C ]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.bufferTopTemperature</Name>
-							<Comment><![CDATA[ Temperatur des Puffers oben in °C ]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.temperatureOverheatedGas</Name>
-							<Comment><![CDATA[ Saugtemperatur des überhitzten Gases ]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.pressureHigh</Name>
-							<Comment><![CDATA[ Hochdruck Kältekreis in bar ]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.pressureLow</Name>
-							<Comment><![CDATA[ Niederdruck Kältekreis in bar ]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.pressureDifferenceEvaporator</Name>
-							<Comment><![CDATA[ Druckdifferenz im Verdampfer in mbar ]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.calculatedOverheatTemperature</Name>
-							<Comment><![CDATA[ Berechnete Überhitzungstemperatur ]]></Comment>
-							<Type>REAL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.heatRequest</Name>
-							<Comment><![CDATA[ Taster für Wärmeanforderung ]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.userConfirmation</Name>
-							<Comment><![CDATA[ Taster für Ein-/Aus-Quittierung ]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.sensor.intValue</Name>
-							<Comment><![CDATA[for testing]]></Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>IO.temperatureOverheatedGas</Name>
-							<Comment><![CDATA[ Saugtemperatur des überhitzten Gases ]]></Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>IO.pressureHigh</Name>
-							<Comment><![CDATA[ Hochdruck Kältekreis in bar ]]></Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>IO.pressureLow</Name>
-							<Comment><![CDATA[ Niederdruck Kältekreis in bar ]]></Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>IO.pressureDifferenceEvaporator</Name>
-							<Comment><![CDATA[ Druckdifferenz im Verdampfer in mbar ]]></Comment>
-							<Type>INT</Type>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="2" AreaNo="1">
-						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>IO.bOutputN1</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.actor.operatingStateWaterPump1</Name>
-							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus ]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>IO.tPd.actor.operatingStateCompressor1</Name>
-							<Comment><![CDATA[ Status des Verdichters: Ein/Aus ]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-					</Vars>
 					<UnrestoredVarLinks ImportTime="2024-10-18T16:30:36">
 						<OwnerA Name="InputDst" Prefix="TIPC^Heatpump^Heatpump Instance" Type="1">
 							<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 2 (EL1008)">
@@ -818,7 +680,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 								<Entry Name="Status__TxPDO Toggle" Index="#x1803" Sub="#x09">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6030" Sub="#x11" Flags="#x00050000">
+								<Entry Name="Value" Index="#x6030" Sub="#x11" Flags="#x00120000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
@@ -841,12 +703,4 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 			</Device>
 		</Io>
 	</Project>
-	<Mappings>
-		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030010"/>
-		<OwnerA Name="TIPC^Heatpump^Heatpump Instance">
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 7 (EL3204)">
-				<Link VarA="PlcTask Inputs^IO.nTemperature" VarB="RTD Inputs Channel 4^Value"/>
-			</OwnerB>
-		</OwnerA>
-	</Mappings>
 </TcSmProject>

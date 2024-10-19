@@ -18,6 +18,9 @@
     <LibraryReferences>{2fc55ad9-b385-4c79-a527-647277861483}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\ST_ConfigValues.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\ST_SensorRaw.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -48,9 +51,6 @@
     <Compile Include="POUs\FB_ErrorState.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FB_HeatpumpIO.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\FB_IdleState.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -69,6 +69,9 @@
     <Compile Include="POUs\I_State.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\lib\ScaleAndRound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -76,10 +79,14 @@
   <ItemGroup>
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
+    <Folder Include="POUs\lib" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Tc2_Math">
+      <DefaultResolution>Tc2_Math, * (Beckhoff Automation GmbH)</DefaultResolution>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>

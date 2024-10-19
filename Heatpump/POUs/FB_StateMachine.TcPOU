@@ -3,9 +3,10 @@
   <POU Name="FB_StateMachine" Id="{c349ad72-d78c-44d0-9319-bf272785d3c6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_StateMachine
 VAR_INPUT
-	bOnButtonPressed			: BOOL;
-	bOffButtonPressed			: BOOL;
-	bConfirmationButtonPressed	: BOOL;
+	pd 							: 	ST_ProcessData;
+	bOnButtonPressed			: 	BOOL;
+	bOffButtonPressed			: 	BOOL;
+	bConfirmationButtonPressed	: 	BOOL;
 END_VAR
 VAR_OUTPUT
 		ipState					:	I_State := fbOffState;	
