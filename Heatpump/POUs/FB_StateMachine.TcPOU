@@ -33,6 +33,7 @@ END_VAR
 rtrigButtonSwitchOff(CLK := bOffButtonPressed);
 rtrigButtonConfirmation(CLK := pd.sensor.userConfirmation);
 
+generateEvents();
 
 IF events.switchOff.isTriggered THEN
 	iState.UserPressedSwitchOffButton();
@@ -98,13 +99,17 @@ END_VAR]]></Declaration>
     </Method>
     <Method Name="generateEvents" Id="{83685a53-198e-44e2-9f24-60ab8684b413}">
       <Declaration><![CDATA[METHOD generateEvents : BOOL
-VAR_INPUT
-END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (rtrigButtonSwitchOff.Q OR (rtrigButtonConfirmation.Q AND iState.State <> E_State.OFF)) THEN
 	events.switchOff.sMessage := 'Bla';
 	events.switchOff.isTriggered := TRUE;
+END_IF
+
+
+IF (rtrigButtonSwitchOn.Q OR (rtrigButtonConfirmation.Q AND iState.State = E_State.OFF)) THEN
+	events.switchOn.sMessage := 'Bla';
+	events.switchOn.isTriggered := TRUE;
 END_IF
 
 ]]></ST>
@@ -198,5 +203,55 @@ END_VAR
         <ST><![CDATA[THIS^.iState := newState;]]></ST>
       </Implementation>
     </Method>
+    <LineIds Name="FB_StateMachine">
+      <LineId Id="3" Count="2" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="7" Count="24" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.CoolDownState.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.ErrorState.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.FB_init">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.generateEvents">
+      <LineId Id="3" Count="3" />
+      <LineId Id="9" Count="4" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.IdleState.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.isCooledDown">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.isHeatRequested">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.isSwitchOffPressed">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.isSwitchOnPressed">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.isTargetTemperaturReached">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.OffState.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.RunningState.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.SetState">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
