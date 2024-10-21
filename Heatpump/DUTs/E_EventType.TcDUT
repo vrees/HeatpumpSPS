@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_EventType" Id="{5974e92a-1925-4467-bd7b-7d781837f1c3}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_EventType :
+(
+	(* Normal StateMachine changes *)	
+	SwitchOn 							:= 1,
+	SwitchOff 							:= 2,
+	HeatIsRequested 					:= 3,
+	TargetTemperatureReached 			:= 4,
+	CooledDown 							:= 5,
+	Confirm 							:= 6,
+	
+	(* Errors *)
+	PressureDiffEvaporatorTooHigh		:= 101,
+	LowPressureRefrigerationThermostat	:= 102,
+	HighPressureRefrigerationThermostat	:= 103,
+	MotorProtectionTriggered			:= 104,
+	ExpansionValveTriggered				:= 105,
+
+		
+	(* Warnings *)
+	LowPressureRefrigerationCalc		:= 201,
+	HighPressureRefrigerationCalc		:= 202,
+	EvaporatingTemperatureTooLow		:= 203,
+	EvaporatingFlowRateTooLow			:= 204,
+	WaterTankLevelTooLow				:= 205,
+	WaterTankDataMissing				:= 206
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
