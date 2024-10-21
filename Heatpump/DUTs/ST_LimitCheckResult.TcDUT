@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_LimitCheckResult" Id="{39cfd9ee-54e3-4e40-928a-a0f756a7950a}">
+    <Declaration><![CDATA[TYPE ST_LimitCheckResult :
+STRUCT
+	limitCheck 		: ST_limitCheck;  
+	sValue 			: STRING;
+	dTimestamp 		: DATE_AND_TIME;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -14,7 +14,7 @@
         pressureDifferenceEvaporator			: REAL;  (* Druckdifferenz im Verdampfer in mbar *)
         calculatedOverheatTemperature			: REAL;  (* Berechnete Überhitzungstemperatur *)
         heatRequest						AT %I*	: BOOL;  (* Taster für Wärmeanforderung - EL1008.1*)
-        userConfirmation				AT %I*	: BOOL;  (* Taster für Ein-/Aus-Quittierung - EL1008.2*)
+        userConfirmation				AT %I*	: BOOL;  (* Taster für Ein-/Aus-Quittierung - EL1008.2*) 
     END_STRUCT
 END_TYPE
 ]]></Declaration>

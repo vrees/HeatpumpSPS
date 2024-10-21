@@ -12,6 +12,7 @@ VAR_IN_OUT
 END_VAR
 VAR_OUTPUT
 	iState						:	I_State := fbOffState;	
+	events						:	ST_Events;
 END_VAR
 VAR
 	fbOffState					:	FB_OffState(THIS);
@@ -33,17 +34,27 @@ rtrigButtonSwitchOff(CLK := bOffButtonPressed);
 rtrigButtonConfirmation(CLK := pd.sensor.userConfirmation);
 
 
-IF isSwitchOffPressed() THEN
+IF events.switchOff.isTriggered THEN
 	iState.UserPressedSwitchOffButton();
-ELSIF isSwitchOnPressed() THEN
+END_IF 
+
+IF events.switchOn.isTriggered THEN
 	iState.UserPressedSwitchOnButton();
-ELSIF rtrigButtonConfirmation.Q THEN
+END_IF 
+
+IF rtrigButtonConfirmation.Q THEN
 	iState.UserPressedConfirmationButton();
-ELSIF isHeatRequested() THEN
+END_IF 
+
+IF isHeatRequested() THEN
 	iState.HeatIsRequested();
-ELSIF isTargetTemperaturReached() THEN
+END_IF 
+
+IF isTargetTemperaturReached() THEN
 	iState.TargetTemeperatureReached();
-ELSIF isCooledDown() THEN
+END_IF 
+
+IF isCooledDown() THEN
 	iState.WaterHasCooledDown();
 END_IF
 
@@ -83,6 +94,20 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="generateEvents" Id="{83685a53-198e-44e2-9f24-60ab8684b413}">
+      <Declaration><![CDATA[METHOD generateEvents : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (rtrigButtonSwitchOff.Q OR (rtrigButtonConfirmation.Q AND iState.State <> E_State.OFF)) THEN
+	events.switchOff.sMessage := 'Bla';
+	events.switchOff.isTriggered := TRUE;
+END_IF
+
+]]></ST>
       </Implementation>
     </Method>
     <Property Name="IdleState" Id="{909b78a6-5091-4b36-9866-235bb070dd8d}">
@@ -173,56 +198,5 @@ END_VAR
         <ST><![CDATA[THIS^.iState := newState;]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_StateMachine">
-      <LineId Id="3" Count="2" />
-      <LineId Id="60" Count="3" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="67" Count="1" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="46" Count="0" />
-      <LineId Id="48" Count="0" />
-      <LineId Id="57" Count="1" />
-      <LineId Id="55" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StateMachine.CoolDownState.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StateMachine.ErrorState.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StateMachine.FB_init">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StateMachine.IdleState.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StateMachine.isCooledDown">
-      <LineId Id="6" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StateMachine.isHeatRequested">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StateMachine.isSwitchOffPressed">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StateMachine.isSwitchOnPressed">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StateMachine.isTargetTemperaturReached">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StateMachine.OffState.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StateMachine.RunningState.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StateMachine.SetState">
-      <LineId Id="5" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
