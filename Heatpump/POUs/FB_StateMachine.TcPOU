@@ -35,25 +35,15 @@ rtrigButtonConfirmation(CLK := pd.sensor.userConfirmation);
 
 IF isSwitchOffPressed() THEN
 	iState.UserPressedSwitchOffButton();
-END_IF 
-
-IF isSwitchOnPressed() THEN
+ELSIF isSwitchOnPressed() THEN
 	iState.UserPressedSwitchOnButton();
-END_IF 
-
-IF rtrigButtonConfirmation.Q THEN
+ELSIF rtrigButtonConfirmation.Q THEN
 	iState.UserPressedConfirmationButton();
-END_IF 
-
-IF isHeatRequested() THEN
+ELSIF isHeatRequested() THEN
 	iState.HeatIsRequested();
-END_IF 
-
-IF isTargetTemperaturReached() THEN
+ELSIF isTargetTemperaturReached() THEN
 	iState.TargetTemeperatureReached();
-END_IF 
-
-IF isCooledDown() THEN
+ELSIF isCooledDown() THEN
 	iState.WaterHasCooledDown();
 END_IF
 
@@ -187,25 +177,13 @@ END_VAR
       <LineId Id="3" Count="2" />
       <LineId Id="60" Count="3" />
       <LineId Id="6" Count="0" />
-      <LineId Id="87" Count="0" />
-      <LineId Id="77" Count="0" />
       <LineId Id="9" Count="0" />
-      <LineId Id="67" Count="0" />
-      <LineId Id="86" Count="0" />
-      <LineId Id="78" Count="0" />
-      <LineId Id="68" Count="0" />
+      <LineId Id="67" Count="1" />
       <LineId Id="10" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="79" Count="0" />
       <LineId Id="41" Count="0" />
       <LineId Id="46" Count="0" />
-      <LineId Id="84" Count="0" />
-      <LineId Id="80" Count="0" />
       <LineId Id="48" Count="0" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="82" Count="0" />
-      <LineId Id="81" Count="0" />
-      <LineId Id="58" Count="0" />
+      <LineId Id="57" Count="1" />
       <LineId Id="55" Count="0" />
       <LineId Id="15" Count="0" />
       <LineId Id="2" Count="0" />
