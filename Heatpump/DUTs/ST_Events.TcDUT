@@ -6,9 +6,9 @@ STRUCT
 	(* Normal StateMachine changes *)
 	switchOff 							: ST_Event := (eEventType := E_EventType.SwitchOff);  
 	switchOn 							: ST_Event := (eEventType := E_EventType.SwitchOn);  
-	confirm								: ST_Event := (eEventType := E_EventType.Confirm);
+	confirmed							: ST_Event := (eEventType := E_EventType.Confirm);
 	heatIsRequested 					: ST_Event := (eEventType := E_EventType.HeatIsRequested);  
-	TargetTemperatureReached			: ST_Event := (eEventType := E_EventType.TargetTemperatureReached);
+	targetTemperatureReached			: ST_Event := (eEventType := E_EventType.TargetTemperatureReached);
 	cooledDown							: ST_Event := (eEventType := E_EventType.CooledDown);
 		
 	(* Errors *)
