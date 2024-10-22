@@ -87,7 +87,7 @@ END_VAR
 METHOD TargetTemeperatureReached : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Zieltemperatur erreicht.', '');
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Zieltemperatur erreicht.', pMachine^.iState.Description);
 pMachine^.SetState(pMachine^.CoolDownState);]]></ST>
       </Implementation>
     </Method>
@@ -104,7 +104,7 @@ METHOD UserPressedConfirmationButton : BOOL
 METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Off Button pressed', '');
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Off Button pressed', pMachine^.iState.Description);
 pMachine^.SetState(pMachine^.CoolDownState);]]></ST>
       </Implementation>
     </Method>

@@ -60,7 +60,7 @@ END_VAR]]></Declaration>
 METHOD HeatIsRequested : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Heizung wurde angefordert', '');
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Heizung wurde angefordert', pMachine^.iState.Description);
 pMachine^.SetState(pMachine^.RunningState);]]></ST>
       </Implementation>
     </Method>

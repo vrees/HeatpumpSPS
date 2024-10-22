@@ -119,7 +119,7 @@ METHOD UserPressedSwitchOnButton : BOOL
 METHOD WaterHasCooledDown : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Abkühlungsphase beendet', '');
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Abkühlungsphase beendet', pMachine^.iState.Description);
 pMachine^.SetState(pMachine^.IdleState);]]></ST>
       </Implementation>
     </Method>

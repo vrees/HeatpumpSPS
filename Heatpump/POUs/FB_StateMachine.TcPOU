@@ -12,7 +12,8 @@ VAR_IN_OUT
 END_VAR
 VAR_OUTPUT
 	iState						:	I_State := fbOffState;	
-	events						:	ST_Events;
+	events						:	ST_Events();
+	defaultEvents 				: 	ST_Events();  // leere Kopie
 END_VAR
 VAR
 	fbOffState					:	FB_OffState(THIS);
@@ -30,6 +31,9 @@ END_VAR
       <ST><![CDATA[rtrigButtonSwitchOn(CLK := bOnButtonPressed);
 rtrigButtonSwitchOff(CLK := bOffButtonPressed);
 rtrigButtonConfirmation(CLK := pd.sensor.userConfirmation);
+
+// Zuweisung von defaultEvent zu myEvent (Wertkopie)
+events := defaultEvents;
 
 generateEvents();
 
@@ -105,30 +109,19 @@ VAR
 	errorEvents		: ST_ErrorEvents := events.errorEvents; 
  	warningEvents	: ST_WarningEvents := events.warningEvents; 
 	message: STRING(255);
-	LowPres: INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (rtrigButtonSwitchOff.Q OR (rtrigButtonConfirmation.Q AND iState.State <> E_State.OFF)) THEN
 	events.switchOff.isTriggered := TRUE;
-END_IF
-
-IF (rtrigButtonSwitchOn.Q OR (rtrigButtonConfirmation.Q AND iState.State = E_State.OFF)) THEN
+ELSIF (rtrigButtonSwitchOn.Q OR (rtrigButtonConfirmation.Q AND iState.State = E_State.OFF)) THEN
 	events.switchOn.isTriggered := TRUE;
-END_IF
-
-IF (rtrigButtonConfirmation.Q) THEN
+ELSIF (rtrigButtonConfirmation.Q AND iState.State = E_State.ERROR) THEN
 	events.switchOn.isTriggered := TRUE;
-END_IF
-
-IF (pd.sensor.bufferTopTemperature < configValues.targetTemperatureOn) THEN
+ELSIF (pd.sensor.bufferTopTemperature < configValues.targetTemperatureOn AND iState.State = E_State.IDLE) THEN
 	events.heatIsRequested.isTriggered := TRUE;
-END_IF
-
-IF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < configValues.temperatureDiffBacklashOff) THEN
+ELSIF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < configValues.temperatureDiffBacklashOff AND iState.State = E_State.COOLDOWN) THEN
 	events.cooledDown.isTriggered := TRUE;
-END_IF
-
-IF (pd.sensor.temperatureFlow > configValues.targetTemperatureOff) THEN
+ELSIF (pd.sensor.temperatureFlow > configValues.targetTemperatureOff AND iState.State = E_State.RUNNING) THEN
 	events.targetTemperatureReached.isTriggered := TRUE;
 END_IF
 
@@ -258,7 +251,9 @@ END_VAR
     </Method>
     <LineIds Name="FB_StateMachine">
       <LineId Id="3" Count="2" />
+      <LineId Id="115" Count="1" />
       <LineId Id="59" Count="0" />
+      <LineId Id="117" Count="0" />
       <LineId Id="58" Count="0" />
       <LineId Id="87" Count="2" />
       <LineId Id="86" Count="0" />
@@ -277,15 +272,12 @@ END_VAR
     <LineIds Name="FB_StateMachine.generateEvents">
       <LineId Id="3" Count="0" />
       <LineId Id="5" Count="1" />
-      <LineId Id="10" Count="1" />
       <LineId Id="13" Count="0" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="39" Count="2" />
-      <LineId Id="38" Count="0" />
-      <LineId Id="16" Count="1" />
-      <LineId Id="19" Count="2" />
-      <LineId Id="24" Count="2" />
-      <LineId Id="29" Count="2" />
+      <LineId Id="40" Count="1" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="30" Count="1" />
       <LineId Id="28" Count="0" />
       <LineId Id="96" Count="2" />
       <LineId Id="36" Count="1" />

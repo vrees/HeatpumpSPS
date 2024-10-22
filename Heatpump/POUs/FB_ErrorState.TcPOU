@@ -91,7 +91,7 @@ METHOD TargetTemeperatureReached : BOOL
 METHOD UserPressedConfirmationButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Confirmation Button pressed', '');
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Confirmation Button pressed', pMachine^.iState.Description);
 pMachine^.SetState(pMachine^.IdleState);]]></ST>
       </Implementation>
     </Method>
