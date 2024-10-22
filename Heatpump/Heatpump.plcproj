@@ -16,6 +16,7 @@
     <Implicit_KindOfTask>{ab6c12df-4602-4530-86df-fc1353b15a4f}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{963a8e3c-0548-4a25-b0cc-04848670cd3c}</Implicit_Jitter_Distribution>
     <LibraryReferences>{2fc55ad9-b385-4c79-a527-647277861483}</LibraryReferences>
+    <Released>false</Released>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DUTs\E_Event.TcDUT">
@@ -119,6 +120,7 @@
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Math">
       <DefaultResolution>Tc2_Math, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Math</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -138,6 +140,20 @@
     <None Include="Heatpump.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="Tc2_Math">
+      <Resolution>Tc2_Math, 3.4.4.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc2_Standard">
+      <Resolution>Tc2_Standard, 3.4.5.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc2_System">
+      <Resolution>Tc2_System, 3.6.4.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc3_Module">
+      <Resolution>Tc3_Module, 3.4.5.0 (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
