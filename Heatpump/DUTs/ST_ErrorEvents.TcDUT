@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_ErrorEvents" Id="{7cb6974c-5521-4862-b356-e11d5f4dfdd9}">
+    <Declaration><![CDATA[TYPE ST_ErrorEvents :
+STRUCT
+	(* Errors *)
+	PressureDiffEvaporatorTooHigh		: ST_Event := (eventType := E_EventType.PressureDiffEvaporatorTooHigh, severity:= E_Severity.Error, message := 'Druckdifferenz am Verdampfer zu hoch');  
+	LowPressureRefrigerationThermostat	: ST_Event := (eventType := E_EventType.LowPressureRefrigerationThermostat, severity:= E_Severity.Error, message := 'Thermostat: Niederdruck zu niedrig');  
+	HighPressureRefrigerationThermostat	: ST_Event := (eventType := E_EventType.HighPressureRefrigerationThermostat, severity:= E_Severity.Error, message := 'Thermostat: Hochdruck zu hoch');  
+	MotorProtectionTriggered			: ST_Event := (eventType := E_EventType.MotorProtectionTriggered, severity:= E_Severity.Error, message := 'Thermostat: Hochdruck zu hoch');  
+	ExpansionValveTriggered				: ST_Event := (eventType := E_EventType.ExpansionValveTriggered, severity:= E_Severity.Error, message := 'Expansionsventil ausgelöst');  
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

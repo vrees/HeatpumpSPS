@@ -39,6 +39,12 @@
     <Compile Include="DUTs\ST_Events.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\ST_ErrorEvents.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\ST_WarningEvents.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\ST_SensorRaw.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -91,6 +97,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\utils\ScaleAndRound.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\utils\ScaleAndRoundString.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

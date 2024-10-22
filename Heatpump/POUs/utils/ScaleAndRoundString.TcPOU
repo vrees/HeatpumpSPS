@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="ScaleAndRoundString" Id="{0262c68a-fc47-4aaf-bd89-714222ee8907}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION ScaleAndRoundString : String
+VAR_INPUT
+	realValue 	: REAL;          // Die zu rundende REAL-Zahl
+	scaleFactor : INT;           // Rundungsfaktor
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[ScaleAndRoundString := REAL_TO_STRING(INT_TO_REAL(REAL_TO_INT(realValue * scaleFactor)) / scaleFactor);]]></ST>
+    </Implementation>
+    <LineIds Name="ScaleAndRoundString">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

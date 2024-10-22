@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_WarningEvents" Id="{756292db-2ea9-418e-88e9-2e7fa3d31910}">
+    <Declaration><![CDATA[TYPE ST_WarningEvents :
+STRUCT
+	(* Warnings *)
+	LowPressureRefrigerationCalc		: ST_Event := (eventType := E_EventType.LowPressureRefrigerationCalc, severity:= E_Severity.Warning, message := 'Sensor: Niederdruck zu niedrig');  
+	HighPressureRefrigerationCalc		: ST_Event := (eventType := E_EventType.HighPressureRefrigerationCalc, severity:= E_Severity.Warning, message := 'Sensor: Niederdruck zu hoch');  
+	EvaporatingTemperatureTooLow		: ST_Event := (eventType := E_EventType.EvaporatingTemperatureTooLow, severity:= E_Severity.Warning, message := 'Temperatur am Verdampferausgang zu niedrig');  
+	EvaporatingFlowRateTooLow			: ST_Event := (eventType := E_EventType.EvaporatingFlowRateTooLow, severity:= E_Severity.Warning, message := 'Durchflussmenge zu gering');  
+	WaterTankLevelTooLow				: ST_Event := (eventType := E_EventType.WaterTankLevelTooLow, severity:= E_Severity.Warning, message := 'Wasserstand des Tanks (Quelle) zu niedrig');  
+	WaterTankDataMissing				: ST_Event := (eventType := E_EventType.WaterTankDataMissing, severity:= E_Severity.Warning, message := 'Tanksensor (Quelle) sendet keine Daten mehr');  
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

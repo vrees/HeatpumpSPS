@@ -99,9 +99,11 @@ END_VAR]]></Declaration>
     </Method>
     <Method Name="generateEvents" Id="{83685a53-198e-44e2-9f24-60ab8684b413}">
       <Declaration><![CDATA[METHOD generateEvents : BOOL
-
 VAR
-	isTriggered: BOOL;
+	errorEvents		: ST_ErrorEvents := events.errorEvents; 
+ 	warningEvents	: ST_WarningEvents := events.warningEvents; 
+	message: STRING(255);
+	LowPres: INT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (rtrigButtonSwitchOff.Q OR (rtrigButtonConfirmation.Q AND iState.State <> E_State.OFF)) THEN
@@ -126,6 +128,78 @@ END_IF
 
 IF (pd.sensor.temperatureFlow > configValues.targetTemperatureOff) THEN
 	events.targetTemperatureReached.isTriggered := TRUE;
+END_IF
+
+
+(***** Errors *****)
+
+(* Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar] *)
+IF pd.sensor.PressureDifferenceEvaporator > configValues.PressureDifferenceEvaporatorMax THEN
+	errorEvents.PressureDiffEvaporatorTooHigh.message := CONCAT('Druckdifferenz [mbar]: ', REAL_TO_STRING(REAL_TO_INT(pd.sensor.PressureDifferenceEvaporator)));
+	errorEvents.PressureDiffEvaporatorTooHigh.isTriggered := TRUE;
+END_IF
+
+(* Prüfe maximalen Druck auf der Niederdruckseite über Ranco Thermostat [bar] *)
+IF pd.sensor.pressureLow > configValues.pressureLowMax THEN
+	errorEvents.LowPressureRefrigerationThermostat.message := CONCAT('Niederdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10));
+	errorEvents.LowPressureRefrigerationThermostat.isTriggered := TRUE;
+END_IF
+
+(*Prüfe maximalen Druck auf der Hochdruckseite über Ranco Thermostat [bar]  *)
+IF pd.sensor.pressureHigh > configValues.pressureHighMax THEN
+	errorEvents.HighPressureRefrigerationThermostat.message := CONCAT('Hochdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureHigh, 10));
+	errorEvents.HighPressureRefrigerationThermostat.isTriggered := TRUE;
+END_IF
+
+(* Motor-Schutzschalter hat ausgelöst *)
+IF pd.incident.incidentCompressor THEN
+	errorEvents.MotorProtectionTriggered.message := 'Motorschutzschalter hat ausgelöst';
+	errorEvents.MotorProtectionTriggered.isTriggered := TRUE;
+END_IF
+
+(* Expansionsventil meldet Fehler *)
+IF pd.incident.alarmExpansionValve THEN
+	errorEvents.ExpansionValveTriggered.message := 'Expansionsventil meldet Fehler';
+	errorEvents.ExpansionValveTriggered.isTriggered := TRUE;
+END_IF
+
+
+(***** Warnings *****)
+
+(* Prüfe maximalen Druck auf der Niederdruckseite [bar] *)
+IF pd.sensor.PressureLow > configValues.PressureLowMax THEN
+	warningEvents.LowPressureRefrigerationCalc.message := CONCAT('Niederdruck: [bar]: ', ScaleAndRoundString(pd.sensor.PressureLow, 10));
+	warningEvents.LowPressureRefrigerationCalc.isTriggered := TRUE;
+END_IF
+
+(* Prüfe maximalen Druck auf der Hochdruckseite [bar] *)
+IF pd.sensor.PressureHigh > configValues.PressureHighMax THEN
+	warningEvents.HighPressureRefrigerationCalc.message := CONCAT('', ScaleAndRoundString(pd.sensor.PressureHigh, 10));
+	warningEvents.HighPressureRefrigerationCalc.isTriggered := TRUE;
+END_IF
+
+(* Prüfe minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [°C] *)
+IF pd.sensor.TemperatureEvaporatingOut < configValues.EvaporatingTemperatureOutMin THEN
+	warningEvents.EvaporatingTemperatureTooLow.message := CONCAT('', ScaleAndRoundString(pd.sensor.TemperatureEvaporatingOut, 10));
+	warningEvents.EvaporatingTemperatureTooLow.isTriggered := TRUE;
+END_IF
+
+(* Prüfe, of Wasser Durchflussmenge ausreichend ist. Mindestens 2500 Liter/Stunde *)
+IF pd.incident.incidentFlow THEN
+	warningEvents.EvaporatingFlowRateTooLow.message := ' Wasser Durchflussmenge nicht ausreichend. Mindestens 2500 Liter/Stunde';
+	warningEvents.EvaporatingFlowRateTooLow.isTriggered := TRUE;
+END_IF
+
+(* TANK_LEVEL_TOO_LOW *)
+IF FALSE THEN
+	warningEvents.WaterTankLevelTooLow.message := 'Wasserstand der Quelle ist zu meiedrig';
+	warningEvents.WaterTankLevelTooLow.isTriggered := TRUE;
+END_IF
+
+(* TANK_LEVEL Data missing *)
+IF FALSE THEN
+	warningEvents.WaterTankDataMissing.message := 'Keine Daten über den Wasserstand der Quelle verfügbar';
+	warningEvents.WaterTankDataMissing.isTriggered := TRUE;
 END_IF
 
 
@@ -204,7 +278,59 @@ END_VAR
       <LineId Id="24" Count="2" />
       <LineId Id="29" Count="2" />
       <LineId Id="28" Count="0" />
+      <LineId Id="96" Count="2" />
       <LineId Id="36" Count="1" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="47" Count="1" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="53" Count="1" />
+      <LineId Id="143" Count="0" />
+      <LineId Id="55" Count="1" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="190" Count="2" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="173" Count="2" />
+      <LineId Id="187" Count="0" />
+      <LineId Id="177" Count="0" />
+      <LineId Id="172" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="183" Count="1" />
+      <LineId Id="188" Count="0" />
+      <LineId Id="186" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="110" Count="1" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="113" Count="2" />
+      <LineId Id="119" Count="0" />
+      <LineId Id="116" Count="1" />
+      <LineId Id="158" Count="2" />
+      <LineId Id="219" Count="0" />
+      <LineId Id="162" Count="0" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="220" Count="0" />
+      <LineId Id="149" Count="1" />
+      <LineId Id="218" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="137" Count="0" />
+      <LineId Id="221" Count="0" />
+      <LineId Id="178" Count="1" />
+      <LineId Id="217" Count="0" />
+      <LineId Id="181" Count="0" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="226" Count="0" />
+      <LineId Id="77" Count="1" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="216" Count="0" />
+      <LineId Id="227" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="90" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.IdleState.Get">

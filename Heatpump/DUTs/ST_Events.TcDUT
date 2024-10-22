@@ -4,27 +4,18 @@
     <Declaration><![CDATA[TYPE ST_Events :
 STRUCT
 	(* Normal StateMachine changes *)
-	switchOff 							: ST_Event := (eEventType := E_EventType.SwitchOff);  
-	switchOn 							: ST_Event := (eEventType := E_EventType.SwitchOn);  
-	confirmed							: ST_Event := (eEventType := E_EventType.Confirm);
-	heatIsRequested 					: ST_Event := (eEventType := E_EventType.HeatIsRequested);  
-	targetTemperatureReached			: ST_Event := (eEventType := E_EventType.TargetTemperatureReached);
-	cooledDown							: ST_Event := (eEventType := E_EventType.CooledDown);
+	switchOff 							: ST_Event := (eventType := E_EventType.SwitchOff);  
+	switchOn 							: ST_Event := (eventType := E_EventType.SwitchOn);  
+	confirmed							: ST_Event := (eventType := E_EventType.Confirm);
+	heatIsRequested 					: ST_Event := (eventType := E_EventType.HeatIsRequested);  
+	targetTemperatureReached			: ST_Event := (eventType := E_EventType.TargetTemperatureReached);
+	cooledDown							: ST_Event := (eventType := E_EventType.CooledDown);
 		
 	(* Errors *)
-	PressureDiffEvaporatorTooHigh		: ST_Event := (eEventType := E_EventType.PressureDiffEvaporatorTooHigh, eSeverity:= E_Severity.Error, sMessage := 'Druckdifferenz am Verdampfer zu hoch');  
-	LowPressureRefrigerationThermostat	: ST_Event := (eEventType := E_EventType.LowPressureRefrigerationThermostat, eSeverity:= E_Severity.Error, sMessage := 'Thermostat: Niederdruck zu niedrig');  
-	HighPressureRefrigerationThermostat	: ST_Event := (eEventType := E_EventType.HighPressureRefrigerationThermostat, eSeverity:= E_Severity.Error, sMessage := 'Thermostat: Hochdruck zu hoch');  
-	MotorProtectionTriggered			: ST_Event := (eEventType := E_EventType.MotorProtectionTriggered, eSeverity:= E_Severity.Error, sMessage := 'Thermostat: Hochdruck zu hoch');  
-	ExpansionValveTriggered				: ST_Event := (eEventType := E_EventType.ExpansionValveTriggered, eSeverity:= E_Severity.Error, sMessage := 'Expansionsventil ausgelöst');  
+     errorEvents						: ST_ErrorEvents; 
 
 	(* Warnings *)
-	LowPressureRefrigerationCalc		: ST_Event := (eEventType := E_EventType.LowPressureRefrigerationCalc, eSeverity:= E_Severity.Warning, sMessage := 'Sensor: Niederdruck zu niedrig');  
-	HighPressureRefrigerationCalc		: ST_Event := (eEventType := E_EventType.HighPressureRefrigerationCalc, eSeverity:= E_Severity.Warning, sMessage := 'Sensor: Niederdruck zu hoch');  
-	EvaporatingTemperatureTooLow		: ST_Event := (eEventType := E_EventType.EvaporatingTemperatureTooLow, eSeverity:= E_Severity.Warning, sMessage := 'Temperatur am Verdampferausgang zu niedrig');  
-	EvaporatingFlowRateTooLow			: ST_Event := (eEventType := E_EventType.EvaporatingFlowRateTooLow, eSeverity:= E_Severity.Warning, sMessage := 'Durchflussmenge zu gering');  
-	WaterTankLevelTooLow				: ST_Event := (eEventType := E_EventType.WaterTankLevelTooLow, eSeverity:= E_Severity.Warning, sMessage := 'Wasserstand des Tanks (Quelle) zu niedrig');  
-	WaterTankDataMissing				: ST_Event := (eEventType := E_EventType.WaterTankDataMissing, eSeverity:= E_Severity.Warning, sMessage := 'Tanksensor (Quelle) sendet keine Daten mehr');  
+	warningEvents						:ST_WarningEvents;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
