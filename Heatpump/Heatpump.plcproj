@@ -102,6 +102,12 @@
     <Compile Include="POUs\utils\ScaleAndRoundString.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\utils\toErrorEventArray.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\utils\toErrorText.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />

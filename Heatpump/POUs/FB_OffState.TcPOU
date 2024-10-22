@@ -26,6 +26,18 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="ErrorDetected" Id="{1888cc77-ab19-429d-b5dc-9fd3ac4091b4}">
+      <Declaration><![CDATA[METHOD ErrorDetected : BOOL
+VAR_INPUT
+	errorEvents		: ST_ErrorEvents;
+END_VAR
+VAR
+	message				: STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="FB_init" Id="{98bea1d9-064f-4e7b-bbff-5c1ffd972edc}">
       <Declaration><![CDATA[//FB_Init ist immer implizit verfügbar und wird primär für die Initialisierung verwendet.
 //Der Rückgabewert wird nicht ausgewertet. Für gezielte Einflussnahme können Sie
@@ -114,6 +126,9 @@ METHOD WaterHasCooledDown : BOOL
     </LineIds>
     <LineIds Name="FB_OffState.Description.Get">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_OffState.ErrorDetected">
+      <LineId Id="6" Count="0" />
     </LineIds>
     <LineIds Name="FB_OffState.FB_init">
       <LineId Id="2" Count="0" />

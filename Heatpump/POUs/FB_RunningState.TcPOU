@@ -26,6 +26,20 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="ErrorDetected" Id="{2d6db66f-da00-40a1-96dd-ed61a3c7e83c}">
+      <Declaration><![CDATA[METHOD ErrorDetected : BOOL
+VAR_INPUT
+	errorEvents		: ST_ErrorEvents;
+END_VAR
+VAR
+	message				: STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[message := toErrorText(errorEvents);
+ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Error detected', message);
+pMachine^.SetState(pMachine^.ErrorState);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="FB_init" Id="{ccdf553b-48e7-41c3-825a-9b44d85c7b93}">
       <Declaration><![CDATA[//FB_Init ist immer implizit verfügbar und wird primär für die Initialisierung verwendet.
 //Der Rückgabewert wird nicht ausgewertet. Für gezielte Einflussnahme können Sie
@@ -115,6 +129,10 @@ METHOD WaterHasCooledDown : BOOL
     </LineIds>
     <LineIds Name="FB_RunningState.Description.Get">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RunningState.ErrorDetected">
+      <LineId Id="13" Count="1" />
+      <LineId Id="6" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.FB_init">
       <LineId Id="2" Count="0" />

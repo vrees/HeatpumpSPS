@@ -13,6 +13,7 @@ STRUCT
 		
 	(* Errors *)
      errorEvents						: ST_ErrorEvents; 
+	 errorsDetected						: BOOL := FALSE;
 
 	(* Warnings *)
 	warningEvents						:ST_WarningEvents;

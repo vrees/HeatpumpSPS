@@ -24,8 +24,6 @@ VAR
 	rtrigButtonSwitchOn			:	R_TRIG;
 	rtrigButtonSwitchOff		:	R_TRIG;
 	rtrigButtonConfirmation		:	R_TRIG;	
-
-	isTaregetTemeraturReached: INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -34,6 +32,10 @@ rtrigButtonSwitchOff(CLK := bOffButtonPressed);
 rtrigButtonConfirmation(CLK := pd.sensor.userConfirmation);
 
 generateEvents();
+
+IF events.errorsDetected THEN
+	iState.ErrorDetected(events.errorEvents);
+END_IF 
 
 IF events.switchOff.isTriggered THEN
 	iState.UserPressedSwitchOffButton();
@@ -137,30 +139,35 @@ END_IF
 IF pd.sensor.PressureDifferenceEvaporator > configValues.PressureDifferenceEvaporatorMax THEN
 	errorEvents.PressureDiffEvaporatorTooHigh.message := CONCAT('Druckdifferenz [mbar]: ', REAL_TO_STRING(REAL_TO_INT(pd.sensor.PressureDifferenceEvaporator)));
 	errorEvents.PressureDiffEvaporatorTooHigh.isTriggered := TRUE;
+	events.errorsDetected := TRUE;
 END_IF
 
 (* Prüfe maximalen Druck auf der Niederdruckseite über Ranco Thermostat [bar] *)
 IF pd.sensor.pressureLow > configValues.pressureLowMax THEN
 	errorEvents.LowPressureRefrigerationThermostat.message := CONCAT('Niederdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10));
 	errorEvents.LowPressureRefrigerationThermostat.isTriggered := TRUE;
+	events.errorsDetected := TRUE;
 END_IF
 
 (*Prüfe maximalen Druck auf der Hochdruckseite über Ranco Thermostat [bar]  *)
 IF pd.sensor.pressureHigh > configValues.pressureHighMax THEN
 	errorEvents.HighPressureRefrigerationThermostat.message := CONCAT('Hochdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureHigh, 10));
 	errorEvents.HighPressureRefrigerationThermostat.isTriggered := TRUE;
+	events.errorsDetected := TRUE;
 END_IF
 
 (* Motor-Schutzschalter hat ausgelöst *)
 IF pd.incident.incidentCompressor THEN
 	errorEvents.MotorProtectionTriggered.message := 'Motorschutzschalter hat ausgelöst';
 	errorEvents.MotorProtectionTriggered.isTriggered := TRUE;
+	events.errorsDetected := TRUE;
 END_IF
 
 (* Expansionsventil meldet Fehler *)
 IF pd.incident.alarmExpansionValve THEN
 	errorEvents.ExpansionValveTriggered.message := 'Expansionsventil meldet Fehler';
 	errorEvents.ExpansionValveTriggered.isTriggered := TRUE;
+	events.errorsDetected := TRUE;
 END_IF
 
 
@@ -253,6 +260,8 @@ END_VAR
       <LineId Id="3" Count="2" />
       <LineId Id="59" Count="0" />
       <LineId Id="58" Count="0" />
+      <LineId Id="87" Count="2" />
+      <LineId Id="86" Count="0" />
       <LineId Id="7" Count="24" />
       <LineId Id="2" Count="0" />
     </LineIds>
@@ -282,23 +291,30 @@ END_VAR
       <LineId Id="36" Count="1" />
       <LineId Id="46" Count="0" />
       <LineId Id="108" Count="0" />
-      <LineId Id="47" Count="1" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="234" Count="0" />
+      <LineId Id="48" Count="0" />
       <LineId Id="83" Count="0" />
       <LineId Id="53" Count="1" />
       <LineId Id="143" Count="0" />
-      <LineId Id="55" Count="1" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="235" Count="0" />
+      <LineId Id="56" Count="0" />
       <LineId Id="107" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="190" Count="2" />
+      <LineId Id="236" Count="0" />
       <LineId Id="64" Count="0" />
       <LineId Id="173" Count="2" />
       <LineId Id="187" Count="0" />
       <LineId Id="177" Count="0" />
+      <LineId Id="237" Count="0" />
       <LineId Id="172" Count="0" />
       <LineId Id="86" Count="0" />
       <LineId Id="183" Count="1" />
       <LineId Id="188" Count="0" />
       <LineId Id="186" Count="0" />
+      <LineId Id="238" Count="0" />
       <LineId Id="68" Count="0" />
       <LineId Id="110" Count="1" />
       <LineId Id="69" Count="0" />
