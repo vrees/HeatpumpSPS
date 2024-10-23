@@ -131,6 +131,7 @@ METHOD WaterHasCooledDown : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Abkühlungsphase beendet -> %s', pMachine^.IdleState.Name);
+pMachine^.pd.actor.operatingStateWaterPump := FALSE;
 pMachine^.SetState(pMachine^.IdleState);]]></ST>
       </Implementation>
     </Method>
@@ -174,6 +175,7 @@ pMachine^.SetState(pMachine^.IdleState);]]></ST>
     </LineIds>
     <LineIds Name="FB_CoolDownState.WaterHasCooledDown">
       <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

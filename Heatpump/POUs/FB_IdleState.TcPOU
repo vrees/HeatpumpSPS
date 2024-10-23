@@ -65,6 +65,8 @@ METHOD HeatIsRequested : BOOL
 IF pMachine^.timerTON.Q OR NOT pMachine^.timerTON.IN THEN
 	ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Heizung wurde angefordert -> %s', pMachine^.RunningState.Name);
 	pMachine^.timerTON(IN := FALSE);  
+	pMachine^.pd.actor.operatingStateCompressor := TRUE;
+	pMachine^.pd.actor.operatingStateWaterPump := TRUE;
 	pMachine^.SetState(pMachine^.RunningState);	
 END_IF
 ]]></ST>
@@ -157,6 +159,7 @@ METHOD WaterHasCooledDown : BOOL
       <LineId Id="14" Count="1" />
       <LineId Id="9" Count="0" />
       <LineId Id="12" Count="1" />
+      <LineId Id="16" Count="1" />
       <LineId Id="10" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>

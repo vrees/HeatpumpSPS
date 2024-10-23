@@ -22,6 +22,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[pMachine^.timerTON(IN := TRUE, PT := GVL.configValues.minIdleSec);
 ADSLOGSTR(ADSLOG_MSGTYPE_HINT, message, pMachine^.CoolDownState.Name);
+pMachine^.pd.actor.operatingStateCompressor := FALSE;
 pMachine^.SetState(pMachine^.CoolDownState);
 
 
@@ -157,6 +158,7 @@ METHOD WaterHasCooledDown : BOOL
     </LineIds>
     <LineIds Name="FB_RunningState.ActionSwitchOff">
       <LineId Id="20" Count="1" />
+      <LineId Id="23" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="10" Count="2" />
       <LineId Id="19" Count="0" />

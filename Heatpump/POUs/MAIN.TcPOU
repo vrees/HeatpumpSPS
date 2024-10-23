@@ -16,12 +16,7 @@ END_VAR
       <ST><![CDATA[
 fbProcessdata(pd := pd);
 
-fbStateMachine(	pd 							:= pd,
-				bOnButtonPressed			:= bOnButtonPressed,
-				bOffButtonPressed			:= bOffButtonPressed);
-				
-	
-sState : fbStateMachine.iState.Description;
+fbStateMachine(pd := pd, bOnButtonPressed := bOnButtonPressed, bOffButtonPressed := bOffButtonPressed);
 
 bOnButtonPressed			:= FALSE;
 bOffButtonPressed			:= FALSE;
@@ -30,7 +25,7 @@ bOffButtonPressed			:= FALSE;
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="3" Count="3" />
-      <LineId Id="8" Count="8" />
+      <LineId Id="13" Count="3" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

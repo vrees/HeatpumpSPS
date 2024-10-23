@@ -4,8 +4,8 @@
     <Declaration><![CDATA[TYPE ST_Actor :
     STRUCT
 		(* EL2004 - Diguital Out*)
-        operatingStateCompressor 	AT %Q* : BOOL;  (* Status des Verdichters: Ein/Aus *)
-        operatingStateWaterPump 	AT %Q* : BOOL;  (* Status der Heizungspumpe: Ein/Aus *)
+        operatingStateCompressor 	AT %Q* : BOOL := FALSE;  (* Status des Verdichters: Ein/Aus *)
+        operatingStateWaterPump 	AT %Q* : BOOL := FALSE;  (* Status der Heizungspumpe: Ein/Aus *)
     END_STRUCT
 END_TYPE
 ]]></Declaration>
