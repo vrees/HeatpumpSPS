@@ -2,8 +2,8 @@
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_ProcessData" Id="{8d629261-798f-4877-9443-8dbcc04e3ba2}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_ProcessData
-VAR_IN_OUT
-	pd 				: 	ST_ProcessData;
+VAR_INPUT
+	pd 				: 	REFERENCE TO ST_ProcessData;
 END_VAR
 VAR
 	sensorRaw		:	ST_SensorRaw; 

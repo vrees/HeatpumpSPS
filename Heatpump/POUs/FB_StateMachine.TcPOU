@@ -5,7 +5,7 @@
 VAR_INPUT	
 	bOnButtonPressed			: 	BOOL;
 	bOffButtonPressed			: 	BOOL;
-	pd 							: 	ST_ProcessData;
+	pd 							: 	REFERENCE TO ST_ProcessData;
 END_VAR
 VAR_OUTPUT
 	iState						:	I_State := fbOffState;	
