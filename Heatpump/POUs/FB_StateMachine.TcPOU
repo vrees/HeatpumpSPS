@@ -8,12 +8,11 @@ VAR_INPUT
 END_VAR
 VAR_IN_OUT
 	pd 							: 	ST_ProcessData;
-	configValues				:   ST_ConfigValues;
 END_VAR
 VAR_OUTPUT
 	iState						:	I_State := fbOffState;	
 	events						:	ST_Events();
-	defaultEvents 				: 	ST_Events();  // leere Kopie
+	defaultEvents 				: 	ST_Events();  			// leere Kopie
 END_VAR
 VAR
 	fbOffState					:	FB_OffState(THIS);
@@ -21,6 +20,7 @@ VAR
 	fbRunningState				:	FB_RunningState(THIS);
 	fbCoolDownState				:	FB_CoolDownState(THIS);
 	fbErrorState				:	FB_ErrorState(THIS);
+	timerTON 					: 	TON;             		// TON-Timer
 		
 	rtrigButtonSwitchOn			:	R_TRIG;
 	rtrigButtonSwitchOff		:	R_TRIG;
@@ -108,7 +108,6 @@ END_VAR]]></Declaration>
 VAR
 	errorEvents		: ST_ErrorEvents := events.errorEvents; 
  	warningEvents	: ST_WarningEvents := events.warningEvents; 
-	message: STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (rtrigButtonSwitchOff.Q OR (rtrigButtonConfirmation.Q AND iState.State <> E_State.OFF)) THEN
@@ -117,11 +116,11 @@ ELSIF (rtrigButtonSwitchOn.Q OR (rtrigButtonConfirmation.Q AND iState.State = E_
 	events.switchOn.isTriggered := TRUE;
 ELSIF (rtrigButtonConfirmation.Q AND iState.State = E_State.ERROR) THEN
 	events.switchOn.isTriggered := TRUE;
-ELSIF (pd.sensor.bufferTopTemperature < configValues.targetTemperatureOn AND iState.State = E_State.IDLE) THEN
+ELSIF (pd.sensor.bufferTopTemperature < GVL.configValues.targetTemperatureOn AND iState.State = E_State.IDLE) THEN
 	events.heatIsRequested.isTriggered := TRUE;
-ELSIF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < configValues.temperatureDiffBacklashOff AND iState.State = E_State.COOLDOWN) THEN
+ELSIF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < GVL.configValues.temperatureDiffBacklashOff AND iState.State = E_State.COOLDOWN) THEN
 	events.cooledDown.isTriggered := TRUE;
-ELSIF (pd.sensor.temperatureFlow > configValues.targetTemperatureOff AND iState.State = E_State.RUNNING) THEN
+ELSIF (pd.sensor.temperatureFlow > GVL.configValues.targetTemperatureOff AND iState.State = E_State.RUNNING) THEN
 	events.targetTemperatureReached.isTriggered := TRUE;
 END_IF
 
@@ -129,21 +128,21 @@ END_IF
 (***** Errors *****)
 
 (* Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar] *)
-IF pd.sensor.PressureDifferenceEvaporator > configValues.PressureDifferenceEvaporatorMax THEN
+IF pd.sensor.PressureDifferenceEvaporator > GVL.configValues.PressureDifferenceEvaporatorMax THEN
 	errorEvents.PressureDiffEvaporatorTooHigh.message := CONCAT('Druckdifferenz [mbar]: ', REAL_TO_STRING(REAL_TO_INT(pd.sensor.PressureDifferenceEvaporator)));
 	errorEvents.PressureDiffEvaporatorTooHigh.isTriggered := TRUE;
 	events.errorsDetected := TRUE;
 END_IF
 
 (* Prüfe maximalen Druck auf der Niederdruckseite über Ranco Thermostat [bar] *)
-IF pd.sensor.pressureLow > configValues.pressureLowMax THEN
+IF pd.sensor.pressureLow > GVL.configValues.pressureLowMax THEN
 	errorEvents.LowPressureRefrigerationThermostat.message := CONCAT('Niederdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10));
 	errorEvents.LowPressureRefrigerationThermostat.isTriggered := TRUE;
 	events.errorsDetected := TRUE;
 END_IF
 
 (*Prüfe maximalen Druck auf der Hochdruckseite über Ranco Thermostat [bar]  *)
-IF pd.sensor.pressureHigh > configValues.pressureHighMax THEN
+IF pd.sensor.pressureHigh > GVL.configValues.pressureHighMax THEN
 	errorEvents.HighPressureRefrigerationThermostat.message := CONCAT('Hochdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureHigh, 10));
 	errorEvents.HighPressureRefrigerationThermostat.isTriggered := TRUE;
 	events.errorsDetected := TRUE;
@@ -167,19 +166,19 @@ END_IF
 (***** Warnings *****)
 
 (* Prüfe maximalen Druck auf der Niederdruckseite [bar] *)
-IF pd.sensor.PressureLow > configValues.PressureLowMax THEN
+IF pd.sensor.PressureLow > GVL.configValues.PressureLowMax THEN
 	warningEvents.LowPressureRefrigerationCalc.message := CONCAT('Niederdruck: [bar]: ', ScaleAndRoundString(pd.sensor.PressureLow, 10));
 	warningEvents.LowPressureRefrigerationCalc.isTriggered := TRUE;
 END_IF
 
 (* Prüfe maximalen Druck auf der Hochdruckseite [bar] *)
-IF pd.sensor.PressureHigh > configValues.PressureHighMax THEN
+IF pd.sensor.PressureHigh > GVL.configValues.PressureHighMax THEN
 	warningEvents.HighPressureRefrigerationCalc.message := CONCAT('', ScaleAndRoundString(pd.sensor.PressureHigh, 10));
 	warningEvents.HighPressureRefrigerationCalc.isTriggered := TRUE;
 END_IF
 
 (* Prüfe minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [°C] *)
-IF pd.sensor.TemperatureEvaporatingOut < configValues.EvaporatingTemperatureOutMin THEN
+IF pd.sensor.TemperatureEvaporatingOut < GVL.configValues.EvaporatingTemperatureOutMin THEN
 	warningEvents.EvaporatingTemperatureTooLow.message := CONCAT('', ScaleAndRoundString(pd.sensor.TemperatureEvaporatingOut, 10));
 	warningEvents.EvaporatingTemperatureTooLow.isTriggered := TRUE;
 END_IF

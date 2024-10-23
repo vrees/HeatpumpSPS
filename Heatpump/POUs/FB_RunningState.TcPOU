@@ -13,6 +13,25 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="ActionSwitchOff" Id="{46ba5a55-86e3-4497-8746-3df853385ea5}">
+      <Declaration><![CDATA[METHOD ActionSwitchOff : BOOL
+VAR_INPUT
+	message		:	STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, message, pMachine^.iState.Description);
+pMachine^.timerTON(IN := TRUE, PT := GVL.configValues.minIdleSec);
+pMachine^.SetState(pMachine^.CoolDownState);
+
+
+
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Description" Id="{fff56124-f3e0-4a4a-810d-d034fa66ff15}">
       <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
 PROPERTY Description : STRING
@@ -87,8 +106,7 @@ END_VAR
 METHOD TargetTemeperatureReached : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Zieltemperatur erreicht.', pMachine^.iState.Description);
-pMachine^.SetState(pMachine^.CoolDownState);]]></ST>
+        <ST><![CDATA[ActionSwitchOff('Zieltemperatur erreicht.');]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedConfirmationButton" Id="{34138e8e-29b3-43c6-83b9-21f3a75e6954}">
@@ -104,8 +122,7 @@ METHOD UserPressedConfirmationButton : BOOL
 METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Off Button pressed', pMachine^.iState.Description);
-pMachine^.SetState(pMachine^.CoolDownState);]]></ST>
+        <ST><![CDATA[ActionSwitchOff('Off Button pressed');]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedSwitchOnButton" Id="{92d0b6bf-2822-477d-9e93-031fae1f4a37}">
@@ -127,6 +144,16 @@ METHOD WaterHasCooledDown : BOOL
     <LineIds Name="FB_RunningState">
       <LineId Id="2" Count="0" />
     </LineIds>
+    <LineIds Name="FB_RunningState.ActionSwitchOff">
+      <LineId Id="6" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="2" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
     <LineIds Name="FB_RunningState.Description.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
@@ -147,15 +174,13 @@ METHOD WaterHasCooledDown : BOOL
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.TargetTemeperatureReached">
-      <LineId Id="5" Count="0" />
-      <LineId Id="2" Count="0" />
+      <LineId Id="8" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.UserPressedConfirmationButton">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.UserPressedSwitchOffButton">
-      <LineId Id="5" Count="0" />
-      <LineId Id="2" Count="0" />
+      <LineId Id="9" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.UserPressedSwitchOnButton">
       <LineId Id="2" Count="0" />

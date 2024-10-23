@@ -5,7 +5,6 @@
 VAR
 	fbStateMachine				:	FB_StateMachine();
 	fbProcessdata				:   FB_Processdata();
-	configValues				:	ST_ConfigValues;
 	pd 							: 	ST_ProcessData;
 	
 	sState						:	STRING;
@@ -15,10 +14,9 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-fbProcessdata(pd := pd, configValues := configValues);
+fbProcessdata(pd := pd);
 
 fbStateMachine(	pd 							:= pd,
-				configValues				:= configValues,
 				bOnButtonPressed			:= bOnButtonPressed,
 				bOffButtonPressed			:= bOffButtonPressed);
 				
@@ -31,7 +29,8 @@ bOffButtonPressed			:= FALSE;
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="3" Count="13" />
+      <LineId Id="3" Count="3" />
+      <LineId Id="8" Count="8" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

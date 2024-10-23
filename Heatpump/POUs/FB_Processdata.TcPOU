@@ -4,7 +4,6 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FB_ProcessData
 VAR_IN_OUT
 	pd 				: 	ST_ProcessData;
-	configValues	:	ST_ConfigValues;
 END_VAR
 VAR
 	sensorRaw		:	ST_SensorRaw; 

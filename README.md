@@ -33,3 +33,6 @@ TwinCAT Standard Remote Manager: 4024.53.0
 -  File: CBxx63_WEC7_HPS_v610a_TC31_B4024.53_v2.zip
 - Lizens-File: ./License-Files/TLR_BI_00976901.tclrs
 - Copy E:\data\Lizenzen\Beckhoff\TLR_BI_00976901.tclrs  (HDD on WIN10-GAMING)
+
+# Lokal Konfig
+C:\ProgramData\Beckhoff\TwinCAT\3.1\Boot
