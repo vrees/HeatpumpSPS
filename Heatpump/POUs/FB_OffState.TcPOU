@@ -69,6 +69,17 @@ METHOD LimitValuesAreExceeded : BOOL
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Name" Id="{2c52335e-5d4a-4ba6-8676-9c0b15fb0662}">
+      <Declaration><![CDATA[PROPERTY Name : STRING]]></Declaration>
+      <Get Name="Get" Id="{5bc9d40e-cee5-4ee4-823f-4fb0e1f3908a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Name := 'Off';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="State" Id="{e9b35d77-403c-47b3-b5d5-c12b8407686e}">
       <Declaration><![CDATA[PROPERTY State : E_State]]></Declaration>
       <Get Name="Get" Id="{5cf49127-fb9c-4307-a0b0-382199956e67}">
@@ -109,7 +120,7 @@ METHOD UserPressedSwitchOffButton : BOOL
 METHOD UserPressedSwitchOnButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Einschalt Button wurde gedrückt', pMachine^.iState.Description);
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Einschalt Button wurde gedrückt -> %s', pMachine^.IdleState.Name);
 pMachine^.SetState(pMachine^.IdleState);]]></ST>
       </Implementation>
     </Method>
@@ -137,6 +148,9 @@ METHOD WaterHasCooledDown : BOOL
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_OffState.LimitValuesAreExceeded">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_OffState.Name.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_OffState.State.Get">

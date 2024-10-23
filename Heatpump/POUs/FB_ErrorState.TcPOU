@@ -67,6 +67,17 @@ METHOD LimitValuesAreExceeded : BOOL
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Name" Id="{cc46a02f-c560-4746-aafb-c4ebfec2dd31}">
+      <Declaration><![CDATA[PROPERTY Name : STRING]]></Declaration>
+      <Get Name="Get" Id="{e8bf7ff8-a2a9-4cce-99be-1ae11e37e3ab}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Name := 'Error';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="State" Id="{145413ed-c790-4267-82eb-9a9ffe70ba62}">
       <Declaration><![CDATA[PROPERTY State : E_State]]></Declaration>
       <Get Name="Get" Id="{7228e2d1-54da-4346-af29-132743857a96}">
@@ -91,7 +102,7 @@ METHOD TargetTemeperatureReached : BOOL
 METHOD UserPressedConfirmationButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Confirmation Button pressed', pMachine^.iState.Description);
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Confirmation Button pressed -> %s', pMachine^.IdleState.Name);
 pMachine^.SetState(pMachine^.IdleState);]]></ST>
       </Implementation>
     </Method>
@@ -135,6 +146,9 @@ METHOD WaterHasCooledDown : BOOL
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ErrorState.LimitValuesAreExceeded">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ErrorState.Name.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ErrorState.State.Get">

@@ -20,8 +20,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, message, pMachine^.iState.Description);
-pMachine^.timerTON(IN := TRUE, PT := GVL.configValues.minIdleSec);
+        <ST><![CDATA[pMachine^.timerTON(IN := TRUE, PT := GVL.configValues.minIdleSec);
+ADSLOGSTR(ADSLOG_MSGTYPE_HINT, message, pMachine^.CoolDownState.Name);
 pMachine^.SetState(pMachine^.CoolDownState);
 
 
@@ -90,6 +90,17 @@ METHOD LimitValuesAreExceeded : BOOL
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Name" Id="{4e96be48-1bba-4ddc-ae4e-db1f900e7cdf}">
+      <Declaration><![CDATA[PROPERTY Name : STRING]]></Declaration>
+      <Get Name="Get" Id="{7e39c09e-d876-4302-9bbd-d2a517af0670}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Name := 'Running';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="State" Id="{75386ad7-2492-4d3c-8098-8f6c395c0bbb}">
       <Declaration><![CDATA[PROPERTY State : E_State]]></Declaration>
       <Get Name="Get" Id="{81495c4a-f76d-4331-90b6-4378394cf226}">
@@ -106,7 +117,7 @@ END_VAR
 METHOD TargetTemeperatureReached : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ActionSwitchOff('Zieltemperatur erreicht.');]]></ST>
+        <ST><![CDATA[ActionSwitchOff('Zieltemperatur erreicht. -> %s');]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedConfirmationButton" Id="{34138e8e-29b3-43c6-83b9-21f3a75e6954}">
@@ -122,7 +133,7 @@ METHOD UserPressedConfirmationButton : BOOL
 METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ActionSwitchOff('Off Button pressed');]]></ST>
+        <ST><![CDATA[ActionSwitchOff('Off Button pressed -> %s');]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedSwitchOnButton" Id="{92d0b6bf-2822-477d-9e93-031fae1f4a37}">
@@ -145,8 +156,7 @@ METHOD WaterHasCooledDown : BOOL
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.ActionSwitchOff">
-      <LineId Id="6" Count="0" />
-      <LineId Id="20" Count="0" />
+      <LineId Id="20" Count="1" />
       <LineId Id="5" Count="0" />
       <LineId Id="10" Count="2" />
       <LineId Id="19" Count="0" />
@@ -168,6 +178,9 @@ METHOD WaterHasCooledDown : BOOL
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.LimitValuesAreExceeded">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RunningState.Name.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.State.Get">

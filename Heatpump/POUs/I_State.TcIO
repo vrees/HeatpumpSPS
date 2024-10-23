@@ -28,6 +28,12 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Property Name="Name" Id="{185febd2-623d-4463-8457-cd856daf23b0}">
+      <Declaration><![CDATA[PROPERTY Name : String]]></Declaration>
+      <Get Name="Get" Id="{706e1d71-bb03-45f8-9d3a-58a361b141c0}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Property Name="State" Id="{68cd257f-c6c4-44a4-9754-52e144c1f6ae}">
       <Declaration><![CDATA[PROPERTY State : E_State]]></Declaration>
       <Get Name="Get" Id="{41d88164-af8d-49fe-af55-96517754930f}">
