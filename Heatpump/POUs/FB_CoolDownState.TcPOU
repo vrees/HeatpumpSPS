@@ -14,7 +14,7 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Property Name="Description" Id="{76a23e04-76c5-464c-a2ea-a1fe64ea1c1f}">
-      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+      <Declaration><![CDATA[
 PROPERTY Description : STRING
 ]]></Declaration>
       <Get Name="Get" Id="{48ed62c6-46f8-4900-a687-57fd823269ad}">
@@ -55,17 +55,15 @@ END_VAR]]></Declaration>
         <ST><![CDATA[THIS^.pMachine := pMachine;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="HeatIsRequested" Id="{256700ac-59a8-426d-b37d-3bd3eeacc152}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD HeatIsRequested : BOOL
+    <Method Name="HeatIsRequested" Id="{291609c8-15f6-438d-bc31-cf00b7fdfb4b}">
+      <Declaration><![CDATA[METHOD HeatIsRequested : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="LimitValuesAreExceeded" Id="{d817e72e-1f23-4e30-8d38-46e62e4b0873}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD LimitValuesAreExceeded : BOOL
+      <Declaration><![CDATA[METHOD LimitValuesAreExceeded : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -94,40 +92,35 @@ END_VAR
       </Get>
     </Property>
     <Method Name="TargetTemeperatureReached" Id="{660c57e7-0ee7-4900-9c79-b8fdca4c4354}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD TargetTemeperatureReached : BOOL
+      <Declaration><![CDATA[METHOD TargetTemeperatureReached : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedConfirmationButton" Id="{a58397d8-89f0-423c-a188-d24ebab8593b}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD UserPressedConfirmationButton : BOOL
+      <Declaration><![CDATA[METHOD UserPressedConfirmationButton : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedSwitchOffButton" Id="{98a471af-99db-479f-bdc4-364d930673d4}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD UserPressedSwitchOffButton : BOOL
+      <Declaration><![CDATA[METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedSwitchOnButton" Id="{8d0ae532-2916-4cc2-8c07-c9276e97bac4}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD UserPressedSwitchOnButton : BOOL
+      <Declaration><![CDATA[METHOD UserPressedSwitchOnButton : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="WaterHasCooledDown" Id="{b15859b9-dd1d-425a-9c19-1eb430d81055}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD WaterHasCooledDown : BOOL
+      <Declaration><![CDATA[METHOD WaterHasCooledDown : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Abkühlungsphase beendet -> %s', pMachine^.IdleState.Name);
@@ -150,7 +143,7 @@ pMachine^.SetState(pMachine^.IdleState);]]></ST>
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_CoolDownState.HeatIsRequested">
-      <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_CoolDownState.LimitValuesAreExceeded">
       <LineId Id="2" Count="0" />

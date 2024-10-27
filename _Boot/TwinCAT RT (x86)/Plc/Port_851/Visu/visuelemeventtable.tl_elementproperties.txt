@@ -1,0 +1,50 @@
+Id;Default;en;de
+EventTable;Event table;Event table;Event-Tabelle
+SpecialControls;Special controls;Special controls;Spezielle Steuerelemente
+Standard;Standard;Standard;Standard
+Array;Event data array;Event data array;Meldungsdatenarray
+Desc_Array;Input for the event data array;Input for the event data array;Eingabe für das Meldungsdatenarray
+Position;Position;Position;Position
+Desc_Position;The position of the element;The position of the element;Die Position des Elements
+Simple;Simple;Simple;Simple
+Columns;Columns;Columns;Spalten
+Desc_Columns;The settings of the columns;The settings of the columns;Die Einstellungen für die Spalten
+ColumnWidth;Width;Width;Breite
+Desc_ColumnWidth;The width of the the current column;The width of the the current column;Die Breite der aktuellen Spalte
+RowHight;Row hight;Row hight;Zeilenhöhe
+Desc_RowHight;The hight for all rows;The hight for all rows;Die Höhe für alle Zeilen
+TextProperties;Text properties;Text properties;Texteigenschaften
+Desc_TextProperties;The properties of the text in the table;The properties of the text in the table;Die Eigenschaften des Texts der Tabelle
+Font;Font;Font;Schriftart
+Desc_Font;The font of the text in the table;The font of the text in the table;Die Schriftart des Texts der Tabelle
+HorizontalAlignment;Horizontal alignment;Horizontal alignment;Horizontale Ausrichtung
+Desc_HorizontalAlignment;The horizontal alignment of the thex in the table;The horizontal alignment of the thex in the table;Die horizontale Ausrichtung des Texts der Tabelle
+VerticalAlignment;Vertical alignment;Vertical alignment;Vertikale Ausrichtung
+Desc_VerticalAlignment;The vertical alignment of the thex in the table;The vertical alignment of the thex in the table;Die vertikale Ausrichtung des Texts der Tabelle
+IndexColumnProperties;Index column;Index column;Indexspalte
+Desc_IndexColumnProperties;The properties of the index column;The column properties of the index;Die Spalteneigenschaften der Indexspalte
+ClassColumnProperties;Class column;Class column;Klassenspalte
+Desc_ClassColumnProperties;The properties of the class column;The properties of the class column;Die Spalteneigenschaften der Klassenspalte
+DateColumnProperties;Date column;Date column;Datumspalte
+Desc_DateColumnProperties;The properties of the date column;The properties of the date column;Die Spalteneigenschaften der Datumspalte
+TimeColumnProperties;Time column;Time column;Zeitspalte
+Desc_TimeColumnProperties;The properties of the time column;The properties of the time column;Die Spalteneigenschaften der Zeitspalte
+MessageColumnProperties;Message column;Message column;Meldungsspalte
+Desc_MessageColumnProperties;The properties of the message column;The properties of the message column;Die Spalteneigenschaften der Meldungsspalte
+ScrollbarWidth;Scrollbar width;Scrollbar width;Scrollbarbreite
+Desc_ScrollbarWidth;The width of the scrollbar;The width of the scrollbar;Die Breite der Bildlaufleiste
+SortSequence;Sort sequence;Sort sequence;Sortierreihenfolge
+Desc_SortSequence;The sort sequence of the table;The sort sequence of the table;Die Sortierreihenfolge der Tabelle
+NewestFirst;Newest first;Newest first;Neustes zuerst
+OldestFirst;Oldest first;Oldest first;Ältestes zuerst
+GeneralTextProperties;General text properties;General text properties;Allgemeine Texteigenschaften
+Desc_GeneralTextProperties;The gernal text properties of the details;The gernal text properties of the details;Die allgemeinen Texteigenschaften der Details
+MessageTextProperties;Message text properties;Message text properties;Meldungstexteigenschaften
+Desc_MessageTextProperties;The text properties of the message;The text properties of the message;Die Texteigenschaften der Meldung
+DetailsProperties;Details properties;Details properties;Detaileigenschaften
+Desc_DetailsProperties;The properties of the details view;The properties of the details view;Die Eigenschaften der Detailanzeige
+ColumnHeader;Column header;Column header;Spaltenüberschrift
+Desc_ColumnHeader;The title of the column;The title of the column;Der Titel der Spalte
+DetailsHeader;Details header;Details header;Detailüberschrift
+Desc_DetailsHeader;The title of the details view;The title of the details view;Der Title der Detailansicht
+;;;

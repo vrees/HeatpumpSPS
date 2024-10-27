@@ -1,8 +1,14 @@
 Id;Default
+191;%i °C
+150;%i°C
 316;dfgjfkjfghj
+386;dfgsdf
 505;Einstellungen
 636;Einstellungen:
 56;Gruppenfeld
 698;Hallo
+611;minimale Temperastur am Verdampfer-Ausgangs 
 28;off
 65;on
+623;Temperatur Puffer Open
+158;Wartezeit

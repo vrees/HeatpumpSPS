@@ -21,6 +21,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"386"</v>
+              <v n="TextDefault">"dfgsdf"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"505"</v>
               <v n="TextDefault">"Einstellungen"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -41,6 +46,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"611"</v>
+              <v n="TextDefault">"minimale Temperastur am Verdampfer-Ausgangs "</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"28"</v>
               <v n="TextDefault">"off"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -48,6 +58,16 @@
             <o>
               <v n="TextID">"65"</v>
               <v n="TextDefault">"on"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"623"</v>
+              <v n="TextDefault">"Temperatur Puffer Open"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"158"</v>
+              <v n="TextDefault">"Wartezeit"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
           </l>
