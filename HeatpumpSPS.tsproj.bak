@@ -116,50 +116,18 @@
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
 				</Task>
+				<Task Id="4" Priority="30" CycleTime="2000000" AmsPort="351" DisableFpExceptions="true" AdtTasks="true">
+					<Name>VISU_TASK</Name>
+				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{12363806-5B06-C0A1-4601-4CA4824567CE}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{9991DBA4-7604-579D-A0A6-1E43A5661B6D}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>MAIN.pd.sensor.heatRequest</Name>
-							<Comment><![CDATA[ Taster für Wärmeanforderung - EL1008.1]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.pd.sensor.userConfirmation</Name>
-							<Comment><![CDATA[ Taster für Ein-/Aus-Quittierung - EL1008.2]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.pd.incident.alarmExpansionValve</Name>
-							<Comment><![CDATA[ Alarm: Elektronisches Expansionsventil - EL1008.3]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.pd.incident.incidentCompressor</Name>
-							<Comment><![CDATA[ Störung: Verdichter / Motorschutzschalter - EL1008.5]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.pd.incident.incidentFlow</Name>
-							<Comment><![CDATA[ Störung: Durchfluss im Verdampfer zu niedrig - EL1008.6]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.pd.incident.incidentHighPressure</Name>
-							<Comment><![CDATA[ Störung: Hochdruck zu hoch - EL1008.7]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.pd.incident.incidentLowPressure</Name>
-							<Comment><![CDATA[ Störung: Niederdruck zu niedrig - EL1008.8]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
 						<Var>
 							<Name>MAIN.fbProcessdata.sensorRaw.temperatureEvaporatingOut</Name>
 							<Comment><![CDATA[ Verdampfungstemperatur in °C (Ausgang) ]]></Comment>
@@ -204,6 +172,41 @@
 							<Name>MAIN.fbProcessdata.sensorRaw.pressureDifferenceEvaporator</Name>
 							<Comment><![CDATA[ Druckdifferenz im Verdampfer in mbar ]]></Comment>
 							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.sensor.heatRequest</Name>
+							<Comment><![CDATA[ Taster für Wärmeanforderung - EL1008.1]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.sensor.userConfirmation</Name>
+							<Comment><![CDATA[ Taster für Ein-/Aus-Quittierung - EL1008.2]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.incident.alarmExpansionValve</Name>
+							<Comment><![CDATA[ Alarm: Elektronisches Expansionsventil - EL1008.3]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.incident.incidentCompressor</Name>
+							<Comment><![CDATA[ Störung: Verdichter / Motorschutzschalter - EL1008.5]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.incident.incidentFlow</Name>
+							<Comment><![CDATA[ Störung: Durchfluss im Verdampfer zu niedrig - EL1008.6]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.incident.incidentHighPressure</Name>
+							<Comment><![CDATA[ Störung: Hochdruck zu hoch - EL1008.7]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.incident.incidentLowPressure</Name>
+							<Comment><![CDATA[ Störung: Niederdruck zu niedrig - EL1008.8]]></Comment>
+							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -253,9 +256,19 @@
 							<Priority>11</Priority>
 							<CycleTime>1000000</CycleTime>
 						</Context>
+						<Context>
+							<Id>1</Id>
+							<Name>VISU_TASK</Name>
+							<ManualConfig>
+								<OTCID>#x02010040</OTCID>
+							</ManualConfig>
+							<Priority>30</Priority>
+							<CycleTime>200000000</CycleTime>
+						</Context>
 					</Contexts>
 					<TaskPouOids>
 						<TaskPouOid Prio="11" OTCID="#x08502001"/>
+						<TaskPouOid Prio="30" OTCID="#x08502002"/>
 					</TaskPouOids>
 				</Instance>
 			</Project>
@@ -938,6 +951,10 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 7 (EL3204)">
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.bufferTopTemperature" VarB="RTD Inputs Channel 2^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureOverheatedGas" VarB="RTD Inputs Channel 1^Value"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 8 (EL2008)">
+				<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateCompressor" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateWaterPump" VarB="Channel 2^Output"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

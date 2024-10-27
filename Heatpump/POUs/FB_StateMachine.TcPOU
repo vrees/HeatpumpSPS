@@ -10,7 +10,7 @@ END_VAR
 VAR_OUTPUT
 	iState						:	I_State := fbOffState;	
 	events						:	ST_Events();
-	defaultEvents 				: 	ST_Events();  			// leere Kopie
+	defaultEvents 				: 	ST_Events();  			// leere Kopie	
 END_VAR
 VAR
 	fbOffState					:	FB_OffState(THIS);
@@ -22,7 +22,8 @@ VAR
 		
 	rtrigButtonSwitchOn			:	R_TRIG;
 	rtrigButtonSwitchOff		:	R_TRIG;
-	rtrigButtonConfirmation		:	R_TRIG;	
+	rtrigButtonConfirmation		:	R_TRIG;
+	stateText					: 	STRING;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -63,6 +64,7 @@ IF events.cooledDown.isTriggered THEN
 	iState.WaterHasCooledDown();
 END_IF
 
+stateText := iState.Name;
 ]]></ST>
     </Implementation>
     <Property Name="CoolDownState" Id="{f97b0a89-973c-4c1a-a93f-bd53afa029ed}">
@@ -254,7 +256,9 @@ END_VAR
       <LineId Id="58" Count="0" />
       <LineId Id="87" Count="2" />
       <LineId Id="86" Count="0" />
-      <LineId Id="7" Count="24" />
+      <LineId Id="7" Count="23" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="144" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.CoolDownState.Get">
