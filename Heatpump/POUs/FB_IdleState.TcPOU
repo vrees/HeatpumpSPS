@@ -14,8 +14,7 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Property Name="Description" Id="{fe51051b-bde8-49da-adbd-89ef23576803}">
-      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
-PROPERTY Description : STRING
+      <Declaration><![CDATA[PROPERTY Description : STRING
 ]]></Declaration>
       <Get Name="Get" Id="{448f7325-1a41-4ec7-86c8-2b42eb5aca50}">
         <Declaration><![CDATA[VAR
@@ -56,8 +55,7 @@ END_VAR]]></Declaration>
       </Implementation>
     </Method>
     <Method Name="HeatIsRequested" Id="{f9b980c4-904d-441c-b993-50969d377d74}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD HeatIsRequested : BOOL
+      <Declaration><![CDATA[METHOD HeatIsRequested : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[pMachine^.timerTON();
@@ -73,8 +71,7 @@ END_IF
       </Implementation>
     </Method>
     <Method Name="LimitValuesAreExceeded" Id="{14c877c5-3616-4fde-8e7d-07cd27554d4a}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD LimitValuesAreExceeded : BOOL
+      <Declaration><![CDATA[METHOD LimitValuesAreExceeded : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -103,40 +100,35 @@ END_VAR
       </Get>
     </Property>
     <Method Name="TargetTemeperatureReached" Id="{a8926a6b-0653-4ec9-9337-e0d5d6da7cc7}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD TargetTemeperatureReached : BOOL
+      <Declaration><![CDATA[METHOD TargetTemeperatureReached : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedConfirmationButton" Id="{95da523e-2d62-4c12-b016-a3dab2092a78}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD UserPressedConfirmationButton : BOOL
+      <Declaration><![CDATA[METHOD UserPressedConfirmationButton : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedSwitchOffButton" Id="{d42dbbf4-6bf5-457a-84b2-51c8ce6fc5fc}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD UserPressedSwitchOffButton : BOOL
+      <Declaration><![CDATA[METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedSwitchOnButton" Id="{0fd362f1-3f35-42de-86a1-4307d29fa058}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD UserPressedSwitchOnButton : BOOL
+      <Declaration><![CDATA[METHOD UserPressedSwitchOnButton : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="WaterHasCooledDown" Id="{0b5f95d5-71c8-41b3-9a09-8b178e27c447}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD WaterHasCooledDown : BOOL
+      <Declaration><![CDATA[METHOD WaterHasCooledDown : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>

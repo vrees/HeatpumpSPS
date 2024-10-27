@@ -14,8 +14,7 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Property Name="Description" Id="{99b20c4c-e12d-41aa-9edb-000ee4c7310b}">
-      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
-PROPERTY Description : STRING
+      <Declaration><![CDATA[PROPERTY Description : STRING
 ]]></Declaration>
       <Get Name="Get" Id="{22f33121-45f5-47c7-8aef-991291fe399a}">
         <Declaration><![CDATA[VAR
@@ -52,16 +51,14 @@ END_VAR]]></Declaration>
       </Implementation>
     </Method>
     <Method Name="HeatIsRequested" Id="{f5a49845-b3d2-4674-be77-835f5d419f38}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD HeatIsRequested : BOOL
+      <Declaration><![CDATA[METHOD HeatIsRequested : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="LimitValuesAreExceeded" Id="{9f256ddf-77a1-419b-aea7-f5d0106e8168}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD LimitValuesAreExceeded : BOOL
+      <Declaration><![CDATA[METHOD LimitValuesAreExceeded : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -90,16 +87,14 @@ END_VAR
       </Get>
     </Property>
     <Method Name="TargetTemeperatureReached" Id="{24b8b0f1-8ac1-4afc-bc6f-4eb4ccc3d660}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD TargetTemeperatureReached : BOOL
+      <Declaration><![CDATA[METHOD TargetTemeperatureReached : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedConfirmationButton" Id="{3cfe4937-42e9-40a6-b5c7-527050ea73ed}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD UserPressedConfirmationButton : BOOL
+      <Declaration><![CDATA[METHOD UserPressedConfirmationButton : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Confirmation Button pressed -> %s', pMachine^.IdleState.Name);
@@ -107,24 +102,21 @@ pMachine^.SetState(pMachine^.IdleState);]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedSwitchOffButton" Id="{5bbcc8c1-3ef1-4641-89cd-a4c6e429c88b}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD UserPressedSwitchOffButton : BOOL
+      <Declaration><![CDATA[METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedSwitchOnButton" Id="{3b9616fd-86d5-4be9-a046-d7829150b454}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD UserPressedSwitchOnButton : BOOL
+      <Declaration><![CDATA[METHOD UserPressedSwitchOnButton : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="WaterHasCooledDown" Id="{3cab738b-672d-4222-9d6f-a0210fe54c6c}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD WaterHasCooledDown : BOOL
+      <Declaration><![CDATA[METHOD WaterHasCooledDown : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
