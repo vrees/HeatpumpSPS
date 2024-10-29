@@ -7,7 +7,6 @@ VAR
 	fbProcessdata				:   FB_Processdata();
 	pd 							: 	ST_ProcessData;
 	
-	sState						:	STRING;
 	bOnButtonPressed    		: 	BOOL;
 	bOffButtonPressed			: 	BOOL;
 END_VAR

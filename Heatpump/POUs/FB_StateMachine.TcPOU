@@ -23,6 +23,7 @@ VAR
 	rtrigButtonSwitchOn			:	R_TRIG;
 	rtrigButtonSwitchOff		:	R_TRIG;
 	rtrigButtonConfirmation		:	R_TRIG;	
+	strState					: 	STRING;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -63,6 +64,7 @@ IF events.cooledDown.isTriggered THEN
 	iState.WaterHasCooledDown();
 END_IF
 
+strState := iState.Name;
 ]]></ST>
     </Implementation>
     <Property Name="CoolDownState" Id="{f97b0a89-973c-4c1a-a93f-bd53afa029ed}">
@@ -254,7 +256,9 @@ END_VAR
       <LineId Id="58" Count="0" />
       <LineId Id="87" Count="2" />
       <LineId Id="86" Count="0" />
-      <LineId Id="7" Count="24" />
+      <LineId Id="7" Count="23" />
+      <LineId Id="143" Count="0" />
+      <LineId Id="31" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.CoolDownState.Get">
