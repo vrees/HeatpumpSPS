@@ -3,28 +3,21 @@
   <POU Name="MAIN" Id="{e3e9ea5b-aaa6-4abd-9e50-1f99907708dc}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	fbStateMachine				:	FB_StateMachine();
-	fbProcessdata				:   FB_Processdata();
-	pd 							: 	ST_ProcessData;
-	
-	bOnButtonPressed    		: 	BOOL;
-	bOffButtonPressed			: 	BOOL;
+	fbStateMachine				:	FB_StateMachine;
+	fbProcessdata				:   FB_Processdata;
+	pd 							: 	ST_ProcessData;	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-fbProcessdata(pd := pd);
+      <ST><![CDATA[fbProcessdata(pd := pd);
 
-fbStateMachine(pd := pd, bOnButtonPressed := bOnButtonPressed, bOffButtonPressed := bOffButtonPressed);
-
-bOnButtonPressed			:= FALSE;
-bOffButtonPressed			:= FALSE;
+fbStateMachine(pd := pd);
 
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="3" Count="3" />
-      <LineId Id="13" Count="3" />
+      <LineId Id="4" Count="2" />
+      <LineId Id="16" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

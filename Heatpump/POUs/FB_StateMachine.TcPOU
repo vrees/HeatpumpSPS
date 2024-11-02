@@ -3,8 +3,6 @@
   <POU Name="FB_StateMachine" Id="{c349ad72-d78c-44d0-9319-bf272785d3c6}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_StateMachine
 VAR_INPUT	
-	bOnButtonPressed			: 	BOOL;
-	bOffButtonPressed			: 	BOOL;
 	pd 							: 	REFERENCE TO ST_ProcessData;
 END_VAR
 VAR_OUTPUT
@@ -19,16 +17,21 @@ VAR
 	fbCoolDownState				:	FB_CoolDownState(THIS);
 	fbErrorState				:	FB_ErrorState(THIS);
 	timerTON 					: 	TON;             		// TON-Timer
-		
+	
+	bStartButtonPressed    		: 	BOOL;
+	bStopButtonPressed			: 	BOOL;		
 	rtrigButtonSwitchOn			:	R_TRIG;
 	rtrigButtonSwitchOff		:	R_TRIG;
 	rtrigButtonConfirmation		:	R_TRIG;	
 	strState					: 	STRING;
+	
+	isStartButtonEnabled		:	 BOOL 	:=	TRUE;
+	isStopButtonEnabled			:	 BOOL 	:=	TRUE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[rtrigButtonSwitchOn(CLK := bOnButtonPressed);
-rtrigButtonSwitchOff(CLK := bOffButtonPressed);
+      <ST><![CDATA[rtrigButtonSwitchOn(CLK := bStartButtonPressed);
+rtrigButtonSwitchOff(CLK := bStopButtonPressed);
 rtrigButtonConfirmation(CLK := pd.sensor.userConfirmation);
 
 // Zuweisung von defaultEvent zu myEvent (Wertkopie)
@@ -65,7 +68,8 @@ IF events.cooledDown.isTriggered THEN
 END_IF
 
 strState := iState.Name;
-]]></ST>
+
+setButtonState();]]></ST>
     </Implementation>
     <Property Name="CoolDownState" Id="{f97b0a89-973c-4c1a-a93f-bd53afa029ed}">
       <Declaration><![CDATA[PROPERTY INTERNAL CoolDownState : I_State]]></Declaration>
@@ -238,6 +242,24 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="setButtonState" Id="{a15529d2-7ea5-42a9-a30a-580f1f9b30bd}">
+      <Declaration><![CDATA[METHOD setButtonState : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF iState.State <> E_State.OFF THEN 
+	isStopButtonEnabled := TRUE;
+	isStartButtonEnabled := FALSE;
+ELSE 
+	isStopButtonEnabled := FALSE;
+	isStartButtonEnabled := TRUE;
+END_IF
+
+bStartButtonPressed			:= FALSE;
+bStopButtonPressed			:= FALSE;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="SetState" Id="{d1b82ae6-b5f8-46df-b7d5-05a5b5812d18}">
       <Declaration><![CDATA[METHOD INTERNAL SetState : BOOL
 VAR_INPUT
@@ -249,17 +271,8 @@ END_VAR
       </Implementation>
     </Method>
     <LineIds Name="FB_StateMachine">
-      <LineId Id="3" Count="2" />
-      <LineId Id="115" Count="1" />
-      <LineId Id="59" Count="0" />
-      <LineId Id="117" Count="0" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="87" Count="2" />
-      <LineId Id="86" Count="0" />
-      <LineId Id="7" Count="23" />
-      <LineId Id="143" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="2" Count="0" />
+      <LineId Id="281" Count="38" />
+      <LineId Id="181" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.CoolDownState.Get">
       <LineId Id="2" Count="0" />
@@ -350,6 +363,15 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_StateMachine.RunningState.Get">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.setButtonState">
+      <LineId Id="8" Count="1" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="10" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="6" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.SetState">
       <LineId Id="2" Count="0" />
