@@ -84,7 +84,7 @@ END_IF
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Name := 'Idle';]]></ST>
+          <ST><![CDATA[Name := 'bereit';]]></ST>
         </Implementation>
       </Get>
     </Property>
