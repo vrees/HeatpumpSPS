@@ -2,7 +2,7 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.62" TcVersionFixed="true">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{A467AA11-2982-4501-1CAC-3C4ABFA7905B}" AutoDeleteType="true">ST_ConfigValues</Name>
+			<Name GUID="{616CDCDF-30C0-D944-8853-F3DCBEC0A2A9}" AutoDeleteType="true">ST_ConfigValues</Name>
 			<BitSize>288</BitSize>
 			<SubItem>
 				<Name>targetTemperatureOn</Name>
@@ -31,17 +31,17 @@
 				<BitSize>32</BitSize>
 				<BitOffs>64</BitOffs>
 				<Default>
-					<DateTime>T#5S</DateTime>
+					<DateTime>T#10S</DateTime>
 				</Default>
 			</SubItem>
 			<SubItem>
-				<Name>lowPressureIgnoreTimeSec</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000006}">INT</Type>
+				<Name>lowPressureIgnoreTime</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000048}">TIME</Type>
 				<Comment><![CDATA[ Nach dem Einschalten sollen Niederdruck-Warnungen für eine gewisse Zeit ignoriert werden]]></Comment>
-				<BitSize>16</BitSize>
+				<BitSize>32</BitSize>
 				<BitOffs>96</BitOffs>
 				<Default>
-					<Value>20</Value>
+					<DateTime>T#20S</DateTime>
 				</Default>
 			</SubItem>
 			<SubItem>
@@ -120,7 +120,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{C2702457-85A5-EDB9-3F52-84D27953C76D}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{E25D3604-D2DB-699E-8846-8ADCAD895400}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -224,7 +224,7 @@
 						<Var>
 							<Name>GVL.configValues</Name>
 							<Comment><![CDATA[ Konfigurationsparaeter - Müssen vom User geändert werden können]]></Comment>
-							<Type GUID="{A467AA11-2982-4501-1CAC-3C4ABFA7905B}">ST_ConfigValues</Type>
+							<Type GUID="{616CDCDF-30C0-D944-8853-F3DCBEC0A2A9}">ST_ConfigValues</Type>
 							<InOut>7</InOut>
 						</Var>
 					</Vars>
