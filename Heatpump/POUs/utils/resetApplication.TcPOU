@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="resetApplication" Id="{70066dab-6a5f-4929-9f23-322a6cf9fd5f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION resetApplication : BOOL
+VAR_INPUT    
+	pMachine : POINTER TO FB_StateMachine;
+END_VAR
+VAR
+	i 			: INT := 1;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FOR i := 1 TO 5 DO
+    GVL.lastErrorsOccurred[i].eventType := E_EventType.None;        // Beispiel für einen "leeren" Event-Typ
+    GVL.lastErrorsOccurred[i].severity := E_Severity.Event;         // Standardwert für severity
+    GVL.lastErrorsOccurred[i].isTriggered := FALSE;                 // Setzt isTriggered auf FALSE
+    GVL.lastErrorsOccurred[i].message := '';                        // Leere Zeichenkette für message
+    GVL.lastErrorsOccurred[i].timestamp := DT#1970-01-01-00:00:00;  // Standardzeitstempel (z. B. Unix-Epoche)
+    i := i + 1;  
+END_FOR;
+
+pMachine^.timerTON(IN := FALSE, PT := T#0S); 
+]]></ST>
+    </Implementation>
+    <LineIds Name="resetApplication">
+      <LineId Id="8" Count="6" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="24" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

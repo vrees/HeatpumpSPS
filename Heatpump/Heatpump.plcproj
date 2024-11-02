@@ -104,6 +104,9 @@
     <Compile Include="POUs\utils\convertTimerToDisplayValue.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\utils\resetApplication.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\utils\ScaleAndRound.TcPOU">
       <SubType>Code</SubType>
     </Compile>

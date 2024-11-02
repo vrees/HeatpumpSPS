@@ -115,7 +115,8 @@ END_VAR
       <Declaration><![CDATA[METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Aus Button wurde gedrückt -> %s', pMachine^.OffState.Name);
+        <ST><![CDATA[resetApplication(pMachine);
+ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Aus Button wurde gedrückt -> %s', pMachine^.OffState.Name);
 pMachine^.SetState(pMachine^.OffState);]]></ST>
       </Implementation>
     </Method>
@@ -169,6 +170,7 @@ pMachine^.SetState(pMachine^.OffState);]]></ST>
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_IdleState.UserPressedSwitchOffButton">
+      <LineId Id="6" Count="0" />
       <LineId Id="4" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>

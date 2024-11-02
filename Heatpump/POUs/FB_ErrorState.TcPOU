@@ -98,15 +98,15 @@ END_VAR
       <Declaration><![CDATA[METHOD UserPressedConfirmationButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Confirmation Button pressed -> %s', pMachine^.IdleState.Name);
-pMachine^.SetState(pMachine^.IdleState);]]></ST>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedSwitchOffButton" Id="{5bbcc8c1-3ef1-4641-89cd-a4c6e429c88b}">
       <Declaration><![CDATA[METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Aus Button wurde gedrückt -> %s', pMachine^.OffState.Name);
+        <ST><![CDATA[resetApplication(pMachine);
+ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Aus Button wurde gedrückt -> %s', pMachine^.OffState.Name);
 pMachine^.SetState(pMachine^.OffState);]]></ST>
       </Implementation>
     </Method>
@@ -153,10 +153,10 @@ pMachine^.SetState(pMachine^.OffState);]]></ST>
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ErrorState.UserPressedConfirmationButton">
-      <LineId Id="5" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ErrorState.UserPressedSwitchOffButton">
+      <LineId Id="6" Count="0" />
       <LineId Id="4" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>

@@ -116,12 +116,11 @@ VAR_IN_OUT
 	events					:	ST_Events();
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (rtrigButtonSwitchOff.Q OR (rtrigButtonConfirmation.Q AND iState.State <> E_State.OFF)) THEN
+        <ST><![CDATA[IF (rtrigButtonSwitchOff.Q OR (rtrigButtonConfirmation.Q AND (iState.State <> E_State.OFF OR iState.State = E_State.ERROR))) THEN
 	events.switchOff.isTriggered := TRUE;
 ELSIF (rtrigButtonSwitchOn.Q OR (rtrigButtonConfirmation.Q AND iState.State = E_State.OFF)) THEN
 	events.switchOn.isTriggered := TRUE;
-ELSIF (rtrigButtonConfirmation.Q AND iState.State = E_State.ERROR) THEN
-	events.switchOn.isTriggered := TRUE;
+
 ELSIF (pd.sensor.bufferTopTemperature < GVL.configValues.targetTemperatureOn AND iState.State = E_State.IDLE) THEN
 	events.heatIsRequested.isTriggered := TRUE;
 ELSIF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < GVL.configValues.temperatureDiffBacklashOff AND iState.State = E_State.COOLDOWN) THEN
@@ -291,7 +290,7 @@ END_VAR
       <LineId Id="3" Count="0" />
       <LineId Id="5" Count="1" />
       <LineId Id="13" Count="0" />
-      <LineId Id="40" Count="1" />
+      <LineId Id="41" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="19" Count="0" />
       <LineId Id="24" Count="1" />
