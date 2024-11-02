@@ -25,8 +25,9 @@ VAR
 	rtrigButtonConfirmation		:	R_TRIG;	
 	strState					: 	STRING;
 	
-	isStartButtonEnabled		:	 BOOL 	:=	TRUE;
-	isStopButtonEnabled			:	 BOOL 	:=	TRUE;
+	isStartButtonEnabled		:	BOOL 	:=	TRUE;
+	isStopButtonEnabled			:	BOOL 	:=	TRUE;
+	timerValueToDisplay			:	STRING	:= 	'';	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -69,7 +70,9 @@ END_IF
 
 strState := iState.Name;
 
-setButtonState();]]></ST>
+setButtonState();
+
+timerValueToDisplay := convertTimerToDisplayValue(timerTON.ET);]]></ST>
     </Implementation>
     <Property Name="CoolDownState" Id="{f97b0a89-973c-4c1a-a93f-bd53afa029ed}">
       <Declaration><![CDATA[PROPERTY INTERNAL CoolDownState : I_State]]></Declaration>
@@ -273,6 +276,8 @@ END_VAR
     <LineIds Name="FB_StateMachine">
       <LineId Id="281" Count="38" />
       <LineId Id="181" Count="0" />
+      <LineId Id="323" Count="0" />
+      <LineId Id="322" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.CoolDownState.Get">
       <LineId Id="2" Count="0" />

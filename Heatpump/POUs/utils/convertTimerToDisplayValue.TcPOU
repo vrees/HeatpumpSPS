@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="convertTimerToDisplayValue" Id="{69bee498-1257-4038-bf88-af12297272dc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION convertTimerToDisplayValue : STRING
+VAR_INPUT
+	timerET		:	TIME;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF timerET = T#0MS THEN 
+	convertTimerToDisplayValue := '';
+ELSE
+	convertTimerToDisplayValue := INT_TO_STRING (TIME_TO_INT ((GVL.configValues.minIdleSec - timerET) / 1000));
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="convertTimerToDisplayValue">
+      <LineId Id="16" Count="4" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
