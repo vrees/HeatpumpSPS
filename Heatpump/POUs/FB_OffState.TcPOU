@@ -27,14 +27,15 @@ END_VAR
     </Property>
     <Method Name="ErrorDetected" Id="{1888cc77-ab19-429d-b5dc-9fd3ac4091b4}">
       <Declaration><![CDATA[METHOD ErrorDetected : BOOL
-VAR_INPUT
+VAR_IN_OUT
 	errorEvents		: ST_ErrorEvents;
 END_VAR
+
 VAR
 	message				: STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[transitionToErrorState(errorEvents := errorEvents, pMachine := pMachine);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{98bea1d9-064f-4e7b-bbff-5c1ffd972edc}">

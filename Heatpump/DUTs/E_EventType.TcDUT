@@ -5,6 +5,7 @@
 {attribute 'strict'}
 TYPE E_EventType :
 (
+	None								:= 0,
 	(* Normal StateMachine changes *)	
 	SwitchOn 							:= 1,
 	SwitchOff 							:= 2,

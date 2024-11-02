@@ -27,16 +27,12 @@ END_VAR
     </Property>
     <Method Name="ErrorDetected" Id="{04bb140a-5d6b-4e66-849a-6791cd9086da}">
       <Declaration><![CDATA[METHOD ErrorDetected : BOOL
-VAR_INPUT
+VAR_IN_OUT
 	errorEvents		: ST_ErrorEvents;
 END_VAR
-VAR
-	message				: STRING(255);
-END_VAR]]></Declaration>
+]]></Declaration>
       <Implementation>
-        <ST><![CDATA[message := toErrorText(errorEvents);
-ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Error detected', message);
-pMachine^.SetState(pMachine^.ErrorState);]]></ST>
+        <ST><![CDATA[transitionToErrorState(errorEvents := errorEvents, pMachine := pMachine);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{63e5eb1b-d453-4548-affe-ff9f484d55b7}">
@@ -135,8 +131,6 @@ pMachine^.SetState(pMachine^.IdleState);]]></ST>
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_CoolDownState.ErrorDetected">
-      <LineId Id="12" Count="0" />
-      <LineId Id="6" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_CoolDownState.FB_init">

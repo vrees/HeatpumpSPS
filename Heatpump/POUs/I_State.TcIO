@@ -11,7 +11,7 @@
     </Property>
     <Method Name="ErrorDetected" Id="{1fadc6df-44ce-4163-8a9d-0b84f9d6da56}">
       <Declaration><![CDATA[METHOD ErrorDetected : BOOL
-VAR_INPUT
+VAR_IN_OUT
 	errorEvents		: ST_ErrorEvents;
 END_VAR
 ]]></Declaration>

@@ -110,10 +110,10 @@
     <Compile Include="POUs\utils\ScaleAndRoundString.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\utils\toErrorEventArray.TcPOU">
+    <Compile Include="POUs\utils\toErrorText.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\utils\toErrorText.TcPOU">
+    <Compile Include="POUs\utils\transitionToErrorState.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

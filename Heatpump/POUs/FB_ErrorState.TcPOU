@@ -27,12 +27,13 @@ END_VAR
     </Property>
     <Method Name="ErrorDetected" Id="{4858f92b-be7c-40d0-8ec0-7dce2aef6360}">
       <Declaration><![CDATA[METHOD ErrorDetected : BOOL
-VAR_INPUT
+VAR_IN_OUT
 	errorEvents		: ST_ErrorEvents;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{acff5f6f-b6a4-4746-b7e6-05f059e8448c}">
@@ -130,7 +131,8 @@ pMachine^.SetState(pMachine^.OffState);]]></ST>
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ErrorState.ErrorDetected">
-      <LineId Id="6" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="38" Count="0" />
     </LineIds>
     <LineIds Name="FB_ErrorState.FB_init">
       <LineId Id="2" Count="0" />

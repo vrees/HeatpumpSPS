@@ -38,7 +38,7 @@ rtrigButtonConfirmation(CLK := pd.sensor.userConfirmation);
 // Zuweisung von defaultEvent zu myEvent (Wertkopie)
 events := defaultEvents;
 
-generateEvents();
+generateEvents(events);
 
 IF events.errorsDetected THEN
 	iState.ErrorDetected(events.errorEvents);
@@ -112,9 +112,8 @@ END_VAR]]></Declaration>
     </Method>
     <Method Name="generateEvents" Id="{83685a53-198e-44e2-9f24-60ab8684b413}">
       <Declaration><![CDATA[METHOD generateEvents : BOOL
-VAR
-	errorEvents		: ST_ErrorEvents := events.errorEvents; 
- 	warningEvents	: ST_WarningEvents := events.warningEvents; 
+VAR_IN_OUT
+	events					:	ST_Events();
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (rtrigButtonSwitchOff.Q OR (rtrigButtonConfirmation.Q AND iState.State <> E_State.OFF)) THEN
@@ -136,36 +135,36 @@ END_IF
 
 (* Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar] *)
 IF pd.sensor.PressureDifferenceEvaporator > GVL.configValues.PressureDifferenceEvaporatorMax THEN
-	errorEvents.PressureDiffEvaporatorTooHigh.message := CONCAT('Druckdifferenz [mbar]: ', REAL_TO_STRING(REAL_TO_INT(pd.sensor.PressureDifferenceEvaporator)));
-	errorEvents.PressureDiffEvaporatorTooHigh.isTriggered := TRUE;
+	events.errorEvents.PressureDiffEvaporatorTooHigh.message := CONCAT('Druckdifferenz [mbar]: ', REAL_TO_STRING(REAL_TO_INT(pd.sensor.PressureDifferenceEvaporator)));
+	events.errorEvents.PressureDiffEvaporatorTooHigh.isTriggered := TRUE;
 	events.errorsDetected := TRUE;
 END_IF
 
 (* Prüfe maximalen Druck auf der Niederdruckseite über Ranco Thermostat [bar] *)
 IF pd.sensor.pressureLow > GVL.configValues.pressureLowMax THEN
-	errorEvents.LowPressureRefrigerationThermostat.message := CONCAT('Niederdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10));
-	errorEvents.LowPressureRefrigerationThermostat.isTriggered := TRUE;
+	events.errorEvents.LowPressureRefrigerationThermostat.message := CONCAT('Niederdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10));
+	events.errorEvents.LowPressureRefrigerationThermostat.isTriggered := TRUE;
 	events.errorsDetected := TRUE;
 END_IF
 
 (*Prüfe maximalen Druck auf der Hochdruckseite über Ranco Thermostat [bar]  *)
 IF pd.sensor.pressureHigh > GVL.configValues.pressureHighMax THEN
-	errorEvents.HighPressureRefrigerationThermostat.message := CONCAT('Hochdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureHigh, 10));
-	errorEvents.HighPressureRefrigerationThermostat.isTriggered := TRUE;
+	events.errorEvents.HighPressureRefrigerationThermostat.message := CONCAT('Hochdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureHigh, 10));
+	events.errorEvents.HighPressureRefrigerationThermostat.isTriggered := TRUE;
 	events.errorsDetected := TRUE;
 END_IF
 
 (* Motor-Schutzschalter hat ausgelöst *)
 IF pd.incident.incidentCompressor THEN
-	errorEvents.MotorProtectionTriggered.message := 'Motorschutzschalter hat ausgelöst';
-	errorEvents.MotorProtectionTriggered.isTriggered := TRUE;
+	events.errorEvents.MotorProtectionTriggered.message := 'Motorschutzschalter hat ausgelöst';
+	events.errorEvents.MotorProtectionTriggered.isTriggered := TRUE;
 	events.errorsDetected := TRUE;
 END_IF
 
 (* Expansionsventil meldet Fehler *)
 IF pd.incident.alarmExpansionValve THEN
-	errorEvents.ExpansionValveTriggered.message := 'Expansionsventil meldet Fehler';
-	errorEvents.ExpansionValveTriggered.isTriggered := TRUE;
+	events.errorEvents.ExpansionValveTriggered.message := 'Expansionsventil meldet Fehler';
+	events.errorEvents.ExpansionValveTriggered.isTriggered := TRUE;
 	events.errorsDetected := TRUE;
 END_IF
 
@@ -174,38 +173,38 @@ END_IF
 
 (* Prüfe maximalen Druck auf der Niederdruckseite [bar] *)
 IF pd.sensor.PressureLow > GVL.configValues.PressureLowMax THEN
-	warningEvents.LowPressureRefrigerationCalc.message := CONCAT('Niederdruck: [bar]: ', ScaleAndRoundString(pd.sensor.PressureLow, 10));
-	warningEvents.LowPressureRefrigerationCalc.isTriggered := TRUE;
+	events.warningEvents.LowPressureRefrigerationCalc.message := CONCAT('Niederdruck: [bar]: ', ScaleAndRoundString(pd.sensor.PressureLow, 10));
+	events.warningEvents.LowPressureRefrigerationCalc.isTriggered := TRUE;
 END_IF
 
 (* Prüfe maximalen Druck auf der Hochdruckseite [bar] *)
 IF pd.sensor.PressureHigh > GVL.configValues.PressureHighMax THEN
-	warningEvents.HighPressureRefrigerationCalc.message := CONCAT('', ScaleAndRoundString(pd.sensor.PressureHigh, 10));
-	warningEvents.HighPressureRefrigerationCalc.isTriggered := TRUE;
+	events.warningEvents.HighPressureRefrigerationCalc.message := CONCAT('', ScaleAndRoundString(pd.sensor.PressureHigh, 10));
+	events.warningEvents.HighPressureRefrigerationCalc.isTriggered := TRUE;
 END_IF
 
 (* Prüfe minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [°C] *)
 IF pd.sensor.TemperatureEvaporatingOut < GVL.configValues.EvaporatingTemperatureOutMin THEN
-	warningEvents.EvaporatingTemperatureTooLow.message := CONCAT('', ScaleAndRoundString(pd.sensor.TemperatureEvaporatingOut, 10));
-	warningEvents.EvaporatingTemperatureTooLow.isTriggered := TRUE;
+	events.warningEvents.EvaporatingTemperatureTooLow.message := CONCAT('', ScaleAndRoundString(pd.sensor.TemperatureEvaporatingOut, 10));
+	events.warningEvents.EvaporatingTemperatureTooLow.isTriggered := TRUE;
 END_IF
 
 (* Prüfe, of Wasser Durchflussmenge ausreichend ist. Mindestens 2500 Liter/Stunde *)
 IF pd.incident.incidentFlow THEN
-	warningEvents.EvaporatingFlowRateTooLow.message := ' Wasser Durchflussmenge nicht ausreichend. Mindestens 2500 Liter/Stunde';
-	warningEvents.EvaporatingFlowRateTooLow.isTriggered := TRUE;
+	events.warningEvents.EvaporatingFlowRateTooLow.message := ' Wasser Durchflussmenge nicht ausreichend. Mindestens 2500 Liter/Stunde';
+	events.warningEvents.EvaporatingFlowRateTooLow.isTriggered := TRUE;
 END_IF
 
 (* TANK_LEVEL_TOO_LOW *)
 IF FALSE THEN
-	warningEvents.WaterTankLevelTooLow.message := 'Wasserstand der Quelle ist zu meiedrig';
-	warningEvents.WaterTankLevelTooLow.isTriggered := TRUE;
+	events.warningEvents.WaterTankLevelTooLow.message := 'Wasserstand der Quelle ist zu meiedrig';
+	events.warningEvents.WaterTankLevelTooLow.isTriggered := TRUE;
 END_IF
 
 (* TANK_LEVEL Data missing *)
 IF FALSE THEN
-	warningEvents.WaterTankDataMissing.message := 'Keine Daten über den Wasserstand der Quelle verfügbar';
-	warningEvents.WaterTankDataMissing.isTriggered := TRUE;
+	events.warningEvents.WaterTankDataMissing.message := 'Keine Daten über den Wasserstand der Quelle verfügbar';
+	events.warningEvents.WaterTankDataMissing.isTriggered := TRUE;
 END_IF
 
 

@@ -3,7 +3,7 @@
   <DUT Name="ST_Event" Id="{493c11c6-cf57-4007-9b07-d443ab2430c6}">
     <Declaration><![CDATA[TYPE ST_Event :
 STRUCT
-	eventType		: E_EventType;
+	eventType		: E_EventType := E_EventType.None;
 	severity 		: E_Severity := E_Severity.Event;
 	isTriggered		: BOOL := false;
 	message	 		: STRING(255);

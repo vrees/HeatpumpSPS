@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="transitionToErrorState" Id="{ab4265fe-38dc-44dd-a855-1198057f69c1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION transitionToErrorState : BOOL
+VAR_IN_OUT
+	errorEvents	: ST_ErrorEvents;
+END_VAR
+VAR_INPUT
+	pMachine 	: POINTER TO FB_StateMachine;
+END_VAR
+VAR
+	message		: STRING(255);
+	i 			: INT := 1;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF errorEvents.PressureDiffEvaporatorTooHigh.isTriggered THEN
+	GVL.lastErrorsOccurred[i] := errorEvents.PressureDiffEvaporatorTooHigh;
+	i := i + 1;
+END_IF
+
+IF errorEvents.LowPressureRefrigerationThermostat.isTriggered THEN
+	GVL.lastErrorsOccurred[i] := errorEvents.LowPressureRefrigerationThermostat;
+	i := i + 1;
+END_IF
+
+IF errorEvents.HighPressureRefrigerationThermostat.isTriggered THEN
+	GVL.lastErrorsOccurred[i] := errorEvents.HighPressureRefrigerationThermostat;
+	i := i + 1;
+END_IF
+
+IF errorEvents.MotorProtectionTriggered.isTriggered THEN
+	GVL.lastErrorsOccurred[i] := errorEvents.MotorProtectionTriggered;
+	i := i + 1;
+END_IF
+
+IF errorEvents.ExpansionValveTriggered.isTriggered THEN
+	GVL.lastErrorsOccurred[i] := errorEvents.ExpansionValveTriggered;
+	i := i + 1;
+END_IF
+
+WHILE i <= 5 DO
+    GVL.lastErrorsOccurred[i].eventType := E_EventType.None;        // Beispiel für einen "leeren" Event-Typ
+    GVL.lastErrorsOccurred[i].severity := E_Severity.Event;         // Standardwert für severity
+    GVL.lastErrorsOccurred[i].isTriggered := FALSE;                 // Setzt isTriggered auf FALSE
+    GVL.lastErrorsOccurred[i].message := '';                        // Leere Zeichenkette für message
+    GVL.lastErrorsOccurred[i].timestamp := DT#1970-01-01-00:00:00;  // Standardzeitstempel (z. B. Unix-Epoche)
+    i := i + 1;  
+END_WHILE;
+
+message := toErrorText();
+ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Error detected: %s', message);
+pMachine^.SetState(pMachine^.ErrorState);]]></ST>
+    </Implementation>
+    <LineIds Name="transitionToErrorState">
+      <LineId Id="19" Count="22" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="53" Count="6" />
+      <LineId Id="62" Count="1" />
+      <LineId Id="49" Count="2" />
+      <LineId Id="48" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
