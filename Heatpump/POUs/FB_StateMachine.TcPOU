@@ -27,7 +27,7 @@ VAR
 	
 	isStartButtonEnabled		:	BOOL 	:=	TRUE;
 	isStopButtonEnabled			:	BOOL 	:=	TRUE;
-	timerValueToDisplay			:	STRING	:= 	'';	
+	timerValueToDisplay			:	INT		:= 	0;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -72,7 +72,7 @@ strState := iState.Name;
 
 setButtonState();
 
-timerValueToDisplay := convertTimerToDisplayValue(timerTON.ET);]]></ST>
+timerValueToDisplay := convertTimerToDisplayValue(timerTON);]]></ST>
     </Implementation>
     <Property Name="CoolDownState" Id="{f97b0a89-973c-4c1a-a93f-bd53afa029ed}">
       <Declaration><![CDATA[PROPERTY INTERNAL CoolDownState : I_State]]></Declaration>
@@ -140,15 +140,15 @@ IF pd.sensor.PressureDifferenceEvaporator > GVL.configValues.PressureDifferenceE
 END_IF
 
 (* Prüfe maximalen Druck auf der Niederdruckseite über Ranco Thermostat [bar] *)
-IF pd.sensor.pressureLow > GVL.configValues.pressureLowMax THEN
-	events.errorEvents.LowPressureRefrigerationThermostat.message := CONCAT('Niederdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10));
+IF pd.incident.incidentLowPressure THEN
+	events.errorEvents.LowPressureRefrigerationThermostat.message := CONCAT('Ranco Thermostat: zu hoher Niederdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10));
 	events.errorEvents.LowPressureRefrigerationThermostat.isTriggered := TRUE;
 	events.errorsDetected := TRUE;
 END_IF
 
 (*Prüfe maximalen Druck auf der Hochdruckseite über Ranco Thermostat [bar]  *)
-IF pd.sensor.pressureHigh > GVL.configValues.pressureHighMax THEN
-	events.errorEvents.HighPressureRefrigerationThermostat.message := CONCAT('Hochdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureHigh, 10));
+IF pd.incident.incidentHighPressure THEN
+	events.errorEvents.HighPressureRefrigerationThermostat.message := CONCAT('Ranco Thermostat: zu hoher Hochdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureHigh, 10));
 	events.errorEvents.HighPressureRefrigerationThermostat.isTriggered := TRUE;
 	events.errorsDetected := TRUE;
 END_IF
