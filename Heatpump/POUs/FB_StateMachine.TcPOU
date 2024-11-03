@@ -169,7 +169,7 @@ END_IF
 
 (* Prüfe minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [°C] *)
 IF pd.sensor.TemperatureEvaporatingOut < GVL.configValues.EvaporatingTemperatureOutMin THEN
-	events.errorEvents.EvaporatingTemperatureTooLow.message := CONCAT('Austritttemperatur am Verdampfer ist zu niedrig', ScaleAndRoundString(pd.sensor.TemperatureEvaporatingOut, 10));
+	events.errorEvents.EvaporatingTemperatureTooLow.message := CONCAT('Austritttemperatur am Verdampfer ist zu niedrig [°C]: ', ScaleAndRoundString(pd.sensor.TemperatureEvaporatingOut, 10));
 	events.errorEvents.EvaporatingTemperatureTooLow.isTriggered := TRUE;
 	events.errorsDetected := TRUE;
 END_IF
