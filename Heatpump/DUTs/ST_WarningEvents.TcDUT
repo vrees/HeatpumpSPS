@@ -6,8 +6,6 @@ STRUCT
 	(* Warnings *)
 	LowPressureRefrigerationCalc		: ST_Event := (eventType := E_EventType.LowPressureRefrigerationCalc, severity:= E_Severity.Warning, message := 'Sensor: Niederdruck zu niedrig');  
 	HighPressureRefrigerationCalc		: ST_Event := (eventType := E_EventType.HighPressureRefrigerationCalc, severity:= E_Severity.Warning, message := 'Sensor: Niederdruck zu hoch');  
-	EvaporatingTemperatureTooLow		: ST_Event := (eventType := E_EventType.EvaporatingTemperatureTooLow, severity:= E_Severity.Warning, message := 'Temperatur am Verdampferausgang zu niedrig');  
-	EvaporatingFlowRateTooLow			: ST_Event := (eventType := E_EventType.EvaporatingFlowRateTooLow, severity:= E_Severity.Warning, message := 'Durchflussmenge zu gering');  
 	WaterTankLevelTooLow				: ST_Event := (eventType := E_EventType.WaterTankLevelTooLow, severity:= E_Severity.Warning, message := 'Wasserstand des Tanks (Quelle) zu niedrig');  
 	WaterTankDataMissing				: ST_Event := (eventType := E_EventType.WaterTankDataMissing, severity:= E_Severity.Warning, message := 'Tanksensor (Quelle) sendet keine Daten mehr');  
 END_STRUCT

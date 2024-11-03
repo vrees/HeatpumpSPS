@@ -130,14 +130,7 @@ ELSIF (pd.sensor.temperatureFlow > GVL.configValues.targetTemperatureOff AND iSt
 END_IF
 
 
-(***** Errors *****)
-
-(* Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar] *)
-IF pd.sensor.PressureDifferenceEvaporator > GVL.configValues.PressureDifferenceEvaporatorMax THEN
-	events.errorEvents.PressureDiffEvaporatorTooHigh.message := CONCAT('Druckdifferenz [mbar]: ', REAL_TO_STRING(REAL_TO_INT(pd.sensor.PressureDifferenceEvaporator)));
-	events.errorEvents.PressureDiffEvaporatorTooHigh.isTriggered := TRUE;
-	events.errorsDetected := TRUE;
-END_IF
+//***** Errors *****
 
 (* Prüfe maximalen Druck auf der Niederdruckseite über Ranco Thermostat [bar] *)
 IF pd.incident.incidentLowPressure THEN
@@ -167,31 +160,45 @@ IF pd.incident.alarmExpansionValve THEN
 	events.errorsDetected := TRUE;
 END_IF
 
+(* Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar] *)
+IF pd.sensor.PressureDifferenceEvaporator > GVL.configValues.PressureDifferenceEvaporatorMax THEN
+	events.errorEvents.PressureDiffEvaporatorTooHigh.message := CONCAT('Druckdifferenz [mbar]: ', REAL_TO_STRING(REAL_TO_INT(pd.sensor.PressureDifferenceEvaporator)));
+	events.errorEvents.PressureDiffEvaporatorTooHigh.isTriggered := TRUE;
+	events.errorsDetected := TRUE;
+END_IF
 
-(***** Warnings *****)
+(* Prüfe minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [°C] *)
+IF pd.sensor.TemperatureEvaporatingOut < GVL.configValues.EvaporatingTemperatureOutMin THEN
+	events.errorEvents.EvaporatingTemperatureTooLow.message := CONCAT('Austritttemperatur am Verdampfer ist zu niedrig', ScaleAndRoundString(pd.sensor.TemperatureEvaporatingOut, 10));
+	events.errorEvents.EvaporatingTemperatureTooLow.isTriggered := TRUE;
+	events.errorsDetected := TRUE;
+END_IF
+
+(* Prüfe, of Wasser Durchflussmenge ausreichend ist. Mindestens 2500 Liter/Stunde *)
+IF pd.incident.incidentFlow THEN
+	events.errorEvents.EvaporatingFlowRateTooLow.message := 'Quellwasser Durchflussmenge zu niedrig';
+	events.errorEvents.EvaporatingFlowRateTooLow.isTriggered := TRUE;
+	events.errorsDetected := TRUE;
+END_IF
+
+// ***** Warnings *****
 
 (* Prüfe maximalen Druck auf der Niederdruckseite [bar] *)
 IF pd.sensor.PressureLow > GVL.configValues.PressureLowMax THEN
 	events.warningEvents.LowPressureRefrigerationCalc.message := CONCAT('Niederdruck: [bar]: ', ScaleAndRoundString(pd.sensor.PressureLow, 10));
 	events.warningEvents.LowPressureRefrigerationCalc.isTriggered := TRUE;
+	pd.incident.warningLowPressure := TRUE;
+ELSE
+	pd.incident.warningLowPressure := FALSE;	
 END_IF
 
 (* Prüfe maximalen Druck auf der Hochdruckseite [bar] *)
 IF pd.sensor.PressureHigh > GVL.configValues.PressureHighMax THEN
 	events.warningEvents.HighPressureRefrigerationCalc.message := CONCAT('', ScaleAndRoundString(pd.sensor.PressureHigh, 10));
 	events.warningEvents.HighPressureRefrigerationCalc.isTriggered := TRUE;
-END_IF
-
-(* Prüfe minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [°C] *)
-IF pd.sensor.TemperatureEvaporatingOut < GVL.configValues.EvaporatingTemperatureOutMin THEN
-	events.warningEvents.EvaporatingTemperatureTooLow.message := CONCAT('', ScaleAndRoundString(pd.sensor.TemperatureEvaporatingOut, 10));
-	events.warningEvents.EvaporatingTemperatureTooLow.isTriggered := TRUE;
-END_IF
-
-(* Prüfe, of Wasser Durchflussmenge ausreichend ist. Mindestens 2500 Liter/Stunde *)
-IF pd.incident.incidentFlow THEN
-	events.warningEvents.EvaporatingFlowRateTooLow.message := ' Wasser Durchflussmenge nicht ausreichend. Mindestens 2500 Liter/Stunde';
-	events.warningEvents.EvaporatingFlowRateTooLow.isTriggered := TRUE;
+	pd.incident.warningHighPressure := TRUE;
+ELSE
+	pd.incident.warningHighPressure := FALSE;	
 END_IF
 
 (* TANK_LEVEL_TOO_LOW *)
@@ -297,13 +304,7 @@ END_VAR
       <LineId Id="30" Count="1" />
       <LineId Id="28" Count="0" />
       <LineId Id="96" Count="2" />
-      <LineId Id="36" Count="1" />
-      <LineId Id="46" Count="0" />
-      <LineId Id="108" Count="0" />
-      <LineId Id="47" Count="0" />
-      <LineId Id="234" Count="0" />
-      <LineId Id="48" Count="0" />
-      <LineId Id="83" Count="0" />
+      <LineId Id="36" Count="0" />
       <LineId Id="53" Count="1" />
       <LineId Id="143" Count="0" />
       <LineId Id="55" Count="0" />
@@ -325,26 +326,27 @@ END_VAR
       <LineId Id="186" Count="0" />
       <LineId Id="238" Count="0" />
       <LineId Id="68" Count="0" />
-      <LineId Id="110" Count="1" />
+      <LineId Id="264" Count="5" />
+      <LineId Id="263" Count="0" />
+      <LineId Id="252" Count="4" />
+      <LineId Id="274" Count="0" />
+      <LineId Id="257" Count="5" />
+      <LineId Id="275" Count="0" />
+      <LineId Id="251" Count="0" />
+      <LineId Id="111" Count="0" />
       <LineId Id="69" Count="0" />
-      <LineId Id="113" Count="2" />
+      <LineId Id="276" Count="0" />
+      <LineId Id="114" Count="1" />
       <LineId Id="119" Count="0" />
-      <LineId Id="116" Count="1" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="245" Count="2" />
+      <LineId Id="117" Count="0" />
       <LineId Id="158" Count="2" />
       <LineId Id="219" Count="0" />
       <LineId Id="162" Count="0" />
+      <LineId Id="248" Count="2" />
       <LineId Id="155" Count="0" />
       <LineId Id="220" Count="0" />
-      <LineId Id="149" Count="1" />
-      <LineId Id="218" Count="0" />
-      <LineId Id="152" Count="0" />
-      <LineId Id="137" Count="0" />
-      <LineId Id="221" Count="0" />
-      <LineId Id="178" Count="1" />
-      <LineId Id="217" Count="0" />
-      <LineId Id="181" Count="0" />
-      <LineId Id="142" Count="0" />
-      <LineId Id="226" Count="0" />
       <LineId Id="77" Count="1" />
       <LineId Id="123" Count="0" />
       <LineId Id="80" Count="0" />

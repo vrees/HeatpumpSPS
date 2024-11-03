@@ -6,7 +6,7 @@ VAR_GLOBAL RETAIN
 	configValues			:   ST_ConfigValues;			// Konfigurationsparaeter - Müssen vom User geändert werden können
 END_VAR
 VAR_GLOBAL 
-	lastErrorsOccurred		:   ARRAY[1..5] OF ST_Event;  // List of last errors occurred
+	lastErrorsOccurred		:   ARRAY[0..6] OF ST_Event;  	// List of last errors occurred
 	None: INT;
 END_VAR
 ]]></Declaration>

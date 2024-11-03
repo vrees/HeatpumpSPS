@@ -11,14 +11,11 @@
         incidentHighPressure	AT %I*			: BOOL; 	(* Störung: Hochdruck zu hoch - EL1008.7*)
         incidentLowPressure		AT %I*			: BOOL; 	(* Störung: Niederdruck zu niedrig - EL1008.8*) 
 
-
 		(* Calculated from Business Logic*)
         incidentTankLevelTooLow					: BOOL;  (* Störung: Wasserstand des Tanks zu niedrig *)
         incidentTankSensorDataMissing			: BOOL;  (* Störung: Tanksensor sendet keine Daten mehr *)
         warningHighPressure						: BOOL;  (* Warnung: Hochdruck zu hoch *)
         warningLowPressure						: BOOL;  (* Warnung: Niederdruck zu niedrig *)
-        incidentPressureDifferenceEvaporator	: BOOL;  (* Störung: Druckverlust im Verdampfer überschritten *)
-        incidentMinTemperatureEvaporator		: BOOL;  (* Störung: Minimale Temperatur im Verdampfer unterschritten *)
     END_STRUCT
 END_TYPE
 ]]></Declaration>

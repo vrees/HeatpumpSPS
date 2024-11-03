@@ -16,19 +16,19 @@ TYPE E_EventType :
 	
 	(* Errors *)
 	PressureDiffEvaporatorTooHigh		:= 101,
-	LowPressureRefrigerationThermostat	:= 102,
-	HighPressureRefrigerationThermostat	:= 103,
-	MotorProtectionTriggered			:= 104,
-	ExpansionValveTriggered				:= 105,
+	EvaporatingTemperatureTooLow		:= 102,
+	EvaporatingFlowRateTooLow			:= 103,
+	LowPressureRefrigerationThermostat	:= 104,
+	HighPressureRefrigerationThermostat	:= 105,
+	MotorProtectionTriggered			:= 106,
+	ExpansionValveTriggered				:= 107,
 
 		
 	(* Warnings *)
 	LowPressureRefrigerationCalc		:= 201,
 	HighPressureRefrigerationCalc		:= 202,
-	EvaporatingTemperatureTooLow		:= 203,
-	EvaporatingFlowRateTooLow			:= 204,
-	WaterTankLevelTooLow				:= 205,
-	WaterTankDataMissing				:= 206
+	WaterTankLevelTooLow				:= 203,
+	WaterTankDataMissing				:= 204
 );
 END_TYPE
 ]]></Declaration>

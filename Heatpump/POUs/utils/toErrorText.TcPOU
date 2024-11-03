@@ -5,11 +5,11 @@
 VAR
 	i				: INT; 
 	message			: STRING(255);
-	errorArray 		: ARRAY [0..5] OF ST_Event;
+	errorArray 		: ARRAY [0..6] OF ST_Event;
 END_VAR	
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[FOR i := 1 TO 5 DO
+      <ST><![CDATA[FOR i := 0 TO 6 DO
 	IF GVL.lastErrorsOccurred[i].isTriggered THEN
 		message := CONCAT(message, GVL.lastErrorsOccurred[i].message);
 		message := CONCAT(message, ',');
