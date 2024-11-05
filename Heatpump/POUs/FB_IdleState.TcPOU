@@ -56,9 +56,7 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[METHOD HeatIsRequested : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[pMachine^.timerTON();
-
-IF pMachine^.timerTON.Q OR NOT pMachine^.timerTON.IN THEN
+        <ST><![CDATA[IF pMachine^.timerTON.Q OR NOT pMachine^.timerTON.IN THEN
 	ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Heizung wurde angefordert -> %s', pMachine^.RunningState.Name);
 	pMachine^.timerTON(IN := FALSE);  
 	pMachine^.pd.actor.operatingStateCompressor := TRUE;
@@ -147,7 +145,6 @@ pMachine^.SetState(pMachine^.OffState);]]></ST>
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_IdleState.HeatIsRequested">
-      <LineId Id="14" Count="1" />
       <LineId Id="9" Count="0" />
       <LineId Id="12" Count="1" />
       <LineId Id="16" Count="1" />

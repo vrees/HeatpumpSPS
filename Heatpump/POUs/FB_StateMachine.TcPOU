@@ -28,6 +28,7 @@ VAR
 	isStartButtonEnabled		:	BOOL 	:=	TRUE;
 	isStopButtonEnabled			:	BOOL 	:=	TRUE;
 	timerValueToDisplay			:	INT		:= 	0;	
+	bIsTimerVisible				: 	BOOL	:=  FALSE;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -72,7 +73,14 @@ strState := iState.Name;
 
 setButtonState();
 
-timerValueToDisplay := convertTimerToDisplayValue(timerTON);]]></ST>
+timerTON();
+timerValueToDisplay := convertTimerToDisplayValue(timerTON);
+
+IF iState.State = E_State.IDLE THEN 	
+	bIsTimerVisible := TRUE;
+ELSE
+	bIsTimerVisible := FALSE;
+END_IF]]></ST>
     </Implementation>
     <Property Name="CoolDownState" Id="{f97b0a89-973c-4c1a-a93f-bd53afa029ed}">
       <Declaration><![CDATA[PROPERTY INTERNAL CoolDownState : I_State]]></Declaration>
@@ -279,8 +287,15 @@ END_VAR
     <LineIds Name="FB_StateMachine">
       <LineId Id="281" Count="38" />
       <LineId Id="181" Count="0" />
+      <LineId Id="395" Count="0" />
       <LineId Id="323" Count="0" />
       <LineId Id="322" Count="0" />
+      <LineId Id="362" Count="0" />
+      <LineId Id="365" Count="0" />
+      <LineId Id="355" Count="0" />
+      <LineId Id="358" Count="0" />
+      <LineId Id="361" Count="0" />
+      <LineId Id="356" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.CoolDownState.Get">
       <LineId Id="2" Count="0" />
