@@ -35,6 +35,7 @@ END_VAR
       <ST><![CDATA[rtrigButtonSwitchOn(CLK := bStartButtonPressed);
 rtrigButtonSwitchOff(CLK := bStopButtonPressed);
 rtrigButtonConfirmation(CLK := pd.sensor.userConfirmation);
+timerTON();
 
 // Zuweisung von defaultEvent zu myEvent (Wertkopie)
 events := defaultEvents;
@@ -76,7 +77,7 @@ setButtonState();
 timerTON();
 timerValueToDisplay := convertTimerToDisplayValue(timerTON);
 
-IF iState.State = E_State.IDLE THEN 	
+IF iState.State = E_State.IDLE AND timerTON.IN = TRUE AND timerTON.Q = FALSE THEN 	
 	bIsTimerVisible := TRUE;
 ELSE
 	bIsTimerVisible := FALSE;
@@ -128,12 +129,11 @@ END_VAR]]></Declaration>
 	events.switchOff.isTriggered := TRUE;
 ELSIF (rtrigButtonSwitchOn.Q OR (rtrigButtonConfirmation.Q AND iState.State = E_State.OFF)) THEN
 	events.switchOn.isTriggered := TRUE;
-
 ELSIF (pd.sensor.bufferTopTemperature < GVL.configValues.targetTemperatureOn AND iState.State = E_State.IDLE) THEN
 	events.heatIsRequested.isTriggered := TRUE;
 ELSIF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < GVL.configValues.temperatureDiffBacklashOff AND iState.State = E_State.COOLDOWN) THEN
 	events.cooledDown.isTriggered := TRUE;
-ELSIF (pd.sensor.temperatureFlow > GVL.configValues.targetTemperatureOff AND iState.State = E_State.RUNNING) THEN
+ELSIF (pd.sensor.bufferTopTemperature > GVL.configValues.targetTemperatureOff AND iState.State = E_State.RUNNING) THEN
 	events.targetTemperatureReached.isTriggered := TRUE;
 END_IF
 
@@ -285,7 +285,9 @@ END_VAR
       </Implementation>
     </Method>
     <LineIds Name="FB_StateMachine">
-      <LineId Id="281" Count="38" />
+      <LineId Id="281" Count="2" />
+      <LineId Id="396" Count="0" />
+      <LineId Id="284" Count="35" />
       <LineId Id="181" Count="0" />
       <LineId Id="395" Count="0" />
       <LineId Id="323" Count="0" />
@@ -310,7 +312,6 @@ END_VAR
       <LineId Id="3" Count="0" />
       <LineId Id="5" Count="1" />
       <LineId Id="13" Count="0" />
-      <LineId Id="41" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="19" Count="0" />
       <LineId Id="24" Count="1" />
