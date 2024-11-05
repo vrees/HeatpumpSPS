@@ -14,8 +14,6 @@
 		(* Calculated from Business Logic*)
         incidentTankLevelTooLow					: BOOL;  (* Störung: Wasserstand des Tanks zu niedrig *)
         incidentTankSensorDataMissing			: BOOL;  (* Störung: Tanksensor sendet keine Daten mehr *)
-        warningHighPressure						: BOOL;  (* Warnung: Hochdruck zu hoch *)
-        warningLowPressure						: BOOL;  (* Warnung: Niederdruck zu niedrig *)
     END_STRUCT
 END_TYPE
 ]]></Declaration>

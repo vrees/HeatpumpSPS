@@ -187,18 +187,16 @@ END_IF
 IF pd.sensor.PressureLow > GVL.configValues.PressureLowMax THEN
 	events.warningEvents.LowPressureRefrigerationCalc.message := CONCAT('Niederdruck: [bar]: ', ScaleAndRoundString(pd.sensor.PressureLow, 10));
 	events.warningEvents.LowPressureRefrigerationCalc.isTriggered := TRUE;
-	pd.incident.warningLowPressure := TRUE;
 ELSE
-	pd.incident.warningLowPressure := FALSE;	
+	events.warningEvents.LowPressureRefrigerationCalc.isTriggered := FALSE;
 END_IF
 
 (* Prüfe maximalen Druck auf der Hochdruckseite [bar] *)
 IF pd.sensor.PressureHigh > GVL.configValues.PressureHighMax THEN
 	events.warningEvents.HighPressureRefrigerationCalc.message := CONCAT('', ScaleAndRoundString(pd.sensor.PressureHigh, 10));
 	events.warningEvents.HighPressureRefrigerationCalc.isTriggered := TRUE;
-	pd.incident.warningHighPressure := TRUE;
 ELSE
-	pd.incident.warningHighPressure := FALSE;	
+	events.warningEvents.HighPressureRefrigerationCalc.isTriggered := FALSE;
 END_IF
 
 (* TANK_LEVEL_TOO_LOW *)
@@ -339,12 +337,14 @@ END_VAR
       <LineId Id="114" Count="1" />
       <LineId Id="119" Count="0" />
       <LineId Id="116" Count="0" />
-      <LineId Id="245" Count="2" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="277" Count="0" />
       <LineId Id="117" Count="0" />
       <LineId Id="158" Count="2" />
       <LineId Id="219" Count="0" />
       <LineId Id="162" Count="0" />
-      <LineId Id="248" Count="2" />
+      <LineId Id="249" Count="0" />
+      <LineId Id="278" Count="0" />
       <LineId Id="155" Count="0" />
       <LineId Id="220" Count="0" />
       <LineId Id="77" Count="1" />
