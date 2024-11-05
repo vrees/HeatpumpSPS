@@ -137,7 +137,6 @@ ELSIF (pd.sensor.bufferTopTemperature > GVL.configValues.targetTemperatureOff AN
 	events.targetTemperatureReached.isTriggered := TRUE;
 END_IF
 
-
 //***** Errors *****
 
 (* Prüfe maximalen Druck auf der Niederdruckseite über Ranco Thermostat [bar] *)
@@ -317,7 +316,7 @@ END_VAR
       <LineId Id="24" Count="1" />
       <LineId Id="30" Count="1" />
       <LineId Id="28" Count="0" />
-      <LineId Id="96" Count="2" />
+      <LineId Id="97" Count="1" />
       <LineId Id="36" Count="0" />
       <LineId Id="53" Count="1" />
       <LineId Id="143" Count="0" />

@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1">
   <GVL Name="GVL" Id="{5aaa212f-5667-440f-b23e-01d8197849cd}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
-VAR_GLOBAL RETAIN
+VAR_GLOBAL PERSISTENT
 	configValues			:   ST_ConfigValues;			// Konfigurationsparaeter - Müssen vom User geändert werden können
 END_VAR
 VAR_GLOBAL 

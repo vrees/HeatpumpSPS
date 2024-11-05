@@ -2,100 +2,6 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.62" TcVersionFixed="true">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{616CDCDF-30C0-D944-8853-F3DCBEC0A2A9}" AutoDeleteType="true">ST_ConfigValues</Name>
-			<BitSize>288</BitSize>
-			<SubItem>
-				<Name>targetTemperatureOn</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
-				<Comment><![CDATA[ Einschalttemperatur bei deren Unterschreiten die Waermepumpe eingeschaltet wird]]></Comment>
-				<BitSize>32</BitSize>
-				<BitOffs>0</BitOffs>
-				<Default>
-					<Value>38</Value>
-				</Default>
-			</SubItem>
-			<SubItem>
-				<Name>targetTemperatureOff</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
-				<Comment><![CDATA[ Einschalttemperatur bei deren Ueberschreiten die Waermepume ausgeschaltet wird]]></Comment>
-				<BitSize>32</BitSize>
-				<BitOffs>32</BitOffs>
-				<Default>
-					<Value>38</Value>
-				</Default>
-			</SubItem>
-			<SubItem>
-				<Name>minIdleSec</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000048}">TIME</Type>
-				<Comment><![CDATA[	:= 	30; 	// Minimale Auschalt-Dauer (verhindert haeufiges Einschalten) [Sekunden]]]></Comment>
-				<BitSize>32</BitSize>
-				<BitOffs>64</BitOffs>
-				<Default>
-					<DateTime>T#10S</DateTime>
-				</Default>
-			</SubItem>
-			<SubItem>
-				<Name>lowPressureIgnoreTime</Name>
-				<Type GUID="{18071995-0000-0000-0000-000000000048}">TIME</Type>
-				<Comment><![CDATA[ Nach dem Einschalten sollen Niederdruck-Warnungen für eine gewisse Zeit ignoriert werden]]></Comment>
-				<BitSize>32</BitSize>
-				<BitOffs>96</BitOffs>
-				<Default>
-					<DateTime>T#20S</DateTime>
-				</Default>
-			</SubItem>
-			<SubItem>
-				<Name>temperatureDiffBacklashOff</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
-				<Comment><![CDATA[ Temperaturdifferenz zwischen Vorlauf und Rücklauf, bei dessen Unterschreiten die Wasserpumpe ausgeschaltet wird]]></Comment>
-				<BitSize>32</BitSize>
-				<BitOffs>128</BitOffs>
-				<Default>
-					<Value>1</Value>
-				</Default>
-			</SubItem>
-			<SubItem>
-				<Name>pressureHighMax</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
-				<Comment><![CDATA[ Maximaler Druck auf der Hochdruckseite [bar]]]></Comment>
-				<BitSize>32</BitSize>
-				<BitOffs>160</BitOffs>
-				<Default>
-					<Value>16</Value>
-				</Default>
-			</SubItem>
-			<SubItem>
-				<Name>pressureLowMax</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
-				<Comment><![CDATA[ Maximaler Druck auf der Niederdruckseite [bar]]]></Comment>
-				<BitSize>32</BitSize>
-				<BitOffs>192</BitOffs>
-				<Default>
-					<Value>6</Value>
-				</Default>
-			</SubItem>
-			<SubItem>
-				<Name>pressureDifferenceEvaporatorMax</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
-				<Comment><![CDATA[  Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar]]]></Comment>
-				<BitSize>32</BitSize>
-				<BitOffs>224</BitOffs>
-				<Default>
-					<Value>100</Value>
-				</Default>
-			</SubItem>
-			<SubItem>
-				<Name>evaporatingTemperatureOutMin</Name>
-				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
-				<Comment><![CDATA[ Minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [�C]]]></Comment>
-				<BitSize>32</BitSize>
-				<BitOffs>256</BitOffs>
-				<Default>
-					<Value>3</Value>
-				</Default>
-			</SubItem>
-		</DataType>
-		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-002000000007}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..6] OF BIT</Name>
 			<BitSize>7</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
@@ -120,7 +26,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{B804E381-AEE2-DD70-A101-EE9BF3AB40C5}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{A2709450-E230-92C8-735D-9DF40920C846}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -217,15 +123,6 @@
 							<Name>MAIN.pd.actor.operatingStateWaterPump</Name>
 							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus ]]></Comment>
 							<Type>BOOL</Type>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="8" AreaNo="4">
-						<Name>PlcTask Retains</Name>
-						<Var>
-							<Name>GVL.configValues</Name>
-							<Comment><![CDATA[ Konfigurationsparaeter - Müssen vom User geändert werden können]]></Comment>
-							<Type GUID="{616CDCDF-30C0-D944-8853-F3DCBEC0A2A9}">ST_ConfigValues</Type>
-							<InOut>7</InOut>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2024-10-18T16:30:36">
