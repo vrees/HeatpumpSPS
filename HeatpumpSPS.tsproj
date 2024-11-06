@@ -26,7 +26,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{520E8768-CDC1-BE52-3F63-E51FDBC3D083}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{29A406A8-9C33-5AE5-9174-094D9AFD32F8}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -123,14 +123,6 @@
 							<Name>MAIN.pd.actor.operatingStateWaterPump</Name>
 							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus ]]></Comment>
 							<Type>BOOL</Type>
-						</Var>
-					</Vars>
-					<Vars VarGrpType="8" AreaNo="4">
-						<Name>PlcTask Retains</Name>
-						<Var>
-							<Name>GVL.testRetain</Name>
-							<Type>INT</Type>
-							<InOut>7</InOut>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2024-10-18T16:30:36">

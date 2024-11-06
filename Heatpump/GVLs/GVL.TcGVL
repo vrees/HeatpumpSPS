@@ -4,10 +4,6 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL PERSISTENT
 	configValues			:   ST_ConfigValues;			// Konfigurationsparaeter - Müssen vom User geändert werden können
-	testPersistent			: INT	:= 	10;
-END_VAR
-VAR_GLOBAL RETAIN
-	testRetain				: INT	:= 	10;
 END_VAR
 VAR_GLOBAL 
 	lastErrorsOccurred		:   ARRAY[0..6] OF ST_Event;  	// List of last errors occurred
