@@ -19,6 +19,11 @@
 	</ImageDatas>
 	<Project ProjectGUID="{0FF30942-AD71-4634-8234-2B4524C10BBB}" TargetNetId="5.124.202.224.1.1" ShowHideConfigurations="#x3c7">
 		<System>
+			<Licenses>
+				<Target>
+					<ManualSelect>{796D380F-D49E-4C0C-A05F-500052FAC883}</ManualSelect>
+				</Target>
+			</Licenses>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
@@ -27,7 +32,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{0C4456D9-42FA-22BD-BC59-5C2C31E3D4A5}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{703A0702-D3C3-8FDC-187B-3F96C242C522}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -60,6 +65,11 @@
 						<Var>
 							<Name>MAIN.fbProcessdata.sensorRaw.bufferTopTemperature</Name>
 							<Comment><![CDATA[ Temperatur des Puffers oben in °C ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.bufferMiddleTemperature</Name>
+							<Comment><![CDATA[ Temperatur des Puffers in der Mitte °C ]]></Comment>
 							<Type>INT</Type>
 						</Var>
 						<Var>
@@ -138,6 +148,13 @@
 							<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 8 (EL2008)">
 								<Link VarA="MAIN.fbStateMachine.pd.actor.operatingStateCompressor" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 1^Output" Size="1" RestoreInfo="ANotFound"/>
 								<Link VarA="MAIN.fbStateMachine.pd.actor.operatingStateWaterPump" TypeA="BOOL" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000030}" VarB="Channel 2^Output" Size="1" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
+					<UnrestoredVarLinks ImportTime="2024-11-09T17:22:33">
+						<OwnerA Name="InputDst" Prefix="TIPC^Heatpump^Heatpump Instance" Type="1">
+							<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 11 (EL3152)">
+								<Link VarA="MAIN.fbProcessdata.sensorRawStatus.pressureHighStatus" TypeA="WORD" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000004}" VarB="InfoData^State" RestoreInfo="ANotFound"/>
 							</OwnerB>
 						</OwnerA>
 					</UnrestoredVarLinks>
@@ -704,7 +721,8 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 		</Io>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-0000-0000-0020-500810000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500821000403}" Id="#x02030020"/>
 		<OwnerA Name="TIPC^Heatpump^Heatpump Instance">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 11 (EL3152)">
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.pressureHigh" VarB="Channel 1^Value"/>
@@ -733,6 +751,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^MAIN.pd.sensor.userConfirmation" VarB="Channel 1^Input"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 16 (EL3204)">
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.bufferMiddleTemperature" VarB="RTD Inputs Channel 2^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.bufferTopTemperature" VarB="RTD Inputs Channel 3^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureOverheatedGas" VarB="RTD Inputs Channel 1^Value"/>
 			</OwnerB>

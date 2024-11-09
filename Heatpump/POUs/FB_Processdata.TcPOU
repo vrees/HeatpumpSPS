@@ -16,6 +16,7 @@ pd.sensor.temperatureEvaporatingOut 	:=	RawToTemperature(sensorRaw.temperatureEv
 pd.sensor.temperatureFlow 				:=	RawToTemperature(sensorRaw.temperatureFlow);
 pd.sensor.temperatureReturn 			:=	RawToTemperature(sensorRaw.temperatureReturn);
 pd.sensor.bufferTopTemperature 			:=	RawToTemperature(sensorRaw.bufferTopTemperature);
+pd.sensor.bufferMiddleTemperature 		:=	RawToTemperature(sensorRaw.bufferMiddleTemperature);
 pd.sensor.temperatureOverheatedGas 		:=	RawToTemperature(sensorRaw.temperatureOverheatedGas);
 pd.sensor.temperatureEvaporatingIn 		:=	RawToTemperature(sensorRaw.temperatureEvaporatingIn);
 pd.sensor.temperatureEvaporatingIn 		:=	RawToTemperature(sensorRaw.temperatureEvaporatingIn);
@@ -60,7 +61,9 @@ END_VAR
     </Method>
     <LineIds Name="FB_ProcessData">
       <LineId Id="63" Count="0" />
-      <LineId Id="48" Count="9" />
+      <LineId Id="48" Count="4" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="53" Count="4" />
       <LineId Id="64" Count="0" />
       <LineId Id="59" Count="0" />
       <LineId Id="66" Count="1" />

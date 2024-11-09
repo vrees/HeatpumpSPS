@@ -8,6 +8,7 @@
         temperatureFlow	 						: REAL;  (* Vorlauftemperatur in °C *)
         temperatureReturn						: REAL;  (* Rücklauftemperatur in °C *)
         bufferTopTemperature					: REAL;  (* Temperatur des Puffers oben in °C *)
+        bufferMiddleTemperature					: REAL;  (* Temperatur des Puffers in der Mitte °C *)		
         temperatureOverheatedGas				: REAL;  (* Saugtemperatur des überhitzten Gases *)
         pressureHigh							: REAL;  (* Hochdruck Kältekreis in bar *)
         pressureLow								: REAL;  (* Niederdruck Kältekreis in bar *)

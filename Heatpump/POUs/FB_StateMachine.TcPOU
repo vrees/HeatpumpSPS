@@ -133,7 +133,7 @@ ELSIF (pd.sensor.bufferTopTemperature < GVL.configValues.targetTemperatureOn AND
 	events.heatIsRequested.isTriggered := TRUE;
 ELSIF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < GVL.configValues.temperatureDiffBacklashOff AND iState.State = E_State.COOLDOWN) THEN
 	events.cooledDown.isTriggered := TRUE;
-ELSIF (pd.sensor.bufferTopTemperature > GVL.configValues.targetTemperatureOff AND iState.State = E_State.RUNNING) THEN
+ELSIF (pd.sensor.bufferMiddleTemperature > GVL.configValues.targetTemperatureOff AND iState.State = E_State.RUNNING) THEN
 	events.targetTemperatureReached.isTriggered := TRUE;
 END_IF
 
@@ -182,7 +182,7 @@ IF pd.sensor.TemperatureEvaporatingOut < GVL.configValues.EvaporatingTemperature
 END_IF
 
 (* Prüfe, of Wasser Durchflussmenge ausreichend ist. Mindestens 2500 Liter/Stunde *)
-IF pd.incident.incidentFlow THEN
+IF NOT pd.incident.incidentFlow THEN
 	events.errorEvents.EvaporatingFlowRateTooLow.message := 'Quellwasser Durchflussmenge zu niedrig';
 	events.errorEvents.EvaporatingFlowRateTooLow.isTriggered := TRUE;
 	events.errorsDetected := TRUE;
