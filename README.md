@@ -34,5 +34,13 @@ TwinCAT Standard Remote Manager: 4024.53.0
 - Lizens-File: ./License-Files/TLR_BI_00976901.tclrs
 - Copy E:\data\Lizenzen\Beckhoff\TLR_BI_00976901.tclrs  (HDD on WIN10-GAMING)
 
-# Lokal Konfig
+## Lokal Konfig
 C:\ProgramData\Beckhoff\TwinCAT\3.1\Boot
+
+
+## TODO:
+- Hardening: Diagnose of Analog Status Ionfo .ilke Overrun, Error, ...
+- Install HMI on PLC
+- Temperatur-Sensor in Boiler
+- Einschalten der Boiler-Ladepume Signal als Heat-Request erkannen
+- 
