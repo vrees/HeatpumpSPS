@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <DUT Name="ST_ConfigValues" Id="{019656bf-067e-4483-97b4-def6d34d2ddb}">
-    <Declaration><![CDATA[50TYPE ST_ConfigValues :
+    <Declaration><![CDATA[TYPE ST_ConfigValues :
 STRUCT	
 	targetTemperatureOn 			:	REAL	:= 	46; 	// Einschalttemperatur bei deren Unterschreiten die Waermepumpe eingeschaltet wird
 	targetTemperatureOff 			:	REAL	:= 	52; 	// Auschaltemperatur bei deren Ueberschreiten die Waermepume ausgeschaltet wird

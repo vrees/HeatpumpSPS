@@ -9,12 +9,13 @@
         temperatureReturn						: REAL;  (* Rücklauftemperatur in °C *)
         bufferTopTemperature					: REAL;  (* Temperatur des Puffers oben in °C *)
         bufferMiddleTemperature					: REAL;  (* Temperatur des Puffers in der Mitte °C *)		
+		boilerTemperature						: REAL;  (* Boiler-Temperatur oben °C *)
         temperatureOverheatedGas				: REAL;  (* Saugtemperatur des überhitzten Gases *)
         pressureHigh							: REAL;  (* Hochdruck Kältekreis in bar *)
         pressureLow								: REAL;  (* Niederdruck Kältekreis in bar *)
         pressureDifferenceEvaporator			: REAL;  (* Druckdifferenz im Verdampfer in mbar *)
         calculatedOverheatTemperature			: REAL;  (* Berechnete Überhitzungstemperatur *)
-        heatRequest						AT %I*	: BOOL;  (* Taster für Wärmeanforderung - EL1008.1*)
+        boilerHeatRequest				AT %I*	: BOOL;  (* Boiler LadePumpe ist eingeschaltet - EL1008.1*)
         userConfirmation				AT %I*	: BOOL;  (* Taster für Ein-/Aus-Quittierung - EL1008.2*) 
     END_STRUCT
 END_TYPE

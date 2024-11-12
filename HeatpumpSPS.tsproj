@@ -32,7 +32,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{AF5767F9-E468-0F43-44D5-59E3EAF0A465}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{679639FE-5B4A-1BD2-6C4B-79CBBFB60B4A}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -73,6 +73,11 @@
 							<Type>INT</Type>
 						</Var>
 						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.boilerTemperature</Name>
+							<Comment><![CDATA[ Boiler-Temperatur oben °C ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
 							<Name>MAIN.fbProcessdata.sensorRaw.pressureHigh</Name>
 							<Comment><![CDATA[ Hochdruck Kältekreis in bar ]]></Comment>
 							<Type>INT</Type>
@@ -88,8 +93,8 @@
 							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.pd.sensor.heatRequest</Name>
-							<Comment><![CDATA[ Taster für Wärmeanforderung - EL1008.1]]></Comment>
+							<Name>MAIN.pd.sensor.boilerHeatRequest</Name>
+							<Comment><![CDATA[ Boiler LadePumpe ist eingeschaltet - EL1008.1]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -746,10 +751,11 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentFlow" VarB="Channel 6^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentHighPressure" VarB="Channel 7^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentLowPressure" VarB="Channel 8^Input"/>
-				<Link VarA="PlcTask Inputs^MAIN.pd.sensor.heatRequest" VarB="Channel 2^Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.pd.sensor.boilerHeatRequest" VarB="Channel 2^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.pd.sensor.userConfirmation" VarB="Channel 1^Input"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 16 (EL3204)">
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.boilerTemperature" VarB="RTD Inputs Channel 4^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.bufferMiddleTemperature" VarB="RTD Inputs Channel 2^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.bufferTopTemperature" VarB="RTD Inputs Channel 3^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureOverheatedGas" VarB="RTD Inputs Channel 1^Value"/>
