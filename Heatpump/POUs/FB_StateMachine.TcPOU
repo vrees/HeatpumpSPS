@@ -129,7 +129,7 @@ END_VAR]]></Declaration>
 	events.switchOff.isTriggered := TRUE;
 ELSIF (rtrigButtonSwitchOn.Q OR (rtrigButtonConfirmation.Q AND iState.State = E_State.OFF)) THEN
 	events.switchOn.isTriggered := TRUE;
-ELSIF (pd.sensor.bufferTopTemperature < GVL.configValues.targetTemperatureOn AND iState.State = E_State.IDLE) THEN
+ELSIF (isHeatRequested()) THEN
 	events.heatIsRequested.isTriggered := TRUE;
 ELSIF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < GVL.configValues.temperatureDiffBacklashOff AND iState.State = E_State.COOLDOWN) THEN
 	events.cooledDown.isTriggered := TRUE;
@@ -233,6 +233,31 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="isHeatRequested" Id="{5b8910d5-2963-4faa-b260-349726816464}">
+      <Declaration><![CDATA[METHOD isHeatRequested : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[isHeatRequested := 
+	(pd.sensor.bufferTopTemperature < GVL.configValues.targetTemperatureOn) OR
+	(pd.sensor.boilerHeatRequest = TRUE AND (pd.sensor.bufferTopTemperature <= pd.sensor.boilerTemperature + GVL.configValues.temperatureDiffBoilerLaden))
+	AND iState.State = E_State.IDLE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="isTargetTemperatureReached" Id="{72de01e8-9221-4ced-9a58-5c631e2f44e4}">
+      <Declaration><![CDATA[METHOD isTargetTemperatureReached : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// In case of State=Running the Heatpump is turened of iff following condition are true
+isTargetTemperatureReached := 
+	pd.sensor.bufferMiddleTemperature >= GVL.configValues.targetTemperatureOff 
+	AND pd.sensor.boilerHeatRequest = FALSE	
+	AND iState.State = E_State.RUNNING;]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="OffState" Id="{9baf72ca-9c89-4e21-8939-001a0e23445d}">
       <Declaration><![CDATA[PROPERTY INTERNAL OffState : I_State]]></Declaration>
       <Get Name="Get" Id="{4045de7f-9103-414f-ae85-7d8c9bbff5c4}">
@@ -377,6 +402,18 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_StateMachine.IdleState.Get">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.isHeatRequested">
+      <LineId Id="5" Count="1" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.isTargetTemperatureReached">
+      <LineId Id="6" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="8" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.OffState.Get">
       <LineId Id="2" Count="0" />

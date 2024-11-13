@@ -8,12 +8,13 @@ STRUCT
 	minIdleSec 						:	TIME 	:= 	T#5M;	//	:= 	30; 	// Minimale Auschalt-Dauer (verhindert haeufiges Einschalten) [Sekunden]
 	lowPressureIgnoreTime 			:	TIME 	:= 	T#20S;	// Nach dem Einschalten sollen Niederdruck-Warnungen für eine gewisse Zeit ignoriert werden
 	temperatureDiffBacklashOff 		:	REAL	:= 	1.0; 	// Temperaturdifferenz zwischen Vorlauf und Rücklauf, bei dessen Unterschreiten die Wasserpumpe ausgeschaltet wird
+	temperatureDiffBoilerLaden 		:	REAL	:= 	3.0; 	// Temperaturdifferenz zwischen Puffer oben und Boiler, die unterschritten sein muss, damit die Wärmepumpe einschaltet.
 
 	// Limits*)
 	pressureHighMax 				:	REAL	:= 	16; 	// Maximaler Druck auf der Hochdruckseite [bar]
 	pressureLowMax 					:	REAL	:= 	6; 		// Maximaler Druck auf der Niederdruckseite [bar]
-	pressureDifferenceEvaporatorMax :	REAL 	:= 	50;	//  Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar]
-	evaporatingTemperatureOutMin 	:	REAL 	:=	3; 		// Minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [�C]
+	pressureDifferenceEvaporatorMax :	REAL 	:= 	50;		// Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar]
+	evaporatingTemperatureOutMin 	:	REAL 	:=	3; 		// Minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [°C]
 END_STRUCT
 END_TYPE
 ]]></Declaration>
