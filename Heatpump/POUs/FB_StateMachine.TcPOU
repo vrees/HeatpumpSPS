@@ -251,7 +251,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// In case of State=Running the Heatpump is turened of iff following condition are true
+        <ST><![CDATA[// In case of State=Running the Heatpump is turned of if following condition are true
 isTargetTemperatureReached := 
 	pd.sensor.bufferMiddleTemperature >= GVL.configValues.targetTemperatureOff 
 	AND pd.sensor.boilerHeatRequest = FALSE	

@@ -37,6 +37,27 @@ TwinCAT Standard Remote Manager: 4024.53.0
 ## Lokal Konfig
 C:\ProgramData\Beckhoff\TwinCAT\3.1\Boot
 
+## Install HMI Server on CX-5110
+CerHost: C:\Users\Viktor Rees\Documents\TcXaeShell\CERHOST.exe
+
+### Starting the Beckhoff Device Manager 
+https://infosys.beckhoff.com/english.php?content=../content/1033/cx51x0_hw/27021604200571915.html&id=
+https://192.168.178.14/config/
+
+### Installing HMI Server
+https://www.linkedin.com/pulse/twincat-3-hmi-windows-ce-mattias-nilsson
+
+### Access WebServer
+https://192.168.178.14:1020/Config  (case sensitive)
+http://192.168.178.14:1010/Config
+
+Username: __System/Password
+Password: is........8
+
+
+
+
+
 
 ## TODO:
 - Hardening: Diagnose of Analog Status Ionfo .ilke Overrun, Error, ...
