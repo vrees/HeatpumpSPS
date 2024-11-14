@@ -107,7 +107,11 @@ END_VAR
       <Declaration><![CDATA[METHOD TargetTemeperatureReached : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ActionSwitchOff('Zieltemperatur erreicht. -> %s');]]></ST>
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Boiler oben: %s ', REAL_TO_STRING (pMachine^.pd.sensor.bufferMiddleTemperature));
+ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Zieltemperatur (Ausschalttemperatur): %s ', REAL_TO_STRING (GVL.configValues.targetTemperatureOff));
+ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Boiler-Ladepumpe: %s ', BOOL_TO_STRING (pMachine^.pd.sensor.boilerHeatRequest));
+
+ActionSwitchOff('Zieltemperatur erreicht. -> %s');]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedConfirmationButton" Id="{34138e8e-29b3-43c6-83b9-21f3a75e6954}">
@@ -169,6 +173,9 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.TargetTemeperatureReached">
+      <LineId Id="10" Count="0" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="11" Count="0" />
       <LineId Id="8" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.UserPressedConfirmationButton">
