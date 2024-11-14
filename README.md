@@ -1,12 +1,32 @@
-# HeatpumpSPS
+# Wärmepumpe Viktor Rees
 Firmware using Beckhoff SPS to Heatpump
 
-HMI: http://192.168.178.14:1010/  (__SystemAdministrator/isdn98)
+Dashboard-Url: http://192.168.178.14:1010/  (__SystemAdministrator/isdn98)
+
+# Bedienung
+
+## Einschalt-Bedingung
+Die WP wird eingeschaltet, wenn eine der beiden Bedingungen zutrifft:
+- die Temperatur 'Puffer oben' ist niedriger als die eingestellte 'mind. Temperatur' 
+- Die Boiler-Ladepumpe läuft und der Puffer ist nicht heiss. 
+  Heiss bedeutet, wenn die Temperatur 'Puffer oben' 
+  um den eingestellten Wert 'Temperatur-Diff. Boiler Laden' höher ist als die Boiler Temperatur. 
+  
+## Ausschalt-Bedingung
+Die Wäremepumpe schaltet aus, wenn 
+- die Boiler-Ladepumpe nicht mehr läuft
+- und die Temperatur 'Puffer Mitte' grösser oder gleich ist wie die eingestellte 'max. Temperatur'  
+
+## Abkühlen
+Nach dem Ausschalten läuft die Wasserpumpe noch solange nach, dis sich der Verflüssiger Wäretauscher abgekühlt hat.
+Danach bleibt sie im Status 'bereit'. 
+Um zu häufige Starts zu vermeiden, kann die WP für die eingestellte 'mindest Ausschaltdauer' nicht starten.
+Ist die Einschaltbedingung erfüllt startet die WP wieder.
 
 
 # Versionen
 
-## CX5110-0115-9020 IPC:
+### CX5110-0115-9020 IPC:
 - Network Adapter: PCT\TCI8254X1
 - Feste IP Adresse 192.168.178.14, Subnetz 255.255.255.0, Gateway 192.168.178.1
 - TwinCAT Version: 3.1 
@@ -14,7 +34,7 @@ HMI: http://192.168.178.14:1010/  (__SystemAdministrator/isdn98)
 - DeviceName: CX-7CCAE0
 - Image Version: CX51x0 HPS 6.10a
 
-## Windows 10, EntwicklerPC:
+### Windows 10, EntwicklerPC:
 DHCP: Adresse vom Fritzbox Router: immer 192.168.178.180
 TE2000 HMI Engineering		1.12.762.46
 TC 3.1 4024.62

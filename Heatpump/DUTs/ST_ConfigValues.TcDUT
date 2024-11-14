@@ -6,7 +6,6 @@ STRUCT
 	targetTemperatureOn 			:	REAL	:= 	46; 	// Einschalttemperatur bei deren Unterschreiten die Waermepumpe eingeschaltet wird
 	targetTemperatureOff 			:	REAL	:= 	52; 	// Auschaltemperatur bei deren Ueberschreiten die Waermepume ausgeschaltet wird
 	minIdleSec 						:	TIME 	:= 	T#5M;	//	:= 	30; 	// Minimale Auschalt-Dauer (verhindert haeufiges Einschalten) [Sekunden]
-	lowPressureIgnoreTime 			:	TIME 	:= 	T#20S;	// Nach dem Einschalten sollen Niederdruck-Warnungen für eine gewisse Zeit ignoriert werden
 	temperatureDiffBacklashOff 		:	REAL	:= 	1.0; 	// Temperaturdifferenz zwischen Vorlauf und Rücklauf, bei dessen Unterschreiten die Wasserpumpe ausgeschaltet wird
 	temperatureDiffBoilerLaden 		:	REAL	:= 	3.0; 	// Temperaturdifferenz zwischen Puffer oben und Boiler, die unterschritten sein muss, damit die Wärmepumpe einschaltet.
 
