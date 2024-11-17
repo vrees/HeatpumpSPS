@@ -70,6 +70,7 @@ Password: is........8
 - Hardening: Diagnose of Analog Status Info Overrun, Error, ...
 - Quellwassermenge stufenlos steuern - oder Ein-/Ausschalten
 - Installation unter Linux VM
+- Selbstheilende Errors
 - Hinweis für Status
 - InfluxDB/Grafana
 - Fehler bei Ladepumpe suchen
