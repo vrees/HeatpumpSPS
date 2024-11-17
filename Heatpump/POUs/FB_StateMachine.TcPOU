@@ -133,7 +133,7 @@ ELSIF (isHeatRequested()) THEN
 	events.heatIsRequested.isTriggered := TRUE;
 ELSIF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < GVL.configValues.temperatureDiffBacklashOff AND iState.State = E_State.COOLDOWN) THEN
 	events.cooledDown.isTriggered := TRUE;
-ELSIF (pd.sensor.bufferMiddleTemperature > GVL.configValues.targetTemperatureOff AND iState.State = E_State.RUNNING) THEN
+ELSIF (isTargetTemperatureReached()) THEN
 	events.targetTemperatureReached.isTriggered := TRUE;
 END_IF
 
@@ -253,9 +253,9 @@ END_VAR
       <Implementation>
         <ST><![CDATA[// In case of State=Running the Heatpump is turned of if following condition are true
 isTargetTemperatureReached := 
-	pd.sensor.bufferMiddleTemperature >= GVL.configValues.targetTemperatureOff 
-	AND pd.sensor.boilerHeatRequest = FALSE	
-	AND iState.State = E_State.RUNNING;]]></ST>
+	(pd.sensor.bufferMiddleTemperature >= GVL.configValues.targetTemperatureOff)  
+	AND (pd.sensor.boilerHeatRequest = FALSE)	
+	AND (iState.State = E_State.RUNNING);]]></ST>
       </Implementation>
     </Method>
     <Property Name="OffState" Id="{9baf72ca-9c89-4e21-8939-001a0e23445d}">

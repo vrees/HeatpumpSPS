@@ -66,11 +66,11 @@ Username: __System/Password
 Password: is........8
 
 
-
-
 ## TODO:
-- Hardening: Diagnose of Analog Status Ionfo .ilke Overrun, Error, ...
-- Install HMI on PLC
-- Temperatur-Sensor in Boiler
+- Hardening: Diagnose of Analog Status Info Overrun, Error, ...
 - Quellwassermenge stufenlos steuern - oder Ein-/Ausschalten
 - Installation unter Linux VM
+- Hinweis für Status
+- InfluxDB/Grafana
+- Fehler bei Ladepumpe suchen
+- Status LED einbauen
