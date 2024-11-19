@@ -24,6 +24,7 @@ VAR
 	rtrigButtonSwitchOff		:	R_TRIG;
 	rtrigButtonConfirmation		:	R_TRIG;	
 	strState					: 	STRING;
+	strInfotext					: 	STRING(256);
 	
 	isStartButtonEnabled		:	BOOL 	:=	TRUE;
 	isStopButtonEnabled			:	BOOL 	:=	TRUE;
@@ -70,7 +71,7 @@ IF events.cooledDown.isTriggered THEN
 	iState.WaterHasCooledDown();
 END_IF
 
-strState := iState.Name;
+setLabelText();
 
 setButtonState();
 
@@ -298,6 +299,28 @@ bStartButtonPressed			:= FALSE;
 bStopButtonPressed			:= FALSE;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="setLabelText" Id="{e9a542b8-1e41-48ce-b30f-244e7b54b970}">
+      <Declaration><![CDATA[METHOD setLabelText : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[strState := iState.Name;
+
+CASE  iState.State OF 
+	E_State.RUNNING:
+		strInfotext := CONCAT('Ausschalten:\nDie Ladepumpe ist nicht eingeschaltet   und\ndie Puffertemperatur Mitte ist grösser als ',  ScaleAndRoundString(GVL.configValues.targetTemperatureOff, 10));
+		strInfotext := CONCAT(strInfotext, ' °C');	
+	E_State.IDLE:
+		strInfotext := CONCAT('Einschalten:\nTemperatur am Puffer oben ist niedriger als ',  ScaleAndRoundString(GVL.configValues.targetTemperatureOn, 10));
+		strInfotext := CONCAT(strInfotext, ' °C    oder\ndie Ladepumpe ist ein und der Puffer ist nicht deutlich wärmer als der Boiler');
+	E_State.COOLDOWN:
+		strInfotext := 'Die Pumpe schaltet aus wenn die Restwärme \naus dem Verflüssiger abtransortiert wurde';
+ELSE
+	strInfotext := '';	
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="SetState" Id="{d1b82ae6-b5f8-46df-b7d5-05a5b5812d18}">
       <Declaration><![CDATA[METHOD INTERNAL SetState : BOOL
 VAR_INPUT
@@ -311,7 +334,9 @@ END_VAR
     <LineIds Name="FB_StateMachine">
       <LineId Id="281" Count="2" />
       <LineId Id="396" Count="0" />
-      <LineId Id="284" Count="35" />
+      <LineId Id="284" Count="33" />
+      <LineId Id="429" Count="0" />
+      <LineId Id="319" Count="0" />
       <LineId Id="181" Count="0" />
       <LineId Id="395" Count="0" />
       <LineId Id="323" Count="0" />
@@ -429,6 +454,19 @@ END_VAR
       <LineId Id="12" Count="0" />
       <LineId Id="15" Count="1" />
       <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.setLabelText">
+      <LineId Id="6" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="12" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.SetState">
       <LineId Id="2" Count="0" />
