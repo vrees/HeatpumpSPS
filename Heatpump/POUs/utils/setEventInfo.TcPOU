@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="setEventInfo" Id="{fd5c5f94-c786-40c8-961b-6509209e48e8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION setEventInfo : BOOL
+VAR_INPUT
+	events				: REFERENCE TO ST_Events;
+	stEvent 			: REFERENCE TO ST_Event;
+	isError				: BOOL;
+	strMessage 			: STRING(255);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[stEvent.message := strMessage;
+stEvent.isTriggered := TRUE;
+updateEventWithTimestamp(stEvent := stEvent);
+events.errorsDetected := isError;]]></ST>
+    </Implementation>
+    <LineIds Name="setEventInfo">
+      <LineId Id="14" Count="2" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -149,86 +149,62 @@ END_IF
 
 (* Prüfe maximalen Druck auf der Niederdruckseite über Ranco Thermostat [bar] *)
 IF pd.incident.incidentLowPressure THEN
-	events.errorEvents.LowPressureRefrigerationThermostat.message := CONCAT('Ranco Thermostat: zu hoher Niederdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10));
-	events.errorEvents.LowPressureRefrigerationThermostat.isTriggered := TRUE;
-	
-	// Get current date and time
-	fbSystemTime(timeLoDW=>timeAsFileTime.dwLowDateTime, timeHiDW=>timeAsFileTime.dwHighDateTime);
-	events.errorEvents.LowPressureRefrigerationThermostat.timestamp := FILETIME_TO_DT(timeAsFileTime); 
-
-	events.errorsDetected := TRUE;
+	setEventInfo(events, events.errorEvents.LowPressureRefrigerationThermostat, TRUE, CONCAT('Ranco Thermostat: zu hoher Niederdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10))); 
 END_IF
 
 (*Prüfe maximalen Druck auf der Hochdruckseite über Ranco Thermostat [bar]  *)
 IF pd.incident.incidentHighPressure THEN
-	events.errorEvents.HighPressureRefrigerationThermostat.message := CONCAT('Ranco Thermostat: zu hoher Hochdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureHigh, 10));
-	events.errorEvents.HighPressureRefrigerationThermostat.isTriggered := TRUE;
-	events.errorsDetected := TRUE;
+	setEventInfo(events, events.errorEvents.HighPressureRefrigerationThermostat, TRUE, CONCAT('Ranco Thermostat: zu hoher Hochdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureHigh, 10)));
 END_IF
 
 (* Motor-Schutzschalter hat ausgelöst *)
 IF pd.incident.incidentCompressor THEN
-	events.errorEvents.MotorProtectionTriggered.message := 'Motorschutzschalter hat ausgelöst';
-	events.errorEvents.MotorProtectionTriggered.isTriggered := TRUE;
-	events.errorsDetected := TRUE;
+	setEventInfo(events, events.errorEvents.MotorProtectionTriggered, TRUE, 'Motorschutzschalter hat ausgelöst');
 END_IF
 
 (* Expansionsventil meldet Fehler *)
 IF pd.incident.alarmExpansionValve THEN
-	events.errorEvents.ExpansionValveTriggered.message := 'Expansionsventil meldet Fehler';
-	events.errorEvents.ExpansionValveTriggered.isTriggered := TRUE;
-	events.errorsDetected := TRUE;
+	setEventInfo(events, events.errorEvents.ExpansionValveTriggered, TRUE, 'Expansionsventil meldet Fehler');
 END_IF
 
 (* Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar] *)
 IF pd.sensor.PressureDifferenceEvaporator > GVL.configValues.PressureDifferenceEvaporatorMax THEN
-	events.errorEvents.PressureDiffEvaporatorTooHigh.message := CONCAT('Druckdifferenz [mbar]: ', REAL_TO_STRING(REAL_TO_INT(pd.sensor.PressureDifferenceEvaporator)));
-	events.errorEvents.PressureDiffEvaporatorTooHigh.isTriggered := TRUE;
-	events.errorsDetected := TRUE;
+	setEventInfo(events, events.errorEvents.PressureDiffEvaporatorTooHigh, TRUE, CONCAT('Druckdifferenz [mbar]: ', REAL_TO_STRING(REAL_TO_INT(pd.sensor.PressureDifferenceEvaporator))));
 END_IF
 
 (* Prüfe minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [°C] *)
 IF pd.sensor.TemperatureEvaporatingOut < GVL.configValues.EvaporatingTemperatureOutMin THEN
-	events.errorEvents.EvaporatingTemperatureTooLow.message := CONCAT('Austritttemperatur am Verdampfer ist zu niedrig [°C]: ', ScaleAndRoundString(pd.sensor.TemperatureEvaporatingOut, 10));
-	events.errorEvents.EvaporatingTemperatureTooLow.isTriggered := TRUE;
-	events.errorsDetected := TRUE;
+	setEventInfo(events, events.errorEvents.EvaporatingTemperatureTooLow, TRUE, CONCAT('Austritttemperatur am Verdampfer ist zu niedrig [°C]: ', ScaleAndRoundString(pd.sensor.TemperatureEvaporatingOut, 10)));
 END_IF
 
 (* Prüfe, of Wasser Durchflussmenge ausreichend ist. Mindestens 2500 Liter/Stunde *)
 IF NOT pd.incident.incidentFlow THEN
-	events.errorEvents.EvaporatingFlowRateTooLow.message := 'Quellwasser Durchflussmenge zu niedrig';
-	events.errorEvents.EvaporatingFlowRateTooLow.isTriggered := TRUE;
-	events.errorsDetected := TRUE;
+	setEventInfo(events, events.errorEvents.EvaporatingFlowRateTooLow, TRUE, 'Quellwasser Durchflussmenge zu niedrig');
 END_IF
 
 // ***** Warnings *****
-
 (* Prüfe maximalen Druck auf der Niederdruckseite [bar] *)
 IF pd.sensor.PressureLow > GVL.configValues.PressureLowMax THEN
-	events.warningEvents.LowPressureRefrigerationCalc.message := CONCAT('Niederdruck: [bar]: ', ScaleAndRoundString(pd.sensor.PressureLow, 10));
-	events.warningEvents.LowPressureRefrigerationCalc.isTriggered := TRUE;
+	setEventInfo(events, events.warningEvents.LowPressureRefrigerationCalc, FALSE, CONCAT('Niederdruck: [bar]: ', ScaleAndRoundString(pd.sensor.PressureLow, 10)));
 ELSE
 	events.warningEvents.LowPressureRefrigerationCalc.isTriggered := FALSE;
 END_IF
 
 (* Prüfe maximalen Druck auf der Hochdruckseite [bar] *)
 IF pd.sensor.PressureHigh > GVL.configValues.PressureHighMax THEN
-	events.warningEvents.HighPressureRefrigerationCalc.message := CONCAT('', ScaleAndRoundString(pd.sensor.PressureHigh, 10));
-	events.warningEvents.HighPressureRefrigerationCalc.isTriggered := TRUE;
+	setEventInfo(events, events.warningEvents.HighPressureRefrigerationCalc, FALSE, CONCAT('', ScaleAndRoundString(pd.sensor.PressureHigh, 10)));
 ELSE
 	events.warningEvents.HighPressureRefrigerationCalc.isTriggered := FALSE;
 END_IF
 
 (* TANK_LEVEL_TOO_LOW *)
 IF FALSE THEN
-	events.warningEvents.WaterTankLevelTooLow.message := 'Wasserstand der Quelle ist zu meiedrig';
-	events.warningEvents.WaterTankLevelTooLow.isTriggered := TRUE;
+	setEventInfo(events, events.warningEvents.WaterTankLevelTooLow, FALSE, 'Wasserstand der Quelle ist zu meiedrig');
 END_IF
 
 (* TANK_LEVEL Data missing *)
 IF FALSE THEN
-	events.warningEvents.WaterTankDataMissing.message := 'Keine Daten über den Wasserstand der Quelle verfügbar';
-	events.warningEvents.WaterTankDataMissing.isTriggered := TRUE;
+	setEventInfo(events, events.warningEvents.WaterTankDataMissing, FALSE, 'Keine Daten über den Wasserstand der Quelle verfügbar');
 END_IF
 
 
@@ -381,63 +357,44 @@ END_VAR
       <LineId Id="97" Count="1" />
       <LineId Id="36" Count="0" />
       <LineId Id="53" Count="1" />
-      <LineId Id="143" Count="0" />
-      <LineId Id="55" Count="0" />
-      <LineId Id="290" Count="1" />
-      <LineId Id="296" Count="0" />
-      <LineId Id="295" Count="0" />
-      <LineId Id="283" Count="0" />
-      <LineId Id="235" Count="0" />
+      <LineId Id="309" Count="0" />
       <LineId Id="56" Count="0" />
       <LineId Id="107" Count="0" />
       <LineId Id="61" Count="0" />
-      <LineId Id="190" Count="2" />
-      <LineId Id="236" Count="0" />
+      <LineId Id="190" Count="1" />
       <LineId Id="64" Count="0" />
       <LineId Id="173" Count="2" />
       <LineId Id="187" Count="0" />
-      <LineId Id="177" Count="0" />
-      <LineId Id="237" Count="0" />
       <LineId Id="172" Count="0" />
       <LineId Id="86" Count="0" />
       <LineId Id="183" Count="1" />
       <LineId Id="188" Count="0" />
-      <LineId Id="186" Count="0" />
-      <LineId Id="238" Count="0" />
       <LineId Id="68" Count="0" />
-      <LineId Id="264" Count="5" />
+      <LineId Id="264" Count="3" />
       <LineId Id="263" Count="0" />
-      <LineId Id="252" Count="4" />
-      <LineId Id="274" Count="0" />
-      <LineId Id="257" Count="5" />
-      <LineId Id="275" Count="0" />
+      <LineId Id="252" Count="3" />
+      <LineId Id="257" Count="4" />
       <LineId Id="251" Count="0" />
       <LineId Id="111" Count="0" />
       <LineId Id="69" Count="0" />
-      <LineId Id="276" Count="0" />
       <LineId Id="114" Count="1" />
       <LineId Id="119" Count="0" />
-      <LineId Id="116" Count="0" />
       <LineId Id="246" Count="0" />
       <LineId Id="277" Count="0" />
       <LineId Id="117" Count="0" />
       <LineId Id="158" Count="2" />
       <LineId Id="219" Count="0" />
-      <LineId Id="162" Count="0" />
       <LineId Id="249" Count="0" />
       <LineId Id="278" Count="0" />
       <LineId Id="155" Count="0" />
       <LineId Id="220" Count="0" />
       <LineId Id="77" Count="1" />
       <LineId Id="123" Count="0" />
-      <LineId Id="80" Count="0" />
       <LineId Id="216" Count="0" />
       <LineId Id="227" Count="0" />
       <LineId Id="81" Count="0" />
       <LineId Id="92" Count="0" />
-      <LineId Id="124" Count="0" />
-      <LineId Id="94" Count="0" />
-      <LineId Id="125" Count="0" />
+      <LineId Id="124" Count="1" />
       <LineId Id="90" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>

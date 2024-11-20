@@ -104,6 +104,9 @@
     <Compile Include="POUs\utils\convertTimerToDisplayValue.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\utils\setEventInfo.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\utils\resetApplication.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -117,6 +120,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\utils\transitionToErrorState.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\utils\updateEventWithTimestamp.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
