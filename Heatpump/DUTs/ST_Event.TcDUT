@@ -5,7 +5,8 @@
 STRUCT
 	eventType		: E_EventType := E_EventType.None;
 	severity 		: E_Severity := E_Severity.Event;
-	isTriggered		: BOOL := false;
+	isTriggered		: BOOL := FALSE;
+	isSelfHealing   : BOOL := FALSE;  	// selbst heilend: Nach einem Error und automatischem Beheben der Ursache startet die WP wieder
 	message	 		: STRING(255);
 	timestamp 		: DATE_AND_TIME;
 END_STRUCT

@@ -30,6 +30,10 @@ VAR
 	isStopButtonEnabled			:	BOOL 	:=	TRUE;
 	timerValueToDisplay			:	INT		:= 	0;	
 	bIsTimerVisible				: 	BOOL	:=  FALSE;
+	
+	fbSystemTime : GETSYSTEMTIME;
+    timeAsFileTime : T_FILETIME;
+    timeAsDT : DT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -64,7 +68,7 @@ IF events.heatIsRequested.isTriggered THEN
 END_IF 
 
 IF events.targetTemperatureReached.isTriggered THEN
-	iState.TargetTemeperatureReached();
+	iState.TargetTemperatureReached();
 END_IF 
 
 IF events.cooledDown.isTriggered THEN
@@ -124,6 +128,9 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[METHOD generateEvents : BOOL
 VAR_IN_OUT
 	events					:	ST_Events();
+END_VAR
+VAR
+	FB_Local: DATE_AND_TIME;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (rtrigButtonSwitchOff.Q OR (rtrigButtonConfirmation.Q AND (iState.State <> E_State.OFF OR iState.State = E_State.ERROR))) THEN
@@ -144,6 +151,11 @@ END_IF
 IF pd.incident.incidentLowPressure THEN
 	events.errorEvents.LowPressureRefrigerationThermostat.message := CONCAT('Ranco Thermostat: zu hoher Niederdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10));
 	events.errorEvents.LowPressureRefrigerationThermostat.isTriggered := TRUE;
+	
+	// Get current date and time
+	fbSystemTime(timeLoDW=>timeAsFileTime.dwLowDateTime, timeHiDW=>timeAsFileTime.dwHighDateTime);
+	events.errorEvents.LowPressureRefrigerationThermostat.timestamp := FILETIME_TO_DT(timeAsFileTime); 
+
 	events.errorsDetected := TRUE;
 END_IF
 
@@ -312,7 +324,7 @@ CASE  iState.State OF
 		strInfotext := CONCAT('Ausschalten:\nDie Ladepumpe ist nicht eingeschaltet   und\ndie Puffertemperatur Mitte ist grösser als ',  ScaleAndRoundString(GVL.configValues.targetTemperatureOff, 10));
 		strInfotext := CONCAT(strInfotext, ' °C');	
 	E_State.IDLE:
-		strInfotext := CONCAT('Einschalten:\nTemperatur am Puffer oben ist niedriger als ',  ScaleAndRoundString(GVL.configValues.targetTemperatureOn, 10));
+		strInfotext := CONCAT('Einschalten:\nDie Temperatur am Puffer oben ist niedriger als ',  ScaleAndRoundString(GVL.configValues.targetTemperatureOn, 10));
 		strInfotext := CONCAT(strInfotext, ' °C    oder\ndie Ladepumpe ist ein und der Puffer ist nicht deutlich wärmer als der Boiler');
 	E_State.COOLDOWN:
 		strInfotext := 'Die Pumpe schaltet aus wenn die Restwärme \naus dem Verflüssiger abtransortiert wurde';
@@ -371,6 +383,10 @@ END_VAR
       <LineId Id="53" Count="1" />
       <LineId Id="143" Count="0" />
       <LineId Id="55" Count="0" />
+      <LineId Id="290" Count="1" />
+      <LineId Id="296" Count="0" />
+      <LineId Id="295" Count="0" />
+      <LineId Id="283" Count="0" />
       <LineId Id="235" Count="0" />
       <LineId Id="56" Count="0" />
       <LineId Id="107" Count="0" />

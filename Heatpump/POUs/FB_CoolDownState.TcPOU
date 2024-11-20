@@ -86,8 +86,8 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="TargetTemeperatureReached" Id="{660c57e7-0ee7-4900-9c79-b8fdca4c4354}">
-      <Declaration><![CDATA[METHOD TargetTemeperatureReached : BOOL
+    <Method Name="TargetTemperatureReached" Id="{660c57e7-0ee7-4900-9c79-b8fdca4c4354}">
+      <Declaration><![CDATA[METHOD TargetTemperatureReached : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -148,7 +148,7 @@ pMachine^.SetState(pMachine^.IdleState);]]></ST>
     <LineIds Name="FB_CoolDownState.State.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_CoolDownState.TargetTemeperatureReached">
+    <LineIds Name="FB_CoolDownState.TargetTemperatureReached">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_CoolDownState.UserPressedConfirmationButton">

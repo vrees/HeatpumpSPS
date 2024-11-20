@@ -40,8 +40,8 @@ END_VAR
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
-    <Method Name="TargetTemeperatureReached" Id="{6137e0ac-cc2f-4194-abc8-c58d06d8efb2}">
-      <Declaration><![CDATA[METHOD TargetTemeperatureReached : BOOL
+    <Method Name="TargetTemperatureReached" Id="{6137e0ac-cc2f-4194-abc8-c58d06d8efb2}">
+      <Declaration><![CDATA[METHOD TargetTemperatureReached : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>

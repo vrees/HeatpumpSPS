@@ -103,8 +103,8 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="TargetTemeperatureReached" Id="{5a9d8a2b-41ae-4ad4-8cdf-a0d67cc0af04}">
-      <Declaration><![CDATA[METHOD TargetTemeperatureReached : BOOL
+    <Method Name="TargetTemperatureReached" Id="{5a9d8a2b-41ae-4ad4-8cdf-a0d67cc0af04}">
+      <Declaration><![CDATA[METHOD TargetTemperatureReached : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Boiler oben: %s ', REAL_TO_STRING (pMachine^.pd.sensor.bufferMiddleTemperature));
@@ -172,7 +172,7 @@ ActionSwitchOff('Zieltemperatur erreicht. -> %s');]]></ST>
     <LineIds Name="FB_RunningState.State.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_RunningState.TargetTemeperatureReached">
+    <LineIds Name="FB_RunningState.TargetTemperatureReached">
       <LineId Id="10" Count="0" />
       <LineId Id="16" Count="1" />
       <LineId Id="11" Count="0" />
