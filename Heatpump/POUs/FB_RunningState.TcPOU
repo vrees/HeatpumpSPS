@@ -49,7 +49,8 @@ VAR
 	message				: STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[transitionToErrorState(errorEvents := errorEvents, pMachine := pMachine);]]></ST>
+        <ST><![CDATA[pMachine^.timerTON(IN := TRUE, PT := GVL.configValues.minIdleSec);
+transitionToErrorState(errorEvents := errorEvents, pMachine := pMachine);]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_init" Id="{ccdf553b-48e7-41c3-825a-9b44d85c7b93}">
@@ -155,6 +156,7 @@ ActionSwitchOff('Zieltemperatur erreicht. -> %s');]]></ST>
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.ErrorDetected">
+      <LineId Id="14" Count="0" />
       <LineId Id="6" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.FB_init">

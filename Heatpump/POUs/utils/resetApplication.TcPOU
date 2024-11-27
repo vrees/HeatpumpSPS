@@ -19,7 +19,7 @@ END_VAR
     i := i + 1;  
 END_FOR;
 
-pMachine^.timerTON(IN := FALSE, PT := T#0S); 
+pMachine^.timerTON(IN := FALSE); 
 ]]></ST>
     </Implementation>
     <LineIds Name="resetApplication">

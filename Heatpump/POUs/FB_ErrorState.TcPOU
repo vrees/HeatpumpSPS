@@ -57,13 +57,6 @@ END_VAR]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="LimitValuesAreExceeded" Id="{9f256ddf-77a1-419b-aea7-f5d0106e8168}">
-      <Declaration><![CDATA[METHOD LimitValuesAreExceeded : BOOL
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Property Name="Name" Id="{cc46a02f-c560-4746-aafb-c4ebfec2dd31}">
       <Declaration><![CDATA[PROPERTY Name : STRING]]></Declaration>
       <Get Name="Get" Id="{e8bf7ff8-a2a9-4cce-99be-1ae11e37e3ab}">
@@ -136,9 +129,6 @@ pMachine^.SetState(pMachine^.OffState);]]></ST>
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ErrorState.HeatIsRequested">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ErrorState.LimitValuesAreExceeded">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ErrorState.Name.Get">

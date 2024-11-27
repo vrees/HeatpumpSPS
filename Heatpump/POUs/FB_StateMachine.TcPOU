@@ -30,10 +30,6 @@ VAR
 	isStopButtonEnabled			:	BOOL 	:=	TRUE;
 	timerValueToDisplay			:	INT		:= 	0;	
 	bIsTimerVisible				: 	BOOL	:=  FALSE;
-	
-	fbSystemTime : GETSYSTEMTIME;
-    timeAsFileTime : T_FILETIME;
-    timeAsDT : DT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -49,6 +45,10 @@ generateEvents(events);
 
 IF events.errorsDetected THEN
 	iState.ErrorDetected(events.errorEvents);
+ELSE IF iState.State = E_State.ERROR THEN
+		ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Fehler steht nicht mehr an -> %s', idleState.Name);
+		SetState(idleState);
+	END_IF	
 END_IF 
 
 IF events.switchOff.isTriggered THEN
@@ -169,7 +169,7 @@ END_IF
 
 (* Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar] *)
 IF pd.sensor.PressureDifferenceEvaporator > GVL.configValues.PressureDifferenceEvaporatorMax THEN
-	setEventInfo(events, events.errorEvents.PressureDiffEvaporatorTooHigh, TRUE, CONCAT('Druckdifferenz [mbar]: ', REAL_TO_STRING(REAL_TO_INT(pd.sensor.PressureDifferenceEvaporator))));
+	setEventInfo(events, events.errorEvents.PressureDiffEvaporatorTooHigh, TRUE, CONCAT('Druckdifferenz am Verdampfer zu niedrig [mbar]: ', REAL_TO_STRING(REAL_TO_INT(pd.sensor.PressureDifferenceEvaporator))));
 END_IF
 
 (* Prüfe minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [°C] *)
@@ -199,7 +199,7 @@ END_IF
 
 (* TANK_LEVEL_TOO_LOW *)
 IF FALSE THEN
-	setEventInfo(events, events.warningEvents.WaterTankLevelTooLow, FALSE, 'Wasserstand der Quelle ist zu meiedrig');
+	setEventInfo(events, events.warningEvents.WaterTankLevelTooLow, FALSE, 'Wasserstand der Quelle ist zu niedrig');
 END_IF
 
 (* TANK_LEVEL Data missing *)
@@ -322,7 +322,12 @@ END_VAR
     <LineIds Name="FB_StateMachine">
       <LineId Id="281" Count="2" />
       <LineId Id="396" Count="0" />
-      <LineId Id="284" Count="33" />
+      <LineId Id="284" Count="7" />
+      <LineId Id="467" Count="0" />
+      <LineId Id="471" Count="0" />
+      <LineId Id="470" Count="0" />
+      <LineId Id="469" Count="0" />
+      <LineId Id="292" Count="25" />
       <LineId Id="429" Count="0" />
       <LineId Id="319" Count="0" />
       <LineId Id="181" Count="0" />

@@ -22,12 +22,6 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="LimitValuesAreExceeded" Id="{00119294-6b09-4037-a5f2-bdd6e49bdada}">
-      <Declaration><![CDATA[METHOD LimitValuesAreExceeded  : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-    </Method>
     <Property Name="Name" Id="{185febd2-623d-4463-8457-cd856daf23b0}">
       <Declaration><![CDATA[PROPERTY Name : String]]></Declaration>
       <Get Name="Get" Id="{706e1d71-bb03-45f8-9d3a-58a361b141c0}">
