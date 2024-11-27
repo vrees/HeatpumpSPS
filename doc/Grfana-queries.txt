@@ -1,0 +1,6 @@
+from(bucket: "heatpump")
+  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "WP")
+  |> filter(fn: (r) => r["_field"] == "BoilerLadepumpe" or r["_field"] == "BoilerTemp" or r["_field"] == "Kompressor" or r["_field"] == "PufferMitteTemp")
+  |> pivot(rowKey: ["_time"], valueColumn: "_value", columnKey: ["_field"])
+  |> yield(name: "last")
