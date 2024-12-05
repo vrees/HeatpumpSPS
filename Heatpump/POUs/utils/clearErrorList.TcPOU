@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="clearErrorList" Id="{6f84dc25-5bef-4cbd-a4e4-f827c19c6c73}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION clearErrorList : BOOL
+VAR
+	i 			: INT := 0;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+WHILE i <= 6 DO
+    GVL.lastErrorsOccurred[i].eventType := E_EventType.None;        // Beispiel für einen "leeren" Event-Typ
+    GVL.lastErrorsOccurred[i].severity := E_Severity.Event;         // Standardwert für severity
+    GVL.lastErrorsOccurred[i].isTriggered := FALSE;                 // Setzt isTriggered auf FALSE
+    GVL.lastErrorsOccurred[i].message := '';                        // Leere Zeichenkette für message
+    GVL.lastErrorsOccurred[i].timestamp := DT#1970-01-01-00:00:00;  // Standardzeitstempel (z. B. Unix-Epoche)
+    i := i + 1;  
+END_WHILE;
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="clearErrorList">
+      <LineId Id="65" Count="0" />
+      <LineId Id="54" Count="5" />
+      <LineId Id="62" Count="1" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="48" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

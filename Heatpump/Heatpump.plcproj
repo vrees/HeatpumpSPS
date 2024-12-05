@@ -122,6 +122,9 @@
     <Compile Include="POUs\utils\transitionToErrorState.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\utils\clearErrorList.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\utils\updateEventWithTimestamp.TcPOU">
       <SubType>Code</SubType>
     </Compile>

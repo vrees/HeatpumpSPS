@@ -19,10 +19,12 @@ VAR
 	timerTON 					: 	TON;             		// TON-Timer
 	
 	bStartButtonPressed    		: 	BOOL;
-	bStopButtonPressed			: 	BOOL;		
+	bStopButtonPressed			: 	BOOL;	
+    bClearErrorListButton		:   BOOL;    	
 	rtrigButtonSwitchOn			:	R_TRIG;
 	rtrigButtonSwitchOff		:	R_TRIG;
 	rtrigButtonConfirmation		:	R_TRIG;	
+	rtrigClearErrorListButton	:	R_TRIG;	
 	strState					: 	STRING;
 	strInfotext					: 	STRING(256);
 	
@@ -36,6 +38,8 @@ END_VAR
       <ST><![CDATA[rtrigButtonSwitchOn(CLK := bStartButtonPressed);
 rtrigButtonSwitchOff(CLK := bStopButtonPressed);
 rtrigButtonConfirmation(CLK := pd.sensor.userConfirmation);
+rtrigClearErrorListButton(CLK := bClearErrorListButton);
+
 timerTON();
 
 // Zuweisung von defaultEvent zu myEvent (Wertkopie)
@@ -76,7 +80,6 @@ IF events.cooledDown.isTriggered THEN
 END_IF
 
 setLabelText();
-
 setButtonState();
 
 timerTON();
@@ -86,6 +89,10 @@ IF iState.State = E_State.IDLE AND timerTON.IN = TRUE AND timerTON.Q = FALSE THE
 	bIsTimerVisible := TRUE;
 ELSE
 	bIsTimerVisible := FALSE;
+END_IF
+
+IF rtrigClearErrorListButton.Q THEN
+	clearErrorList();
 END_IF]]></ST>
     </Implementation>
     <Property Name="CoolDownState" Id="{f97b0a89-973c-4c1a-a93f-bd53afa029ed}">
@@ -284,7 +291,9 @@ ELSE
 END_IF
 
 bStartButtonPressed			:= FALSE;
-bStopButtonPressed			:= FALSE;]]></ST>
+bStopButtonPressed			:= FALSE;
+bClearErrorListButton 		:= FALSE;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="setLabelText" Id="{e9a542b8-1e41-48ce-b30f-244e7b54b970}">
@@ -321,6 +330,7 @@ END_VAR
     </Method>
     <LineIds Name="FB_StateMachine">
       <LineId Id="281" Count="2" />
+      <LineId Id="504" Count="1" />
       <LineId Id="396" Count="0" />
       <LineId Id="284" Count="7" />
       <LineId Id="467" Count="0" />
@@ -329,7 +339,6 @@ END_VAR
       <LineId Id="469" Count="0" />
       <LineId Id="292" Count="25" />
       <LineId Id="429" Count="0" />
-      <LineId Id="319" Count="0" />
       <LineId Id="181" Count="0" />
       <LineId Id="395" Count="0" />
       <LineId Id="323" Count="0" />
@@ -340,6 +349,9 @@ END_VAR
       <LineId Id="358" Count="0" />
       <LineId Id="361" Count="0" />
       <LineId Id="356" Count="0" />
+      <LineId Id="507" Count="0" />
+      <LineId Id="506" Count="0" />
+      <LineId Id="508" Count="1" />
     </LineIds>
     <LineIds Name="FB_StateMachine.CoolDownState.Get">
       <LineId Id="2" Count="0" />
@@ -432,6 +444,7 @@ END_VAR
       <LineId Id="12" Count="0" />
       <LineId Id="15" Count="1" />
       <LineId Id="6" Count="0" />
+      <LineId Id="20" Count="1" />
     </LineIds>
     <LineIds Name="FB_StateMachine.setLabelText">
       <LineId Id="6" Count="1" />
