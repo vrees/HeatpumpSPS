@@ -70,8 +70,12 @@ Password: is........8
 - Hardening: Diagnose of Analog Status Info Overrun, Error, ...
 - Quellwassermenge stufenlos steuern - oder Ein-/Ausschalten
 - Installation unter Linux VM
-- Selbstheilende Errors
-- Hinweis für Status
-- InfluxDB/Grafana
+- Grafana Dashboard
 - Fehler bei Ladepumpe suchen
 - Status LED einbauen
+- Zeitzone einstellen in InfluxDB
+- SG Ready Verbindung zum Wechselrichter
+- Schwerkraft Drossel einbauen
+- Zeitstempel in Fehlerliste
+- Ladepumpe steuern von SPS
+- Ausschalten bei zu hoher Rücklauf Temperatur
