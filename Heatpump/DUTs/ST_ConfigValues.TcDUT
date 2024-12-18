@@ -4,7 +4,8 @@
     <Declaration><![CDATA[TYPE ST_ConfigValues :
 STRUCT	
 	targetTemperatureOn 			:	REAL	:= 	36; 	// Einschalttemperatur bei deren Unterschreiten die Waermepumpe eingeschaltet wird
-	targetTemperatureOff 			:	REAL	:= 	44; 	// Auschaltemperatur bei deren Ueberschreiten die Waermepume ausgeschaltet wird
+	targetTemperatureOff 			:	REAL	:= 	44; 	// Auschaltemperatur bei deren Ueberschreiten die Waermepume ausgeschaltet wird	
+	maxReturnTemperature			:	REAL	:= 	54; 	// Schaltet aus / nicht ein, falls Rücklauf Temperatur zu hoch, z.B. wenn Holzkessel heizt
 	minIdleSec 						:	TIME 	:= 	T#10M;	// Minimale Auschalt-Dauer (verhindert haeufiges Einschalten) [Minuten]
 	temperatureDiffBacklashOff 		:	REAL	:= 	1.0; 	// Temperaturdifferenz zwischen Vorlauf und Rücklauf, bei dessen Unterschreiten die Wasserpumpe ausgeschaltet wird
 	temperatureDiffBoilerLaden 		:	REAL	:= 	4.0; 	// Temperaturdifferenz zwischen Puffer oben und Boiler, die unterschritten sein muss, damit die Wärmepumpe einschaltet.

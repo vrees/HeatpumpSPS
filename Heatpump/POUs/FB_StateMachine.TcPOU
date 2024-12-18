@@ -236,9 +236,10 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[isHeatRequested := 
-	(pd.sensor.bufferTopTemperature < GVL.configValues.targetTemperatureOn) OR
-	(pd.sensor.boilerHeatRequest = TRUE AND (pd.sensor.bufferTopTemperature <= pd.sensor.boilerTemperature + GVL.configValues.temperatureDiffBoilerLaden))
-	AND iState.State = E_State.IDLE;]]></ST>
+	((pd.sensor.bufferTopTemperature < GVL.configValues.targetTemperatureOn) OR
+	(pd.sensor.boilerHeatRequest = TRUE AND (pd.sensor.bufferTopTemperature <= pd.sensor.boilerTemperature + GVL.configValues.temperatureDiffBoilerLaden)))
+	AND iState.State = E_State.IDLE
+	AND pd.sensor.temperatureReturn <= GVL.configValues.maxReturnTemperature;]]></ST>
       </Implementation>
     </Method>
     <Method Name="isTargetTemperatureReached" Id="{72de01e8-9221-4ced-9a58-5c631e2f44e4}">
@@ -249,9 +250,10 @@ END_VAR
       <Implementation>
         <ST><![CDATA[// In case of State=Running the Heatpump is turned of if following condition are true
 isTargetTemperatureReached := 
-	(pd.sensor.bufferMiddleTemperature >= GVL.configValues.targetTemperatureOff)  
-	AND (pd.sensor.boilerHeatRequest = FALSE)	
-	AND (iState.State = E_State.RUNNING);]]></ST>
+	((pd.sensor.bufferMiddleTemperature >= GVL.configValues.targetTemperatureOff) AND (pd.sensor.boilerHeatRequest = FALSE)	
+	  OR pd.sensor.temperatureReturn > GVL.configValues.maxReturnTemperature)
+	AND (iState.State = E_State.RUNNING);
+	]]></ST>
       </Implementation>
     </Method>
     <Property Name="OffState" Id="{9baf72ca-9c89-4e21-8939-001a0e23445d}">
@@ -422,13 +424,15 @@ END_VAR
       <LineId Id="5" Count="1" />
       <LineId Id="8" Count="0" />
       <LineId Id="7" Count="0" />
+      <LineId Id="12" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.isTargetTemperatureReached">
       <LineId Id="6" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="7" Count="0" />
-      <LineId Id="11" Count="0" />
+      <LineId Id="16" Count="0" />
       <LineId Id="8" Count="0" />
+      <LineId Id="15" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.OffState.Get">
       <LineId Id="2" Count="0" />
