@@ -75,7 +75,6 @@ Password: is........8
 - Zeitzone einstellen in InfluxDB
 - SG Ready Verbindung zum Wechselrichter
 - Schwerkraft Drossel einbauen
-- Zeitstempel in Fehlerliste wird nicht angezeigt
 - Ladepumpe steuern von SPS
 - Ausschalten bei zu hoher Rücklauf Temperatur
 - Lizens kaufen für HMI

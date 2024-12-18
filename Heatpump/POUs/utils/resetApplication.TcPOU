@@ -19,13 +19,17 @@ END_VAR
     i := i + 1;  
 END_FOR;
 
+pMachine^.pd.actor.operatingStateCompressor := FALSE;
+pMachine^.pd.actor.operatingStateWaterPump := FALSE;
 pMachine^.timerTON(IN := FALSE); 
 ]]></ST>
     </Implementation>
     <LineIds Name="resetApplication">
       <LineId Id="8" Count="6" />
       <LineId Id="7" Count="0" />
+      <LineId Id="32" Count="0" />
       <LineId Id="18" Count="0" />
+      <LineId Id="33" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="24" Count="0" />
     </LineIds>
