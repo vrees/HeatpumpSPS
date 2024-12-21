@@ -115,7 +115,9 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Einschalt Button wurde gedrückt -> %s', pMachine^.IdleState.Name);
-pMachine^.SetState(pMachine^.IdleState);]]></ST>
+pMachine^.pd.actor.operatingStateLed := TRUE;
+pMachine^.SetState(pMachine^.IdleState);
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="WaterHasCooledDown" Id="{df284c9a-4c2c-49fb-8cfb-cdf35d9d5fda}">
@@ -160,7 +162,9 @@ pMachine^.SetState(pMachine^.IdleState);]]></ST>
     </LineIds>
     <LineIds Name="FB_OffState.UserPressedSwitchOnButton">
       <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="0" />
       <LineId Id="2" Count="0" />
+      <LineId Id="7" Count="0" />
     </LineIds>
     <LineIds Name="FB_OffState.WaterHasCooledDown">
       <LineId Id="2" Count="0" />

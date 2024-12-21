@@ -21,6 +21,7 @@ END_FOR;
 
 pMachine^.pd.actor.operatingStateCompressor := FALSE;
 pMachine^.pd.actor.operatingStateWaterPump := FALSE;
+pMachine^.pd.actor.operatingStateLed := FALSE;
 pMachine^.timerTON(IN := FALSE); 
 ]]></ST>
     </Implementation>
@@ -30,6 +31,7 @@ pMachine^.timerTON(IN := FALSE);
       <LineId Id="32" Count="0" />
       <LineId Id="18" Count="0" />
       <LineId Id="33" Count="0" />
+      <LineId Id="41" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="24" Count="0" />
     </LineIds>

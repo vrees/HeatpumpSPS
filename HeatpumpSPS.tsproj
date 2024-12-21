@@ -33,7 +33,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{5608B4FA-5061-5863-69B2-D48499721929}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{CD89376D-C8E6-0A41-98C3-2DEEA6285BFA}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -133,12 +133,17 @@
 						<Name>PlcTask Outputs</Name>
 						<Var>
 							<Name>MAIN.pd.actor.operatingStateCompressor</Name>
-							<Comment><![CDATA[ Status des Verdichters: Ein/Aus ]]></Comment>
+							<Comment><![CDATA[ Status des Verdichters: Ein/Aus]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.pd.actor.operatingStateWaterPump</Name>
-							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus ]]></Comment>
+							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.actor.operatingStateLed</Name>
+							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
