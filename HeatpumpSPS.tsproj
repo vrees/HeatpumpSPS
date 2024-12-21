@@ -33,7 +33,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{CD89376D-C8E6-0A41-98C3-2DEEA6285BFA}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{C8C76EB6-005A-2B35-6315-9B50971D78E8}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -740,6 +740,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 12 (EL2004)">
 				<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateCompressor" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateLed" VarB="Channel 3^Output"/>
 				<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateWaterPump" VarB="Channel 2^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 13 (EL3204)">
