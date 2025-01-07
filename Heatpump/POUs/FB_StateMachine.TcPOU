@@ -308,10 +308,10 @@ END_VAR
 
 CASE  iState.State OF 
 	E_State.RUNNING:
-		strInfotext := CONCAT('Ausschalten:\nDie Ladepumpe ist nicht eingeschaltet   und\ndie Puffertemperatur Mitte ist grösser als ',  ScaleAndRoundString(calculateTargetTemperatureOff(pd.sensor.photovoltaicSurplus), 10));
+		strInfotext := CONCAT('Ausschalt-Bedingung:\nDie Ladepumpe ist nicht eingeschaltet   und\ndie Puffertemperatur Mitte ist grösser als ',  ScaleAndRoundString(calculateTargetTemperatureOff(pd.sensor.photovoltaicSurplus), 10));
 		strInfotext := CONCAT(strInfotext, ' °C');	
 	E_State.IDLE:
-		strInfotext := CONCAT('Einschalten:\nDie Temperatur am Puffer oben ist niedriger als ',  ScaleAndRoundString(calculateTargetTemperatureOn(pd.sensor.photovoltaicSurplus), 10));
+		strInfotext := CONCAT('Einschalt-Bedingung:\nDie Temperatur am Puffer oben ist niedriger als ',  ScaleAndRoundString(calculateTargetTemperatureOn(pd.sensor.photovoltaicSurplus), 10));
 		strInfotext := CONCAT(strInfotext, ' °C    oder\ndie Ladepumpe ist ein und der Puffer ist nicht deutlich wärmer als der Boiler');
 	E_State.COOLDOWN:
 		strInfotext := 'Die Pumpe schaltet aus wenn die Restwärme \naus dem Verflüssiger abtransortiert wurde';
