@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="calculateTargetTemperatureOff" Id="{7db5afe6-c836-4eb4-8762-fc21a3ee7caa}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION calculateTargetTemperatureOff : REAL
+VAR_INPUT
+	photovoltaicSurplus			: BOOL;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF (photovoltaicSurplus) THEN
+    calculateTargetTemperatureOff := GVL.configValues.targetTemperatureOffPV;
+ELSE
+    calculateTargetTemperatureOff := GVL.configValues.targetTemperatureOff;
+END_IF;]]></ST>
+    </Implementation>
+    <LineIds Name="calculateTargetTemperatureOff">
+      <LineId Id="12" Count="3" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

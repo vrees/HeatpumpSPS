@@ -236,7 +236,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[isHeatRequested := 
-	((pd.sensor.bufferTopTemperature < GVL.configValues.targetTemperatureOn) OR
+	((pd.sensor.bufferTopTemperature < calculateTargetTemperatureOn(pd.sensor.photovoltaicSurplus)) OR
 	(pd.sensor.boilerHeatRequest = TRUE AND (pd.sensor.bufferTopTemperature <= pd.sensor.boilerTemperature + GVL.configValues.temperatureDiffBoilerLaden)))
 	AND iState.State = E_State.IDLE
 	AND pd.sensor.temperatureReturn <= GVL.configValues.maxReturnTemperature;]]></ST>
@@ -250,7 +250,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[// In case of State=Running the Heatpump is turned of if following condition are true
 isTargetTemperatureReached := 
-	((pd.sensor.bufferMiddleTemperature >= GVL.configValues.targetTemperatureOff) AND (pd.sensor.boilerHeatRequest = FALSE)	
+	((pd.sensor.bufferMiddleTemperature >= calculateTargetTemperatureOff(pd.sensor.photovoltaicSurplus)) AND (pd.sensor.boilerHeatRequest = FALSE)	
 	  OR pd.sensor.temperatureReturn > GVL.configValues.maxReturnTemperature)
 	AND (iState.State = E_State.RUNNING);
 	]]></ST>
@@ -308,10 +308,10 @@ END_VAR
 
 CASE  iState.State OF 
 	E_State.RUNNING:
-		strInfotext := CONCAT('Ausschalten:\nDie Ladepumpe ist nicht eingeschaltet   und\ndie Puffertemperatur Mitte ist grösser als ',  ScaleAndRoundString(GVL.configValues.targetTemperatureOff, 10));
+		strInfotext := CONCAT('Ausschalten:\nDie Ladepumpe ist nicht eingeschaltet   und\ndie Puffertemperatur Mitte ist grösser als ',  ScaleAndRoundString(calculateTargetTemperatureOff(pd.sensor.photovoltaicSurplus), 10));
 		strInfotext := CONCAT(strInfotext, ' °C');	
 	E_State.IDLE:
-		strInfotext := CONCAT('Einschalten:\nDie Temperatur am Puffer oben ist niedriger als ',  ScaleAndRoundString(GVL.configValues.targetTemperatureOn, 10));
+		strInfotext := CONCAT('Einschalten:\nDie Temperatur am Puffer oben ist niedriger als ',  ScaleAndRoundString(calculateTargetTemperatureOn(pd.sensor.photovoltaicSurplus), 10));
 		strInfotext := CONCAT(strInfotext, ' °C    oder\ndie Ladepumpe ist ein und der Puffer ist nicht deutlich wärmer als der Boiler');
 	E_State.COOLDOWN:
 		strInfotext := 'Die Pumpe schaltet aus wenn die Restwärme \naus dem Verflüssiger abtransortiert wurde';

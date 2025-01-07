@@ -101,6 +101,12 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\utils\calculateTargetTemperatureOn.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\utils\calculateTargetTemperatureOff.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\utils\convertTimerToDisplayValue.TcPOU">
       <SubType>Code</SubType>
     </Compile>

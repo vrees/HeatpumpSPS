@@ -33,7 +33,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{15541078-7B2B-BEB3-509E-BA41F0A6C26E}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{D50AC3BB-5B75-2722-5504-FC0163B4EE59}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -148,7 +148,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.pd.actor.operatingStateLed</Name>
-							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus]]></Comment>
+							<Comment><![CDATA[ LED am Schaltschrank, die anzeigt ob die Wärmepumpe eingschaltet/bereit ist ]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>

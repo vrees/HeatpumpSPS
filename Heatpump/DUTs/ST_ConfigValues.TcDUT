@@ -3,8 +3,10 @@
   <DUT Name="ST_ConfigValues" Id="{019656bf-067e-4483-97b4-def6d34d2ddb}">
     <Declaration><![CDATA[TYPE ST_ConfigValues :
 STRUCT	
-	targetTemperatureOn 			:	REAL	:= 	36; 	// Einschalttemperatur bei deren Unterschreiten die Waermepumpe eingeschaltet wird
-	targetTemperatureOff 			:	REAL	:= 	44; 	// Auschaltemperatur bei deren Ueberschreiten die Waermepume ausgeschaltet wird	
+	targetTemperatureOn 			:	REAL	:= 	33; 	// Einschalttemperatur bei deren Unterschreiten die Waermepumpe eingeschaltet wird
+	targetTemperatureOnPV 			:	REAL	:= 	40; 	// Bei PV-Überschuss: Einschalttemperatur bei deren Unterschreiten die Waermepumpe eingeschaltet wird
+	targetTemperatureOff 			:	REAL	:= 	41; 	// Auschaltemperatur bei deren Ueberschreiten die Waermepume ausgeschaltet wird	
+	targetTemperatureOffPV			:	REAL	:= 	50; 	// Bei PV-Überschuss: Auschaltemperatur bei deren Ueberschreiten die Waermepume ausgeschaltet wird	
 	maxReturnTemperature			:	REAL	:= 	54; 	// Schaltet aus / nicht ein, falls Rücklauf Temperatur zu hoch, z.B. wenn Holzkessel heizt
 	minIdleSec 						:	TIME 	:= 	T#10M;	// Minimale Auschalt-Dauer (verhindert haeufiges Einschalten) [Minuten]
 	temperatureDiffBacklashOff 		:	REAL	:= 	1.0; 	// Temperaturdifferenz zwischen Vorlauf und Rücklauf, bei dessen Unterschreiten die Wasserpumpe ausgeschaltet wird
@@ -14,7 +16,7 @@ STRUCT
 	pressureHighMax 				:	REAL	:= 	16; 	// Maximaler Druck auf der Hochdruckseite [bar]
 	pressureLowMax 					:	REAL	:= 	6; 		// Maximaler Druck auf der Niederdruckseite [bar]
 	pressureDifferenceEvaporatorMax :	REAL 	:= 	45;		// Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar]
-	evaporatingTemperatureOutMin 	:	REAL 	:=	2.6; 	// Minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [°C]
+	evaporatingTemperatureOutMin 	:	REAL 	:=	2.3; 	// Minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [°C]
 END_STRUCT
 END_TYPE
 ]]></Declaration>
