@@ -33,7 +33,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{C8C76EB6-005A-2B35-6315-9B50971D78E8}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{15541078-7B2B-BEB3-509E-BA41F0A6C26E}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -95,12 +95,17 @@
 						</Var>
 						<Var>
 							<Name>MAIN.pd.sensor.boilerHeatRequest</Name>
-							<Comment><![CDATA[ Boiler LadePumpe ist eingeschaltet - EL1008.1]]></Comment>
+							<Comment><![CDATA[ Boiler LadePumpe ist eingeschaltet - EL1008.1*)]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.pd.sensor.userConfirmation</Name>
-							<Comment><![CDATA[ Taster für Ein-/Aus-Quittierung - EL1008.2]]></Comment>
+							<Comment><![CDATA[ Taster für Ein-/Aus-Quittierung - EL1008.2*) ]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.sensor.photovoltaicSurplus</Name>
+							<Comment><![CDATA[ Photovoltaik Überschuss - EL1008.4*)]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -759,6 +764,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentHighPressure" VarB="Channel 7^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentLowPressure" VarB="Channel 8^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.pd.sensor.boilerHeatRequest" VarB="Channel 2^Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.pd.sensor.photovoltaicSurplus" VarB="Channel 4^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.pd.sensor.userConfirmation" VarB="Channel 1^Input"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 16 (EL3204)">

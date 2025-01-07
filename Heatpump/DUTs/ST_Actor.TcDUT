@@ -6,7 +6,7 @@
 		(* EL2004 - Diguital Out*)
         operatingStateCompressor 	AT %Q* : BOOL := FALSE;  // Status des Verdichters: Ein/Aus
         operatingStateWaterPump 	AT %Q* : BOOL := FALSE;  // Status der Heizungspumpe: Ein/Aus
-		operatingStateLed			AT %Q* : BOOL := FALSE;  // Status der Heizungspumpe: Ein/Aus
+		operatingStateLed			AT %Q* : BOOL := FALSE;  // LED am Schaltschrank, die anzeigt ob die Wärmepumpe eingschaltet/bereit ist 
     END_STRUCT
 END_TYPE
 ]]></Declaration>
