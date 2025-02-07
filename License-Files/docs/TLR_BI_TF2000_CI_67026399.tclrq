@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
+	<TargetInfo>
+		<TcTargetDesc>
+			<TargetType>CX51x0-CE</TargetType>
+			<TargetVersion>
+				<Version>3</Version>
+				<Revision>1</Revision>
+				<Build>4024</Build>
+			</TargetVersion>
+			<TargetFeatures>
+				<NetId>5.124.202.224.1.1</NetId>
+			</TargetFeatures>
+			<Hardware>
+				<Model>CX5110-0115</Model>
+				<SerialNo>000t5krb</SerialNo>
+				<CPUVersion>1.1</CPUVersion>
+				<Date>22.6.23</Date>
+				<CPUArchitecture>0</CPUArchitecture>
+			</Hardware>
+			<OsImage>
+				<ImageDevice>CX51x0</ImageDevice>
+				<ImageVersion>6.10a</ImageVersion>
+				<ImageLevel>HPS</ImageLevel>
+				<OsName>Windows CE</OsName>
+				<OsVersion>7.0</OsVersion>
+			</OsImage>
+		</TcTargetDesc>
+	</TargetInfo>
+	<LicenseInfo>
+		<SystemId Level="30" SerialNo="000t5krb" MacAddress="0001057ccae0">{6DCE6779-381E-B184-4BFB-1425D13BDD07}</SystemId>
+		<PurchaseOrder><![CDATA[TF2000]]></PurchaseOrder>
+		<CustomOrder><![CDATA[67026399]]></CustomOrder>
+		<IssueTime>2025-02-07T10:40:00</IssueTime>
+		<License>
+			<LicenseId>{66689887-CCBD-452C-AC9A-039D997C6E66}</LicenseId>
+			<Name>TC3 PLC</Name>
+			<OrderNo>TC1200</OrderNo>
+		</License>
+		<License>
+			<LicenseId>{796D380F-D49E-4C0C-A05F-500052FAC883}</LicenseId>
+			<Name>TC3 HMI Server</Name>
+			<OrderNo>TF2000</OrderNo>
+			<LicenseTAN>LH4DK-8GC02</LicenseTAN>
+		</License>
+		<License ManuallyAdded="true">
+			<LicenseId>{1C20D4D8-C732-464D-AF34-6EA5D2180E06}</LicenseId>
+			<Name>TC3 HMI Targets Pack 10</Name>
+			<OrderNo>TF2070</OrderNo>
+		</License>
+		<License ManuallyAdded="true">
+			<LicenseId>{8161723B-0C2E-405C-B829-EDC5DAAB5104}</LicenseId>
+			<Name>TC3 HMI Clients Pack 10</Name>
+			<OrderNo>TF2030</OrderNo>
+		</License>
+	</LicenseInfo>
+</TcLicenseInfo>
