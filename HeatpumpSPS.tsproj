@@ -20,10 +20,7 @@
 	<Project ProjectGUID="{0FF30942-AD71-4634-8234-2B4524C10BBB}" TargetNetId="5.124.202.224.1.1" ShowHideConfigurations="#x3c7">
 		<System>
 			<Licenses>
-				<Target BkhfOrder="TF2000" CustomOrder="67026399">
-					<ManualSelect>{1C20D4D8-C732-464D-AF34-6EA5D2180E06}</ManualSelect>
-					<ManualSelect>{8161723B-0C2E-405C-B829-EDC5DAAB5104}</ManualSelect>
-				</Target>
+				<Target BkhfOrder="TF2000" CustomOrder="67026399"/>
 			</Licenses>
 			<Tasks>
 				<Task Id="3" Priority="1" CycleTime="100000" AmsPort="350" AdtTasks="true">
