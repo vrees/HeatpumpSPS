@@ -57,17 +57,25 @@ END_VAR]]></Declaration>
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF pMachine^.timerTON.Q OR NOT pMachine^.timerTON.IN THEN
-	ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Heizung wurde angefordert -> %s', pMachine^.RunningState.Name);
+	ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Heizung wurde angefordert -> %s', pMachine^.StartWaterFlowState.Name);
 	pMachine^.timerTON(IN := FALSE);  
-	pMachine^.pd.actor.operatingStateCompressor := TRUE;
-	pMachine^.pd.actor.operatingStateWaterPump := TRUE;
-	pMachine^.SetState(pMachine^.RunningState);	
+    switchWaterVentil(bOpen := TRUE, pMachine);
+	pMachine^.SetState(pMachine^.StartWaterFlowState);	
 END_IF
 ]]></ST>
       </Implementation>
     </Method>
     <Method Name="LimitValuesAreExceeded" Id="{14c877c5-3616-4fde-8e7d-07cd27554d4a}">
       <Declaration><![CDATA[METHOD LimitValuesAreExceeded : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MinWaterFlowReached" Id="{dc768344-ad71-4ae3-b160-db38e5595f9f}">
+      <Declaration><![CDATA[METHOD MinWaterFlowReached : BOOL
+VAR_INPUT
+END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -147,12 +155,16 @@ pMachine^.SetState(pMachine^.OffState);]]></ST>
     <LineIds Name="FB_IdleState.HeatIsRequested">
       <LineId Id="9" Count="0" />
       <LineId Id="12" Count="1" />
-      <LineId Id="16" Count="1" />
-      <LineId Id="10" Count="1" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="11" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_IdleState.LimitValuesAreExceeded">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_IdleState.MinWaterFlowReached">
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_IdleState.Name.Get">
       <LineId Id="2" Count="0" />

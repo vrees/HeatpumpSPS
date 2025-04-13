@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_StartWaterFlowState" Id="{d6143444-8385-4f02-ba2f-ac6faf4cc7a7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StartWaterFlowState IMPLEMENTS I_State
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	pMachine : POINTER TO FB_StateMachine;	
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Description" Id="{85edbbf9-5af6-4227-bd92-768a7a8660f6}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY Description : STRING
+]]></Declaration>
+      <Get Name="Get" Id="{0ecedba2-0913-4b6d-b593-f32af667137c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Description := 'Opening Ventil ...';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ErrorDetected" Id="{d3299433-f31e-4f24-b5b8-67543a1d3986}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD ErrorDetected : BOOL
+VAR_IN_OUT
+	errorEvents	: ST_ErrorEvents;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[transitionToErrorState(errorEvents := errorEvents, pMachine := pMachine);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{099a8c71-7fde-4fa0-912e-b7622d7c04c4}">
+      <Declaration><![CDATA[//FB_Init ist immer implizit verfügbar und wird primär für die Initialisierung verwendet.
+//Der Rückgabewert wird nicht ausgewertet. Für gezielte Einflussnahme können Sie
+//die Methoden explizit deklarieren und darin mit dem Standard-Initialisierungscode 
+//zusätzlichen Code bereitstellen. Sie können den Rückgabewert auswerten.
+METHOD FB_Init: BOOL
+VAR_INPUT    
+	bInitRetains: BOOL; // TRUE: Die Retain-Variablen werden initialisiert (Reset warm / Reset kalt)    
+	bInCopyCode: BOOL;  // TRUE: Die Instanz wird danach in den Kopiercode kopiert (Online-Change)
+	pMachine : POINTER TO FB_StateMachine;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="HeatIsRequested" Id="{bc3ae7fd-9def-47d5-b24d-7241e3a96555}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD HeatIsRequested : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MinWaterFlowReached" Id="{d9d57206-5755-440e-a786-4c12f144959a}">
+      <Declaration><![CDATA[METHOD MinWaterFlowReached : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Durchflussmenge ok -> %s', pMachine^.RunningState.Name);
+pMachine^.pd.actor.operatingStateCompressor := TRUE;
+pMachine^.pd.actor.operatingStateWaterPump := TRUE;
+pMachine^.SetState(pMachine^.RunningState);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Name" Id="{91be18b5-b8e8-4a69-af2d-5dcef30e192b}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY Name : STRING
+]]></Declaration>
+      <Get Name="Get" Id="{cacf37de-231d-49bd-a636-7e05eac8d2eb}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Name := 'öffne Ventil ...';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="State" Id="{f2e32701-8d1d-4e8c-b547-4a95e9c31fdf}">
+      <Declaration><![CDATA[{warning 'Eigenschaftenimplementierung hinzufügen'}
+PROPERTY State : E_State
+]]></Declaration>
+      <Get Name="Get" Id="{60fc8015-6f48-4dec-a1a9-3520b4b3d0fe}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[State := E_State.START_WATER_FLOW;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="TargetTemperatureReached" Id="{183626c5-33c6-4814-93d2-48104f196c2b}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD TargetTemperatureReached : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UserPressedConfirmationButton" Id="{15d87427-e804-4017-a28c-eb5f7982c5b9}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD UserPressedConfirmationButton : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UserPressedSwitchOffButton" Id="{132cc9f9-1903-4055-8e00-9860ee28e509}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD UserPressedSwitchOffButton : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Aus Button wurde gedrückt -> %s', pMachine^.OffState.Name);
+switchWaterVentil(bOpen := FALSE, pMachine);
+pMachine^.SetState(pMachine^.OffState);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="UserPressedSwitchOnButton" Id="{83eb9baa-fd12-4076-9a0d-d1625eff0b1b}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD UserPressedSwitchOnButton : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="WaterHasCooledDown" Id="{810af7e9-9366-4b5e-94ea-c4a8efb0ab95}">
+      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
+METHOD WaterHasCooledDown : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_StartWaterFlowState">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StartWaterFlowState.Description.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StartWaterFlowState.ErrorDetected">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StartWaterFlowState.FB_init">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StartWaterFlowState.HeatIsRequested">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StartWaterFlowState.MinWaterFlowReached">
+      <LineId Id="12" Count="2" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StartWaterFlowState.Name.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StartWaterFlowState.State.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StartWaterFlowState.TargetTemperatureReached">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StartWaterFlowState.UserPressedConfirmationButton">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StartWaterFlowState.UserPressedSwitchOffButton">
+      <LineId Id="5" Count="1" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StartWaterFlowState.UserPressedSwitchOnButton">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StartWaterFlowState.WaterHasCooledDown">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

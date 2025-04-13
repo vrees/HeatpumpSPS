@@ -13,6 +13,7 @@ END_VAR
 VAR
 	fbOffState					:	FB_OffState(THIS);
 	fbIdleState					:	FB_IdleState(THIS);
+	fbStartWaterFlowState		:	FB_StartWaterFlowState(THIS);
 	fbRunningState				:	FB_RunningState(THIS);
 	fbCoolDownState				:	FB_CoolDownState(THIS);
 	fbErrorState				:	FB_ErrorState(THIS);
@@ -150,6 +151,8 @@ ELSIF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < GVL.configVal
 	events.cooledDown.isTriggered := TRUE;
 ELSIF (isTargetTemperatureReached()) THEN
 	events.targetTemperatureReached.isTriggered := TRUE;
+ELSIF (pd.incident.incidentFlow AND iState.State = E_State.START_WATER_FLOW) THEN
+	events.minWaterFlowReached.isTriggered := TRUE;
 END_IF
 
 //***** Errors *****
@@ -184,8 +187,8 @@ IF pd.sensor.TemperatureEvaporatingOut < GVL.configValues.EvaporatingTemperature
 	setEventInfo(events, events.errorEvents.EvaporatingTemperatureTooLow, TRUE, CONCAT('Austritttemperatur am Verdampfer ist zu niedrig [°C]: ', ScaleAndRoundString(pd.sensor.TemperatureEvaporatingOut, 10)));
 END_IF
 
-(* Prüfe, of Wasser Durchflussmenge ausreichend ist. Mindestens 2500 Liter/Stunde *)
-IF NOT pd.incident.incidentFlow THEN
+(* Prüfe, of Wasser Durchflussmenge ausreichend ist. Mindestens 1800 Liter/Stunde *)
+IF NOT pd.incident.incidentFlow AND iState.State = E_State.RUNNING THEN
 	setEventInfo(events, events.errorEvents.EvaporatingFlowRateTooLow, TRUE, 'Quellwasser Durchflussmenge zu niedrig');
 END_IF
 
@@ -330,6 +333,17 @@ END_VAR
         <ST><![CDATA[THIS^.iState := newState;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="StartWaterFlowState" Id="{86d6b517-590e-4033-9c21-68b1acbabf83}">
+      <Declaration><![CDATA[PROPERTY INTERNAL StartWaterFlowState : I_State]]></Declaration>
+      <Get Name="Get" Id="{23e3367f-027b-4225-aa95-9c2a35e34284}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[StartWaterFlowState := THIS^.fbStartWaterFlowState;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <LineIds Name="FB_StateMachine">
       <LineId Id="281" Count="2" />
       <LineId Id="504" Count="1" />
@@ -372,6 +386,7 @@ END_VAR
       <LineId Id="19" Count="0" />
       <LineId Id="24" Count="1" />
       <LineId Id="30" Count="1" />
+      <LineId Id="316" Count="1" />
       <LineId Id="28" Count="0" />
       <LineId Id="97" Count="1" />
       <LineId Id="36" Count="0" />
@@ -465,6 +480,9 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_StateMachine.SetState">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StateMachine.StartWaterFlowState.Get">
+      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

@@ -7,9 +7,10 @@ TYPE E_State :
 (
 	OFF := 0,
 	IDLE := 1,
-	RUNNING := 2,
-	COOLDOWN := 3,
-    ERROR := 4
+	START_WATER_FLOW := 2,
+	RUNNING := 3,
+	COOLDOWN := 4,
+    ERROR := 5
 );
 END_TYPE
 ]]></Declaration>

@@ -10,6 +10,7 @@ STRUCT
 	heatIsRequested 					: ST_Event := (eventType := E_EventType.HeatIsRequested);  
 	targetTemperatureReached			: ST_Event := (eventType := E_EventType.TargetTemperatureReached);
 	cooledDown							: ST_Event := (eventType := E_EventType.CooledDown);
+	minWaterFlowReached					: ST_Event := (eventType := E_EventType.MinWaterFlowReached);
 		
 	(* Errors *)
      errorEvents						: ST_ErrorEvents; 
