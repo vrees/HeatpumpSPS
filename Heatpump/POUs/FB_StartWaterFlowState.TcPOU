@@ -67,10 +67,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Durchflussmenge ist gross genug -> %s', pMachine^.RunningState.Name);
-// pMachine^.pd.actor.operatingStateCompressor := TRUE;
-pMachine^.pd.actor.operatingStateWaterPump := TRUE;
-pMachine^.SetState(pMachine^.RunningState);]]></ST>
+        <ST><![CDATA[pMachine^.SetState(pMachine^.RunningState);]]></ST>
       </Implementation>
     </Method>
     <Property Name="Name" Id="{91be18b5-b8e8-4a69-af2d-5dcef30e192b}">
@@ -157,7 +154,6 @@ METHOD WaterHasCooledDown : BOOL
       <LineId Id="4" Count="0" />
     </LineIds>
     <LineIds Name="FB_StartWaterFlowState.MinWaterFlowReached">
-      <LineId Id="12" Count="2" />
       <LineId Id="11" Count="0" />
     </LineIds>
     <LineIds Name="FB_StartWaterFlowState.Name.Get">
