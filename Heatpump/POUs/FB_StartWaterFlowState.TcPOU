@@ -67,8 +67,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Durchflussmenge ok -> %s', pMachine^.RunningState.Name);
-pMachine^.pd.actor.operatingStateCompressor := TRUE;
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Durchflussmenge ist gross genug -> %s', pMachine^.RunningState.Name);
+// pMachine^.pd.actor.operatingStateCompressor := TRUE;
 pMachine^.pd.actor.operatingStateWaterPump := TRUE;
 pMachine^.SetState(pMachine^.RunningState);]]></ST>
       </Implementation>

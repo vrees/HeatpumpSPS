@@ -799,8 +799,8 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureOverheatedGas" VarB="RTD Inputs Channel 1^Value"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 8 (EL2622)">
-				<Link VarA="PlcTask Outputs^MAIN.pd.actor.closeFlowVentil" VarB="Channel 2^Output"/>
-				<Link VarA="PlcTask Outputs^MAIN.pd.actor.openFlowVentil" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^MAIN.pd.actor.closeFlowVentil" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^MAIN.pd.actor.openFlowVentil" VarB="Channel 2^Output"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

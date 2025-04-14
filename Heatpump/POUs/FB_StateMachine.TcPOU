@@ -80,6 +80,10 @@ IF events.cooledDown.isTriggered THEN
 	iState.WaterHasCooledDown();
 END_IF
 
+IF events.minWaterFlowReached.isTriggered THEN
+	iState.MinWaterFlowReached();
+END_IF
+
 setLabelText();
 setButtonState();
 
@@ -353,7 +357,10 @@ END_VAR
       <LineId Id="471" Count="0" />
       <LineId Id="470" Count="0" />
       <LineId Id="469" Count="0" />
-      <LineId Id="292" Count="25" />
+      <LineId Id="292" Count="24" />
+      <LineId Id="544" Count="2" />
+      <LineId Id="543" Count="0" />
+      <LineId Id="317" Count="0" />
       <LineId Id="429" Count="0" />
       <LineId Id="181" Count="0" />
       <LineId Id="395" Count="0" />
