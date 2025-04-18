@@ -64,6 +64,15 @@ END_VAR]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Method Name="MinWaterFlowReached" Id="{422fc8a1-b638-45ed-8834-aa6cd555d5aa}">
+      <Declaration><![CDATA[METHOD MinWaterFlowReached : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Name" Id="{60138b53-c969-49f5-bf47-7661b7bde249}">
       <Declaration><![CDATA[PROPERTY Name : STRING]]></Declaration>
       <Get Name="Get" Id="{a3307f7e-42d9-4ff4-9315-493f45a2eeb5}">
@@ -141,6 +150,9 @@ pMachine^.SetState(pMachine^.IdleState);]]></ST>
     </LineIds>
     <LineIds Name="FB_CoolDownState.LimitValuesAreExceeded">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CoolDownState.MinWaterFlowReached">
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_CoolDownState.Name.Get">
       <LineId Id="2" Count="0" />

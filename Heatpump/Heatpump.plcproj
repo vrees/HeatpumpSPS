@@ -92,6 +92,9 @@
     <Compile Include="POUs\FB_RunningState.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\FB_StartWaterFlowState.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\FB_StateMachine.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -120,6 +123,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\utils\ScaleAndRoundString.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\utils\switchWaterVentil.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\utils\toErrorText.TcPOU">

@@ -67,6 +67,15 @@ END_VAR]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Method Name="MinWaterFlowReached" Id="{2e9341e2-379c-436c-921d-db5129e4e34b}">
+      <Declaration><![CDATA[METHOD MinWaterFlowReached : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Name" Id="{2c52335e-5d4a-4ba6-8676-9c0b15fb0662}">
       <Declaration><![CDATA[PROPERTY Name : STRING]]></Declaration>
       <Get Name="Get" Id="{5bc9d40e-cee5-4ee4-823f-4fb0e1f3908a}">
@@ -144,6 +153,9 @@ pMachine^.SetState(pMachine^.IdleState);
     </LineIds>
     <LineIds Name="FB_OffState.LimitValuesAreExceeded">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_OffState.MinWaterFlowReached">
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_OffState.Name.Get">
       <LineId Id="2" Count="0" />

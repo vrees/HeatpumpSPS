@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="switchWaterVentil" Id="{2bfeaffd-a66e-4330-bc82-06133f12c6f8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION switchWaterVentil : BOOL
+VAR_INPUT
+	bOpen : BOOL; // TRUE = öffnen, FALSE = schließen
+	pMachine : POINTER TO FB_StateMachine;
+END_VAR
+
+
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bOpen THEN
+	pMachine^.pd.actor.openFlowVentil := TRUE;
+	pMachine^.pd.actor.closeFlowVentil := FALSE;
+ELSE
+	pMachine^.pd.actor.openFlowVentil := FALSE;
+	pMachine^.pd.actor.closeFlowVentil := TRUE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="switchWaterVentil">
+      <LineId Id="18" Count="1" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

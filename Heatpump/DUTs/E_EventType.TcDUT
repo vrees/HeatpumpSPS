@@ -13,6 +13,7 @@ TYPE E_EventType :
 	TargetTemperatureReached 			:= 4,
 	CooledDown 							:= 5,
 	Confirm 							:= 6,
+	minWaterFlowReached					:= 7,
 	
 	(* Errors *)
 	PressureDiffEvaporatorTooHigh		:= 101,

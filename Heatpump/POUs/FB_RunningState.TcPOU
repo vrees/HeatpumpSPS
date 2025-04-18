@@ -23,6 +23,7 @@ END_VAR
         <ST><![CDATA[pMachine^.timerTON(IN := TRUE, PT := GVL.configValues.minIdleSec);
 ADSLOGSTR(ADSLOG_MSGTYPE_HINT, message, pMachine^.CoolDownState.Name);
 pMachine^.pd.actor.operatingStateCompressor := FALSE;
+switchWaterVentil(bOpen := FALSE, pMachine);
 pMachine^.SetState(pMachine^.CoolDownState);
 ]]></ST>
       </Implementation>
@@ -77,6 +78,15 @@ END_VAR]]></Declaration>
     </Method>
     <Method Name="LimitValuesAreExceeded" Id="{ad40b40e-36c5-4eb1-933c-96726184bd4b}">
       <Declaration><![CDATA[METHOD LimitValuesAreExceeded : BOOL
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MinWaterFlowReached" Id="{686cb901-5f62-43c5-a0b8-8566a3d9b00a}">
+      <Declaration><![CDATA[METHOD MinWaterFlowReached : BOOL
+VAR_INPUT
+END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -149,6 +159,7 @@ ActionSwitchOff('Zieltemperatur erreicht. -> %s');]]></ST>
     <LineIds Name="FB_RunningState.ActionSwitchOff">
       <LineId Id="20" Count="1" />
       <LineId Id="23" Count="0" />
+      <LineId Id="29" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="13" Count="0" />
     </LineIds>
@@ -167,6 +178,9 @@ ActionSwitchOff('Zieltemperatur erreicht. -> %s');]]></ST>
     </LineIds>
     <LineIds Name="FB_RunningState.LimitValuesAreExceeded">
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_RunningState.MinWaterFlowReached">
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_RunningState.Name.Get">
       <LineId Id="2" Count="0" />
