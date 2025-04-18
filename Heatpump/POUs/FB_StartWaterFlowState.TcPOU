@@ -50,7 +50,7 @@ VAR_INPUT
 	pMachine : POINTER TO FB_StateMachine;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[THIS^.pMachine := pMachine;]]></ST>
       </Implementation>
     </Method>
     <Method Name="HeatIsRequested" Id="{bc3ae7fd-9def-47d5-b24d-7241e3a96555}">
@@ -67,7 +67,11 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[pMachine^.SetState(pMachine^.RunningState);]]></ST>
+        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Ventil ist geöffnet. Durchflussmenge erreicht. Kompressor wird eingeschaltet: -> %s', pMachine^.RunningState.Name);
+pMachine^.pd.actor.operatingStateWaterPump := TRUE;
+pMachine^.pd.actor.operatingStateCompressor := TRUE;
+pMachine^.SetState(pMachine^.RunningState);
+]]></ST>
       </Implementation>
     </Method>
     <Property Name="Name" Id="{91be18b5-b8e8-4a69-af2d-5dcef30e192b}">
@@ -79,7 +83,7 @@ PROPERTY Name : STRING
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Name := 'öffne Ventil ...';]]></ST>
+          <ST><![CDATA[Name := 'öffne Ventil';]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -119,6 +123,8 @@ METHOD UserPressedSwitchOffButton : BOOL
       <Implementation>
         <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Aus Button wurde gedrückt -> %s', pMachine^.OffState.Name);
 switchWaterVentil(bOpen := FALSE, pMachine);
+pMachine^.pd.actor.operatingStateCompressor := FALSE;
+pMachine^.pd.actor.operatingStateWaterPump := FALSE;
 pMachine^.SetState(pMachine^.OffState);]]></ST>
       </Implementation>
     </Method>
@@ -154,7 +160,11 @@ METHOD WaterHasCooledDown : BOOL
       <LineId Id="4" Count="0" />
     </LineIds>
     <LineIds Name="FB_StartWaterFlowState.MinWaterFlowReached">
+      <LineId Id="15" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="26" Count="0" />
       <LineId Id="11" Count="0" />
+      <LineId Id="17" Count="0" />
     </LineIds>
     <LineIds Name="FB_StartWaterFlowState.Name.Get">
       <LineId Id="2" Count="0" />
@@ -170,6 +180,7 @@ METHOD WaterHasCooledDown : BOOL
     </LineIds>
     <LineIds Name="FB_StartWaterFlowState.UserPressedSwitchOffButton">
       <LineId Id="5" Count="1" />
+      <LineId Id="19" Count="1" />
       <LineId Id="4" Count="0" />
     </LineIds>
     <LineIds Name="FB_StartWaterFlowState.UserPressedSwitchOnButton">
