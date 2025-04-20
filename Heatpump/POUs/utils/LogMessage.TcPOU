@@ -9,7 +9,9 @@ VAR_INPUT
 END_VAR
 VAR
     nIndex : INT;
+	i : INT;
 	sMsg : STRING;
+	sTypeName : STRING(20);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -24,31 +26,44 @@ CASE eType OF
         AdsLogStr(ADSLOG_MSGTYPE_ERROR, '[ERROR] %s', sMsg);
 END_CASE
 
-// Index berechnen
-nIndex := GVL.g_LogData.nWriteIndex;
+// Schiebe alle bisherigen Einträge um 1 nach unten
+FOR i := 100 TO 2 BY -1 DO
+	GVL.g_LogData.aEntries[i] := GVL.g_LogData.aEntries[i - 1];
+END_FOR;
 
+
+CASE eType OF
+    E_LogType.INFO:    sTypeName := 'INFO';
+    E_LogType.WARNING: sTypeName := 'WARNING';
+    E_LogType.ERROR:   sTypeName := 'ERROR';
+END_CASE;
+
+	
 // Eintrag schreiben
-GVL.g_LogData.aEntries[nIndex].sMessage := sMsg;
-UpdateLogTimestampWithSystemTime(GVL.g_LogData.aEntries[nIndex]);
-GVL.g_LogData.aEntries[nIndex].eType := eType;
-
-// Index erhöhen
-GVL.g_LogData.nWriteIndex := GVL.g_LogData.nWriteIndex + 1;
-IF GVL.g_LogData.nWriteIndex > 100 THEN
-    GVL.g_LogData.nWriteIndex := 1;
-END_IF;
-
-// Anzahl erhöhen
-IF GVL.g_LogData.nCount < 100 THEN
-    GVL.g_LogData.nCount := GVL.g_LogData.nCount + 1;
-END_IF;
+// Neuesten Eintrag an Position 1 einfügen
+GVL.g_LogData.aEntries[1].sMessage := sMsg;
+UpdateLogTimestampWithSystemTime(GVL.g_LogData.aEntries[1]);
+GVL.g_LogData.aEntries[1].eType := eType;
+GVL.g_LogData.aEntries[1].sTypeName := sTypeName;
 
 LogMessage := TRUE;]]></ST>
     </Implementation>
     <LineIds Name="LogMessage">
       <LineId Id="239" Count="1" />
-      <LineId Id="204" Count="13" />
-      <LineId Id="222" Count="13" />
+      <LineId Id="204" Count="7" />
+      <LineId Id="253" Count="3" />
+      <LineId Id="252" Count="0" />
+      <LineId Id="275" Count="0" />
+      <LineId Id="277" Count="4" />
+      <LineId Id="276" Count="0" />
+      <LineId Id="274" Count="0" />
+      <LineId Id="260" Count="0" />
+      <LineId Id="216" Count="0" />
+      <LineId Id="262" Count="0" />
+      <LineId Id="217" Count="0" />
+      <LineId Id="222" Count="1" />
+      <LineId Id="235" Count="0" />
+      <LineId Id="283" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>
   </POU>

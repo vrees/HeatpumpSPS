@@ -4,8 +4,6 @@
     <Declaration><![CDATA[TYPE ST_LogBuffer :
 STRUCT
     aEntries : ARRAY[1..100] OF ST_LogEntry;
-    nWriteIndex : INT := 1;
-    nCount : INT := 0;
 END_STRUCT
 END_TYPE
 ]]></Declaration>

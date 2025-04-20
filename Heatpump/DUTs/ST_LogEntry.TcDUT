@@ -6,6 +6,7 @@ STRUCT
     sMessage : STRING(255);
     dtTimestamp : DATE_AND_TIME;
     eType : E_LogType;
+	sTypeName : STRING(20);
 END_STRUCT
 END_TYPE
 ]]></Declaration>
