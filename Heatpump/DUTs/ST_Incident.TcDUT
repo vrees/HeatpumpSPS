@@ -3,17 +3,17 @@
   <DUT Name="ST_Incident" Id="{bbb8154b-704a-43ea-9cc2-cef9d4f926cf}">
     <Declaration><![CDATA[TYPE ST_Incident :
     STRUCT
-		(* Connected to IO Klemmen*)		
-        alarmExpansionValve		AT %I*			: BOOL;		(* Alarm: Elektronisches Expansionsventil - EL1008.3*)
-										 					(* operatingStateWaterPump	- EL1008.4*)
-        incidentCompressor		AT %I*			: BOOL; 	(* Störung: Verdichter / Motorschutzschalter - EL1008.5*)
-        incidentFlow			AT %I*			: BOOL; 	(* Störung: Durchfluss im Verdampfer zu niedrig - EL1008.6*)
-        incidentHighPressure	AT %I*			: BOOL; 	(* Störung: Hochdruck zu hoch - EL1008.7*)
-        incidentLowPressure		AT %I*			: BOOL; 	(* Störung: Niederdruck zu niedrig - EL1008.8*) 
+		// Connected to IO Klemmen		
+        alarmExpansionValve		AT %I*			: BOOL;		// Alarm: Elektronisches Expansionsventil - EL1008.3
+										 					// operatingStateWaterPump	- EL1008.4
+        incidentCompressor		AT %I*			: BOOL; 	// Störung: Verdichter / Motorschutzschalter - EL1008.5
+        incidentFlow			AT %I*			: BOOL; 	// Störung: Durchfluss im Verdampfer zu niedrig - EL1008.6  Achtung!!! invertiert: True bedeutet genug Fluss vorhanden
+        incidentHighPressure	AT %I*			: BOOL; 	// Störung: Hochdruck zu hoch - EL1008.7
+        incidentLowPressure		AT %I*			: BOOL; 	// Störung: Niederdruck zu niedrig - EL1008.8 
 
-		(* Calculated from Business Logic*)
-        incidentTankLevelTooLow					: BOOL;  (* Störung: Wasserstand des Tanks zu niedrig *)
-        incidentTankSensorDataMissing			: BOOL;  (* Störung: Tanksensor sendet keine Daten mehr *)
+		// Calculated from Business Logic
+        incidentTankLevelTooLow					: BOOL;  // Störung: Wasserstand des Tanks zu niedrig 
+        incidentTankSensorDataMissing			: BOOL;  // Störung: Tanksensor sendet keine Daten mehr 
     END_STRUCT
 END_TYPE
 ]]></Declaration>

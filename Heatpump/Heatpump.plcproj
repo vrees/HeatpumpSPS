@@ -113,6 +113,9 @@
     <Compile Include="POUs\utils\convertTimerToDisplayValue.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\utils\isVentilOpen.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\utils\setEventInfo.TcPOU">
       <SubType>Code</SubType>
     </Compile>

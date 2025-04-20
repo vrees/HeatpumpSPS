@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="isVentilOpen" Id="{14b65eaf-864a-4731-8613-d210785d0b89}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION isVentilOpen : BOOL
+VAR_INPUT
+	pd 		: REFERENCE TO ST_ProcessData;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[isVentilOpen := pd.incident.incidentFlow;]]></ST>
+    </Implementation>
+    <LineIds Name="isVentilOpen">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

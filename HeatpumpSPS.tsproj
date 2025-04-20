@@ -30,7 +30,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{8E134311-BC98-3D53-73AC-32AC057DF6AC}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{6DC3E54C-87EF-F80E-140F-DFCAB12D9E99}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -117,7 +117,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.pd.incident.incidentFlow</Name>
-							<Comment><![CDATA[ Störung: Durchfluss im Verdampfer zu niedrig - EL1008.6]]></Comment>
+							<Comment><![CDATA[ Störung: Durchfluss im Verdampfer zu niedrig - EL1008.6  Achtung!!! invertiert: True bedeutet genug Fluss vorhanden]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -127,7 +127,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.pd.incident.incidentLowPressure</Name>
-							<Comment><![CDATA[ Störung: Niederdruck zu niedrig - EL1008.8]]></Comment>
+							<Comment><![CDATA[ Störung: Niederdruck zu niedrig - EL1008.8 ]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
