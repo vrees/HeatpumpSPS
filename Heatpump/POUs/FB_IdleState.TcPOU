@@ -57,7 +57,7 @@ END_VAR]]></Declaration>
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF pMachine^.timerTON.Q OR NOT pMachine^.timerTON.IN THEN
-	ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Heizung wurde angefordert -> %s', pMachine^.StartWaterFlowState.Name);
+	LogMessage(E_LogType.INFO, 'Heizung wurde angefordert -> ', pMachine^.StartWaterFlowState.Name);
 	pMachine^.timerTON(IN := FALSE);  
     switchWaterVentil(bOpen := TRUE, pMachine);
 	pMachine^.SetState(pMachine^.StartWaterFlowState);	
@@ -122,7 +122,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[resetApplication(pMachine);
-ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Aus Button wurde gedrückt -> %s', pMachine^.OffState.Name);
+LogMessage(E_LogType.INFO, 'Aus Button wurde gedrückt -> ', pMachine^.OffState.Name);
 pMachine^.SetState(pMachine^.OffState);]]></ST>
       </Implementation>
     </Method>

@@ -7,7 +7,7 @@ VAR_GLOBAL PERSISTENT
 END_VAR
 VAR_GLOBAL 
 	lastErrorsOccurred		:   ARRAY[0..6] OF ST_Event;  	// List of last errors occurred
-	None: INT;
+	g_LogData : ST_LogBuffer;
 END_VAR
 ]]></Declaration>
   </GVL>

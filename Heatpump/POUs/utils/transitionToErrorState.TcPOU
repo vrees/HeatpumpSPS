@@ -61,7 +61,7 @@ WHILE i <= 6 DO
 END_WHILE;
 
 message := toErrorText();
-ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Error detected: %s', message);
+LogMessage(E_LogType.INFO, 'Error detected: ', message);
 pMachine^.SetState(pMachine^.ErrorState);]]></ST>
     </Implementation>
     <LineIds Name="transitionToErrorState">

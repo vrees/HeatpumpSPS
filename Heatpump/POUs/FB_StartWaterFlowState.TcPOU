@@ -67,7 +67,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Ventil ist geöffnet. Durchflussmenge erreicht. Kompressor wird eingeschaltet: -> %s', pMachine^.RunningState.Name);
+        <ST><![CDATA[LogMessage(E_LogType.INFO, 'Ventil ist geöffnet. Durchflussmenge erreicht. Kompressor wird eingeschaltet: -> ', pMachine^.RunningState.Name);
 pMachine^.pd.actor.operatingStateWaterPump := TRUE;
 pMachine^.pd.actor.operatingStateCompressor := TRUE;
 pMachine^.SetState(pMachine^.RunningState);
@@ -121,7 +121,7 @@ METHOD UserPressedConfirmationButton : BOOL
 METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Aus Button wurde gedrückt -> %s', pMachine^.OffState.Name);
+        <ST><![CDATA[LogMessage(E_LogType.INFO, 'Aus Button wurde gedrückt -> ', pMachine^.OffState.Name);
 switchWaterVentil(bOpen := FALSE, pMachine);
 pMachine^.pd.actor.operatingStateCompressor := FALSE;
 pMachine^.pd.actor.operatingStateWaterPump := FALSE;

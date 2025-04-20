@@ -107,7 +107,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[resetApplication(pMachine);
-ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Aus Button wurde gedrückt -> %s', pMachine^.OffState.Name);
+LogMessage(E_LogType.INFO, 'Aus Button wurde gedrückt -> ', pMachine^.OffState.Name);
 pMachine^.SetState(pMachine^.OffState);]]></ST>
       </Implementation>
     </Method>

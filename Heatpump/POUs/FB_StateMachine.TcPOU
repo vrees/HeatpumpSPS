@@ -55,7 +55,7 @@ generateEvents(events);
 IF events.errorsDetected THEN
 	iState.ErrorDetected(events.errorEvents);
 ELSE IF iState.State = E_State.ERROR THEN
-		ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Fehler steht nicht mehr an -> %s', idleState.Name);
+		LogMessage(E_LogType.WARNING, 'Fehler steht nicht mehr an ->', idleState.Name);
 		SetState(idleState);
 	END_IF	
 END_IF 
@@ -151,9 +151,7 @@ END_VAR]]></Declaration>
 VAR_IN_OUT
 	events					:	ST_Events();
 END_VAR
-VAR
-	FB_Local: DATE_AND_TIME;
-END_VAR]]></Declaration>
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (rtrigButtonSwitchOff.Q OR (rtrigButtonConfirmation.Q AND (iState.State <> E_State.OFF OR iState.State = E_State.ERROR))) THEN
 	events.switchOff.isTriggered := TRUE;
@@ -367,7 +365,7 @@ END_VAR
       <LineId Id="590" Count="0" />
       <LineId Id="290" Count="1" />
       <LineId Id="467" Count="0" />
-      <LineId Id="471" Count="0" />
+      <LineId Id="677" Count="0" />
       <LineId Id="470" Count="0" />
       <LineId Id="469" Count="0" />
       <LineId Id="292" Count="24" />

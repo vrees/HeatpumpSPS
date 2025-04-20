@@ -12,9 +12,9 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[IF (bOpen) THEN
-	ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Betätige Ventil: -> %s', 'öffnen');
+	LogMessage(E_LogType.INFO, 'Betätige Ventil: -> ', 'öffnen');
 ELSE
-	ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Betätige Ventil: -> %s', 'schliessen');
+	LogMessage(E_LogType.INFO, 'Betätige Ventil: -> ', 'schliessen');
 END_IF;	
 
 IF bOpen THEN

@@ -21,7 +21,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[pMachine^.timerTON(IN := TRUE, PT := GVL.configValues.minIdleSec);
-ADSLOGSTR(ADSLOG_MSGTYPE_HINT, message, pMachine^.CoolDownState.Name);
+LogMessage(E_LogType.INFO, message, pMachine^.CoolDownState.Name);
 pMachine^.pd.actor.operatingStateCompressor := FALSE;
 switchWaterVentil(bOpen := FALSE, pMachine);
 pMachine^.SetState(pMachine^.CoolDownState);
@@ -118,11 +118,11 @@ END_VAR
       <Declaration><![CDATA[METHOD TargetTemperatureReached : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Boiler oben: %s ', REAL_TO_STRING (pMachine^.pd.sensor.bufferMiddleTemperature));
-ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Zieltemperatur (Ausschalttemperatur): %s ', REAL_TO_STRING (GVL.configValues.targetTemperatureOff));
-ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Boiler-Ladepumpe: %s ', BOOL_TO_STRING (pMachine^.pd.sensor.boilerHeatRequest));
+        <ST><![CDATA[LogMessage(E_LogType.INFO, 'Boiler oben: ', REAL_TO_STRING (pMachine^.pd.sensor.bufferMiddleTemperature));
+LogMessage(E_LogType.INFO, 'Zieltemperatur (Ausschalttemperatur): ', REAL_TO_STRING (GVL.configValues.targetTemperatureOff));
+LogMessage(E_LogType.INFO, 'Boiler-Ladepumpe: ', BOOL_TO_STRING (pMachine^.pd.sensor.boilerHeatRequest));
 
-ActionSwitchOff('Zieltemperatur erreicht. -> %s');]]></ST>
+ActionSwitchOff('Zieltemperatur erreicht. -> ');]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedConfirmationButton" Id="{34138e8e-29b3-43c6-83b9-21f3a75e6954}">
@@ -136,7 +136,7 @@ ActionSwitchOff('Zieltemperatur erreicht. -> %s');]]></ST>
       <Declaration><![CDATA[METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ActionSwitchOff('Off Button pressed -> %s');]]></ST>
+        <ST><![CDATA[ActionSwitchOff('Off Button pressed -> ');]]></ST>
       </Implementation>
     </Method>
     <Method Name="UserPressedSwitchOnButton" Id="{92d0b6bf-2822-477d-9e93-031fae1f4a37}">

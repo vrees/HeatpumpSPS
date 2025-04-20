@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="LogMessage" Id="{eccb331a-711b-40fd-9334-694853602f77}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION LogMessage : BOOL
+VAR_INPUT
+    eType 		: E_LogType;
+	sParam1 	: STRING;
+	sParam2  	: STRING;
+END_VAR
+VAR
+    nIndex : INT;
+	sMsg : STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[sMsg := CONCAT(sParam1, sParam2);
+
+CASE eType OF
+    E_LogType.INFO:
+        AdsLogStr(ADSLOG_MSGTYPE_HINT, '[INFO] %s', sMsg);
+    E_LogType.WARNING:
+        AdsLogStr(ADSLOG_MSGTYPE_WARN, '[WARN] %s', sMsg);
+    E_LogType.ERROR:
+        AdsLogStr(ADSLOG_MSGTYPE_ERROR, '[ERROR] %s', sMsg);
+END_CASE
+
+// Index berechnen
+nIndex := GVL.g_LogData.nWriteIndex;
+
+// Eintrag schreiben
+GVL.g_LogData.aEntries[nIndex].sMessage := sMsg;
+UpdateLogTimestampWithSystemTime(GVL.g_LogData.aEntries[nIndex]);
+GVL.g_LogData.aEntries[nIndex].eType := eType;
+
+// Index erhöhen
+GVL.g_LogData.nWriteIndex := GVL.g_LogData.nWriteIndex + 1;
+IF GVL.g_LogData.nWriteIndex > 100 THEN
+    GVL.g_LogData.nWriteIndex := 1;
+END_IF;
+
+// Anzahl erhöhen
+IF GVL.g_LogData.nCount < 100 THEN
+    GVL.g_LogData.nCount := GVL.g_LogData.nCount + 1;
+END_IF;
+
+LogMessage := TRUE;]]></ST>
+    </Implementation>
+    <LineIds Name="LogMessage">
+      <LineId Id="239" Count="1" />
+      <LineId Id="204" Count="13" />
+      <LineId Id="222" Count="13" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

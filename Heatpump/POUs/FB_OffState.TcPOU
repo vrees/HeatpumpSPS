@@ -123,7 +123,7 @@ END_VAR
       <Declaration><![CDATA[METHOD UserPressedSwitchOnButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Einschalt Button wurde gedrückt -> %s', pMachine^.IdleState.Name);
+        <ST><![CDATA[LogMessage(E_LogType.INFO, 'Einschalt Button wurde gedrückt -> ', pMachine^.IdleState.Name);
 pMachine^.pd.actor.operatingStateLed := TRUE;
 pMachine^.SetState(pMachine^.IdleState);
 ]]></ST>
@@ -173,7 +173,7 @@ pMachine^.SetState(pMachine^.IdleState);
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_OffState.UserPressedSwitchOnButton">
-      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="0" />
       <LineId Id="8" Count="0" />
       <LineId Id="2" Count="0" />
       <LineId Id="7" Count="0" />

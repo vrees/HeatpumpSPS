@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_LogBuffer" Id="{93eb5be0-7697-48e2-8222-3bc985371d80}">
+    <Declaration><![CDATA[TYPE ST_LogBuffer :
+STRUCT
+    aEntries : ARRAY[1..100] OF ST_LogEntry;
+    nWriteIndex : INT := 1;
+    nCount : INT := 0;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

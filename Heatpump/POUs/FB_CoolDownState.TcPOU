@@ -113,7 +113,7 @@ END_VAR
       <Declaration><![CDATA[METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Aus Button wurde gedrückt -> %s', pMachine^.OffState.Name);
+        <ST><![CDATA[LogMessage(E_LogType.INFO, 'Aus Button wurde gedrückt -> ', pMachine^.OffState.Name);
 pMachine^.SetState(pMachine^.OffState);]]></ST>
       </Implementation>
     </Method>
@@ -128,7 +128,7 @@ pMachine^.SetState(pMachine^.OffState);]]></ST>
       <Declaration><![CDATA[METHOD WaterHasCooledDown : BOOL
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[ADSLOGSTR(ADSLOG_MSGTYPE_HINT, 'Abkühlungsphase beendet -> %s', pMachine^.IdleState.Name);
+        <ST><![CDATA[LogMessage(E_LogType.INFO, 'Abkühlungsphase beendet -> ', pMachine^.IdleState.Name);
 pMachine^.pd.actor.operatingStateWaterPump := FALSE;
 pMachine^.SetState(pMachine^.IdleState);]]></ST>
       </Implementation>

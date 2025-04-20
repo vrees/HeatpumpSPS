@@ -25,6 +25,9 @@
     <Compile Include="DUTs\E_EventType.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\E_LogType.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\E_Severity.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -41,6 +44,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_ErrorEvents.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\ST_LogBuffer.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\ST_LogEntry.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_WarningEvents.TcDUT">
@@ -116,6 +125,9 @@
     <Compile Include="POUs\utils\isVentilOpen.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\utils\LogMessage.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\utils\setEventInfo.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -141,6 +153,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\utils\updateEventWithTimestamp.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\utils\UpdateLogTimestampWithSystemTime.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

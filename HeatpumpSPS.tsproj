@@ -30,7 +30,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{6DC3E54C-87EF-F80E-140F-DFCAB12D9E99}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{AD059CCD-6EDE-71A9-C56B-16408F4880EF}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">

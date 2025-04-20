@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_LogType" Id="{ebc64424-1f14-4d68-85fc-fc182ee8a05d}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_LogType :
+(
+    INFO := 0,
+    WARNING := 1,
+    ERROR := 2
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
