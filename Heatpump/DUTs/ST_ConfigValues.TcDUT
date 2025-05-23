@@ -7,7 +7,7 @@ STRUCT
 	targetTemperatureOnPV 			:	REAL	:= 	40; 	// Bei PV-Überschuss: Einschalttemperatur bei deren Unterschreiten die Waermepumpe eingeschaltet wird
 	targetTemperatureOff 			:	REAL	:= 	41; 	// Auschaltemperatur bei deren Ueberschreiten die Waermepume ausgeschaltet wird	
 	targetTemperatureOffPV			:	REAL	:= 	50; 	// Bei PV-Überschuss: Auschaltemperatur bei deren Ueberschreiten die Waermepume ausgeschaltet wird	
-	maxReturnTemperature			:	REAL	:= 	54; 	// Schaltet aus / nicht ein, falls Rücklauf Temperatur zu hoch, z.B. wenn Holzkessel heizt
+	maxReturnTemperature			:	REAL	:= 	53; 	// Schaltet aus / nicht ein, falls Rücklauf Temperatur zu hoch, z.B. wenn Holzkessel heizt
 	minIdleSec 						:	TIME 	:= 	T#10M;	// Minimale Auschalt-Dauer (verhindert haeufiges Einschalten) [Minuten]
 	temperatureDiffBacklashOff 		:	REAL	:= 	1.0; 	// Temperaturdifferenz zwischen Vorlauf und Rücklauf, bei dessen Unterschreiten die Wasserpumpe ausgeschaltet wird
 	temperatureDiffBoilerLaden 		:	REAL	:= 	4.0; 	// Temperaturdifferenz zwischen Puffer oben und Boiler, die unterschritten sein muss, damit die Wärmepumpe einschaltet.
