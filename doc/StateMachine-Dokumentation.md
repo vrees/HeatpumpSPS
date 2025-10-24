@@ -13,41 +13,33 @@ Die Wärmepumpen-Steuerung verwendet das **State Pattern** (Zustandsmuster) zur 
 
 ## State Machine Diagramm
 
+### Vereinfachtes Zustandsdiagramm
+
 ```mermaid
 stateDiagram-v2
-    [*] --> OFF : System Start
+    [*] --> OFF
 
-    OFF --> IDLE : Einschalt-Button gedrückt\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• LED einschalten
+    OFF --> IDLE : Einschalt-Button
+    OFF --> ERROR : Fehler
 
-    OFF --> ERROR : Fehler erkannt\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• Fehler loggen\n• Ventil schließen\n• Pumpe ausschalten\n• Kompressor ausschalten
+    IDLE --> START_WATER_FLOW : Heizung angefordert
+    IDLE --> OFF : Ausschalt-Button
+    IDLE --> ERROR : Fehler
 
-    IDLE --> START_WATER_FLOW : Heizung angefordert\n━━━━━━━━━━━━━━━━━━━\nBedingungen:\n• Timer abgelaufen ODER\n• Timer nicht aktiv\nUND:\n• Puffer oben < Zieltemp. (33°C / 40°C PV)\n• ODER Boiler-Anforderung aktiv\nUND:\n• Rücklauftemp. ≤ 53°C\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• Timer stoppen\n• Ventil öffnen
+    START_WATER_FLOW --> RUNNING : Min. Durchfluss erreicht
+    START_WATER_FLOW --> OFF : Ausschalt-Button
+    START_WATER_FLOW --> ERROR : Fehler
 
-    IDLE --> OFF : Ausschalt-Button\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• System zurücksetzen
+    RUNNING --> COOLDOWN : Zieltemperatur erreicht
+    RUNNING --> COOLDOWN : Ausschalt-Button
+    RUNNING --> ERROR : Fehler
 
-    IDLE --> ERROR : Fehler erkannt\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• Fehler loggen\n• System sichern
+    COOLDOWN --> IDLE : Abgekühlt
+    COOLDOWN --> OFF : Ausschalt-Button
+    COOLDOWN --> ERROR : Fehler
 
-    START_WATER_FLOW --> RUNNING : Min. Durchfluss erreicht\n━━━━━━━━━━━━━━━━━━━\nBedingung:\n• incident.incidentFlow = TRUE\n(mind. 1800 L/h)\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• Wasserpumpe einschalten\n• Kompressor einschalten
-
-    START_WATER_FLOW --> OFF : Ausschalt-Button\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• Ventil schließen\n• Kompressor ausschalten\n• Wasserpumpe ausschalten
-
-    START_WATER_FLOW --> ERROR : Fehler erkannt\n━━━━━━━━━━━━━━━━━━━\nBedingungen:\n• Kein Durchfluss innerhalb Timeout\n• Druck/Temperatur-Fehler\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• Fehler loggen\n• Ventil schließen\n• Alles ausschalten
-
-    RUNNING --> COOLDOWN : Zieltemperatur erreicht\n━━━━━━━━━━━━━━━━━━━\nBedingungen:\n• Puffer Mitte ≥ Zieltemp. (41°C / 50°C PV)\nUND:\n• Boiler-Anforderung = FALSE\nODER:\n• Rücklauftemp. > 53°C\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• Min-Idle-Timer starten (10 Min)\n• Kompressor ausschalten\n• Ventil schließen\n• Pumpe läuft weiter!
-
-    RUNNING --> COOLDOWN : Ausschalt-Button\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• Min-Idle-Timer starten (10 Min)\n• Kompressor ausschalten\n• Ventil schließen\n• Pumpe läuft weiter!
-
-    RUNNING --> ERROR : Fehler erkannt\n━━━━━━━━━━━━━━━━━━━\nBedingungen:\n• Druckdiff. Verdampfer > 45 mbar\n• Verdampfer Austritt < 2.3°C\n• Durchfluss zu niedrig\n• Druck-Thermostat ausgelöst\n• Motorschutz ausgelöst\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• Min-Idle-Timer starten\n• Fehler loggen\n• Alles ausschalten
-
-    COOLDOWN --> IDLE : Abgekühlt\n━━━━━━━━━━━━━━━━━━━\nBedingung:\n• (T_Vorlauf - T_Rücklauf) < 1.0°C\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• Wasserpumpe ausschalten\n• Min-Idle-Timer läuft weiter
-
-    COOLDOWN --> OFF : Ausschalt-Button\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• Wasserpumpe bleibt an\n• (Kühlung fortsetzen)
-
-    COOLDOWN --> ERROR : Fehler erkannt\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• Fehler loggen\n• System sichern
-
-    ERROR --> OFF : Ausschalt-Button\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• System zurücksetzen\n• Alles ausschalten
-
-    ERROR --> IDLE : Fehler behoben\n━━━━━━━━━━━━━━━━━━━\nBedingung:\n• Alle Fehler-Flags = FALSE\n━━━━━━━━━━━━━━━━━━━\nAktion:\n• System bereit
+    ERROR --> OFF : Ausschalt-Button
+    ERROR --> IDLE : Fehler behoben
 
     note right of IDLE
         Min. Stillstandszeit: 10 Min
@@ -64,6 +56,54 @@ stateDiagram-v2
         Nur Pumpe läuft
     end note
 ```
+
+### Detaillierte Übergänge mit Bedingungen und Aktionen
+
+#### Von OFF (Aus)
+
+| Übergang | Event | Bedingungen | Aktionen |
+|----------|-------|-------------|----------|
+| **OFF → IDLE** | Einschalt-Button / Bestätigung | - | • LED einschalten |
+| **OFF → ERROR** | Fehler erkannt | Beliebiger Fehler | • Fehler loggen<br>• System sichern |
+
+#### Von IDLE (Bereit)
+
+| Übergang | Event | Bedingungen | Aktionen |
+|----------|-------|-------------|----------|
+| **IDLE → START_WATER_FLOW** | Heizung angefordert | • Timer abgelaufen ODER nicht aktiv<br>• Puffer oben < Zieltemp. (33°C / 40°C PV)<br>• ODER Boiler-Anforderung aktiv<br>• UND Rücklauftemp. ≤ 53°C | • Timer stoppen<br>• Ventil öffnen |
+| **IDLE → OFF** | Ausschalt-Button | - | • System zurücksetzen |
+| **IDLE → ERROR** | Fehler erkannt | Beliebiger Fehler | • Fehler loggen |
+
+#### Von START_WATER_FLOW (Ventil öffnen)
+
+| Übergang | Event | Bedingungen | Aktionen |
+|----------|-------|-------------|----------|
+| **START_WATER_FLOW → RUNNING** | Min. Durchfluss erreicht | • incident.incidentFlow = TRUE<br>• (mind. 1800 L/h) | • Wasserpumpe einschalten<br>• Kompressor einschalten |
+| **START_WATER_FLOW → OFF** | Ausschalt-Button | - | • Ventil schließen<br>• Alles ausschalten |
+| **START_WATER_FLOW → ERROR** | Fehler erkannt | • Kein Durchfluss (Timeout)<br>• Druck/Temp-Fehler | • Ventil schließen<br>• Alles ausschalten |
+
+#### Von RUNNING (Kompressor ein)
+
+| Übergang | Event | Bedingungen | Aktionen |
+|----------|-------|-------------|----------|
+| **RUNNING → COOLDOWN** | Zieltemperatur erreicht | • Puffer Mitte ≥ Zieltemp. (41°C / 50°C PV)<br>• UND Boiler-Anforderung = FALSE<br>• ODER Rücklauftemp. > 53°C | • Min-Idle-Timer starten (10 Min)<br>• Kompressor ausschalten<br>• Ventil schließen<br>• **Pumpe läuft weiter!** |
+| **RUNNING → COOLDOWN** | Ausschalt-Button | - | • Min-Idle-Timer starten (10 Min)<br>• Kompressor ausschalten<br>• Ventil schließen<br>• **Pumpe läuft weiter!** |
+| **RUNNING → ERROR** | Fehler erkannt | • Druckdiff. Verdampfer > 45 mbar<br>• Verdampfer Austritt < 2.3°C<br>• Durchfluss zu niedrig<br>• Druck-Thermostat ausgelöst<br>• Motorschutz ausgelöst | • Min-Idle-Timer starten<br>• Alles ausschalten |
+
+#### Von COOLDOWN (Abkühlen)
+
+| Übergang | Event | Bedingungen | Aktionen |
+|----------|-------|-------------|----------|
+| **COOLDOWN → IDLE** | Abgekühlt | • (T_Vorlauf - T_Rücklauf) < 1.0°C | • Wasserpumpe ausschalten<br>• Min-Idle-Timer läuft weiter |
+| **COOLDOWN → OFF** | Ausschalt-Button | - | • Wasserpumpe bleibt an<br>• (Kühlung fortsetzen) |
+| **COOLDOWN → ERROR** | Fehler erkannt | Beliebiger Fehler | • Fehler loggen |
+
+#### Von ERROR (Fehler)
+
+| Übergang | Event | Bedingungen | Aktionen |
+|----------|-------|-------------|----------|
+| **ERROR → IDLE** | Automatisch | • Alle Fehler-Flags = FALSE | • System bereit |
+| **ERROR → OFF** | Ausschalt-Button | - | • System zurücksetzen<br>• Alles ausschalten |
 
 ## Detaillierte Zustandsbeschreibung
 
