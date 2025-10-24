@@ -1,5 +1,7 @@
 # Wärmepumpe Viktor Rees
-Firmware using Beckhoff SPS to Heatpump
+Diese Projekt enthält die Software zur Steuerung der Wasser/Wasser Wärmepumpe con Viktor Rees. 
+Es handelt sich um eine TwinCAT 3 SPS der Firma Beckhoff. Es wird der embedded IPC CX5110-0115-9020 von Beckhoff 
+als Steuerrechnenr verwendet
 
 Dashboard-Url: http://192.168.178.14:1010/  (__SystemAdministrator/isdn98)
 
@@ -68,14 +70,5 @@ Password: is........8
 
 ## TODO:
 - Hardening: Diagnose of Analog Status Info Overrun, Error, ...
-- Quellwassermenge stufenlos steuern - oder Ein-/Ausschalten
 - Installation unter Linux VM
 - Grafana Dashboard
-- Status LED einbauen
-- Zeitzone einstellen in InfluxDB
-- SG Ready Verbindung zum Wechselrichter
-- Schwerkraft Drossel einbauen
-- Ladepumpe steuern von SPS
-- Ausschalten bei zu hoher Rücklauf Temperatur
-- Lizens kaufen für HMI
-- neue SPS ohne Windows CE
