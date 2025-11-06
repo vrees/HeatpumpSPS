@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R134a p-h-Diagramm</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .chart-container {
+            position: relative;
+            height: 700px;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        canvas {
+            background: white;
+            border-radius: 10px;
+        }
+        .legend-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .legend-item {
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 R134a Druck-Enthalpie-Diagramm (log p-h)</h1>
+        <p><strong>Betriebspunkt:</strong> Niederdruck 2.2 bar, Hochdruck 13.8 bar, COP = 3.25</p>
+
+        <div class="info">
+            <h2>Was ist ein p-h-Diagramm?</h2>
+            <p>Das <strong>Druck-Enthalpie-Diagramm</strong> ist das wichtigste Werkzeug in der Kälte- und Klimatechnik:</p>
+            <ul>
+                <li><strong>Y-Achse:</strong> Druck p in bar (logarithmisch skaliert)</li>
+                <li><strong>X-Achse:</strong> Spezifische Enthalpie h in kJ/kg</li>
+                <li><strong>Sättigungskurve (Glocke):</strong> Trennt flüssige Phase von Dampfphase</li>
+                <li><strong>Nassdampfgebiet:</strong> Bereich innerhalb der Glocke (Gemisch aus Flüssigkeit + Dampf)</li>
+                <li><strong>Isobaren:</strong> Horizontale Linien = konstanter Druck</li>
+                <li><strong>Isothermen:</strong> Kurven = konstante Temperatur</li>
+            </ul>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="phDiagram"></canvas>
+        </div>
+
+        <h2>Prozess-Erklärung: Die 4 Schritte deiner Wärmepumpe</h2>
+
+        <table>
+            <tr>
+                <th>Schritt</th>
+                <th>Von → Nach</th>
+                <th>Was passiert physikalisch?</th>
+                <th>Im Diagramm</th>
+                <th>Energie</th>
+            </tr>
+            <tr style="background: #e8f5e9;">
+                <td><strong>① → ②<br>KOMPRESSION</strong></td>
+                <td><strong>Punkt ①:</strong> 2.7°C, 2.2 bar<br><strong>Punkt ②:</strong> ~70°C, 13.8 bar</td>
+                <td>
+                    • Überhitzter Dampf wird verdichtet<br>
+                    • Druck steigt von 2.2 auf 13.8 bar<br>
+                    • Temperatur steigt von 2.7 auf ~70°C<br>
+                    • Enthalpie nimmt zu (Arbeit wird zugeführt)
+                </td>
+                <td>
+                    <strong>Fast senkrechte Linie nach oben</strong><br>
+                    (leicht nach rechts geneigt = reale Kompression mit Verlusten)
+                </td>
+                <td>
+                    <strong>Arbeit ZU:</strong><br>
+                    W = 3.2 kW<br>
+                    (elektrisch)
+                </td>
+            </tr>
+            <tr style="background: #ffebee;">
+                <td><strong>② → ③<br>VERFLÜSSIGUNG</strong></td>
+                <td><strong>Punkt ②:</strong> ~70°C, 13.8 bar<br><strong>Punkt ③:</strong> 45°C, 13.8 bar</td>
+                <td>
+                    <strong>Phase 1:</strong> Heißgas kühlt ab (70→50°C)<br>
+                    <strong>Phase 2:</strong> Kondensation bei 50°C<br>
+                    <strong>Phase 3:</strong> Unterkühlung (50→45°C)<br>
+                    • Wärme wird an Heizung abgegeben
+                </td>
+                <td>
+                    <strong>Horizontale Linie nach links</strong><br>
+                    (isobar = konstanter Druck 13.8 bar)<br>
+                    Durchläuft Sättigungskurve!
+                </td>
+                <td>
+                    <strong>Wärme AB:</strong><br>
+                    Q = 10.4 kW<br>
+                    (an Heizung)
+                </td>
+            </tr>
+            <tr style="background: #fff3e0;">
+                <td><strong>③ → ④<br>EXPANSION</strong></td>
+                <td><strong>Punkt ③:</strong> 45°C, 13.8 bar<br><strong>Punkt ④:</strong> -10°C, 2.2 bar</td>
+                <td>
+                    • Flüssigkeit entspannt durch Ventil<br>
+                    • Druck fällt von 13.8 auf 2.2 bar<br>
+                    • Temperatur sinkt auf -10°C<br>
+                    • <strong>Flash-Gas entsteht</strong> (30-40% verdampft sofort)<br>
+                    • Enthalpie bleibt konstant!
+                </td>
+                <td>
+                    <strong>Senkrechte Linie nach unten</strong><br>
+                    (isenthalp = h = const.)<br>
+                    Endet im Nassdampfgebiet
+                </td>
+                <td>
+                    <strong>Keine Arbeit</strong><br>
+                    (Drossel-Verlust)
+                </td>
+            </tr>
+            <tr style="background: #e3f2fd;">
+                <td><strong>④ → ①<br>VERDAMPFUNG</strong></td>
+                <td><strong>Punkt ④:</strong> -10°C, 2.2 bar<br><strong>Punkt ①:</strong> 2.7°C, 2.2 bar</td>
+                <td>
+                    <strong>Phase 1:</strong> Nassdampf verdampft bei -10°C<br>
+                    <strong>Phase 2:</strong> Dampf wird überhitzt (-10→2.7°C)<br>
+                    • Wärme wird von Quelle aufgenommen<br>
+                    • ⚠️ <strong>Zu viel Überhitzung</strong> (12.7°C)
+                </td>
+                <td>
+                    <strong>Horizontale Linie nach rechts</strong><br>
+                    (isobar = konstanter Druck 2.2 bar)<br>
+                    Verlässt Nassdampfgebiet nach rechts
+                </td>
+                <td>
+                    <strong>Wärme AUF:</strong><br>
+                    Q₀ = 7.2 kW<br>
+                    (von Quelle)
+                </td>
+            </tr>
+        </table>
+
+        <h2>Wichtige Ablese-Punkte im Diagramm</h2>
+
+        <div class="legend-box">
+            <div class="legend-item" style="border-color: #e74c3c; background: #ffebee;">
+                <h3 style="margin-top: 0; color: #e74c3c;">① Verdampfer-Austritt</h3>
+                <p><strong>Zustand:</strong> Überhitzter Dampf</p>
+                <p><strong>Werte:</strong> 2.7°C / 2.2 bar</p>
+                <p><strong>h ≈ 407 kJ/kg</strong></p>
+                <p>⚠️ Zu weit rechts = zu viel Überhitzung (12.7°C)</p>
+            </div>
+
+            <div class="legend-item" style="border-color: #9b59b6; background: #f3e5f5;">
+                <h3 style="margin-top: 0; color: #9b59b6;">② Kompressor-Austritt</h3>
+                <p><strong>Zustand:</strong> Heißgas (stark überhitzt)</p>
+                <p><strong>Werte:</strong> ~70°C / 13.8 bar</p>
+                <p><strong>h ≈ 435 kJ/kg</strong></p>
+                <p>Stark überhitzter Dampf</p>
+            </div>
+
+            <div class="legend-item" style="border-color: #27ae60; background: #e8f5e9;">
+                <h3 style="margin-top: 0; color: #27ae60;">③ Verflüssiger-Austritt</h3>
+                <p><strong>Zustand:</strong> Flüssigkeit (unterkühlt)</p>
+                <p><strong>Werte:</strong> 45°C / 13.8 bar</p>
+                <p><strong>h ≈ 268 kJ/kg</strong></p>
+                <p>✓ Gute Unterkühlung (~5°C)</p>
+            </div>
+
+            <div class="legend-item" style="border-color: #3498db; background: #e3f2fd;">
+                <h3 style="margin-top: 0; color: #3498db;">④ Expansionsventil-Austritt</h3>
+                <p><strong>Zustand:</strong> Nassdampf</p>
+                <p><strong>Werte:</strong> -10°C / 2.2 bar</p>
+                <p><strong>h ≈ 268 kJ/kg</strong> (gleich wie ③!)</p>
+                <p>Dampfgehalt x ≈ 30-40%</p>
+            </div>
+        </div>
+
+        <h2>COP-Berechnung aus dem Diagramm</h2>
+
+        <div class="success">
+            <h3>Enthalpien ablesen:</h3>
+            <ul>
+                <li>h₁ (nach Verdampfer) ≈ 407 kJ/kg</li>
+                <li>h₂ (nach Kompressor) ≈ 435 kJ/kg</li>
+                <li>h₃ (nach Verflüssiger) ≈ 268 kJ/kg</li>
+                <li>h₄ (nach Expansion) ≈ 268 kJ/kg (isenthalp!)</li>
+            </ul>
+
+            <h3>Berechnungen:</h3>
+            <p><strong>Kälteleistung Q₀:</strong> h₁ - h₄ = 407 - 268 = 139 kJ/kg</p>
+            <p><strong>Kompressorarbeit W:</strong> h₂ - h₁ = 435 - 407 = 28 kJ/kg</p>
+            <p><strong>Heizleistung Q:</strong> h₂ - h₃ = 435 - 268 = 167 kJ/kg</p>
+
+            <h3 style="color: #27ae60;">COP = Q / W = 167 / 28 = 5.96 (theoretisch)</h3>
+            <p style="color: #e67e22;"><strong>Real gemessen:</strong> COP = 3.25</p>
+            <p>Die Differenz kommt von:<br>
+            • Wärmeverlusten an Gehäusen<br>
+            • Druckverlusten in Leitungen<br>
+            • Motorwirkungsgrad Kompressor<br>
+            • Ölrückführung und Nebenverbrauchern</p>
+        </div>
+
+        <h2>Optimierungspotential im p-h-Diagramm sichtbar</h2>
+
+        <div class="warning">
+            <h3>⚠️ Problem: Punkt ① liegt zu weit rechts</h3>
+            <p><strong>Aktuelle Überhitzung:</strong> 12.7°C</p>
+            <p><strong>Im Diagramm:</strong> Punkt ① hat großen horizontalen Abstand zur Taulinie (rechter Ast der Sättigungskurve)</p>
+            
+            <h4>Folgen:</h4>
+            <ul>
+                <li>❌ Zu viel Verdampferfläche wird für Überhitzung "verschwendet"</li>
+                <li>❌ Zu wenig Fläche für die eigentliche Verdampfung (Phasenwechsel)</li>
+                <li>❌ COP-Verlust von ca. 5-10%</li>
+            </ul>
+
+            <h4>Lösung: EEV weiter öffnen</h4>
+            <ul>
+                <li>✓ Mehr Kältemittel-Durchsatz</li>
+                <li>✓ Punkt ① wandert nach links (näher an Taulinie)</li>
+                <li>✓ Optimale Überhitzung: 5-8°C</li>
+                <li>✓ Mehr Verdampfungsfläche = höherer COP</li>
+            </ul>
+
+            <p><strong>Erwartung:</strong> COP 3.25 → 3.35-3.40 (+3-5%)</p>
+        </div>
+
+        <div class="info">
+            <h3>Weitere Beobachtungen:</h3>
+            <ul>
+                <li>✓ <strong>Unterkühlung (~5°C):</strong> Punkt ③ liegt links der Siedelinie → gut!</li>
+                <li>✓ <strong>Druckverhältnis:</strong> 13.8 / 2.2 = 6.3 → moderat (gut für Kompressor)</li>
+                <li>✓ <strong>Temperaturhub:</strong> 50°C - (-10°C) = 60 K → für Grundwasser-WP sehr gut</li>
+                <li>⚠️ <strong>Flash-Gas-Anteil:</strong> Bei Punkt ④ ca. 30-40% → normal, könnte mit IHX reduziert werden</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        // R134a p-h-Diagramm erstellen
+        const ctx = document.getElementById('phDiagram').getContext('2d');
+        
+        // Sättigungskurve für R134a (vereinfachte Werte aus Tabellen)
+        const liquidLine = [
+            { x: 200, y: 1.0 },   // -40°C
+            { x: 205, y: 1.2 },
+            { x: 210, y: 1.5 },
+            { x: 215, y: 1.8 },
+            { x: 220, y: 2.2 },   // -10°C
+            { x: 225, y: 2.6 },
+            { x: 230, y: 3.1 },
+            { x: 240, y: 4.2 },
+            { x: 250, y: 5.7 },
+            { x: 260, y: 7.7 },
+            { x: 268, y: 10.0 },
+            { x: 275, y: 13.8 },  // 50°C
+            { x: 280, y: 16.5 }
+        ];
+        
+        const vaporLine = [
+            { x: 395, y: 1.0 },   // -40°C
+            { x: 397, y: 1.2 },
+            { x: 400, y: 1.5 },
+            { x: 401, y: 1.8 },
+            { x: 402, y: 2.2 },   // -10°C
+            { x: 404, y: 2.6 },
+            { x: 406, y: 3.1 },
+            { x: 409, y: 4.2 },
+            { x: 412, y: 5.7 },
+            { x: 416, y: 7.7 },
+            { x: 420, y: 10.0 },
+            { x: 423, y: 13.8 },  // 50°C
+            { x: 426, y: 16.5 }
+        ];
+        
+        // Realer Kreisprozess
+        const process = [
+            { x: 407, y: 2.2 },   // ① Nach Verdampfer
+            { x: 435, y: 13.8 },  // ② Nach Kompressor
+            { x: 268, y: 13.8 },  // ③ Nach Verflüssiger
+            { x: 268, y: 2.2 },   // ④ Nach Expansion
+            { x: 407, y: 2.2 }    // ① Zurück
+        ];
+        
+        // Isothermen
+        const createIsotherm = (temp, h1, h2, p1, p2) => {
+            const points = [];
+            for (let i = 0; i <= 20; i++) {
+                const t = i / 20;
+                points.push({
+                    x: h1 + t * (h2 - h1),
+                    y: p1 * Math.pow(p2/p1, t)
+                });
+            }
+            return points;
+        };
+        
+        const phChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [
+                    // Siedelinie (Flüssigkeit)
+                    {
+                        label: 'Siedelinie (flüssig)',
+                        data: liquidLine,
+                        borderColor: '#3498db',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0.4
+                    },
+                    // Taulinie (Dampf)
+                    {
+                        label: 'Taulinie (Dampf)',
+                        data: vaporLine,
+                        borderColor: '#e74c3c',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0.4
+                    },
+                    // Isotherme -10°C
+                    {
+                        label: '-10°C',
+                        data: createIsotherm(-10, 220, 450, 2.2, 2.2),
+                        borderColor: 'rgba(46, 204, 113, 0.4)',
+                        backgroundColor: 'transparent',
+                        borderWidth: 1,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false
+                    },
+                    // Isotherme 0°C
+                    {
+                        label: '0°C',
+                        data: createIsotherm(0, 230, 445, 3.0, 3.0),
+                        borderColor: 'rgba(52, 152, 219, 0.4)',
+                        backgroundColor: 'transparent',
+                        borderWidth: 1,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false
+                    },
+                    // Isotherme 20°C
+                    {
+                        label: '20°C',
+                        data: createIsotherm(20, 250, 440, 5.7, 5.7),
+                        borderColor: 'rgba(155, 89, 182, 0.4)',
+                        backgroundColor: 'transparent',
+                        borderWidth: 1,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false
+                    },
+                    // Isotherme 50°C
+                    {
+                        label: '50°C',
+                        data: createIsotherm(50, 275, 430, 13.8, 13.8),
+                        borderColor: 'rgba(231, 76, 60, 0.4)',
+                        backgroundColor: 'transparent',
+                        borderWidth: 1,
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                        fill: false
+                    },
+                    // Realer Prozess
+                    {
+                        label: 'Realer Kältekreislauf',
+                        data: process,
+                        borderColor: '#27ae60',
+                        backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                        borderWidth: 5,
+                        pointRadius: 12,
+                        pointBackgroundColor: ['#e74c3c', '#9b59b6', '#27ae60', '#3498db', '#e74c3c'],
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 3,
+                        fill: false,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'log p-h-Diagramm für R134a',
+                        font: { size: 20, weight: 'bold' },
+                        padding: 20
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            filter: function(item) {
+                                return item.text === 'Siedelinie (flüssig)' || 
+                                       item.text === 'Taulinie (Dampf)' || 
+                                       item.text === 'Realer Kältekreislauf' ||
+                                       item.text === '-10°C' ||
+                                       item.text === '50°C';
+                            },
+                            font: { size: 12 }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        callbacks: {
+                            title: function(context) {
+                                const labels = ['① Verdampfer-Austritt', '② Kompressor-Austritt', 
+                                              '③ Verflüssiger-Austritt', '④ Expansionsventil-Austritt'];
+                                if (context[0].datasetIndex === 6 && context[0].dataIndex < 4) {
+                                    return labels[context[0].dataIndex];
+                                }
+                                return '';
+                            },
+                            label: function(context) {
+                                if (context.datasetIndex === 6) {
+                                    return 'h = ' + context.parsed.x.toFixed(0) + ' kJ/kg, p = ' + 
+                                           context.parsed.y.toFixed(1) + ' bar';
+                                }
+                                return context.dataset.label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        title: {
+                            display: true,
+                            text: 'Spezifische Enthalpie h [kJ/kg]',
+                            font: { size: 16, weight: 'bold' }
+                        },
+                        min: 180,
+                        max: 460,
+                        ticks: {
+                            stepSize: 20,
+                            font: { size: 12 }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)',
+                            lineWidth: 1
+                        }
+                    },
+                    y: {
+                        type: 'logarithmic',
+                        title: {
+                            display: true,
+                            text: 'Druck p [bar] - logarithmisch',
+                            font: { size: 16, weight: 'bold' }
+                        },
+                        min: 0.8,
+                        max: 25,
+                        ticks: {
+                            callback: function(value) {
+                                if ([0.8, 1, 1.5, 2, 2.2, 3, 5, 7, 10, 13.8, 15, 20].includes(value)) {
+                                    return value.toFixed(1);
+                                }
+                                return null;
+                            },
+                            font: { size: 12 }
+                        },
+                        grid: {
+                            color: function(context) {
+                                if (context.tick.value === 2.2 || context.tick.value === 13.8) {
+                                    return 'rgba(46, 204, 113, 0.6)';
+                                }
+                                return 'rgba(0, 0, 0, 0.1)';
+                            },
+                            lineWidth: function(context) {
+                                if (context.tick.value === 2.2 || context.tick.value === 13.8) {
+                                    return 2;
+                                }
+                                return 1;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

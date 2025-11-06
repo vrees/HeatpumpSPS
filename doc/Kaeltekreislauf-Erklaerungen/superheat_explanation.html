@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Überhitzung und Verdampfer-Dimensionierung</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .danger {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .box {
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+        }
+        .box-good {
+            background: #e8f5e9;
+            border-color: #27ae60;
+        }
+        .box-bad {
+            background: #ffebee;
+            border-color: #e74c3c;
+        }
+        canvas {
+            max-width: 100%;
+            margin: 20px 0;
+        }
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .highlight {
+            background: yellow;
+            padding: 2px 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Überhitzung erklärt: Warum 12.7°C zu viel ist</h1>
+
+        <div class="success">
+            <h2>✅ Deine Auslegung war RICHTIG!</h2>
+            <p><strong>Mit 60 Platten hast du einen großzügig dimensionierten Verdampfer gewählt.</strong> 
+            Das ist genau richtig für die Sicherheit gegen Einfrieren!</p>
+            <p><strong>Aber:</strong> Ein großer Verdampfer allein garantiert noch keinen optimalen Betrieb. 
+            Die <strong>Kältemittel-Durchflussmenge</strong> (gesteuert durch das EEV) muss zur Verdampfergröße passen!</p>
+        </div>
+
+        <h2>1. Was bedeutet "Überhitzung zu hoch"?</h2>
+
+        <div class="info">
+            <h3>📚 Definition Überhitzung</h3>
+            <p><strong>Überhitzung</strong> = Temperatur des Dampfes ÜBER der Siedetemperatur</p>
+            <p><strong>Deine Werte:</strong></p>
+            <ul>
+                <li>Siedetemperatur bei 2.2 bar: <strong>-10°C</strong></li>
+                <li>Tatsächliche Austrittstemperatur: <strong>2.7°C</strong></li>
+                <li>Überhitzung: 2.7°C - (-10°C) = <strong>12.7°C</strong></li>
+            </ul>
+        </div>
+
+        <h3>Was passiert im Verdampfer?</h3>
+        
+        <pre>
+VERDAMPFER MIT 60 PLATTEN (deine Anlage):
+
+Quellwasser:  7.2°C ──────────────────────────→ 3.7°C
+               │                                  │
+               │  60 Platten verfügbar            │
+               ↓                                  ↓
+Kältemittel: -10°C ←──────────────────────────── 2.7°C
+             (flüssig/    ZONE A    ZONE B      (überhitzt)
+              siedend)   │=======│  │~~~~~~~│
+                         │ 70%   │  │  30%  │
+                         │Verdampf│ │Überhitz│
+        </pre>
+
+        <div class="comparison">
+            <div class="box box-bad">
+                <h3 style="color: #e74c3c;">❌ IST-Zustand: Überhitzung 12.7°C</h3>
+                <p><strong>Flächenverteilung (geschätzt):</strong></p>
+                <ul>
+                    <li><strong>Zone A (Verdampfung):</strong> ~70% der Fläche</li>
+                    <li><strong>Zone B (Überhitzung):</strong> ~30% der Fläche</li>
+                </ul>
+                <p><strong>Problem:</strong> 30% der teuren Verdampferfläche wird "verschwendet" für Überhitzung!</p>
+            </div>
+
+            <div class="box box-good">
+                <h3 style="color: #27ae60;">✅ SOLL-Zustand: Überhitzung 6°C</h3>
+                <p><strong>Optimale Flächenverteilung:</strong></p>
+                <ul>
+                    <li><strong>Zone A (Verdampfung):</strong> ~90% der Fläche</li>
+                    <li><strong>Zone B (Überhitzung):</strong> ~10% der Fläche</li>
+                </ul>
+                <p><strong>Vorteil:</strong> Fast die gesamte Fläche für effiziente Verdampfung genutzt!</p>
+            </div>
+        </div>
+
+        <h2>2. Warum ist Verdampfung effizienter als Überhitzung?</h2>
+
+        <div class="info">
+            <h3>🔥 Thermodynamik: Phasenwechsel vs. Temperaturänderung</h3>
+            <p>Die Wärmeaufnahme im Verdampfer erfolgt in 2 Phasen:</p>
+            
+            <table>
+                <tr>
+                    <th>Phase</th>
+                    <th>Prozess</th>
+                    <th>Wärmeaufnahme</th>
+                    <th>Wärmeübergangskoeffizient α</th>
+                </tr>
+                <tr style="background: #e8f5e9;">
+                    <td><strong>Phase 1:<br>Verdampfung</strong></td>
+                    <td>Flüssig → Dampf<br>bei konstant -10°C</td>
+                    <td><strong>≈ 200 kJ/kg</strong><br>(Verdampfungsenthalpie!)</td>
+                    <td><strong>3000-5000 W/(m²·K)</strong><br>⭐ SEHR HOCH</td>
+                </tr>
+                <tr style="background: #ffebee;">
+                    <td><strong>Phase 2:<br>Überhitzung</strong></td>
+                    <td>Dampf erwärmen<br>-10°C → 2.7°C</td>
+                    <td><strong>≈ 13 kJ/kg</strong><br>(nur spezifische Wärme)</td>
+                    <td><strong>200-500 W/(m²·K)</strong><br>⚠️ NIEDRIG</td>
+                </tr>
+            </table>
+
+            <h4>📊 Verhältnis:</h4>
+            <p><strong>Verdampfung überträgt 15x mehr Wärme pro kg als Überhitzung!</strong></p>
+            <p>Wärmeübergangskoeffizient beim Verdampfen ist <strong>10-15x höher</strong> als bei Überhitzung!</p>
+        </div>
+
+        <canvas id="efficiencyChart" width="800" height="400"></canvas>
+
+        <h2>3. Deine konkreten Fragen beantwortet</h2>
+
+        <div class="warning">
+            <h3>❓ War die Auslegung mit Reserve falsch?</h3>
+            <p><strong>NEIN!</strong> Die Auslegung mit 60 Platten war absolut richtig und wichtig:</p>
+            <ul>
+                <li>✅ Verhindert Einfrieren (hohe Sicherheit)</li>
+                <li>✅ Niedriger Differenzdruck (38.2 mbar ist noch gut)</li>
+                <li>✅ Guter Pinch Point möglich (4.5°C ist akzeptabel)</li>
+                <li>✅ Robuste Anlage gegen Lastschwankungen</li>
+            </ul>
+            <p><strong>ABER:</strong> Du musst jetzt das <strong>EEV (Expansionsventil) richtig einstellen</strong>, 
+            damit mehr Kältemittel durchströmt und die Fläche optimal genutzt wird!</p>
+        </div>
+
+        <div class="info">
+            <h3>❓ Sind neben erhöhten Kosten noch weitere Nachteile vorhanden?</h3>
+            <p><strong>Nachteile eines zu großen Verdampfers:</strong></p>
+            <table>
+                <tr>
+                    <th>Aspekt</th>
+                    <th>Nachteil</th>
+                    <th>Bei dir relevant?</th>
+                </tr>
+                <tr>
+                    <td>Anschaffungskosten</td>
+                    <td>60 Platten teurer als 40 Platten</td>
+                    <td style="background: #fff3cd;">⚠️ Ja (aber Sicherheit ist wichtiger!)</td>
+                </tr>
+                <tr>
+                    <td>Größe/Platzbedarf</td>
+                    <td>Mehr Bauraum erforderlich</td>
+                    <td style="background: #d4edda;">✓ Vermutlich kein Problem</td>
+                </tr>
+                <tr>
+                    <td>Kältemittel-Füllmenge</td>
+                    <td>Mehr R134a im System</td>
+                    <td style="background: #d4edda;">✓ Minimal (nur im Verdampfer)</td>
+                </tr>
+                <tr style="background: #f8d7da;">
+                    <td><strong>Überhitzung!</strong></td>
+                    <td><strong>Zu wenig Kältemittel für große Fläche</strong></td>
+                    <td style="background: #f8d7da;"><strong>❌ JA! Aktuelles Problem</strong></td>
+                </tr>
+                <tr>
+                    <td>Druckverlust</td>
+                    <td>Könnte höher sein durch längere Wege</td>
+                    <td style="background: #d4edda;">✓ Nein (38.2 mbar ist OK)</td>
+                </tr>
+            </table>
+
+            <p><strong>Fazit:</strong> Der einzige relevante Nachteil ist die <span class="highlight">falsche EEV-Einstellung</span>!</p>
+        </div>
+
+        <div class="danger">
+            <h3>❓ Was bedeutet hohe Überhitzung für den Kompressor?</h3>
+            <p><strong>Gute Nachrichten:</strong> Hohe Überhitzung ist für den Kompressor NICHT schlecht - sogar sicherer!</p>
+            
+            <h4>Vorteile für Kompressor:</h4>
+            <ul>
+                <li>✅ <strong>Kein Flüssigkeitsschlag:</strong> Absolut sicher, dass nur Dampf angesaugt wird</li>
+                <li>✅ <strong>Längere Lebensdauer:</strong> Keine Gefahr durch Flüssigkeitstropfen</li>
+                <li>✅ <strong>Öl bleibt im Kompressor:</strong> Wird nicht durch Flüssigkeit ausgewaschen</li>
+            </ul>
+
+            <h4>Nachteile für Kompressor:</h4>
+            <ul>
+                <li>⚠️ <strong>Höhere Sauggas-Temperatur:</strong> 2.7°C statt -4°C (bei 6°C Überhitzung)</li>
+                <li>⚠️ <strong>Geringere volumetrische Effizienz:</strong> Dampf ist "dünner" (weniger dicht)</li>
+                <li>⚠️ <strong>Höhere Heißgas-Temperatur:</strong> ~70-75°C statt ~65°C</li>
+                <li>⚠️ <strong>COP-Verlust:</strong> Nicht durch Kompressor selbst, sondern weil weniger Kältemittel verdampft!</li>
+            </ul>
+
+            <p><strong>Kritisch:</strong> Der Kompressor läuft zwar sicher, aber er <strong>pumpt weniger Kältemittel-Masse pro Stunde</strong>, 
+            weil das angesaugte Gas eine geringere Dichte hat!</p>
+        </div>
+
+        <canvas id="densityChart" width="800" height="400"></canvas>
+
+        <div class="warning">
+            <h3>❓ Je größer der Wärmetauscher, desto besser der COP - stimmt das nicht?</h3>
+            <p><strong>Die Wahrheit ist komplizierter:</strong></p>
+            
+            <h4>✅ Richtig ist:</h4>
+            <ul>
+                <li>Größerer Wärmetauscher → <strong>POTENZIAL</strong> für besseren COP</li>
+                <li>Niedrigere Temperaturdifferenzen möglich</li>
+                <li>Mehr Reserve gegen Verschmutzung</li>
+                <li>Besserer Pinch Point möglich</li>
+            </ul>
+
+            <h4>❌ ABER nur wenn:</h4>
+            <ul>
+                <li><strong>Ausreichend Kältemittel durchströmt</strong> (EEV richtig eingestellt!)</li>
+                <li>Durchflussmengen beider Medien stimmen</li>
+                <li>Wärmetauscher sauber ist</li>
+                <li>Strömungsführung optimal</li>
+            </ul>
+        </div>
+
+        <h2>4. Das eigentliche Problem: EEV-Einstellung</h2>
+
+        <div class="info">
+            <h3>🎯 Die Kern-Erkenntnis</h3>
+            <p>Stell dir vor, du hast eine <strong>60-spurige Autobahn</strong> gebaut (dein Verdampfer), 
+            aber nur <strong>genug Autos für 40 Spuren</strong> durchfahren lassen (Kältemittel-Menge).</p>
+            
+            <p><strong>Was passiert?</strong></p>
+            <ul>
+                <li>Die 40 Spuren mit Autos (Verdampfungszone): <strong>Stau, hohe Effizienz</strong> ✅</li>
+                <li>Die 20 leeren Spuren (Überhitzungszone): <strong>Verschwendet, ineffizient</strong> ❌</li>
+            </ul>
+
+            <p><strong>Lösung:</strong> Mehr Autos durchlassen = <strong>EEV weiter öffnen</strong>!</p>
+        </div>
+
+        <h3>Mechanismus im Detail</h3>
+
+        <table>
+            <tr>
+                <th>Kältemittel-<br>Durchsatz</th>
+                <th>Was passiert im Verdampfer?</th>
+                <th>Überhitzung</th>
+                <th>COP</th>
+                <th>Sicherheit</th>
+            </tr>
+            <tr style="background: #f8d7da;">
+                <td><strong>Zu wenig</strong><br>(EEV zu geschlossen)</td>
+                <td>
+                    • Wenig Flüssigkeit pro Zeit<br>
+                    • Verdampft schnell in ersten 70%<br>
+                    • Restliche 30% nur Überhitzung<br>
+                    • Verdampferfläche verschwendet
+                </td>
+                <td style="color: #dc3545;"><strong>&gt; 12°C</strong><br>ZU HOCH</td>
+                <td style="color: #dc3545;"><strong>Niedrig</strong><br>(3.25)</td>
+                <td style="color: #27ae60;"><strong>SEHR GUT</strong><br>Kein Flüssig</td>
+            </tr>
+            <tr style="background: #d4edda;">
+                <td><strong>OPTIMAL</strong><br>(EEV richtig)</td>
+                <td>
+                    • Gute Kältemittel-Menge<br>
+                    • Verdampft in 85-90% der Fläche<br>
+                    • Nur 10-15% für Überhitzung<br>
+                    • Fläche optimal genutzt
+                </td>
+                <td style="color: #27ae60;"><strong>5-8°C</strong><br>OPTIMAL</td>
+                <td style="color: #27ae60;"><strong>Hoch</strong><br>(3.35-3.40)</td>
+                <td style="color: #27ae60;"><strong>GUT</strong><br>Sicher</td>
+            </tr>
+            <tr style="background: #f8d7da;">
+                <td><strong>Zu viel</strong><br>(EEV zu offen)</td>
+                <td>
+                    • Sehr viel Flüssigkeit<br>
+                    • Verdampft nicht vollständig<br>
+                    • Flüssigkeit gelangt zum Kompressor<br>
+                    • <strong>GEFAHR!</strong>
+                </td>
+                <td style="color: #dc3545;"><strong>&lt; 3°C</strong><br>KRITISCH</td>
+                <td style="color: #ffc107;"><strong>Hoch?</strong><br>(aber riskant!)</td>
+                <td style="color: #dc3545;"><strong>GEFAHR</strong><br>Flüssigschlag!</td>
+            </tr>
+        </table>
+
+        <h2>5. Dein optimaler Betriebspunkt</h2>
+
+        <div class="success">
+            <h3>✅ Was du RICHTIG gemacht hast:</h3>
+            <ol>
+                <li><strong>Verdampfer großzügig dimensioniert</strong> (60 Platten) → Sicherheit gegen Einfrieren ✅</li>
+                <li><strong>Guter Pinch Point möglich</strong> (4.5°C ist OK) → Potenzial ist da ✅</li>
+                <li><strong>Niedriger Differenzdruck</strong> (38.2 mbar) → Strömung gut ✅</li>
+                <li><strong>Quellwasser-ΔT gut</strong> (3.5°C) → Auslegung passt ✅</li>
+            </ol>
+        </div>
+
+        <div class="warning">
+            <h3>⚠️ Was du jetzt OPTIMIEREN solltest:</h3>
+            <ol>
+                <li><strong>EEV weiter öffnen</strong> → Mehr Kältemittel-Durchsatz</li>
+                <li><strong>Überhitzung auf 5-8°C senken</strong> → Fläche besser nutzen</li>
+                <li><strong>COP steigt um 3-5%</strong> → Von 3.25 auf ~3.35-3.40</li>
+                <li><strong>Kontinuierlich überwachen</strong> → NIEMALS unter 5°C gehen!</li>
+            </ol>
+        </div>
+
+        <h2>6. Schritt-für-Schritt Optimierung</h2>
+
+        <div class="info">
+            <h3>🔧 Praktische Vorgehensweise</h3>
+            <ol>
+                <li><strong>Dokumentiere Ist-Zustand:</strong>
+                    <ul>
+                        <li>Überhitzung: 12.7°C ✅ (dokumentiert)</li>
+                        <li>COP: 3.25 ✅</li>
+                        <li>Aktueller EEV-Öffnungsgrad: [zu dokumentieren]</li>
+                    </ul>
+                </li>
+
+                <li><strong>Schrittweise öffnen:</strong>
+                    <ul>
+                        <li>EEV um 5-10% weiter öffnen</li>
+                        <li>15-20 Minuten stabilisieren lassen</li>
+                        <li>Überhitzung ablesen: T_Austritt_Verdampfer - (-10°C)</li>
+                        <li>Wenn noch > 8°C: Nächsten Schritt</li>
+                    </ul>
+                </li>
+
+                <li><strong>Ziel erreichen:</strong>
+                    <ul>
+                        <li>Überhitzung = 5-8°C (optimal)</li>
+                        <li>NIEMALS unter 5°C gehen!</li>
+                        <li>Bei 3-5°C: SOFORT stoppen, etwas zurück</li>
+                    </ul>
+                </li>
+
+                <li><strong>Ergebnis prüfen:</strong>
+                    <ul>
+                        <li>COP sollte steigen (Ziel: 3.35-3.40)</li>
+                        <li>Überhitzung stabil bei 5-8°C</li>
+                        <li>Keine Auffälligkeiten (Geräusche, Schwingungen)</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <h2>7. Zusammenfassung</h2>
+
+        <table>
+            <tr>
+                <th>Aussage</th>
+                <th>Richtig?</th>
+                <th>Erklärung</th>
+            </tr>
+            <tr>
+                <td>"Meine Verdampfer-Dimensionierung war falsch"</td>
+                <td style="background: #d4edda; color: #27ae60;"><strong>NEIN</strong></td>
+                <td>60 Platten sind richtig und wichtig für Sicherheit!</td>
+            </tr>
+            <tr>
+                <td>"Ein großer Verdampfer hat Nachteile"</td>
+                <td style="background: #fff3cd; color: #856404;"><strong>JEIN</strong></td>
+                <td>Nur Kosten + falscher EEV-Einstellung, sonst nur Vorteile</td>
+            </tr>
+            <tr>
+                <td>"Hohe Überhitzung schadet dem Kompressor"</td>
+                <td style="background: #d4edda; color: #27ae60;"><strong>NEIN</strong></td>
+                <td>Kompressor läuft sogar sicherer! Aber System-COP sinkt</td>
+            </tr>
+            <tr>
+                <td>"Je größer der WT, desto besser der COP"</td>
+                <td style="background: #fff3cd; color: #856404;"><strong>JEIN</strong></td>
+                <td>Nur wenn EEV passend eingestellt ist!</td>
+            </tr>
+            <tr style="background: #e8f5e9;">
+                <td><strong>"Ich muss nur das EEV optimieren"</strong></td>
+                <td style="background: #d4edda; color: #27ae60;"><strong>JA!</strong></td>
+                <td><strong>Das ist die Lösung! Verdampfer selbst ist perfekt.</strong></td>
+            </tr>
+        </table>
+
+        <div class="success">
+            <h3>🎯 Das Wichtigste in einem Satz:</h3>
+            <p style="font-size: 18px; font-weight: bold; color: #27ae60;">
+            Dein Verdampfer (60 Platten) ist PERFEKT dimensioniert - du musst nur mehr Kältemittel 
+            durchlassen (EEV öffnen), um die vorhandene Fläche optimal zu nutzen!
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Chart 1: Effizienz Verdampfung vs. Überhitzung
+        const ctx1 = document.getElementById('efficiencyChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Verdampfung\n(Phasenwechsel)', 'Überhitzung\n(Erwärmung Dampf)'],
+                datasets: [{
+                    label: 'Wärmeaufnahme [kJ/kg]',
+                    data: [200, 13],
+                    backgroundColor: ['rgba(46, 204, 113, 0.7)', 'rgba(231, 76, 60, 0.7)'],
+                    borderColor: ['#27ae60', '#e74c3c'],
+                    borderWidth: 2
+                }, {
+                    label: 'Wärmeübergangskoeffizient α [W/(m²·K)] / 10',
+                    data: [400, 35],
+                    backgroundColor: ['rgba(52, 152, 219, 0.7)', 'rgba(243, 156, 18, 0.7)'],
+                    borderColor: ['#3498db', '#f39c12'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Warum Verdampfung effizienter ist als Überhitzung',
+                        font: { size: 16, weight: 'bold' }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Wert'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Dichte und Massenstrom
+        const ctx2 = document.getElementById('densityChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: ['0°C\n(kein Überhitz)', '3°C\n(3°C Überhitz)', '6°C\n(6°C Überhitz, optimal)', '10°C\n(10°C Überhitz)', '13°C\n(12.7°C IST)'],
+                datasets: [{
+                    label: 'Dampfdichte [kg/m³]',
+                    data: [11.5, 10.8, 10.2, 9.5, 9.0],
+                    borderColor: '#3498db',
+                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    yAxisID: 'y'
+                }, {
+                    label: 'Relativer Massenstrom [%]',
+                    data: [100, 94, 89, 83, 78],
+                    borderColor: '#e74c3c',
+                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Auswirkung der Überhitzung auf Kompressor-Massenstrom',
+                        font:
