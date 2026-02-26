@@ -30,7 +30,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{B35D3622-C963-6CF6-8417-5C704AF626BA}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{E35B069D-3540-93AA-16B5-3B33258662A3}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -758,6 +758,47 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 					</Box>
 				</Box>
 				<EtherCAT/>
+			</Device>
+			<Device Id="5" DevType="11" AmsPort="28677">
+				<Name>Gerät 5 (COM Port)</Name>
+				<AddressInfo>
+					<Pci>
+						<Address>-793665536</Address>
+						<Size>4096</Size>
+						<BusNo>0</BusNo>
+						<SlotNo>126</SlotNo>
+						<VendorId>32902</VendorId>
+						<DeviceId>3850</DeviceId>
+					</Pci>
+				</AddressInfo>
+				<Image Id="5" AddrType="1" ImageType="1">
+					<Name>Prozessabbild</Name>
+				</Image>
+				<Serial Baud="38400" Parity="1" StopBit="1" RsType="1" WaitTimeToShutdown="60" BufSize="4096" DataBit="8" Is16950="true" ComPortNo="99" Timeout="300"/>
+			</Device>
+			<Device Id="6" DevType="121">
+				<Name>Gerät 6 (NOV-DP-RAM)</Name>
+				<AddressInfo>
+					<Pci>
+						<Address>-800063488</Address>
+						<Size>131072</Size>
+						<BusNo>3</BusNo>
+						<SlotNo>0</SlotNo>
+						<VendorId>5612</VendorId>
+						<DeviceId>20480</DeviceId>
+						<BaseAreaOffset>1048576</BaseAreaOffset>
+					</Pci>
+				</AddressInfo>
+				<Vars VarGrpType="1" InsertType="1">
+					<Name>Eingänge</Name>
+				</Vars>
+				<Vars VarGrpType="2" InsertType="1">
+					<Name>Ausgänge</Name>
+				</Vars>
+				<Image Id="6" AddrType="5" ImageType="2">
+					<Name>Prozessabbild</Name>
+				</Image>
+				<DpRam/>
 			</Device>
 		</Io>
 	</Project>

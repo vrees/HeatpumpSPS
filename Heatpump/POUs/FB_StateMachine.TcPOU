@@ -171,7 +171,7 @@ END_IF
 
 (* Prüfe maximalen Druck auf der Niederdruckseite über Ranco Thermostat [bar] *)
 IF pd.incident.incidentLowPressure THEN
-	setEventInfo(events, events.errorEvents.LowPressureRefrigerationThermostat, TRUE, CONCAT('Ranco Thermostat: zu hoher Niederdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10))); 
+	setEventInfo(events, events.errorEvents.LowPressureRefrigerationThermostat, TRUE, CONCAT('Ranco Thermostat: Niederdruck Fehler [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10))); 
 END_IF
 
 (*Prüfe maximalen Druck auf der Hochdruckseite über Ranco Thermostat [bar]  *)
