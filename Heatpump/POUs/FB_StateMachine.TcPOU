@@ -163,7 +163,7 @@ ELSIF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < GVL.configVal
 	events.cooledDown.isTriggered := TRUE;
 ELSIF (isTargetTemperatureReached()) THEN
 	events.targetTemperatureReached.isTriggered := TRUE;
-ELSIF (pd.incident.incidentFlow AND iState.State = E_State.START_WATER_FLOW) THEN
+ELSIF (pd.incident.incidentWaterFlow AND iState.State = E_State.START_WATER_FLOW) THEN
 	events.minWaterFlowReached.isTriggered := TRUE;
 END_IF
 
@@ -200,7 +200,7 @@ IF pd.sensor.TemperatureEvaporatingOut < GVL.configValues.EvaporatingTemperature
 END_IF
 
 (* Prüfe, of Wasser Durchflussmenge ausreichend ist. Mindestens 1800 Liter/Stunde *)
-IF NOT pd.incident.incidentFlow AND iState.State = E_State.RUNNING THEN
+IF NOT pd.incident.incidentWaterFlow AND iState.State = E_State.RUNNING THEN
 	setEventInfo(events, events.errorEvents.EvaporatingFlowRateTooLow, TRUE, 'Quellwasser Durchflussmenge zu niedrig');
 END_IF
 
@@ -398,57 +398,7 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.generateEvents">
-      <LineId Id="3" Count="0" />
-      <LineId Id="5" Count="1" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="24" Count="1" />
-      <LineId Id="30" Count="1" />
-      <LineId Id="316" Count="1" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="97" Count="1" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="53" Count="1" />
-      <LineId Id="309" Count="0" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="107" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="190" Count="1" />
-      <LineId Id="64" Count="0" />
-      <LineId Id="173" Count="2" />
-      <LineId Id="187" Count="0" />
-      <LineId Id="172" Count="0" />
-      <LineId Id="86" Count="0" />
-      <LineId Id="183" Count="1" />
-      <LineId Id="188" Count="0" />
-      <LineId Id="68" Count="0" />
-      <LineId Id="264" Count="3" />
-      <LineId Id="263" Count="0" />
-      <LineId Id="252" Count="3" />
-      <LineId Id="257" Count="4" />
-      <LineId Id="251" Count="0" />
-      <LineId Id="111" Count="0" />
-      <LineId Id="69" Count="0" />
-      <LineId Id="114" Count="1" />
-      <LineId Id="119" Count="0" />
-      <LineId Id="246" Count="0" />
-      <LineId Id="277" Count="0" />
-      <LineId Id="117" Count="0" />
-      <LineId Id="158" Count="2" />
-      <LineId Id="219" Count="0" />
-      <LineId Id="249" Count="0" />
-      <LineId Id="278" Count="0" />
-      <LineId Id="155" Count="0" />
-      <LineId Id="220" Count="0" />
-      <LineId Id="77" Count="1" />
-      <LineId Id="123" Count="0" />
-      <LineId Id="216" Count="0" />
-      <LineId Id="227" Count="0" />
-      <LineId Id="81" Count="0" />
-      <LineId Id="92" Count="0" />
-      <LineId Id="124" Count="1" />
-      <LineId Id="90" Count="1" />
+      <LineId Id="322" Count="76" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.IdleState.Get">

@@ -5,11 +5,11 @@
     STRUCT
 		// Connected to IO Klemmen		
         alarmExpansionValve		AT %I*			: BOOL;		// Alarm: Elektronisches Expansionsventil - EL1008.3
-										 					// operatingStateWaterPump	- EL1008.4
         incidentCompressor		AT %I*			: BOOL; 	// Störung: Verdichter / Motorschutzschalter - EL1008.5
-        incidentFlow			AT %I*			: BOOL; 	// Störung: Durchfluss im Verdampfer zu niedrig - EL1008.6  Achtung!!! invertiert: True bedeutet genug Fluss vorhanden
+        incidentWaterFlow		AT %I*			: BOOL; 	// Störung: Durchfluss im Verdampfer zu niedrig - EL1008.6  Achtung!!! invertiert: True bedeutet genug Fluss vorhanden
         incidentHighPressure	AT %I*			: BOOL; 	// Störung: Hochdruck zu hoch - EL1008.7
         incidentLowPressure		AT %I*			: BOOL; 	// Störung: Niederdruck zu niedrig - EL1008.8 
+
 
 		// Calculated from Business Logic
         incidentTankLevelTooLow					: BOOL;  // Störung: Wasserstand des Tanks zu niedrig 
