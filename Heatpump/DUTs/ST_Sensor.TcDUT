@@ -11,6 +11,8 @@
         bufferMiddleTemperature					: REAL;  // Temperatur des Puffers in der Mitte °C		
 		boilerTemperature						: REAL;  // Boiler-Temperatur oben °C
         temperatureOverheatedGas				: REAL;  // Saugtemperatur des überhitzten Gases
+        temperatureSourceWaterIn				: REAL;  // Quellwassertemperatur Eingang in °C
+        temperatureSourceWaterOut				: REAL;  // Quellwassertemperatur Ausgang in °C
         pressureHigh							: REAL;  // Hochdruck Kältekreis in bar
         pressureLow								: REAL;  // Niederdruck Kältekreis in bar
         pressureDifferenceEvaporator			: REAL;  // Druckdifferenz im Verdampfer in mbar

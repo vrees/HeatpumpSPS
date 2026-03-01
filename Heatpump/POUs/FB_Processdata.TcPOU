@@ -19,9 +19,8 @@ pd.sensor.bufferTopTemperature 			:=	RawToTemperature(sensorRaw.bufferTopTempera
 pd.sensor.bufferMiddleTemperature 		:=	RawToTemperature(sensorRaw.bufferMiddleTemperature);
 pd.sensor.boilerTemperature				:=	RawToTemperature(sensorRaw.boilerTemperature);
 pd.sensor.temperatureOverheatedGas 		:=	RawToTemperature(sensorRaw.temperatureOverheatedGas);
-pd.sensor.temperatureEvaporatingIn 		:=	RawToTemperature(sensorRaw.temperatureEvaporatingIn);
-pd.sensor.temperatureEvaporatingIn 		:=	RawToTemperature(sensorRaw.temperatureEvaporatingIn);
-pd.sensor.temperatureEvaporatingIn 		:=	RawToTemperature(sensorRaw.temperatureEvaporatingIn);
+pd.sensor.temperatureSourceWaterIn 		:=	RawToTemperature(sensorRaw.temperatureSourceWaterIn);
+pd.sensor.temperatureSourceWaterOut 	:=	RawToTemperature(sensorRaw.temperatureEvaporatingOut);
 
 (* Pressure Difference im mBar -  0-10 Volt  or  -10V to +10V *)
 pd.sensor.pressureDifferenceEvaporator	:= 	RawToRealAnalog(sensorRaw.pressureDifferenceEvaporator, 0, 200, 10);
@@ -65,7 +64,8 @@ END_VAR
       <LineId Id="48" Count="4" />
       <LineId Id="76" Count="0" />
       <LineId Id="84" Count="0" />
-      <LineId Id="53" Count="4" />
+      <LineId Id="53" Count="2" />
+      <LineId Id="57" Count="0" />
       <LineId Id="64" Count="0" />
       <LineId Id="59" Count="0" />
       <LineId Id="66" Count="1" />
