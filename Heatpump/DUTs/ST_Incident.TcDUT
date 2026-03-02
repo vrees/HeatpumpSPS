@@ -4,12 +4,12 @@
     <Declaration><![CDATA[TYPE ST_Incident :
     STRUCT
 		// Connected to IO Klemmen		
-        alarmExpansionValve		AT %I*			: BOOL;		// Alarm: Elektronisches Expansionsventil - EL1008.3
-        incidentCompressor		AT %I*			: BOOL; 	// Störung: Verdichter / Motorschutzschalter - EL1008.5
-        incidentWaterFlow		AT %I*			: BOOL; 	// Störung: Durchfluss im Verdampfer zu niedrig - EL1008.6  Achtung!!! invertiert: True bedeutet genug Fluss vorhanden
-        incidentHighPressure	AT %I*			: BOOL; 	// Störung: Hochdruck zu hoch - EL1008.7
-        incidentLowPressure		AT %I*			: BOOL; 	// Störung: Niederdruck zu niedrig - EL1008.8 
-
+        alarmExpansionValve				AT %I*			: BOOL;		// Alarm: Elektronisches Expansionsventil - EL1008.3
+        incidentCompressor				AT %I*			: BOOL; 	// Störung: Verdichter / Motorschutzschalter - EL1008.5
+        incidentWaterFlow				AT %I*			: BOOL; 	// Störung: Quellwasser-Durchfluss zu niedrig - EL1008.6  Achtung!!! invertiert: True bedeutet genug Fluss vorhanden
+        incidentFlowIntermediateCircuit	AT %I*			: BOOL; 	// Störung: Durchfluss im Verdampfer (Zwischenkreis) zu niedrig. Achtung!!! invertiert: True bedeutet genug Fluss vorhanden 
+        incidentHighPressure			AT %I*			: BOOL; 	// Störung: Hochdruck zu hoch - EL1008.7
+        incidentLowPressure				AT %I*			: BOOL; 	// Störung: Niederdruck zu niedrig - EL1008.8 
 
 		// Calculated from Business Logic
         incidentTankLevelTooLow					: BOOL;  // Störung: Wasserstand des Tanks zu niedrig 

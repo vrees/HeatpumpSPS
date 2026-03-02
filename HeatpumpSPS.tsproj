@@ -30,7 +30,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{9BE2146A-2C34-CD82-B2DB-EC28079E2A97}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{354CC001-7219-8E74-4219-A1360E5E560A}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -127,7 +127,12 @@
 						</Var>
 						<Var>
 							<Name>MAIN.pd.incident.incidentWaterFlow</Name>
-							<Comment><![CDATA[ Störung: Durchfluss im Verdampfer zu niedrig - EL1008.6  Achtung!!! invertiert: True bedeutet genug Fluss vorhanden]]></Comment>
+							<Comment><![CDATA[ Störung: Quellwasser-Durchfluss zu niedrig - EL1008.6  Achtung!!! invertiert: True bedeutet genug Fluss vorhanden]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.incident.incidentFlowIntermediateCircuit</Name>
+							<Comment><![CDATA[ Störung: Durchfluss im Verdampfer (Zwischenkreis) zu niedrig. Achtung!!! invertiert: True bedeutet genug Fluss vorhanden ]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
