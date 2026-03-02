@@ -20,7 +20,7 @@ pd.sensor.bufferMiddleTemperature 		:=	RawToTemperature(sensorRaw.bufferMiddleTe
 pd.sensor.boilerTemperature				:=	RawToTemperature(sensorRaw.boilerTemperature);
 pd.sensor.temperatureOverheatedGas 		:=	RawToTemperature(sensorRaw.temperatureOverheatedGas);
 pd.sensor.temperatureSourceWaterIn 		:=	RawToTemperature(sensorRaw.temperatureSourceWaterIn);
-pd.sensor.temperatureSourceWaterOut 	:=	RawToTemperature(sensorRaw.temperatureEvaporatingOut);
+pd.sensor.temperatureSourceWaterOut 	:=	RawToTemperature(sensorRaw.temperatureSourceWaterOut);
 
 (* Pressure Difference im mBar -  0-10 Volt  or  -10V to +10V *)
 pd.sensor.pressureDifferenceEvaporator	:= 	RawToRealAnalog(sensorRaw.pressureDifferenceEvaporator, 0, 200, 10);
