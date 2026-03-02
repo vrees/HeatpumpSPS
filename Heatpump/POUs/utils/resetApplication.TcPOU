@@ -21,6 +21,7 @@ END_FOR;
 
 pMachine^.pd.actor.operatingStateCompressor := FALSE;
 pMachine^.pd.actor.operatingStateWaterPump := FALSE;
+pMachine^.pd.actor.operatingStateIntermediateCircuitPump := FALSE;
 pMachine^.pd.actor.operatingStateLed := FALSE;
 pMachine^.pd.actor.openFlowVentil := FALSE;
 pMachine^.pd.actor.closeFlowVentil := FALSE;
@@ -33,6 +34,7 @@ pMachine^.timerTON(IN := FALSE);
       <LineId Id="32" Count="0" />
       <LineId Id="18" Count="0" />
       <LineId Id="33" Count="0" />
+      <LineId Id="61" Count="0" />
       <LineId Id="41" Count="0" />
       <LineId Id="51" Count="0" />
       <LineId Id="49" Count="0" />

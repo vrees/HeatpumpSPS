@@ -30,7 +30,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{354CC001-7219-8E74-4219-A1360E5E560A}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{5A567117-36D7-CC23-8FB1-004CF1EF0FDE}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -155,6 +155,11 @@
 						</Var>
 						<Var>
 							<Name>MAIN.pd.actor.operatingStateWaterPump</Name>
+							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.actor.operatingStateIntermediateCircuitPump</Name>
 							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus]]></Comment>
 							<Type>BOOL</Type>
 						</Var>

@@ -4,11 +4,12 @@
     <Declaration><![CDATA[TYPE ST_Actor :
     STRUCT
 		(* EL2004 - Digital Out*)
-        operatingStateCompressor 	AT %Q* : BOOL := FALSE;  // Status des Verdichters: Ein/Aus
-        operatingStateWaterPump 	AT %Q* : BOOL := FALSE;  // Status der Heizungspumpe: Ein/Aus
-		operatingStateLed			AT %Q* : BOOL := FALSE;  // LED am Schaltschrank, die anzeigt ob die Wärmepumpe eingschaltet/bereit ist
-		openFlowVentil   			AT %Q* : BOOL := FALSE;  // Wasserventil öffnen
-		closeFlowVentil   			AT %Q* : BOOL := FALSE;  // Wasserventil schliessen 
+        operatingStateCompressor 				AT %Q* : BOOL := FALSE;  // Status des Verdichters: Ein/Aus
+        operatingStateWaterPump 				AT %Q* : BOOL := FALSE;  // Status der Heizungspumpe: Ein/Aus
+        operatingStateIntermediateCircuitPump 	AT %Q* : BOOL := FALSE;  // Status der Heizungspumpe: Ein/Aus
+		operatingStateLed						AT %Q* : BOOL := FALSE;  // LED am Schaltschrank, die anzeigt ob die Wärmepumpe eingschaltet/bereit ist
+		openFlowVentil   						AT %Q* : BOOL := FALSE;  // Wasserventil öffnen
+		closeFlowVentil   						AT %Q* : BOOL := FALSE;  // Wasserventil schliessen 
     END_STRUCT
 END_TYPE
 ]]></Declaration>

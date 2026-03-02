@@ -1,42 +1,45 @@
 <?xml version="1.0"?>
-<!-- Exportiert aus TwinCAT 3: HeatpumpSPS -> E/A -> Zuordnungen ->  Verknuepfungsinformation erportieren -->
 <VarLinks>
 	<OwnerA Name="TIPC^Heatpump^Heatpump Instance">
-		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 11 (EL3152)">
+		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 19 (EL3204)">
+			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureSourceWaterIn" VarB="RTD Inputs Channel 1^Value"/>
+			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureSourceWaterOut" VarB="RTD Inputs Channel 2^Value"/>
+		</OwnerB>
+		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 2 (EL3152)">
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.pressureHigh" VarB="Channel 1^Value"/>
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.pressureLow" VarB="Channel 2^Value"/>
 		</OwnerB>
-		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 12 (EL2004)">
+		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 3 (EL2004)">
 			<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateCompressor" VarB="Channel 1^Output"/>
 			<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateLed" VarB="Channel 3^Output"/>
 			<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateWaterPump" VarB="Channel 2^Output"/>
 		</OwnerB>
-		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 13 (EL3204)">
+		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 4 (EL3204)">
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureEvaporatingIn" VarB="RTD Inputs Channel 2^Value"/>
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureEvaporatingOut" VarB="RTD Inputs Channel 1^Value"/>
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureFlow" VarB="RTD Inputs Channel 3^Value"/>
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureReturn" VarB="RTD Inputs Channel 4^Value"/>
 		</OwnerB>
-		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 14 (EL3102)">
+		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 5 (EL3102)">
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.pressureDifferenceEvaporator" VarB="Channel 1^Value"/>
 		</OwnerB>
-		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 15 (EL1008)">
+		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 6 (EL1008)">
 			<Link VarA="PlcTask Inputs^MAIN.pd.incident.alarmExpansionValve" VarB="Channel 3^Input"/>
 			<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentCompressor" VarB="Channel 5^Input"/>
-			<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentFlow" VarB="Channel 6^Input"/>
 			<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentHighPressure" VarB="Channel 7^Input"/>
 			<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentLowPressure" VarB="Channel 8^Input"/>
+			<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentWaterFlow" VarB="Channel 6^Input"/>
 			<Link VarA="PlcTask Inputs^MAIN.pd.sensor.boilerHeatRequest" VarB="Channel 2^Input"/>
 			<Link VarA="PlcTask Inputs^MAIN.pd.sensor.photovoltaicSurplus" VarB="Channel 4^Input"/>
 			<Link VarA="PlcTask Inputs^MAIN.pd.sensor.userConfirmation" VarB="Channel 1^Input"/>
 		</OwnerB>
-		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 16 (EL3204)">
+		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 7 (EL3204)">
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.boilerTemperature" VarB="RTD Inputs Channel 4^Value"/>
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.bufferMiddleTemperature" VarB="RTD Inputs Channel 2^Value"/>
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.bufferTopTemperature" VarB="RTD Inputs Channel 3^Value"/>
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureOverheatedGas" VarB="RTD Inputs Channel 1^Value"/>
 		</OwnerB>
-		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 8 (EL2622)">
+		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 9 (EL2622)">
 			<Link VarA="PlcTask Outputs^MAIN.pd.actor.closeFlowVentil" VarB="Channel 1^Output"/>
 			<Link VarA="PlcTask Outputs^MAIN.pd.actor.openFlowVentil" VarB="Channel 2^Output"/>
 		</OwnerB>

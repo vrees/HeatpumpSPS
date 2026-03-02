@@ -15,6 +15,7 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[pMachine^.pd.actor.operatingStateCompressor := FALSE;
 pMachine^.pd.actor.operatingStateWaterPump := FALSE;
+pMachine^.pd.actor.operatingStateIntermediateCircuitPump := FALSE;
 switchWaterVentil(bOpen := FALSE, pMachine);
 
 IF errorEvents.PressureDiffEvaporatorTooHigh.isTriggered THEN
@@ -68,6 +69,7 @@ pMachine^.SetState(pMachine^.ErrorState);]]></ST>
     <LineIds Name="transitionToErrorState">
       <LineId Id="99" Count="0" />
       <LineId Id="111" Count="0" />
+      <LineId Id="134" Count="0" />
       <LineId Id="122" Count="0" />
       <LineId Id="100" Count="0" />
       <LineId Id="19" Count="3" />
