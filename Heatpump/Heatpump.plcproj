@@ -146,6 +146,9 @@
     <Compile Include="POUs\utils\toErrorText.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\utils\toggleIntermediateCircuitPump.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\utils\transitionToErrorState.TcPOU">
       <SubType>Code</SubType>
     </Compile>

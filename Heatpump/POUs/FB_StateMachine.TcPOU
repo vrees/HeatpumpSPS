@@ -19,17 +19,19 @@ VAR
 	fbErrorState				:	FB_ErrorState(THIS);
 	timerTON 					: 	TON;             		// TON-Timer
 	
-	bStartButtonPressed    		: 	BOOL;
-	bStopButtonPressed			: 	BOOL;	
-    bClearErrorListButton		:   BOOL;  		
-    bToggleButtonVentil 		: 	BOOL; 	
-	rtrigButtonSwitchOn			:	R_TRIG;
-	rtrigButtonSwitchOff		:	R_TRIG;
-	rtrigButtonConfirmation		:	R_TRIG;	
-	rtrigClearErrorListButton	:	R_TRIG;
-	rtrigToggleButtonVentil		:   R_TRIG;		// rising Edge
-	strState					: 	STRING;
-	strInfotext					: 	STRING(256);
+	bStartButtonPressed    				: 	BOOL;
+	bStopButtonPressed					: 	BOOL;	
+    bClearErrorListButton				:   BOOL;  		
+    bToggleButtonVentil 				: 	BOOL; 	
+	bToggleIntermediateCircuitPump		: 	BOOL; 	
+	rtrigButtonSwitchOn					:	R_TRIG;
+	rtrigButtonSwitchOff				:	R_TRIG;
+	rtrigButtonConfirmation				:	R_TRIG;	
+	rtrigClearErrorListButton			:	R_TRIG;
+	rtrigToggleButtonVentil				:   R_TRIG;		// rising Edge
+	rtrigToggleIntermediateCircuitPump	:   R_TRIG;		
+	strState							: 	STRING;
+	strInfotext							: 	STRING(256);
 	
 	isStartButtonEnabled		:	BOOL 	:=	TRUE;
 	isStopButtonEnabled			:	BOOL 	:=	TRUE;
@@ -44,6 +46,7 @@ rtrigButtonSwitchOff(CLK := bStopButtonPressed);
 rtrigButtonConfirmation(CLK := pd.sensor.userConfirmation);
 rtrigClearErrorListButton(CLK := bClearErrorListButton);
 rtrigToggleButtonVentil(CLK := bToggleButtonVentil);
+rtrigToggleIntermediateCircuitPump(CLK := bToggleIntermediateCircuitPump);
 
 timerTON();
 
@@ -95,6 +98,11 @@ END_IF
 IF rtrigToggleButtonVentil.Q THEN
 	switchWaterVentil(NOT isVentilOpen(pd), THIS);
 END_IF
+
+IF rtrigToggleIntermediateCircuitPump.Q THEN
+	toggleIntermediateCircuitPump(THIS);
+END_IF
+
 
 setLabelText();
 setButtonState();
@@ -314,10 +322,11 @@ ELSE
 	isStartButtonEnabled := TRUE;
 END_IF
 
-bStartButtonPressed			:= FALSE;
-bStopButtonPressed			:= FALSE;
-bClearErrorListButton 		:= FALSE;
-bToggleButtonVentil 		:= FALSE;]]></ST>
+bStartButtonPressed				:= FALSE;
+bStopButtonPressed				:= FALSE;
+bClearErrorListButton 			:= FALSE;
+bToggleButtonVentil 			:= FALSE;
+bToggleIntermediateCircuitPump	:= FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="setLabelText" Id="{e9a542b8-1e41-48ce-b30f-244e7b54b970}">
@@ -366,6 +375,7 @@ END_VAR
     <LineIds Name="FB_StateMachine">
       <LineId Id="281" Count="2" />
       <LineId Id="504" Count="1" />
+      <LineId Id="717" Count="0" />
       <LineId Id="582" Count="0" />
       <LineId Id="396" Count="0" />
       <LineId Id="284" Count="4" />
@@ -380,6 +390,8 @@ END_VAR
       <LineId Id="543" Count="0" />
       <LineId Id="634" Count="6" />
       <LineId Id="633" Count="0" />
+      <LineId Id="719" Count="3" />
+      <LineId Id="718" Count="0" />
       <LineId Id="317" Count="0" />
       <LineId Id="429" Count="0" />
       <LineId Id="181" Count="0" />
@@ -447,6 +459,7 @@ END_VAR
       <LineId Id="15" Count="1" />
       <LineId Id="6" Count="0" />
       <LineId Id="20" Count="1" />
+      <LineId Id="25" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.setLabelText">
       <LineId Id="6" Count="1" />
