@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <VarLinks>
 	<OwnerA Name="TIPC^Heatpump^Heatpump Instance">
+		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 18 (EL1008)">
+			<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentFlowIntermediateCircuit" VarB="Channel 1^Input"/>
+		</OwnerB>
 		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 19 (EL3204)">
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureSourceWaterIn" VarB="RTD Inputs Channel 1^Value"/>
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureSourceWaterOut" VarB="RTD Inputs Channel 2^Value"/>
@@ -38,6 +41,9 @@
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.bufferMiddleTemperature" VarB="RTD Inputs Channel 2^Value"/>
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.bufferTopTemperature" VarB="RTD Inputs Channel 3^Value"/>
 			<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureOverheatedGas" VarB="RTD Inputs Channel 1^Value"/>
+		</OwnerB>
+		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 8 (EL2622)">
+			<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateIntermediateCircuitPump" VarB="Channel 1^Output"/>
 		</OwnerB>
 		<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 9 (EL2622)">
 			<Link VarA="PlcTask Outputs^MAIN.pd.actor.closeFlowVentil" VarB="Channel 1^Output"/>
