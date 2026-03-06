@@ -60,6 +60,7 @@ END_VAR]]></Declaration>
 	LogMessage(E_LogType.INFO, 'Heizung wurde angefordert -> ', pMachine^.StartWaterFlowState.Name);
 	pMachine^.timerTON(IN := FALSE);  
     switchWaterVentil(bOpen := TRUE, pMachine);
+	pMachine^.pd.actor.operatingStateIntermediateCircuitPump := TRUE;
 	pMachine^.SetState(pMachine^.StartWaterFlowState);	
 END_IF
 ]]></ST>
@@ -156,6 +157,7 @@ pMachine^.SetState(pMachine^.OffState);]]></ST>
       <LineId Id="9" Count="0" />
       <LineId Id="12" Count="1" />
       <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="0" />
       <LineId Id="19" Count="0" />
       <LineId Id="11" Count="0" />
       <LineId Id="2" Count="0" />

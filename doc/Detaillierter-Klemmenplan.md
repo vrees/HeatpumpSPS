@@ -4,40 +4,41 @@
 
 ---
 
-## Zusammenfassung aller I/O 
+## Zusammenfassung aller I/O
 
 | Anzahl   | Beschreibung   | Bemerkung   |
-|----------|----------------|-------------| 
+|----------|----------------|-------------|
 | 2        | Analog Ein     | 4-20 mA     |
-| 8        | Analog Ein     | PT1000      |
+| 10       | Analog Ein     | PT1000      |
 | 1        | Analog Ein     | 0-10 V      |
-| 8        | Digital Ein    |             |
-| 5        | Digital Aus    | Relais      |
+| 9        | Digital Ein    |             |
+| 3        | Digital Aus    | 24V DC      |
+| 3        | Relais Aus     | 230V AC     |
 
-- **Gesamt: 24**
-- 19 Eingänge
-- 5 Relais Ausgänge
+- **Gesamt: 28**
+- 22 Eingänge
+- 6 Ausgänge
 
 ## Übersicht der EtherCAT-Module
 
-| Modul      | Typ            | Beschreibung                         | Anzahl Kanäle | Position       |
-|------------|----------------|--------------------------------------|---------------|----------------|
-| **EL3152** | Analog Input   | 4-20 mA Stromsensoren                | 2             | Bus Position 1 |
-| **EL3204** | Analog Input   | PT1000 Temperatursensoren (1. Modul) | 4             | Bus Position 2 |
-| **EL3204** | Analog Input   | PT1000 Temperatursensoren (2. Modul) | 4             | Bus Position 3 |
-| **EL3102** | Analog Input   | 0-10 V Spannungssensoren             | 2             | Bus Position 4 |
-| **EL1008** | Digital Input  | 24V DC Digitaleingänge               | 8             | Bus Position 5 |
-| **EL2004** | Digital Output | 24V DC Digitalausgänge               | 4             | Bus Position 6 |
-| **EL2622** | Relay Output   | 230V AC Relaisausgänge (4A)          | 2             | Bus Position 7 |
+Alle Module sind unter dem EK1200 Bus-Koppler (Term 10) zusammengefasst.
 
-**Gesamt: 24 Signale**
-
-- **19 Eingänge**: 2x 4-20mA, 8x PT1000, 1x 0-10V, 8x Digital
-- **5 Ausgänge**: 3x Digital (24V), 2x Relais (230V AC)
+| Term | Modul      | Typ            | Beschreibung                         | Kanäle | Physisch belegt |
+|------|------------|----------------|--------------------------------------|--------|-----------------|
+| 2    | **EL3152** | Analog Input   | 4-20 mA Drucksensoren Kältekreis     | 2      | 2               |
+| 3    | **EL2004** | Digital Output | 24V DC Digitalausgänge               | 4      | 3               |
+| 4    | **EL3204** | Analog Input   | PT1000 Temperatursensoren (1. Modul) | 4      | 4               |
+| 5    | **EL3102** | Analog Input   | 0-10 V Spannungssensoren             | 2      | 1               |
+| 6    | **EL1008** | Digital Input  | 24V DC Digitaleingänge (1. Modul)    | 8      | 8               |
+| 7    | **EL3204** | Analog Input   | PT1000 Temperatursensoren (2. Modul) | 4      | 4               |
+| 8    | **EL2622** | Relay Output   | 230V AC Relaisausgang Zwischenkreis  | 2      | 1               |
+| 9    | **EL2622** | Relay Output   | 230V AC Relaisausgänge Wasserventil  | 2      | 2               |
+| 18   | **EL1008** | Digital Input  | 24V DC Digitaleingänge (2. Modul)    | 8      | 1               |
+| 19   | **EL3204** | Analog Input   | PT1000 Temperatursensoren (3. Modul) | 4      | 2               |
 
 ---
 
-## 1. EL3152 - Analog Eingang (4-20 mA Stromsensoren)
+## 1. Term 2 (EL3152) - Analog Eingang (4-20 mA Drucksensoren)
 
 **Technische Daten:**
 
@@ -50,7 +51,7 @@
 
 | Parameter                  | Wert                                  |
 |----------------------------|---------------------------------------|
-| **Klemme**                 | EL3152 - Channel 1                    |
+| **Klemme**                 | Term 2 (EL3152) - Channel 1           |
 | **Signal-Name**            | `pressureHigh`                        |
 | **Variable**               | `pd.sensor.pressureHigh`              |
 | **Typ**                    | Eingang, Analog (4-20 mA)             |
@@ -58,7 +59,7 @@
 | **Messbereich**            | 0 - 18 bar                            |
 | **Physikalischer Bereich** | 0 bar @ 4mA, 18 bar @ 20mA            |
 | **Einheit**                | bar (absolut)                         |
-| **Umrechnung**             | `(rawValue / 32767) * (18 - 0) + 0`   |
+| **Umrechnung**             | `(rawValue / 32767) * 18`             |
 | **Rundung**                | 1 Dezimalstelle (0.1 bar)             |
 | **Normalbetrieb**          | 8-14 bar (typisch)                    |
 | **Warning-Grenze**         | > 16 bar (Software)                   |
@@ -69,7 +70,7 @@
 
 | Parameter                  | Wert                                                       |
 |----------------------------|------------------------------------------------------------|
-| **Klemme**                 | EL3152 - Channel 2                                         |
+| **Klemme**                 | Term 2 (EL3152) - Channel 2                                |
 | **Signal-Name**            | `pressureLow`                                              |
 | **Variable**               | `pd.sensor.pressureLow`                                    |
 | **Typ**                    | Eingang, Analog (4-20 mA)                                  |
@@ -77,7 +78,7 @@
 | **Messbereich**            | -0.5 - 7 bar                                               |
 | **Physikalischer Bereich** | -0.5 bar @ 4mA, 7 bar @ 20mA                               |
 | **Einheit**                | bar (absolut)                                              |
-| **Umrechnung**             | `(rawValue / 32767) * (7 - (-0.5)) + (-0.5)`               |
+| **Umrechnung**             | `(rawValue / 32767) * 7.5 - 0.5`                           |
 | **Rundung**                | 1 Dezimalstelle (0.1 bar)                                  |
 | **Normalbetrieb**          | 2-4 bar (typisch)                                          |
 | **Warning-Grenze**         | > 6 bar (Software)                                         |
@@ -86,7 +87,62 @@
 
 ---
 
-## 2. EL3204 (1. Modul) - Analog Eingang (PT1000 Temperatursensoren)
+## 2. Term 3 (EL2004) - Digital Ausgang (24V DC)
+
+**Technische Daten:**
+
+- Ausgangsspannung: 24V DC (von interner Versorgung)
+- Max. Strom: 0.5A pro Kanal
+- Kurzschlussschutz: Ja
+- Übertemperaturschutz: Ja
+
+### Kanal 1: Kompressor Ein/Aus
+
+| Parameter       | Wert                                |
+|-----------------|-------------------------------------|
+| **Klemme**      | Term 3 (EL2004) - Channel 1         |
+| **Signal-Name** | `operatingStateCompressor`          |
+| **Variable**    | `pd.actor.operatingStateCompressor` |
+| **Typ**         | Ausgang, Digital (24V DC, 0.5A)     |
+| **Last**        | Schütz für Kompressor-Motor (Spule) |
+| **Logik**       | TRUE = Kompressor einschalten       |
+| **Verwendung**  | Nur in **RUNNING** Zustand = TRUE   |
+| **Sicherheit**  | Darf nur laufen wenn Durchfluss OK  |
+
+### Kanal 2: Wasserpumpe Ein/Aus
+
+| Parameter       | Wert                                        |
+|-----------------|---------------------------------------------|
+| **Klemme**      | Term 3 (EL2004) - Channel 2                 |
+| **Signal-Name** | `operatingStateWaterPump`                   |
+| **Variable**    | `pd.actor.operatingStateWaterPump`          |
+| **Typ**         | Ausgang, Digital (24V DC, 0.5A)             |
+| **Last**        | Schütz für Quellwasser-Pumpe (Spule)        |
+| **Logik**       | TRUE = Pumpe einschalten                    |
+| **Verwendung**  | In **RUNNING** und **COOLDOWN** = TRUE      |
+
+### Kanal 3: Status-LED
+
+| Parameter       | Wert                               |
+|-----------------|------------------------------------|
+| **Klemme**      | Term 3 (EL2004) - Channel 3        |
+| **Signal-Name** | `operatingStateLed`                |
+| **Variable**    | `pd.actor.operatingStateLed`       |
+| **Typ**         | Ausgang, Digital (24V DC, 0.5A)    |
+| **Last**        | Betriebs-LED oder Signallampe      |
+| **Logik**       | TRUE = LED ein (Betriebsbereit)    |
+| **Verwendung**  | Alle Zustände außer **OFF** = TRUE |
+
+### Kanal 4: Nicht belegt
+
+| Parameter  | Wert                   |
+|------------|------------------------|
+| **Klemme** | Term 3 (EL2004) - Channel 4 |
+| **Status** | Nicht belegt / Reserve |
+
+---
+
+## 3. Term 4 (EL3204) - Analog Eingang PT1000 (1. Modul)
 
 **Technische Daten:**
 
@@ -94,13 +150,12 @@
 - Auflösung: 16 Bit
 - Messbereich: -200°C bis +850°C
 - Genauigkeit: ±0.1°C @ 25°C
-- Anschluss: 2-Leiter oder 3-Leiter (3-Leiter empfohlen)
 
 ### Kanal 1: Verdampfer Austrittstemperatur
 
 | Parameter         | Wert                                            |
 |-------------------|-------------------------------------------------|
-| **Klemme**        | EL3204 (1) - RTD Channel 1                      |
+| **Klemme**        | Term 4 (EL3204) - RTD Channel 1                 |
 | **Signal-Name**   | `temperatureEvaporatingOut`                     |
 | **Variable**      | `pd.sensor.temperatureEvaporatingOut`           |
 | **Typ**           | Eingang, Analog (PT1000)                        |
@@ -117,7 +172,7 @@
 
 | Parameter         | Wert                                           |
 |-------------------|------------------------------------------------|
-| **Klemme**        | EL3204 (1) - RTD Channel 2                     |
+| **Klemme**        | Term 4 (EL3204) - RTD Channel 2                |
 | **Signal-Name**   | `temperatureEvaporatingIn`                     |
 | **Variable**      | `pd.sensor.temperatureEvaporatingIn`           |
 | **Typ**           | Eingang, Analog (PT1000)                       |
@@ -131,25 +186,25 @@
 
 ### Kanal 3: Vorlauftemperatur
 
-| Parameter         | Wert                                               |
-|-------------------|----------------------------------------------------|
-| **Klemme**        | EL3204 (1) - RTD Channel 3                         |
-| **Signal-Name**   | `temperatureFlow`                                  |
-| **Variable**      | `pd.sensor.temperatureFlow`                        |
-| **Typ**           | Eingang, Analog (PT1000)                           |
-| **Sensor**        | PT1000 am Wärmepumpen-Ausgang (Vorlauf)            |
-| **Messbereich**   | 0°C - +80°C (typisch)                              |
-| **Einheit**       | °C                                                 |
-| **Umrechnung**    | `rawValue / 10`                                    |
-| **Rundung**       | 1 Dezimalstelle (0.1°C)                            |
-| **Normalbetrieb** | 35-50°C (Heizbetrieb)                              |
+| Parameter         | Wert                                                |
+|-------------------|-----------------------------------------------------|
+| **Klemme**        | Term 4 (EL3204) - RTD Channel 3                     |
+| **Signal-Name**   | `temperatureFlow`                                   |
+| **Variable**      | `pd.sensor.temperatureFlow`                         |
+| **Typ**           | Eingang, Analog (PT1000)                            |
+| **Sensor**        | PT1000 am Wärmepumpen-Ausgang (Vorlauf)             |
+| **Messbereich**   | 0°C - +80°C (typisch)                               |
+| **Einheit**       | °C                                                  |
+| **Umrechnung**    | `rawValue / 10`                                     |
+| **Rundung**       | 1 Dezimalstelle (0.1°C)                             |
+| **Normalbetrieb** | 35-50°C (Heizbetrieb)                               |
 | **Verwendung**    | Cooldown-Steuerung (ΔT < 1°C), Leistungsberechnung |
 
 ### Kanal 4: Rücklauftemperatur
 
 | Parameter         | Wert                                             |
 |-------------------|--------------------------------------------------|
-| **Klemme**        | EL3204 (1) - RTD Channel 4                       |
+| **Klemme**        | Term 4 (EL3204) - RTD Channel 4                  |
 | **Signal-Name**   | `temperatureReturn`                              |
 | **Variable**      | `pd.sensor.temperatureReturn`                    |
 | **Typ**           | Eingang, Analog (PT1000)                         |
@@ -164,15 +219,158 @@
 
 ---
 
-## 3. EL3204 (2. Modul) - Analog Eingang (PT1000 Temperatursensoren)
+## 4. Term 5 (EL3102) - Analog Eingang (0-10 V Spannungssensoren)
 
-**Technische Daten:** (identisch zu Modul 1)
+**Technische Daten:**
+
+- Eingangsspannung: 0-10 V (auch -10V bis +10V möglich)
+- Auflösung: 16 Bit
+- Genauigkeit: ±0.3% vom Messbereich
+
+### Kanal 1: Druckdifferenz Verdampfer
+
+| Parameter                  | Wert                                       |
+|----------------------------|--------------------------------------------|
+| **Klemme**                 | Term 5 (EL3102) - Channel 1                |
+| **Signal-Name**            | `pressureDifferenceEvaporator`             |
+| **Variable**               | `pd.sensor.pressureDifferenceEvaporator`   |
+| **Typ**                    | Eingang, Analog (0-10 V)                   |
+| **Sensor**                 | Differenzdrucksensor am Verdampfer         |
+| **Messbereich**            | 0 - 200 mbar                               |
+| **Physikalischer Bereich** | 0 mbar @ 0V, 200 mbar @ 10V               |
+| **Einheit**                | mbar (Millibar)                            |
+| **Umrechnung**             | `(rawValue / 32767) * 200`                 |
+| **Rundung**                | Ganzzahl (1 mbar)                          |
+| **Normalbetrieb**          | 10-30 mbar (abhängig von Durchfluss)       |
+| **Fehlergrenze**           | > 45 mbar (Einfriergefahr!)                |
+| **Verwendung**             | Überwachung Durchflussmenge, Verschmutzung |
+
+### Kanal 2: Nicht belegt
+
+| Parameter  | Wert                        |
+|------------|-----------------------------|
+| **Klemme** | Term 5 (EL3102) - Channel 2 |
+| **Status** | Nicht belegt / Reserve      |
+
+---
+
+## 5. Term 6 (EL1008) - Digital Eingang 24V DC (1. Modul)
+
+**Technische Daten:**
+
+- Eingangsspannung: 24V DC (typ.), 11-30V DC (Bereich)
+- Logik: HIGH bei > 15V, LOW bei < 5V
+- Eingangsfilter: 3 ms (typisch)
+
+### Kanal 1: Benutzer-Bestätigung (Taster)
+
+| Parameter         | Wert                                                |
+|-------------------|-----------------------------------------------------|
+| **Klemme**        | Term 6 (EL1008) - Channel 1                         |
+| **Signal-Name**   | `userConfirmation`                                  |
+| **Variable**      | `pd.sensor.userConfirmation` (AT %I*)               |
+| **Typ**           | Eingang, Digital (24V DC)                           |
+| **Sensor/Taster** | Bestätigungs-Taster (Schließer)                     |
+| **Logik**         | TRUE = Taster gedrückt (24V)                        |
+| **Verwendung**    | Quittierung von Fehlern, manuelles Ein-/Ausschalten |
+| **Auswertung**    | Rising Edge (R_TRIG) im Programm                    |
+
+### Kanal 2: Boiler-Ladepumpe aktiv
+
+| Parameter       | Wert                                        |
+|-----------------|---------------------------------------------|
+| **Klemme**      | Term 6 (EL1008) - Channel 2                 |
+| **Signal-Name** | `boilerHeatRequest`                         |
+| **Variable**    | `pd.sensor.boilerHeatRequest` (AT %I*)      |
+| **Typ**         | Eingang, Digital (24V DC)                   |
+| **Sensor**      | Rückmeldung Boiler-Ladepumpe (Hilfsschütz)  |
+| **Logik**       | TRUE = Boiler-Ladepumpe läuft               |
+| **Verwendung**  | **Einschalt-Bedingung** (Boiler-Lade-Logik) |
+
+### Kanal 3: Expansionsventil Alarm
+
+| Parameter       | Wert                                                |
+|-----------------|-----------------------------------------------------|
+| **Klemme**      | Term 6 (EL1008) - Channel 3                         |
+| **Signal-Name** | `alarmExpansionValve`                               |
+| **Variable**    | `pd.incident.alarmExpansionValve` (AT %I*)          |
+| **Typ**         | Eingang, Digital (24V DC)                           |
+| **Sensor**      | Alarm-Ausgang EEV (elektronisches Expansionsventil) |
+| **Logik**       | TRUE = Fehler am Expansionsventil                   |
+| **Verwendung**  | **Fehler-Erkennung** → ERROR-Zustand                |
+
+### Kanal 4: Photovoltaik-Überschuss
+
+| Parameter       | Wert                                                      |
+|-----------------|-----------------------------------------------------------|
+| **Klemme**      | Term 6 (EL1008) - Channel 4                               |
+| **Signal-Name** | `photovoltaicSurplus`                                     |
+| **Variable**    | `pd.sensor.photovoltaicSurplus` (AT %I*)                  |
+| **Typ**         | Eingang, Digital (24V DC)                                 |
+| **Sensor**      | PV-Überschuss-Signal (z.B. von Wechselrichter)            |
+| **Logik**       | TRUE = PV-Überschuss verfügbar                            |
+| **Verwendung**  | Erhöhte Zieltemperaturen (40°C / 50°C statt 33°C / 41°C) |
+
+### Kanal 5: Motorschutz Kompressor
+
+| Parameter       | Wert                                            |
+|-----------------|-------------------------------------------------|
+| **Klemme**      | Term 6 (EL1008) - Channel 5                     |
+| **Signal-Name** | `incidentCompressor`                            |
+| **Variable**    | `pd.incident.incidentCompressor` (AT %I*)       |
+| **Typ**         | Eingang, Digital (24V DC)                       |
+| **Sensor**      | Motorschutzschalter Kompressor (Öffner-Kontakt) |
+| **Logik**       | TRUE = Motorschutz ausgelöst                    |
+| **Verwendung**  | **Fehler-Erkennung** → ERROR-Zustand            |
+
+### Kanal 6: Durchflusswächter Quellwasser
+
+| Parameter        | Wert                                                                                    |
+|------------------|-----------------------------------------------------------------------------------------|
+| **Klemme**       | Term 6 (EL1008) - Channel 6                                                             |
+| **Signal-Name**  | `incidentWaterFlow`                                                                     |
+| **Variable**     | `pd.incident.incidentWaterFlow` (AT %I*)                                                |
+| **Typ**          | Eingang, Digital (24V DC)                                                               |
+| **Sensor**       | Durchflusswächter Quellwasser (mind. 1800 L/h)                                          |
+| **Logik**        | TRUE = Durchfluss OK (mind. 1800 L/h)<br>FALSE = Durchfluss zu niedrig                 |
+| **Verwendung**   | **Transition** START_WATER_FLOW → RUNNING<br>**Fehler** bei FALSE im RUNNING-Zustand   |
+| **Besonderheit** | Invertierte Logik! TRUE = OK                                                            |
+
+### Kanal 7: Hochdruck-Thermostat
+
+| Parameter       | Wert                                        |
+|-----------------|---------------------------------------------|
+| **Klemme**      | Term 6 (EL1008) - Channel 7                 |
+| **Signal-Name** | `incidentHighPressure`                      |
+| **Variable**    | `pd.incident.incidentHighPressure` (AT %I*) |
+| **Typ**         | Eingang, Digital (24V DC)                   |
+| **Sensor**      | Ranco Hochdruck-Thermostat (Öffner)         |
+| **Logik**       | TRUE = Hochdruck-Thermostat ausgelöst       |
+| **Verwendung**  | **Fehler-Erkennung** → ERROR-Zustand        |
+
+### Kanal 8: Niederdruck-Thermostat
+
+| Parameter       | Wert                                       |
+|-----------------|--------------------------------------------|
+| **Klemme**      | Term 6 (EL1008) - Channel 8               |
+| **Signal-Name** | `incidentLowPressure`                      |
+| **Variable**    | `pd.incident.incidentLowPressure` (AT %I*) |
+| **Typ**         | Eingang, Digital (24V DC)                  |
+| **Sensor**      | Ranco Niederdruck-Thermostat (Öffner)      |
+| **Logik**       | TRUE = Niederdruck-Thermostat ausgelöst    |
+| **Verwendung**  | **Fehler-Erkennung** → ERROR-Zustand       |
+
+---
+
+## 6. Term 7 (EL3204) - Analog Eingang PT1000 (2. Modul)
+
+**Technische Daten:** (identisch zu Term 4)
 
 ### Kanal 1: Überhitzungstemperatur (Heißgas)
 
 | Parameter         | Wert                                    |
 |-------------------|-----------------------------------------|
-| **Klemme**        | EL3204 (2) - RTD Channel 1              |
+| **Klemme**        | Term 7 (EL3204) - RTD Channel 1         |
 | **Signal-Name**   | `temperatureOverheatedGas`              |
 | **Variable**      | `pd.sensor.temperatureOverheatedGas`    |
 | **Typ**           | Eingang, Analog (PT1000)                |
@@ -188,7 +386,7 @@
 
 | Parameter       | Wert                                           |
 |-----------------|------------------------------------------------|
-| **Klemme**      | EL3204 (2) - RTD Channel 2                     |
+| **Klemme**      | Term 7 (EL3204) - RTD Channel 2                |
 | **Signal-Name** | `bufferMiddleTemperature`                      |
 | **Variable**    | `pd.sensor.bufferMiddleTemperature`            |
 | **Typ**         | Eingang, Analog (PT1000)                       |
@@ -197,14 +395,14 @@
 | **Einheit**     | °C                                             |
 | **Umrechnung**  | `rawValue / 10`                                |
 | **Rundung**     | 1 Dezimalstelle (0.1°C)                        |
-| **Sollwert**    | 41°C (Standard) / 50°C (PV-Modus)              |
+| **Sollwert**    | 41°C (Standard) / 50°C (PV-Modus)             |
 | **Verwendung**  | **Ausschalt-Bedingung** (targetTemperatureOff) |
 
 ### Kanal 3: Pufferspeicher Oben
 
 | Parameter       | Wert                                          |
 |-----------------|-----------------------------------------------|
-| **Klemme**      | EL3204 (2) - RTD Channel 3                    |
+| **Klemme**      | Term 7 (EL3204) - RTD Channel 3               |
 | **Signal-Name** | `bufferTopTemperature`                        |
 | **Variable**    | `pd.sensor.bufferTopTemperature`              |
 | **Typ**         | Eingang, Analog (PT1000)                      |
@@ -213,14 +411,14 @@
 | **Einheit**     | °C                                            |
 | **Umrechnung**  | `rawValue / 10`                               |
 | **Rundung**     | 1 Dezimalstelle (0.1°C)                       |
-| **Sollwert**    | 33°C (Standard) / 40°C (PV-Modus)             |
+| **Sollwert**    | 33°C (Standard) / 40°C (PV-Modus)            |
 | **Verwendung**  | **Einschalt-Bedingung** (targetTemperatureOn) |
 
 ### Kanal 4: Boiler-Temperatur
 
 | Parameter       | Wert                                           |
 |-----------------|------------------------------------------------|
-| **Klemme**      | EL3204 (2) - RTD Channel 4                     |
+| **Klemme**      | Term 7 (EL3204) - RTD Channel 4               |
 | **Signal-Name** | `boilerTemperature`                            |
 | **Variable**    | `pd.sensor.boilerTemperature`                  |
 | **Typ**         | Eingang, Analog (PT1000)                       |
@@ -233,205 +431,7 @@
 
 ---
 
-## 4. EL3102 - Analog Eingang (0-10 V Spannungssensoren)
-
-**Technische Daten:**
-
-- Eingangsspannung: 0-10 V (auch -10V bis +10V möglich)
-- Auflösung: 16 Bit
-- Genauigkeit: ±0.3% vom Messbereich
-
-### Kanal 1: Druckdifferenz Verdampfer
-
-| Parameter                  | Wert                                       |
-|----------------------------|--------------------------------------------|
-| **Klemme**                 | EL3102 - Channel 1                         |
-| **Signal-Name**            | `pressureDifferenceEvaporator`             |
-| **Variable**               | `pd.sensor.pressureDifferenceEvaporator`   |
-| **Typ**                    | Eingang, Analog (0-10 V)                   |
-| **Sensor**                 | Differenzdrucksensor am Verdampfer         |
-| **Messbereich**            | 0 - 200 mbar                               |
-| **Physikalischer Bereich** | 0 mbar @ 0V, 200 mbar @ 10V                |
-| **Einheit**                | mbar (Millibar)                            |
-| **Umrechnung**             | `(rawValue / 32767) * (200 - 0) + 0`       |
-| **Rundung**                | Ganzzahl (1 mbar)                          |
-| **Normalbetrieb**          | 10-30 mbar (abhängig von Durchfluss)       |
-| **Fehlergrenze**           | > 45 mbar (Einfriergefahr!)                |
-| **Verwendung**             | Überwachung Durchflussmenge, Verschmutzung |
-
-### Kanal 2: Nicht belegt
-
-| Parameter  | Wert                   |
-|------------|------------------------|
-| **Klemme** | EL3102 - Channel 2     |
-| **Status** | Nicht belegt / Reserve |
-
----
-
-## 5. EL1008 - Digital Eingang (24V DC)
-
-**Technische Daten:**
-
-- Eingangsspannung: 24V DC (typ.), 11-30V DC (Bereich)
-- Logik: HIGH bei > 15V, LOW bei < 5V
-- Eingangsfilter: 3 ms (typisch)
-
-### Kanal 1: Benutzer-Bestätigung (Taster)
-
-| Parameter         | Wert                                                |
-|-------------------|-----------------------------------------------------|
-| **Klemme**        | EL1008 - Channel 1                                  |
-| **Signal-Name**   | `userConfirmation`                                  |
-| **Variable**      | `pd.sensor.userConfirmation` (AT %I*)               |
-| **Typ**           | Eingang, Digital (24V DC)                           |
-| **Sensor/Taster** | Bestätigungs-Taster (Schließer)                     |
-| **Logik**         | TRUE = Taster gedrückt (24V)                        |
-| **Verwendung**    | Quittierung von Fehlern, manuelles Ein-/Ausschalten |
-| **Auswertung**    | Rising Edge (R_TRIG) im Programm                    |
-
-### Kanal 2: Boiler-Ladepumpe aktiv
-
-| Parameter       | Wert                                        |
-|-----------------|---------------------------------------------|
-| **Klemme**      | EL1008 - Channel 2                          |
-| **Signal-Name** | `boilerHeatRequest`                         |
-| **Variable**    | `pd.sensor.boilerHeatRequest` (AT %I*)      |
-| **Typ**         | Eingang, Digital (24V DC)                   |
-| **Sensor**      | Rückmeldung Boiler-Ladepumpe (Hilfsschütz)  |
-| **Logik**       | TRUE = Boiler-Ladepumpe läuft               |
-| **Verwendung**  | **Einschalt-Bedingung** (Boiler-Lade-Logik) |
-
-### Kanal 3: Expansionsventil Alarm
-
-| Parameter       | Wert                                                |
-|-----------------|-----------------------------------------------------|
-| **Klemme**      | EL1008 - Channel 3                                  |
-| **Signal-Name** | `alarmExpansionValve`                               |
-| **Variable**    | `pd.incident.alarmExpansionValve` (AT %I*)          |
-| **Typ**         | Eingang, Digital (24V DC)                           |
-| **Sensor**      | Alarm-Ausgang EEV (elektronisches Expansionsventil) |
-| **Logik**       | TRUE = Fehler am Expansionsventil                   |
-| **Verwendung**  | **Fehler-Erkennung** → ERROR-Zustand                |
-
-### Kanal 4: Photovoltaik-Überschuss
-
-| Parameter       | Wert                                                     |
-|-----------------|----------------------------------------------------------|
-| **Klemme**      | EL1008 - Channel 4                                       |
-| **Signal-Name** | `photovoltaicSurplus`                                    |
-| **Variable**    | `pd.sensor.photovoltaicSurplus` (AT %I*)                 |
-| **Typ**         | Eingang, Digital (24V DC)                                |
-| **Sensor**      | PV-Überschuss-Signal (z.B. von Wechselrichter)           |
-| **Logik**       | TRUE = PV-Überschuss verfügbar                           |
-| **Verwendung**  | Erhöhte Zieltemperaturen (40°C / 50°C statt 33°C / 41°C) |
-
-### Kanal 5: Motorschutz Kompressor
-
-| Parameter       | Wert                                            |
-|-----------------|-------------------------------------------------|
-| **Klemme**      | EL1008 - Channel 5                              |
-| **Signal-Name** | `incidentCompressor`                            |
-| **Variable**    | `pd.incident.incidentCompressor` (AT %I*)       |
-| **Typ**         | Eingang, Digital (24V DC)                       |
-| **Sensor**      | Motorschutzschalter Kompressor (Öffner-Kontakt) |
-| **Logik**       | TRUE = Motorschutz ausgelöst                    |
-| **Verwendung**  | **Fehler-Erkennung** → ERROR-Zustand            |
-
-### Kanal 6: Durchflusswächter OK
-
-| Parameter        | Wert                                                                                 |
-|------------------|--------------------------------------------------------------------------------------|
-| **Klemme**       | EL1008 - Channel 6                                                                   |
-| **Signal-Name**  | `incidentFlow`                                                                       |
-| **Variable**     | `pd.incident.incidentFlow` (AT %I*)                                                  |
-| **Typ**          | Eingang, Digital (24V DC)                                                            |
-| **Sensor**       | Durchflusswächter (mind. 1800 L/h)                                                   |
-| **Logik**        | TRUE = Durchfluss OK (mind. 1800 L/h)<br>FALSE = Durchfluss zu niedrig               |
-| **Verwendung**   | **Transition** START_WATER_FLOW → RUNNING<br>**Fehler** bei FALSE im RUNNING-Zustand |
-| **Besonderheit** | Invertierte Logik! TRUE = OK                                                         |
-
-### Kanal 7: Hochdruck-Thermostat
-
-| Parameter       | Wert                                        |
-|-----------------|---------------------------------------------|
-| **Klemme**      | EL1008 - Channel 7                          |
-| **Signal-Name** | `incidentHighPressure`                      |
-| **Variable**    | `pd.incident.incidentHighPressure` (AT %I*) |
-| **Typ**         | Eingang, Digital (24V DC)                   |
-| **Sensor**      | Ranco Hochdruck-Thermostat (Öffner)         |
-| **Logik**       | TRUE = Hochdruck-Thermostat ausgelöst       |
-| **Verwendung**  | **Fehler-Erkennung** → ERROR-Zustand        |
-
-### Kanal 8: Niederdruck-Thermostat
-
-| Parameter       | Wert                                       |
-|-----------------|--------------------------------------------|
-| **Klemme**      | EL1008 - Channel 8                         |
-| **Signal-Name** | `incidentLowPressure`                      |
-| **Variable**    | `pd.incident.incidentLowPressure` (AT %I*) |
-| **Typ**         | Eingang, Digital (24V DC)                  |
-| **Sensor**      | Ranco Niederdruck-Thermostat (Öffner)      |
-| **Logik**       | TRUE = Niederdruck-Thermostat ausgelöst    |
-| **Verwendung**  | **Fehler-Erkennung** → ERROR-Zustand       |
-
----
-
-## 6. EL2004 - Digital Ausgang (24V DC)
-
-**Technische Daten:**
-
-- Ausgangsspannung: 24V DC (von interner Versorgung)
-- Max. Strom: 0.5A pro Kanal
-- Kurzschlussschutz: Ja
-- Übertemperaturschutz: Ja
-
-### Kanal 1: Kompressor Ein/Aus
-
-| Parameter       | Wert                                |
-|-----------------|-------------------------------------|
-| **Klemme**      | EL2004 - Channel 1                  |
-| **Signal-Name** | `operatingStateCompressor`          |
-| **Variable**    | `pd.actor.operatingStateCompressor` |
-| **Typ**         | Ausgang, Digital (24V DC, 0.5A)     |
-| **Last**        | Schütz für Kompressor-Motor (Spule) |
-| **Logik**       | TRUE = Kompressor einschalten       |
-| **Verwendung**  | Nur in **RUNNING** Zustand = TRUE   |
-| **Sicherheit**  | Darf nur laufen wenn Durchfluss OK  |
-
-### Kanal 2: Wasserpumpe Ein/Aus
-
-| Parameter       | Wert                                   |
-|-----------------|----------------------------------------|
-| **Klemme**      | EL2004 - Channel 2                     |
-| **Signal-Name** | `operatingStateWaterPump`              |
-| **Variable**    | `pd.actor.operatingStateWaterPump`     |
-| **Typ**         | Ausgang, Digital (24V DC, 0.5A)        |
-| **Last**        | Schütz für Quellwasser-Pumpe (Spule)   |
-| **Logik**       | TRUE = Pumpe einschalten               |
-| **Verwendung**  | In **RUNNING** und **COOLDOWN** = TRUE |
-
-### Kanal 3: Status-LED
-
-| Parameter       | Wert                               |
-|-----------------|------------------------------------|
-| **Klemme**      | EL2004 - Channel 3                 |
-| **Signal-Name** | `operatingStateLed`                |
-| **Variable**    | `pd.actor.operatingStateLed`       |
-| **Typ**         | Ausgang, Digital (24V DC, 0.5A)    |
-| **Last**        | Betriebs-LED oder Signallampe      |
-| **Logik**       | TRUE = LED ein (Betriebsbereit)    |
-| **Verwendung**  | Alle Zustände außer **OFF** = TRUE |
-
-### Kanal 4: Nicht belegt
-
-| Parameter  | Wert                   |
-|------------|------------------------|
-| **Klemme** | EL2004 - Channel 4     |
-| **Status** | Nicht belegt / Reserve |
-
----
-
-## 7. EL2622 - Relais Ausgang (230V AC, 4A)
+## 7. Term 8 (EL2622) - Relais Ausgang 230V AC (Zwischenkreispumpe)
 
 **Technische Daten:**
 
@@ -439,15 +439,40 @@
 - Max. Spannung: 230V AC
 - Max. Strom: 4A (ohmsche Last)
 - Schaltleistung: 920 VA (AC1)
-- Lebensdauer: > 100.000 Schaltzyklen (bei Nennlast)
+
+### Kanal 1: Sole-Zwischenkreispumpe Ein/Aus
+
+| Parameter        | Wert                                                     |
+|------------------|----------------------------------------------------------|
+| **Klemme**       | Term 8 (EL2622) - Channel 1                              |
+| **Signal-Name**  | `operatingStateIntermediateCircuitPump`                  |
+| **Variable**     | `pd.actor.operatingStateIntermediateCircuitPump`         |
+| **Typ**          | Ausgang, Relais (230V AC, 4A)                            |
+| **Last**         | Sole-Zwischenkreispumpe (230V AC Motor)                  |
+| **Logik**        | TRUE = Pumpe ein                                         |
+| **Verwendung**   | Manuell schaltbar im IDLE- und ERROR-Zustand             |
+| **Besonderheit** | Schaltung über `toggleIntermediateCircuitPump()` Funktion |
+
+### Kanal 2: Nicht belegt
+
+| Parameter  | Wert                        |
+|------------|-----------------------------|
+| **Klemme** | Term 8 (EL2622) - Channel 2 |
+| **Status** | Nicht belegt / Reserve      |
+
+---
+
+## 8. Term 9 (EL2622) - Relais Ausgang 230V AC (Wasserventil)
+
+**Technische Daten:** (identisch zu Term 8)
 
 ### Kanal 1: Ventil Schließen
 
 | Parameter        | Wert                                              |
 |------------------|---------------------------------------------------|
-| **Klemme**       | EL2622 - Channel 1                                |
+| **Klemme**       | Term 9 (EL2622) - Channel 1                       |
 | **Signal-Name**  | `closeFlowVentil`                                 |
-| **Variable**     | Gesteuert durch `switchWaterVentil(bOpen:=FALSE)` |
+| **Variable**     | `pd.actor.closeFlowVentil`                        |
 | **Typ**          | Ausgang, Relais (230V AC, 4A)                     |
 | **Last**         | Bistabiles Ventil - Spule "Schließen" (230V AC)   |
 | **Logik**        | Kurzer Impuls (ca. 200-500 ms) zum Schließen      |
@@ -458,9 +483,9 @@
 
 | Parameter        | Wert                                             |
 |------------------|--------------------------------------------------|
-| **Klemme**       | EL2622 - Channel 2                               |
+| **Klemme**       | Term 9 (EL2622) - Channel 2                      |
 | **Signal-Name**  | `openFlowVentil`                                 |
-| **Variable**     | Gesteuert durch `switchWaterVentil(bOpen:=TRUE)` |
+| **Variable**     | `pd.actor.openFlowVentil`                        |
 | **Typ**          | Ausgang, Relais (230V AC, 4A)                    |
 | **Last**         | Bistabiles Ventil - Spule "Öffnen" (230V AC)     |
 | **Logik**        | Kurzer Impuls (ca. 200-500 ms) zum Öffnen        |
@@ -469,20 +494,93 @@
 
 ---
 
+## 9. Term 18 (EL1008) - Digital Eingang 24V DC (2. Modul)
+
+**Technische Daten:** (identisch zu Term 6)
+
+### Kanal 1: Durchflusswächter Zwischenkreis
+
+| Parameter        | Wert                                                                                         |
+|------------------|----------------------------------------------------------------------------------------------|
+| **Klemme**       | Term 18 (EL1008) - Channel 1                                                                 |
+| **Signal-Name**  | `incidentFlowIntermediateCircuit`                                                            |
+| **Variable**     | `pd.incident.incidentFlowIntermediateCircuit` (AT %I*)                                       |
+| **Typ**          | Eingang, Digital (24V DC)                                                                    |
+| **Sensor**       | Durchflusswächter Sole-Zwischenkreis (Verdampfer)                                            |
+| **Logik**        | TRUE = Durchfluss OK<br>FALSE = Durchfluss zu niedrig                                        |
+| **Verwendung**   | Überwachung Sole-Kreislauf im Verdampfer                                                     |
+| **Besonderheit** | Invertierte Logik! TRUE = OK                                                                 |
+
+### Kanäle 2-8: Nicht belegt
+
+| Parameter  | Wert                          |
+|------------|-------------------------------|
+| **Klemme** | Term 18 (EL1008) - CH 2 bis 8 |
+| **Status** | Nicht belegt / Reserve        |
+
+---
+
+## 10. Term 19 (EL3204) - Analog Eingang PT1000 (3. Modul)
+
+**Technische Daten:** (identisch zu Term 4)
+
+### Kanal 1: Quellwassertemperatur Eingang
+
+| Parameter         | Wert                                               |
+|-------------------|----------------------------------------------------|
+| **Klemme**        | Term 19 (EL3204) - RTD Channel 1                   |
+| **Signal-Name**   | `temperatureSourceWaterIn`                         |
+| **Variable**      | `pd.sensor.temperatureSourceWaterIn`               |
+| **Typ**           | Eingang, Analog (PT1000)                           |
+| **Sensor**        | PT1000 am Quellwasser-Eingang (Brunnen/Grundwasser) |
+| **Messbereich**   | -10°C - +30°C (typisch)                            |
+| **Einheit**       | °C                                                 |
+| **Umrechnung**    | `rawValue / 10`                                    |
+| **Rundung**       | 1 Dezimalstelle (0.1°C)                            |
+| **Normalbetrieb** | 8-12°C (Grundwasser)                               |
+| **Verwendung**    | Monitoring Quellwassertemperatur                   |
+
+### Kanal 2: Quellwassertemperatur Ausgang
+
+| Parameter         | Wert                                                 |
+|-------------------|------------------------------------------------------|
+| **Klemme**        | Term 19 (EL3204) - RTD Channel 2                     |
+| **Signal-Name**   | `temperatureSourceWaterOut`                          |
+| **Variable**      | `pd.sensor.temperatureSourceWaterOut`                |
+| **Typ**           | Eingang, Analog (PT1000)                             |
+| **Sensor**        | PT1000 am Quellwasser-Ausgang (nach Verdampfer)      |
+| **Messbereich**   | -10°C - +30°C (typisch)                              |
+| **Einheit**       | °C                                                   |
+| **Umrechnung**    | `rawValue / 10`                                      |
+| **Rundung**       | 1 Dezimalstelle (0.1°C)                              |
+| **Normalbetrieb** | 5-10°C (nach Wärmeentnahme)                          |
+| **Verwendung**    | Monitoring Quellwassertemperatur, ΔT Wärmequelle     |
+
+### Kanäle 3-4: Nicht belegt
+
+| Parameter  | Wert                           |
+|------------|--------------------------------|
+| **Klemme** | Term 19 (EL3204) - CH 3 und 4  |
+| **Status** | Nicht belegt / Reserve         |
+
+---
+
 ## Verkabelungsübersicht
 
-### Temperatursensoren (PT1000) - 8 Stück
+### Temperatursensoren (PT1000) - 10 Stück
 
-| Nr | Sensor                      | Modul      | Kanal | Messposition         | Wertebereich         |
-|----|-----------------------------|------------|-------|----------------------|----------------------|
-| 1  | `temperatureEvaporatingOut` | EL3204 (1) | RTD 1 | Verdampfer Ausgang   | 5-12°C (typ.)        |
-| 2  | `temperatureEvaporatingIn`  | EL3204 (1) | RTD 2 | Verdampfer Eingang   | 8-15°C (typ.)        |
-| 3  | `temperatureFlow`           | EL3204 (1) | RTD 3 | Wärmepumpe Vorlauf   | 35-50°C              |
-| 4  | `temperatureReturn`         | EL3204 (1) | RTD 4 | Wärmepumpe Rücklauf  | 25-45°C (max 53°C)   |
-| 5  | `temperatureOverheatedGas`  | EL3204 (2) | RTD 1 | Kompressor Heißgas   | 60-90°C              |
-| 6  | `bufferMiddleTemperature`   | EL3204 (2) | RTD 2 | Pufferspeicher Mitte | **Ausschalt-Sensor** |
-| 7  | `bufferTopTemperature`      | EL3204 (2) | RTD 3 | Pufferspeicher Oben  | **Einschalt-Sensor** |
-| 8  | `boilerTemperature`         | EL3204 (2) | RTD 4 | Boiler Oben          | 40-60°C              |
+| Nr | Sensor                        | Term | Modul  | Kanal | Messposition             | Wertebereich         |
+|----|-------------------------------|------|--------|-------|--------------------------|----------------------|
+| 1  | `temperatureEvaporatingOut`   | 4    | EL3204 | RTD 1 | Verdampfer Ausgang       | 5-12°C (typ.)        |
+| 2  | `temperatureEvaporatingIn`    | 4    | EL3204 | RTD 2 | Verdampfer Eingang       | 8-15°C (typ.)        |
+| 3  | `temperatureFlow`             | 4    | EL3204 | RTD 3 | Wärmepumpe Vorlauf       | 35-50°C              |
+| 4  | `temperatureReturn`           | 4    | EL3204 | RTD 4 | Wärmepumpe Rücklauf      | 25-45°C (max 53°C)   |
+| 5  | `temperatureOverheatedGas`    | 7    | EL3204 | RTD 1 | Kompressor Heißgas       | 60-90°C              |
+| 6  | `bufferMiddleTemperature`     | 7    | EL3204 | RTD 2 | Pufferspeicher Mitte     | **Ausschalt-Sensor** |
+| 7  | `bufferTopTemperature`        | 7    | EL3204 | RTD 3 | Pufferspeicher Oben      | **Einschalt-Sensor** |
+| 8  | `boilerTemperature`           | 7    | EL3204 | RTD 4 | Boiler Oben              | 40-60°C              |
+| 9  | `temperatureSourceWaterIn`    | 19   | EL3204 | RTD 1 | Quellwasser Eingang      | 8-12°C (Grundwasser) |
+| 10 | `temperatureSourceWaterOut`   | 19   | EL3204 | RTD 2 | Quellwasser Ausgang      | 5-10°C (nach WP)     |
 
 **Anschluss PT1000:** 3-Leiter empfohlen (rot-weiß-weiß)
 
@@ -492,65 +590,56 @@
 
 ### Drucksensoren (4-20 mA) - 2 Stück
 
-| Nr | Sensor         | Modul  | Kanal | Messposition           | Wertebereich              |
-|----|----------------|--------|-------|------------------------|---------------------------|
-| 1  | `pressureHigh` | EL3152 | CH 1  | Hochdruck Kältekreis   | 0-18 bar (8-14 bar typ.)  |
-| 2  | `pressureLow`  | EL3152 | CH 2  | Niederdruck Kältekreis | -0.5-7 bar (2-4 bar typ.) |
+| Nr | Sensor         | Term | Modul  | Kanal | Messposition           | Wertebereich              |
+|----|----------------|------|--------|-------|------------------------|---------------------------|
+| 1  | `pressureHigh` | 2    | EL3152 | CH 1  | Hochdruck Kältekreis   | 0-18 bar (8-14 bar typ.)  |
+| 2  | `pressureLow`  | 2    | EL3152 | CH 2  | Niederdruck Kältekreis | -0.5-7 bar (2-4 bar typ.) |
 
-**Anschluss 4-20mA:** 2-Leiter
-
--
-    + : Speiseleitung (24V DC)
--
-    - : Messleitung (Signal-GND)
+**Anschluss 4-20mA:** 2-Leiter (+ Speiseleitung 24V DC, - Messleitung/Signal-GND)
 
 ### Spannungssensor (0-10 V) - 1 Stück
 
-| Nr | Sensor                         | Modul  | Kanal | Messposition              | Wertebereich            |
-|----|--------------------------------|--------|-------|---------------------------|-------------------------|
-| 1  | `pressureDifferenceEvaporator` | EL3102 | CH 1  | Differenzdruck Verdampfer | 0-200 mbar (10-30 typ.) |
+| Nr | Sensor                         | Term | Modul  | Kanal | Messposition              | Wertebereich            |
+|----|--------------------------------|------|--------|-------|---------------------------|-------------------------|
+| 1  | `pressureDifferenceEvaporator` | 5    | EL3102 | CH 1  | Differenzdruck Verdampfer | 0-200 mbar (10-30 typ.) |
 
-**Anschluss 0-10V:** 3-Leiter
+**Anschluss 0-10V:** 3-Leiter (+ Speiseleitung 24V DC, Signal 0-10V, - Signal-GND)
 
--
-    + : Speiseleitung (24V DC)
-- Signal: Spannungsausgang (0-10V)
--
-    - : Signal-GND
+### Digitale Eingänge (24V DC) - 9 Stück
 
-### Digitale Eingänge (24V DC) - 8 Stück
-
-| Nr | Signal                 | Modul  | Kanal | Funktion               | Logik              |
-|----|------------------------|--------|-------|------------------------|--------------------|
-| 1  | `userConfirmation`     | EL1008 | CH 1  | Bestätigungs-Taster    | TRUE = gedrückt    |
-| 2  | `boilerHeatRequest`    | EL1008 | CH 2  | Boiler-Ladepumpe aktiv | TRUE = Pumpe läuft |
-| 3  | `alarmExpansionValve`  | EL1008 | CH 3  | EEV Alarm              | TRUE = Fehler      |
-| 4  | `photovoltaicSurplus`  | EL1008 | CH 4  | PV-Überschuss          | TRUE = Überschuss  |
-| 5  | `incidentCompressor`   | EL1008 | CH 5  | Motorschutz Kompressor | TRUE = ausgelöst   |
-| 6  | `incidentFlow`         | EL1008 | CH 6  | Durchfluss OK          | TRUE = OK (!)      |
-| 7  | `incidentHighPressure` | EL1008 | CH 7  | Hochdruck-Thermostat   | TRUE = ausgelöst   |
-| 8  | `incidentLowPressure`  | EL1008 | CH 8  | Niederdruck-Thermostat | TRUE = ausgelöst   |
+| Nr | Signal                          | Term | Modul  | Kanal | Funktion                      | Logik              |
+|----|---------------------------------|------|--------|-------|-------------------------------|--------------------|
+| 1  | `userConfirmation`              | 6    | EL1008 | CH 1  | Bestätigungs-Taster           | TRUE = gedrückt    |
+| 2  | `boilerHeatRequest`             | 6    | EL1008 | CH 2  | Boiler-Ladepumpe aktiv        | TRUE = Pumpe läuft |
+| 3  | `alarmExpansionValve`           | 6    | EL1008 | CH 3  | EEV Alarm                     | TRUE = Fehler      |
+| 4  | `photovoltaicSurplus`           | 6    | EL1008 | CH 4  | PV-Überschuss                 | TRUE = Überschuss  |
+| 5  | `incidentCompressor`            | 6    | EL1008 | CH 5  | Motorschutz Kompressor        | TRUE = ausgelöst   |
+| 6  | `incidentWaterFlow`             | 6    | EL1008 | CH 6  | Durchfluss Quellwasser OK     | TRUE = OK (!)      |
+| 7  | `incidentHighPressure`          | 6    | EL1008 | CH 7  | Hochdruck-Thermostat          | TRUE = ausgelöst   |
+| 8  | `incidentLowPressure`           | 6    | EL1008 | CH 8  | Niederdruck-Thermostat        | TRUE = ausgelöst   |
+| 9  | `incidentFlowIntermediateCircuit` | 18 | EL1008 | CH 1  | Durchfluss Zwischenkreis OK   | TRUE = OK (!)      |
 
 **Anschluss:** Schließer-Kontakte gegen 24V DC
 
 ### Digitale Ausgänge (24V DC) - 3 Stück
 
-| Nr | Signal                     | Modul  | Kanal | Last              | Logik      |
-|----|----------------------------|--------|-------|-------------------|------------|
-| 1  | `operatingStateCompressor` | EL2004 | CH 1  | Kompressor-Schütz | TRUE = Ein |
-| 2  | `operatingStateWaterPump`  | EL2004 | CH 2  | Pumpen-Schütz     | TRUE = Ein |
-| 3  | `operatingStateLed`        | EL2004 | CH 3  | Betriebs-LED      | TRUE = Ein |
+| Nr | Signal                     | Term | Modul  | Kanal | Last              | Logik      |
+|----|----------------------------|------|--------|-------|-------------------|------------|
+| 1  | `operatingStateCompressor` | 3    | EL2004 | CH 1  | Kompressor-Schütz | TRUE = Ein |
+| 2  | `operatingStateWaterPump`  | 3    | EL2004 | CH 2  | Pumpen-Schütz     | TRUE = Ein |
+| 3  | `operatingStateLed`        | 3    | EL2004 | CH 3  | Betriebs-LED      | TRUE = Ein |
 
 **Anschluss:** Schütz-Spulen oder LED mit Vorwiderstand
 
-### Relais-Ausgänge (230V AC) - 2 Stück
+### Relais-Ausgänge (230V AC) - 3 Stück
 
-| Nr | Signal            | Modul  | Kanal | Last                    | Logik              |
-|----|-------------------|--------|-------|-------------------------|--------------------|
-| 1  | `closeFlowVentil` | EL2622 | CH 1  | Ventil Schließen (230V) | Impuls = Schließen |
-| 2  | `openFlowVentil`  | EL2622 | CH 2  | Ventil Öffnen (230V)    | Impuls = Öffnen    |
+| Nr | Signal                              | Term | Modul  | Kanal | Last                           | Logik              |
+|----|-------------------------------------|------|--------|-------|--------------------------------|--------------------|
+| 1  | `operatingStateIntermediateCircuitPump` | 8 | EL2622 | CH 1  | Sole-Zwischenkreispumpe (230V) | TRUE = Ein         |
+| 2  | `closeFlowVentil`                   | 9    | EL2622 | CH 1  | Ventil Schließen (230V)        | Impuls = Schließen |
+| 3  | `openFlowVentil`                    | 9    | EL2622 | CH 2  | Ventil Öffnen (230V)           | Impuls = Öffnen    |
 
-**Anschluss:** Bistabiles 230V AC Ventil (2 Spulen)
+**Anschluss:** 230V AC Last direkt an Relaiskontakt
 
 ---
 
@@ -575,10 +664,12 @@
 
 ### Durchfluss
 
-| Parameter        | Bedingung | Aktion                        |
-|------------------|-----------|-------------------------------|
-| **incidentFlow** | TRUE      | Durchfluss OK (≥ 1800 L/h)    |
-| **incidentFlow** | FALSE     | Durchfluss zu niedrig → ERROR |
+| Parameter                          | Bedingung | Aktion                              |
+|------------------------------------|-----------|-------------------------------------|
+| **incidentWaterFlow**              | TRUE      | Quellwasser OK (≥ 1800 L/h)         |
+| **incidentWaterFlow**              | FALSE     | Quellwasser zu niedrig → ERROR      |
+| **incidentFlowIntermediateCircuit** | TRUE     | Zwischenkreis OK                    |
+| **incidentFlowIntermediateCircuit** | FALSE    | Zwischenkreis zu niedrig → ERROR    |
 
 ---
 
@@ -588,44 +679,27 @@
 
 Das EL3204 Modul liefert die Temperatur als **Integer-Wert in Zehntel-Grad**:
 
-**Umrechnung:**
-
 ```
 Temperatur [°C] = rawValue / 10
 ```
 
-**Beispiel:**
-
-- rawValue = 235 → Temperatur = 23.5°C
-- rawValue = -50 → Temperatur = -5.0°C
+**Beispiel:** rawValue = 235 → 23.5°C
 
 ### 4-20 mA Drucksensoren
 
-Das EL3152 Modul liefert den Stromwert als **16-Bit Integer** (0-32767):
-
-**Umrechnung (generisch):**
+Das EL3152 Modul liefert den Stromwert als **16-Bit Integer** (0x0000-0x7FFF = 0-32767):
 
 ```
-Physikalischer Wert = ((rawValue / 32767) * (max - min)) + min
+Physikalischer Wert = ((rawMax - rawMin) * rawVal) / 32767 + rawMin
 ```
 
-**Hochdruck (0-18 bar):**
+**Hochdruck (0-18 bar):** `pressureHigh = rawValue / 32767 * 18`
 
-```
-pressureHigh [bar] = ((rawValue / 32767) * 18) + 0
-```
-
-**Niederdruck (-0.5-7 bar):**
-
-```
-pressureLow [bar] = ((rawValue / 32767) * 7.5) - 0.5
-```
+**Niederdruck (-0.5-7 bar):** `pressureLow = rawValue / 32767 * 7.5 - 0.5`
 
 ### 0-10 V Differenzdrucksensor
 
 Das EL3102 Modul liefert die Spannung als **16-Bit Integer** (0-32767):
-
-**Umrechnung (0-200 mbar):**
 
 ```
 pressureDifferenceEvaporator [mbar] = (rawValue / 32767) * 200
@@ -637,13 +711,14 @@ pressureDifferenceEvaporator [mbar] = (rawValue / 32767) * 200
 
 ### Regelmäßige Prüfung (jährlich)
 
-| Komponente           | Prüfung                 | Sollwert               |
-|----------------------|-------------------------|------------------------|
-| PT1000 Sensoren      | Vergleichsmessung       | ±0.5°C Abweichung max. |
-| Drucksensoren        | Nullpunkt-Kalibrierung  | 4 mA bei 0 bar         |
-| Differenzdrucksensor | Reinigung Verdampfer    | < 20 mbar bei Nennlast |
-| Durchflusswächter    | Funktion prüfen         | Schaltet bei 1800 L/h  |
-| Ventil               | Öffnen/Schließen testen | Frei beweglich         |
+| Komponente                  | Prüfung                 | Sollwert               |
+|-----------------------------|-------------------------|------------------------|
+| PT1000 Sensoren (alle 10)   | Vergleichsmessung       | ±0.5°C Abweichung max. |
+| Drucksensoren               | Nullpunkt-Kalibrierung  | 4 mA bei 0 bar         |
+| Differenzdrucksensor        | Reinigung Verdampfer    | < 20 mbar bei Nennlast |
+| Durchflusswächter Quellwasser | Funktion prüfen       | Schaltet bei 1800 L/h  |
+| Durchflusswächter Zwischenkreis | Funktion prüfen    | Schaltpunkt prüfen     |
+| Wasserventil                | Öffnen/Schließen testen | Frei beweglich         |
 
 ### Fehlersuche
 
@@ -653,6 +728,7 @@ pressureDifferenceEvaporator [mbar] = (rawValue / 32767) * 200
 | Sensor liefert konstanten Wert | Sensor defekt oder eingefroren | Sensor tauschen                     |
 | Drucksensor zeigt 0 bar        | Stromschleife unterbrochen     | 4-20 mA messen                      |
 | Ventil öffnet nicht            | Relais defekt oder Spule       | Spannung an Ventil messen (230V AC) |
+| Pumpe schaltet nicht           | EL2622 Relais prüfen           | Spannung am Relaisausgang messen    |
 
 ---
 
@@ -662,13 +738,16 @@ pressureDifferenceEvaporator [mbar] = (rawValue / 32767) * 200
 
 - `Heatpump/DUTs/ST_Sensor.TcDUT` - Sensor-Datenstruktur
 - `Heatpump/DUTs/ST_Actor.TcDUT` - Aktor-Datenstruktur
+- `Heatpump/DUTs/ST_Incident.TcDUT` - Störungs-Datenstruktur
+- `Heatpump/DUTs/ST_SensorRaw.TcDUT` - Rohdaten-Struktur mit EtherCAT-Modulzuordnung
 - `Heatpump/POUs/FB_Processdata.TcPOU` - Sensor-Umrechnung (Code)
-- `_Config/IO/Gerät 1 (EtherCAT)/` - EtherCAT Konfiguration
+- `doc/Zuordnungen.xml` - TwinCAT I/O-Verknüpfungen (maßgeblich!)
 
 ---
 
 ## Änderungshistorie
 
-| Version | Datum      | Autor       | Änderung                        |
-|---------|------------|-------------|---------------------------------|
-| 1.0     | 2025-01-24 | Claude Code | Initiale Dokumentation erstellt |
+| Version | Datum      | Autor       | Änderung                                                             |
+|---------|------------|-------------|----------------------------------------------------------------------|
+| 1.0     | 2025-01-24 | Claude Code | Initiale Dokumentation erstellt                                      |
+| 1.1     | 2026-03-06 | Claude Code | Term 8 EL2622 (Zwischenkreispumpe), Term 18 EL1008 (Zwischenkreis-Durchfluss), Term 19 EL3204 (Quellwasser-Temperaturen) hinzugefügt; incidentFlow → incidentWaterFlow umbenannt |

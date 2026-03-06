@@ -14,6 +14,10 @@
         bufferTopTemperature			AT %I*	: INT;  (* Temperatur des Puffers oben in °C *)
 		bufferMiddleTemperature			AT %I*	: INT;  (* Temperatur des Puffers in der Mitte °C *)	
 		boilerTemperature				AT %I*	: INT;  (* Boiler-Temperatur oben °C *)	
+		
+		(* EL3204 - 3*)
+		temperatureSourceWaterIn		AT %I*	: INT;  (* Quellwassertemperatur Eingang in °C *)
+		temperatureSourceWaterOut		AT %I*	: INT;  (* Quellwassertemperatur Ausgang in °C *)		
 
 		(* EL3122 - 4-20mA*)
         pressureHigh					AT %I*	: INT;  (* Hochdruck Kältekreis in bar *)

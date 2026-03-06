@@ -69,6 +69,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[LogMessage(E_LogType.INFO, 'Ventil ist geöffnet. Durchflussmenge erreicht. Kompressor wird eingeschaltet: -> ', pMachine^.RunningState.Name);
 pMachine^.pd.actor.operatingStateWaterPump := TRUE;
+pMachine^.pd.actor.operatingStateIntermediateCircuitPump := TRUE;
 pMachine^.pd.actor.operatingStateCompressor := TRUE;
 pMachine^.SetState(pMachine^.RunningState);
 ]]></ST>
@@ -117,14 +118,14 @@ METHOD UserPressedConfirmationButton : BOOL
       </Implementation>
     </Method>
     <Method Name="UserPressedSwitchOffButton" Id="{132cc9f9-1903-4055-8e00-9860ee28e509}">
-      <Declaration><![CDATA[{warning 'Methodenimplementierung hinzufügen'}
-METHOD UserPressedSwitchOffButton : BOOL
+      <Declaration><![CDATA[METHOD UserPressedSwitchOffButton : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[LogMessage(E_LogType.INFO, 'Aus Button wurde gedrückt -> ', pMachine^.OffState.Name);
 switchWaterVentil(bOpen := FALSE, pMachine);
 pMachine^.pd.actor.operatingStateCompressor := FALSE;
 pMachine^.pd.actor.operatingStateWaterPump := FALSE;
+pMachine^.pd.actor.operatingStateIntermediateCircuitPump := FALSE;
 pMachine^.SetState(pMachine^.OffState);]]></ST>
       </Implementation>
     </Method>
@@ -162,6 +163,7 @@ METHOD WaterHasCooledDown : BOOL
     <LineIds Name="FB_StartWaterFlowState.MinWaterFlowReached">
       <LineId Id="15" Count="0" />
       <LineId Id="29" Count="0" />
+      <LineId Id="34" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="11" Count="0" />
       <LineId Id="17" Count="0" />
@@ -181,6 +183,7 @@ METHOD WaterHasCooledDown : BOOL
     <LineIds Name="FB_StartWaterFlowState.UserPressedSwitchOffButton">
       <LineId Id="5" Count="1" />
       <LineId Id="19" Count="1" />
+      <LineId Id="24" Count="0" />
       <LineId Id="4" Count="0" />
     </LineIds>
     <LineIds Name="FB_StartWaterFlowState.UserPressedSwitchOnButton">

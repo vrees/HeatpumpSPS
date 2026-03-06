@@ -130,6 +130,7 @@ pMachine^.SetState(pMachine^.OffState);]]></ST>
       <Implementation>
         <ST><![CDATA[LogMessage(E_LogType.INFO, 'Abkühlungsphase beendet -> ', pMachine^.IdleState.Name);
 pMachine^.pd.actor.operatingStateWaterPump := FALSE;
+pMachine^.pd.actor.operatingStateIntermediateCircuitPump := FALSE;
 pMachine^.SetState(pMachine^.IdleState);]]></ST>
       </Implementation>
     </Method>
@@ -176,6 +177,7 @@ pMachine^.SetState(pMachine^.IdleState);]]></ST>
     <LineIds Name="FB_CoolDownState.WaterHasCooledDown">
       <LineId Id="5" Count="0" />
       <LineId Id="8" Count="0" />
+      <LineId Id="12" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

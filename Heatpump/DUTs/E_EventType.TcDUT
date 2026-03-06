@@ -23,7 +23,7 @@ TYPE E_EventType :
 	HighPressureRefrigerationThermostat	:= 105,
 	MotorProtectionTriggered			:= 106,
 	ExpansionValveTriggered				:= 107,
-
+	IntermediateCircuitFlowRateTooLow	:= 108,
 		
 	(* Warnings *)
 	LowPressureRefrigerationCalc		:= 201,

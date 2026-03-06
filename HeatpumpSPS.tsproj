@@ -30,7 +30,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{B2D93252-973A-42CA-84AA-9B5A07DF2ABD}" Name="Heatpump" PrjFilePath="Heatpump\Heatpump.plcproj" TmcFilePath="Heatpump\Heatpump.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{D40AE7DC-773E-D549-FF3A-87A6E22C7990}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" TmcPath="Heatpump\Heatpump.tmc" TmcHash="{A1D30655-9741-38C3-07D6-2EFA170FEB7E}">
 					<Name>Heatpump Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -76,6 +76,16 @@
 							<Type>INT</Type>
 						</Var>
 						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.temperatureSourceWaterIn</Name>
+							<Comment><![CDATA[ Quellwassertemperatur Eingang in °C ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.fbProcessdata.sensorRaw.temperatureSourceWaterOut</Name>
+							<Comment><![CDATA[ Quellwassertemperatur Ausgang in °C ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
 							<Name>MAIN.fbProcessdata.sensorRaw.pressureHigh</Name>
 							<Comment><![CDATA[ Hochdruck Kältekreis in bar ]]></Comment>
 							<Type>INT</Type>
@@ -116,8 +126,13 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.pd.incident.incidentFlow</Name>
-							<Comment><![CDATA[ Störung: Durchfluss im Verdampfer zu niedrig - EL1008.6  Achtung!!! invertiert: True bedeutet genug Fluss vorhanden]]></Comment>
+							<Name>MAIN.pd.incident.incidentWaterFlow</Name>
+							<Comment><![CDATA[ Störung: Quellwasser-Durchfluss zu niedrig - EL1008.6  Achtung!!! invertiert: True bedeutet genug Fluss vorhanden]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.incident.incidentFlowIntermediateCircuit</Name>
+							<Comment><![CDATA[ Störung: Durchfluss im Verdampfer (Zwischenkreis) zu niedrig. Achtung!!! invertiert: True bedeutet genug Fluss vorhanden ]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -140,6 +155,11 @@
 						</Var>
 						<Var>
 							<Name>MAIN.pd.actor.operatingStateWaterPump</Name>
+							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.pd.actor.operatingStateIntermediateCircuitPump</Name>
 							<Comment><![CDATA[ Status der Heizungspumpe: Ein/Aus]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
@@ -229,14 +249,14 @@
 				<Image Id="1" AddrType="9" ImageType="3">
 					<Name>Prozessabbild</Name>
 				</Image>
-				<Box Id="10" BoxType="9099">
+				<Box Id="1" BoxType="9099">
 					<Name>Klemme 10 (EK1200)</Name>
 					<ImageId>1000</ImageId>
 					<EtherCAT PdiType="#x0100" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x04b02c52" RevisionNo="#x00001388" InfoDataState="false" PortPhys="49" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EK1200-5000 EtherCAT Netzteil (2A E-Bus)" Desc="EK1200" PortABoxInfo="#x00ffffff"/>
-					<Box Id="11" BoxType="9099" BoxFlags="#x00000020">
-						<Name>Klemme 11 (EL3152)</Name>
+					<Box Id="2" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Klemme 2 (EL3152)</Name>
 						<ImageId>1001</ImageId>
-						<EtherCAT SlaveType="2" PdiType="#x0005" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="15" FoeType="1" VendorId="#x00000002" ProductCode="#x0c503052" InfoDataAddr="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3152 2K. Ana. Eingang 4-20mA" Desc="EL3152" PortABoxInfo="#x0100000a">
+						<EtherCAT SlaveType="2" PdiType="#x0005" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="15" FoeType="1" VendorId="#x00000002" ProductCode="#x0c503052" InfoDataAddr="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3152 2K. Ana. Eingang 4-20mA" Desc="EL3152" PortABoxInfo="#x01000001">
 							<SyncMan>0018f60026000100010000002800ce05f600001826010000</SyncMan>
 							<SyncMan>f618f60022000100020000002800ce05f600f61822010000</SyncMan>
 							<SyncMan>001000002400000003000000000000000000001024010000</SyncMan>
@@ -276,10 +296,10 @@
 							<CoeProfile ProfileNo="401"/>
 						</EtherCAT>
 					</Box>
-					<Box Id="12" BoxType="9099">
-						<Name>Klemme 12 (EL2004)</Name>
+					<Box Id="3" BoxType="9099">
+						<Name>Klemme 3 (EL2004)</Name>
 						<ImageId>1002</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07d43052" RevisionNo="#x00100000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2004 4K. Dig. Ausgang 24V, 0.5A" Desc="EL2004" PortABoxInfo="#x0100000b">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07d43052" RevisionNo="#x00100000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2004 4K. Dig. Ausgang 24V, 0.5A" Desc="EL2004" PortABoxInfo="#x01000002">
 							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
 							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
@@ -304,10 +324,10 @@
 							</Pdo>
 						</EtherCAT>
 					</Box>
-					<Box Id="13" BoxType="9099" BoxFlags="#x00000020">
-						<Name>Klemme 13 (EL3204)</Name>
+					<Box Id="4" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Klemme 4 (EL3204)</Name>
 						<ImageId>1001</ImageId>
-						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x0c843052" RevisionNo="#x00100000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3204 4K. Ana. Eingang PT100 (RTD)" Desc="EL3204" PortABoxInfo="#x0100000c">
+						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x0c843052" RevisionNo="#x00100000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3204 4K. Ana. Eingang PT100 (RTD)" Desc="EL3204" PortABoxInfo="#x01000003">
 							<SyncMan>001080002600010001000000800080008000001026010000</SyncMan>
 							<SyncMan>801080002200010002000000800080008000801022010000</SyncMan>
 							<SyncMan>001100006400000003000000000000000000001164010000</SyncMan>
@@ -473,10 +493,10 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 							<CoeProfile ProfileNo="20976521"/>
 						</EtherCAT>
 					</Box>
-					<Box Id="14" BoxType="9099" BoxFlags="#x00000020">
-						<Name>Klemme 14 (EL3102)</Name>
+					<Box Id="5" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Klemme 5 (EL3102)</Name>
 						<ImageId>1001</ImageId>
-						<EtherCAT SlaveType="2" PdiType="#x0005" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="15" FoeType="1" VendorId="#x00000002" ProductCode="#x0c1e3052" InfoDataAddr="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3102 2K. Ana. Eingang +/-10V, Diff." Desc="EL3102" PortABoxInfo="#x0100000d">
+						<EtherCAT SlaveType="2" PdiType="#x0005" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="15" FoeType="1" VendorId="#x00000002" ProductCode="#x0c1e3052" InfoDataAddr="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3102 2K. Ana. Eingang +/-10V, Diff." Desc="EL3102" PortABoxInfo="#x01000004">
 							<SyncMan>0018f60026000100010000002800ce05f600001826010000</SyncMan>
 							<SyncMan>f618f60022000100020000002800ce05f600f61822010000</SyncMan>
 							<SyncMan>001000002400000003000000000000000000001024010000</SyncMan>
@@ -516,10 +536,10 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 							<CoeProfile ProfileNo="401"/>
 						</EtherCAT>
 					</Box>
-					<Box Id="15" BoxType="9099">
-						<Name>Klemme 15 (EL1008)</Name>
+					<Box Id="6" BoxType="9099">
+						<Name>Klemme 6 (EL1008)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03f03052" RevisionNo="#x00100000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1008 8K. Dig. Eingang 24V, 3ms" Desc="EL1008" PortABoxInfo="#x0100000e">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03f03052" RevisionNo="#x00100000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1008 8K. Dig. Eingang 24V, 3ms" Desc="EL1008" PortABoxInfo="#x01000005">
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
@@ -564,10 +584,58 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 							</Pdo>
 						</EtherCAT>
 					</Box>
-					<Box Id="16" BoxType="9099" BoxFlags="#x00000020">
-						<Name>Klemme 16 (EL3204)</Name>
+					<Box Id="18" BoxType="9099">
+						<Name>Klemme 18 (EL1008)</Name>
+						<ImageId>7</ImageId>
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x03f03052" RevisionNo="#x00100000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1008 8K. Dig. Eingang 24V, 3ms" Desc="EL1008" PortABoxInfo="#x01000006">
+							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
+							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
+							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 2" Index="#x1a01" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6010" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 3" Index="#x1a02" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6020" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 4" Index="#x1a03" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6030" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 5" Index="#x1a04" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6040" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 6" Index="#x1a05" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6050" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 7" Index="#x1a06" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6060" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 8" Index="#x1a07" Flags="#x0011" SyncMan="0">
+								<Entry Name="Input" Index="#x6070" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+						</EtherCAT>
+					</Box>
+					<Box Id="7" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Klemme 7 (EL3204)</Name>
 						<ImageId>1001</ImageId>
-						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x0c843052" RevisionNo="#x00100000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3204 4K. Ana. Eingang PT100 (RTD)" Desc="EL3204" PortABoxInfo="#x0100000f">
+						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x0c843052" RevisionNo="#x00100000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3204 4K. Ana. Eingang PT100 (RTD)" Desc="EL3204" PortABoxInfo="#x01000012">
 							<SyncMan>001080002600010001000000800080008000001026010000</SyncMan>
 							<SyncMan>801080002200010002000000800080008000801022010000</SyncMan>
 							<SyncMan>001100006400000003000000000000000000001164010000</SyncMan>
@@ -733,10 +801,10 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 							<CoeProfile ProfileNo="20976521"/>
 						</EtherCAT>
 					</Box>
-					<Box Id="8" BoxType="9099">
-						<Name>Klemme 8 (EL2622)</Name>
+					<Box Id="9" BoxType="9099">
+						<Name>Klemme 9 (EL2622)</Name>
 						<ImageId>1002</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x0a3e3052" RevisionNo="#x00100000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2622 2K. Relais Ausgang, Schließer (230V AC / 30V DC)" Desc="EL2622" PortABoxInfo="#x01000010">
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x0a3e3052" RevisionNo="#x00100000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2622 2K. Relais Ausgang, Schließer (230V AC / 30V DC)" Desc="EL2622" PortABoxInfo="#x01000007">
 							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
 							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
@@ -751,10 +819,161 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 							</Pdo>
 						</EtherCAT>
 					</Box>
-					<Box Id="17" BoxType="9099">
-						<Name>Klemme 17 (EL9011)</Name>
+					<Box Id="8" BoxType="9099">
+						<Name>Klemme 8 (EL2622)</Name>
+						<ImageId>1002</ImageId>
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x0a3e3052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2622 2K. Relais Ausgang, Schließer (230V AC / 30V DC)" Desc="EL2622" PortABoxInfo="#x01000009">
+							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
+							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
+							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x7010" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+						</EtherCAT>
+					</Box>
+					<Box Id="19" BoxType="9099" BoxFlags="#x00000020">
+						<Name>Klemme 19 (EL3204)</Name>
+						<ImageId>1001</ImageId>
+						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x0c843052" RevisionNo="#x00110000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3204 4K. Ana. Eingang PT100 (RTD)" Desc="EL3204" PortABoxInfo="#x01000008">
+							<SyncMan>001080002600010001000000800080008000001026010000</SyncMan>
+							<SyncMan>801080002200010002000000800080008000801022010000</SyncMan>
+							<SyncMan>001100000400000003000000000000000000001104000000</SyncMan>
+							<SyncMan>801110002000010004000000000000001000801120010000</SyncMan>
+							<Fmmu>0000000000000000801100010100000002000000000000000000000000000000</Fmmu>
+							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+							<BootStrapData>0010f400f410f400</BootStrapData>
+							<Pdo Name="RTD Inputs Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="3">
+								<Entry Name="Status__Underrange" Index="#x6000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Overrange" Index="#x6000" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Limit 1" Index="#x6000" Sub="#x03">
+									<Type>BIT2</Type>
+								</Entry>
+								<Entry Name="Status__Limit 2" Index="#x6000" Sub="#x05">
+									<Type>BIT2</Type>
+								</Entry>
+								<Entry Name="Status__Error" Index="#x6000" Sub="#x07">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000007}">ARRAY [0..6] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO State" Index="#x1800" Sub="#x07">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO Toggle" Index="#x1800" Sub="#x09">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Value" Index="#x6000" Sub="#x11" Flags="#x00050000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="RTD Inputs Channel 2" Index="#x1a01" Flags="#x0011" SyncMan="3">
+								<Entry Name="Status__Underrange" Index="#x6010" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Overrange" Index="#x6010" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Limit 1" Index="#x6010" Sub="#x03">
+									<Type>BIT2</Type>
+								</Entry>
+								<Entry Name="Status__Limit 2" Index="#x6010" Sub="#x05">
+									<Type>BIT2</Type>
+								</Entry>
+								<Entry Name="Status__Error" Index="#x6010" Sub="#x07">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000007}">ARRAY [0..6] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO State" Index="#x1801" Sub="#x07">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO Toggle" Index="#x1801" Sub="#x09">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Value" Index="#x6010" Sub="#x11" Flags="#x00050000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="RTD Inputs Channel 3" Index="#x1a02" Flags="#x0011" SyncMan="3">
+								<Entry Name="Status__Underrange" Index="#x6020" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Overrange" Index="#x6020" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Limit 1" Index="#x6020" Sub="#x03">
+									<Type>BIT2</Type>
+								</Entry>
+								<Entry Name="Status__Limit 2" Index="#x6020" Sub="#x05">
+									<Type>BIT2</Type>
+								</Entry>
+								<Entry Name="Status__Error" Index="#x6020" Sub="#x07">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000007}">ARRAY [0..6] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO State" Index="#x1802" Sub="#x07">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO Toggle" Index="#x1802" Sub="#x09">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Value" Index="#x6020" Sub="#x11" Flags="#x00050000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="RTD Inputs Channel 4" Index="#x1a03" Flags="#x0011" SyncMan="3">
+								<Entry Name="Status__Underrange" Index="#x6030" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Overrange" Index="#x6030" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Limit 1" Index="#x6030" Sub="#x03">
+									<Type>BIT2</Type>
+								</Entry>
+								<Entry Name="Status__Limit 2" Index="#x6030" Sub="#x05">
+									<Type>BIT2</Type>
+								</Entry>
+								<Entry Name="Status__Error" Index="#x6030" Sub="#x07">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000007}">ARRAY [0..6] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO State" Index="#x1803" Sub="#x07">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO Toggle" Index="#x1803" Sub="#x09">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Value" Index="#x6030" Sub="#x11" Flags="#x00050000">
+									<Type>INT</Type>
+								</Entry>
+							</Pdo>
+							<CoeProfile ProfileNo="20976521"/>
+							<CoeProfile ProfileNo="20976521"/>
+							<CoeProfile ProfileNo="20976521"/>
+							<CoeProfile ProfileNo="20976521"/>
+						</EtherCAT>
+					</Box>
+					<Box Id="20" BoxType="9099">
+						<Name>Klemme 20 (EL9011)</Name>
 						<ImageId>1003</ImageId>
-						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 Endklemme" Desc="EL9011" PortABoxInfo="#x01000008"/>
+						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 Endklemme" Desc="EL9011" PortABoxInfo="#x01000013"/>
 					</Box>
 				</Box>
 				<EtherCAT/>
@@ -764,41 +983,51 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 	<Mappings>
 		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^Heatpump^Heatpump Instance">
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 11 (EL3152)">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 18 (EL1008)">
+				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentFlowIntermediateCircuit" VarB="Channel 1^Input"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 19 (EL3204)">
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureSourceWaterIn" VarB="RTD Inputs Channel 1^Value"/>
+				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureSourceWaterOut" VarB="RTD Inputs Channel 2^Value"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 2 (EL3152)">
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.pressureHigh" VarB="Channel 1^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.pressureLow" VarB="Channel 2^Value"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 12 (EL2004)">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 3 (EL2004)">
 				<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateCompressor" VarB="Channel 1^Output"/>
 				<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateLed" VarB="Channel 3^Output"/>
 				<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateWaterPump" VarB="Channel 2^Output"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 13 (EL3204)">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 4 (EL3204)">
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureEvaporatingIn" VarB="RTD Inputs Channel 2^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureEvaporatingOut" VarB="RTD Inputs Channel 1^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureFlow" VarB="RTD Inputs Channel 3^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureReturn" VarB="RTD Inputs Channel 4^Value"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 14 (EL3102)">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 5 (EL3102)">
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.pressureDifferenceEvaporator" VarB="Channel 1^Value"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 15 (EL1008)">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 6 (EL1008)">
 				<Link VarA="PlcTask Inputs^MAIN.pd.incident.alarmExpansionValve" VarB="Channel 3^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentCompressor" VarB="Channel 5^Input"/>
-				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentFlow" VarB="Channel 6^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentHighPressure" VarB="Channel 7^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentLowPressure" VarB="Channel 8^Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.pd.incident.incidentWaterFlow" VarB="Channel 6^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.pd.sensor.boilerHeatRequest" VarB="Channel 2^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.pd.sensor.photovoltaicSurplus" VarB="Channel 4^Input"/>
 				<Link VarA="PlcTask Inputs^MAIN.pd.sensor.userConfirmation" VarB="Channel 1^Input"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 16 (EL3204)">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 7 (EL3204)">
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.boilerTemperature" VarB="RTD Inputs Channel 4^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.bufferMiddleTemperature" VarB="RTD Inputs Channel 2^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.bufferTopTemperature" VarB="RTD Inputs Channel 3^Value"/>
 				<Link VarA="PlcTask Inputs^MAIN.fbProcessdata.sensorRaw.temperatureOverheatedGas" VarB="RTD Inputs Channel 1^Value"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 8 (EL2622)">
+				<Link VarA="PlcTask Outputs^MAIN.pd.actor.operatingStateIntermediateCircuitPump" VarB="Channel 1^Output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 10 (EK1200)^Term 9 (EL2622)">
 				<Link VarA="PlcTask Outputs^MAIN.pd.actor.closeFlowVentil" VarB="Channel 1^Output"/>
 				<Link VarA="PlcTask Outputs^MAIN.pd.actor.openFlowVentil" VarB="Channel 2^Output"/>
 			</OwnerB>
