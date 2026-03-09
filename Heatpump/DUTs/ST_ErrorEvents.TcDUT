@@ -13,6 +13,7 @@
 		ExpansionValveTriggered				: ST_Event := (eventType := E_EventType.ExpansionValveTriggered, isSelfHealing:=FALSE, severity:= E_Severity.Error, message := 'Expansionsventil ausgelöst');
 		IntermediateCircuitFlowRateTooLow	: ST_Event := (eventType := E_EventType.IntermediateCircuitFlowRateTooLow, isSelfHealing:=TRUE, severity:= E_Severity.Error, message := 'Sole Durchflussmenge im Zwischenkreis zu niedrig');
 		LowPressureRefrigerationCalc		: ST_Event := (eventType := E_EventType.LowPressureRefrigerationCalc, isSelfHealing:=FALSE, severity:= E_Severity.Error, message := 'Sensor: Niederdruck zu niedrig');  
+		TemperatureSourceWaterOutMinTooLow	: ST_Event := (eventType := E_EventType.TemperatureSourceWaterOutMinTooLow, isSelfHealing:=TRUE, severity:= E_Severity.Error, message := 'Quellwasser-Autrittstemperatur zu niedrig. Einfriergefahr');  
 	END_STRUCT
 END_TYPE
 ]]></Declaration>

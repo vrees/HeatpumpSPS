@@ -25,6 +25,7 @@ TYPE E_EventType :
 	ExpansionValveTriggered				:= 107,
 	IntermediateCircuitFlowRateTooLow	:= 108,
 	LowPressureRefrigerationCalc		:= 109,
+	TemperatureSourceWaterOutMinTooLow  := 110,
 		
 	(* Warnings *)
 	HighPressureRefrigerationCalc		:= 202,
