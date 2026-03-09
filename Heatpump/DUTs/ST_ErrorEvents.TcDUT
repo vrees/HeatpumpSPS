@@ -9,9 +9,10 @@
 		EvaporatingFlowRateTooLow			: ST_Event := (eventType := E_EventType.EvaporatingFlowRateTooLow, isSelfHealing:=TRUE, severity:= E_Severity.Error, message := 'Durchflussmenge zu niedrig');  
 		LowPressureRefrigerationThermostat	: ST_Event := (eventType := E_EventType.LowPressureRefrigerationThermostat, isSelfHealing:=FALSE, severity:= E_Severity.Error, message := 'Thermostat: Niederdruck zu niedrig');  
 		HighPressureRefrigerationThermostat	: ST_Event := (eventType := E_EventType.HighPressureRefrigerationThermostat, isSelfHealing:=FALSE, severity:= E_Severity.Error, message := 'Thermostat: Hochdruck zu hoch');  
-		MotorProtectionTriggered			: ST_Event := (eventType := E_EventType.MotorProtectionTriggered, isSelfHealing:=FALSE, severity:= E_Severity.Error, message := 'Thermostat: Hochdruck zu hoch');  
+		MotorProtectionTriggered			: ST_Event := (eventType := E_EventType.MotorProtectionTriggered, isSelfHealing:=FALSE, severity:= E_Severity.Error, message := 'Motorschutzschalter hat ausgelöst');  
 		ExpansionValveTriggered				: ST_Event := (eventType := E_EventType.ExpansionValveTriggered, isSelfHealing:=FALSE, severity:= E_Severity.Error, message := 'Expansionsventil ausgelöst');
-		IntermediateCircuitFlowRateTooLow	: ST_Event := (eventType := E_EventType.IntermediateCircuitFlowRateTooLow, isSelfHealing:=TRUE, severity:= E_Severity.Error, message := 'Sole Durchflussmenge im Zwischenkreis zu niedrig');    
+		IntermediateCircuitFlowRateTooLow	: ST_Event := (eventType := E_EventType.IntermediateCircuitFlowRateTooLow, isSelfHealing:=TRUE, severity:= E_Severity.Error, message := 'Sole Durchflussmenge im Zwischenkreis zu niedrig');
+		LowPressureRefrigerationCalc		: ST_Event := (eventType := E_EventType.LowPressureRefrigerationCalc, isSelfHealing:=FALSE, severity:= E_Severity.Error, message := 'Sensor: Niederdruck zu niedrig');  
 	END_STRUCT
 END_TYPE
 ]]></Declaration>

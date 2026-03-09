@@ -24,9 +24,9 @@ TYPE E_EventType :
 	MotorProtectionTriggered			:= 106,
 	ExpansionValveTriggered				:= 107,
 	IntermediateCircuitFlowRateTooLow	:= 108,
+	LowPressureRefrigerationCalc		:= 109,
 		
 	(* Warnings *)
-	LowPressureRefrigerationCalc		:= 201,
 	HighPressureRefrigerationCalc		:= 202,
 	WaterTankLevelTooLow				:= 203,
 	WaterTankDataMissing				:= 204

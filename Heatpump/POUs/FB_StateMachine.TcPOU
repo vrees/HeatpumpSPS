@@ -179,9 +179,9 @@ END_IF
 
 //***** Errors *****
 
-(* Prüfe maximalen Druck auf der Niederdruckseite über Ranco Thermostat [bar] *)
+(* Prüfe minimalen Druck auf der Niederdruckseite über Ranco Thermostat [bar] *)
 IF pd.incident.incidentLowPressure THEN
-	setEventInfo(events, events.errorEvents.LowPressureRefrigerationThermostat, TRUE, CONCAT('Ranco Thermostat: Niederdruck Fehler [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10))); 
+	setEventInfo(events, events.errorEvents.LowPressureRefrigerationThermostat, TRUE, CONCAT('Ranco Thermostat: zu niedriger Niederdruck [bar]: ', ScaleAndRoundString(pd.sensor.pressureLow, 10))); 
 END_IF
 
 (*Prüfe maximalen Druck auf der Hochdruckseite über Ranco Thermostat [bar]  *)
@@ -197,6 +197,11 @@ END_IF
 (* Expansionsventil meldet Fehler *)
 IF pd.incident.alarmExpansionValve THEN
 	setEventInfo(events, events.errorEvents.ExpansionValveTriggered, TRUE, 'Expansionsventil meldet Fehler');
+END_IF
+
+(* Prüfe Mindest-Druck auf der Niederdruckseite über Druck-Transmitter [bar] *)
+IF pd.sensor.PressureLow < GVL.configValues.pressureLowMin THEN
+	setEventInfo(events, events.errorEvents.LowPressureRefrigerationCalc, TRUE, CONCAT('Gemessener Niederdruck zu niedrig: [bar]: ', ScaleAndRoundString(pd.sensor.PressureLow, 10)));
 END_IF
 
 (* Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar] *)
@@ -220,13 +225,6 @@ IF NOT pd.incident.incidentFlowIntermediateCircuit AND iState.State = E_State.RU
 END_IF
 
 // ***** Warnings *****
-(* Prüfe maximalen Druck auf der Niederdruckseite [bar] *)
-IF pd.sensor.PressureLow > GVL.configValues.PressureLowMax THEN
-	setEventInfo(events, events.warningEvents.LowPressureRefrigerationCalc, FALSE, CONCAT('Niederdruck: [bar]: ', ScaleAndRoundString(pd.sensor.PressureLow, 10)));
-ELSE
-	events.warningEvents.LowPressureRefrigerationCalc.isTriggered := FALSE;
-END_IF
-
 (* Prüfe maximalen Druck auf der Hochdruckseite [bar] *)
 IF pd.sensor.PressureHigh > GVL.configValues.PressureHighMax THEN
 	setEventInfo(events, events.warningEvents.HighPressureRefrigerationCalc, FALSE, CONCAT('', ScaleAndRoundString(pd.sensor.PressureHigh, 10)));
@@ -420,11 +418,15 @@ END_VAR
       <LineId Id="322" Count="10" />
       <LineId Id="404" Count="0" />
       <LineId Id="403" Count="0" />
-      <LineId Id="333" Count="38" />
+      <LineId Id="333" Count="23" />
+      <LineId Id="420" Count="3" />
+      <LineId Id="419" Count="0" />
+      <LineId Id="357" Count="14" />
       <LineId Id="407" Count="0" />
       <LineId Id="412" Count="2" />
       <LineId Id="408" Count="1" />
-      <LineId Id="373" Count="25" />
+      <LineId Id="373" Count="0" />
+      <LineId Id="381" Count="17" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.IdleState.Get">

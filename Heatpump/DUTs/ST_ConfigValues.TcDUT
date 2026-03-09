@@ -14,7 +14,7 @@ STRUCT
 
 	// Limits*)
 	pressureHighMax 				:	REAL	:= 	16; 	// Maximaler Druck auf der Hochdruckseite [bar]
-	pressureLowMax 					:	REAL	:= 	6; 		// Maximaler Druck auf der Niederdruckseite [bar]
+	pressureLowMin 					:	REAL	:= 	1.4; 	// Minimaler Druck auf der Niederdruckseite [bar]. Entspricht -5°C. Falls niedriger deutet dies auf ein Kältemittel-Leck hin 
 	pressureDifferenceEvaporatorMax :	REAL 	:= 	45;		// Maximaler Druckverlust des Verdampfer-Wärmetauschers [mbar]
 	evaporatingTemperatureOutMin 	:	REAL 	:=	2.3; 	// Minimale Temperatur am Austritt des Verdampfer-Wärmetausschers. Triplepunkt des Wassers. [°C]
 END_STRUCT
