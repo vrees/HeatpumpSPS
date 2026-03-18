@@ -167,8 +167,10 @@ ELSIF (rtrigButtonSwitchOn.Q OR (rtrigButtonConfirmation.Q AND iState.State = E_
 	events.switchOn.isTriggered := TRUE;
 ELSIF (isHeatRequested()) THEN
 	events.heatIsRequested.isTriggered := TRUE;
-ELSIF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < GVL.configValues.temperatureDiffBacklashOff AND iState.State = E_State.COOLDOWN) THEN
-	events.cooledDown.isTriggered := TRUE;
+ELSIF ((pd.sensor.temperatureFlow - pd.sensor.temperatureReturn) < GVL.configValues.temperatureDiffBacklashOff
+	AND (pd.sensor.temperatureEvaporatingIn - pd.sensor.temperatureEvaporatingOut) < GVL.configValues.temperatureDiffBacklashOff 
+	AND iState.State = E_State.COOLDOWN) THEN
+		events.cooledDown.isTriggered := TRUE;
 ELSIF (isTargetTemperatureReached()) THEN
 	events.targetTemperatureReached.isTriggered := TRUE;
 ELSIF (pd.incident.incidentWaterFlow AND      				// Durchfluss Quellwasser ist ok
@@ -420,7 +422,10 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.generateEvents">
-      <LineId Id="322" Count="10" />
+      <LineId Id="322" Count="6" />
+      <LineId Id="440" Count="0" />
+      <LineId Id="439" Count="0" />
+      <LineId Id="329" Count="3" />
       <LineId Id="404" Count="0" />
       <LineId Id="403" Count="0" />
       <LineId Id="333" Count="23" />

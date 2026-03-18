@@ -94,7 +94,7 @@ stateDiagram-v2
 
 | Übergang | Event | Bedingungen | Aktionen |
 |----------|-------|-------------|----------|
-| **COOLDOWN → IDLE** | Abgekühlt | • (T_Vorlauf - T_Rücklauf) < 1.0°C | • Wasserpumpe ausschalten<br>• Min-Idle-Timer läuft weiter |
+| **COOLDOWN → IDLE** | Abgekühlt | • (T_Vorlauf - T_Rücklauf) < 1.0°C<br>• und Delta-T am Verdampfer < 1.0°C | • Wasserpumpe ausschalten<br>• Min-Idle-Timer läuft weiter |
 | **COOLDOWN → OFF** | Ausschalt-Button | - | • Wasserpumpe bleibt an<br>• (Kühlung fortsetzen) |
 | **COOLDOWN → ERROR** | Fehler erkannt | Beliebiger Fehler | • Fehler loggen |
 
@@ -307,16 +307,19 @@ ActionSwitchOff(message):
 - Ventil geschlossen
 
 #### Zweck der Cooldown-Phase
-Nach dem Ausschalten des Kompressors befindet sich im Verflüssiger (Kondensator) noch Restwärme. Die Wasserpumpe läuft weiter und transportiert diese Wärme ab. Dies:
+Nach dem Ausschalten des Kompressors befindet sich im Verflüssiger (Kondensator) noch Restwärme. 
+Die Wasserpumpe läuft weiter und transportiert diese Wärme ab. 
+Ausserdem wird die kalte Sole im Verdampfer noch abgeführt.
+Dies:
 - Verhindert unnötigen Wärmeverlust durch Abstrahlung
 - Nutzt die Restwärme zur Pufferbeladung
-- Schont die Komponenten durch kontrollierte Abkühlung
 
 #### Abkühlkriterium
-Die Cooldown-Phase endet, wenn die **Temperaturdifferenz zwischen Vorlauf und Rücklauf kleiner als 1.0°C** ist:
+Die Cooldown-Phase endet, wenn die **Temperaturdifferenz zwischen Vorlauf und Rücklauf kleiner als 1.0°C** 
+und wenn die **Temperaturdifferenz zwischen Eingang und Ausgang Verdamper kleiner als 1.0°C** ist:
 
 ```
-(temperatureFlow - temperatureReturn) < 1.0°C
+(temperatureFlow - temperatureReturn) < 1.0°C AND (pd.sensor.temperatureEvaporatingIn - pd.sensor.temperatureEvaporatingOut) < 1.0°C
 ```
 
 Dies zeigt an, dass kein nennenswerter Wärmetransport mehr stattfindet.
