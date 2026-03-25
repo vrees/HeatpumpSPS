@@ -9,7 +9,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Das manuelle EIn-Ausschalten der Zwischenkreispumpe ist nur in IDLE oder ERROR Status möglich
+      <ST><![CDATA[// Das manuelle Ein-Ausschalten der Zwischenkreispumpe ist nur in IDLE oder ERROR Status möglich
 IF pMachine^.iState.State = E_State.IDLE OR pMachine^.iState.State = E_State.ERROR THEN
 	IF pMachine^.pd.actor.operatingStateIntermediateCircuitPump = FALSE THEN
 		LogMessage(E_LogType.INFO, 'Schalte Sole Zwischenkreispumpe: -> ', 'Ein');	
