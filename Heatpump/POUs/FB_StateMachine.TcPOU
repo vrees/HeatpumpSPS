@@ -24,12 +24,14 @@ VAR
     bClearErrorListButton				:   BOOL;  		
     bToggleButtonVentil 				: 	BOOL; 	
 	bToggleIntermediateCircuitPump		: 	BOOL; 	
+	bToggleButtonPvBoost				: 	BOOL; 
 	rtrigButtonSwitchOn					:	R_TRIG;
 	rtrigButtonSwitchOff				:	R_TRIG;
 	rtrigButtonConfirmation				:	R_TRIG;	
 	rtrigClearErrorListButton			:	R_TRIG;
 	rtrigToggleButtonVentil				:   R_TRIG;		// rising Edge
 	rtrigToggleIntermediateCircuitPump	:   R_TRIG;		
+	rtrigToogleButtonPvBoost			:   R_TRIG;	
 	strState							: 	STRING;
 	strInfotext							: 	STRING(256);
 	
@@ -47,6 +49,7 @@ rtrigButtonConfirmation(CLK := pd.sensor.userConfirmation);
 rtrigClearErrorListButton(CLK := bClearErrorListButton);
 rtrigToggleButtonVentil(CLK := bToggleButtonVentil);
 rtrigToggleIntermediateCircuitPump(CLK := bToggleIntermediateCircuitPump);
+rtrigToogleButtonPvBoost(CLK := bToggleButtonPvBoost);
 
 timerTON();
 
@@ -101,6 +104,10 @@ END_IF
 
 IF rtrigToggleIntermediateCircuitPump.Q THEN
 	toggleIntermediateCircuitPump(THIS);
+END_IF
+
+IF rtrigToogleButtonPvBoost.Q THEN
+	togglePvBoost(THIS);
 END_IF
 
 
@@ -271,7 +278,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[isHeatRequested := 
-	((pd.sensor.bufferTopTemperature < calculateTargetTemperatureOn(pd.sensor.photovoltaicSurplus)) OR
+	((pd.sensor.bufferTopTemperature < calculateTargetTemperatureOn(pd.sensor.photovoltaicSurplus, pd.sensor.photovoltaicBoost)) OR
 	(pd.sensor.boilerHeatRequest = TRUE AND (pd.sensor.bufferTopTemperature <= pd.sensor.boilerTemperature + GVL.configValues.temperatureDiffBoilerLaden)))
 	AND iState.State = E_State.IDLE
 	AND pd.sensor.temperatureReturn <= GVL.configValues.maxReturnTemperature;]]></ST>
@@ -285,7 +292,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[// In case of State=Running the Heatpump is turned of if following condition are true
 isTargetTemperatureReached := 
-	((pd.sensor.bufferMiddleTemperature >= calculateTargetTemperatureOff(pd.sensor.photovoltaicSurplus)) AND (pd.sensor.boilerHeatRequest = FALSE)	
+	((pd.sensor.bufferMiddleTemperature >= calculateTargetTemperatureOff(pd.sensor.photovoltaicSurplus, pd.sensor.photovoltaicBoost)) AND (pd.sensor.boilerHeatRequest = FALSE)	
 	  OR pd.sensor.temperatureReturn > GVL.configValues.maxReturnTemperature)
 	AND (iState.State = E_State.RUNNING);
 	]]></ST>
@@ -331,7 +338,8 @@ bStartButtonPressed				:= FALSE;
 bStopButtonPressed				:= FALSE;
 bClearErrorListButton 			:= FALSE;
 bToggleButtonVentil 			:= FALSE;
-bToggleIntermediateCircuitPump	:= FALSE;]]></ST>
+bToggleIntermediateCircuitPump	:= FALSE;
+bToggleButtonPvBoost			:= FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="setLabelText" Id="{e9a542b8-1e41-48ce-b30f-244e7b54b970}">
@@ -344,10 +352,10 @@ END_VAR
 
 CASE  iState.State OF 
 	E_State.RUNNING:
-		strInfotext := CONCAT('Ausschalt-Bedingung:\nDie Ladepumpe ist nicht eingeschaltet   und\ndie Puffertemperatur Mitte ist grösser als ',  ScaleAndRoundString(calculateTargetTemperatureOff(pd.sensor.photovoltaicSurplus), 10));
+		strInfotext := CONCAT('Ausschalt-Bedingung:\nDie Ladepumpe ist nicht eingeschaltet   und\ndie Puffertemperatur Mitte ist grösser als ',  ScaleAndRoundString(calculateTargetTemperatureOff(pd.sensor.photovoltaicSurplus, pd.sensor.photovoltaicBoost), 10));
 		strInfotext := CONCAT(strInfotext, ' °C');	
 	E_State.IDLE:
-		strInfotext := CONCAT('Einschalt-Bedingung:\nDie Temperatur am Puffer oben ist niedriger als ',  ScaleAndRoundString(calculateTargetTemperatureOn(pd.sensor.photovoltaicSurplus), 10));
+		strInfotext := CONCAT('Einschalt-Bedingung:\nDie Temperatur am Puffer oben ist niedriger als ',  ScaleAndRoundString(calculateTargetTemperatureOn(pd.sensor.photovoltaicSurplus, pd.sensor.photovoltaicBoost), 10));
 		strInfotext := CONCAT(strInfotext, ' °C    oder\ndie Ladepumpe ist ein und der Puffer ist nicht deutlich wärmer als der Boiler');
 	E_State.COOLDOWN:
 		strInfotext := 'Die Pumpe schaltet aus wenn die Restwärme \naus dem Verflüssiger abtransortiert wurde';
@@ -381,6 +389,7 @@ END_VAR
       <LineId Id="281" Count="2" />
       <LineId Id="504" Count="1" />
       <LineId Id="717" Count="0" />
+      <LineId Id="763" Count="0" />
       <LineId Id="582" Count="0" />
       <LineId Id="396" Count="0" />
       <LineId Id="284" Count="4" />
@@ -396,6 +405,8 @@ END_VAR
       <LineId Id="634" Count="6" />
       <LineId Id="633" Count="0" />
       <LineId Id="719" Count="3" />
+      <LineId Id="765" Count="2" />
+      <LineId Id="764" Count="0" />
       <LineId Id="718" Count="0" />
       <LineId Id="317" Count="0" />
       <LineId Id="429" Count="0" />
@@ -475,6 +486,7 @@ END_VAR
       <LineId Id="6" Count="0" />
       <LineId Id="20" Count="1" />
       <LineId Id="25" Count="0" />
+      <LineId Id="29" Count="0" />
     </LineIds>
     <LineIds Name="FB_StateMachine.setLabelText">
       <LineId Id="6" Count="1" />

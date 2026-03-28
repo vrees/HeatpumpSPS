@@ -19,7 +19,8 @@
         calculatedOverheatTemperature			: REAL;  // Berechnete Überhitzungstemperatur
         boilerHeatRequest				AT %I*	: BOOL;  // Boiler LadePumpe ist eingeschaltet - EL1008.1*)
         userConfirmation				AT %I*	: BOOL;  // Taster für Ein-/Aus-Quittierung - EL1008.2*) 
-		photovoltaicSurplus				AT %I*	: BOOL;  // Photovoltaik Überschuss - EL1008.4*)
+		photovoltaicSurplus				AT %I*	: BOOL;  // Photovoltaik Überschuss - gemeldet vom PV-WechselrichterEL1008.4*)
+		photovoltaicBoost				  		: BOOL;  // Photovoltaik Boost - ist kein Sensor - sondern per Click einschaltbar*)
     END_STRUCT
 END_TYPE
 ]]></Declaration>

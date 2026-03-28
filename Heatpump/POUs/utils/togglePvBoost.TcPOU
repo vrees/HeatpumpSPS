@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="togglePvBoost" Id="{c034a06b-5db7-4075-99b0-b658a8d8fbee}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION togglePvBoost : BOOL
+VAR_INPUT
+	pMachine : POINTER TO FB_StateMachine;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF pMachine^.pd.sensor.photovoltaicBoost = FALSE THEN
+	LogMessage(E_LogType.INFO, 'PV Boost wurde geklickt: -> ', 'Ein');	
+	pMachine^.pd.sensor.photovoltaicBoost := TRUE;
+ELSE
+	LogMessage(E_LogType.INFO, 'PV Boost wurde geklickt: -> ', 'Aus');	
+	pMachine^.pd.sensor.photovoltaicBoost := FALSE;
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="togglePvBoost">
+      <LineId Id="12" Count="6" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

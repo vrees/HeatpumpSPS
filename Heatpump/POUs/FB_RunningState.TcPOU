@@ -24,6 +24,7 @@ END_VAR
 LogMessage(E_LogType.INFO, message, pMachine^.CoolDownState.Name);
 pMachine^.pd.actor.operatingStateCompressor := FALSE;
 switchWaterVentil(bOpen := FALSE, pMachine);
+pMachine^.pd.sensor.photovoltaicBoost := FALSE;
 pMachine^.SetState(pMachine^.CoolDownState);
 ]]></ST>
       </Implementation>
@@ -157,6 +158,7 @@ ActionSwitchOff('Zieltemperatur erreicht. -> ');]]></ST>
       <LineId Id="20" Count="1" />
       <LineId Id="23" Count="0" />
       <LineId Id="29" Count="0" />
+      <LineId Id="34" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="13" Count="0" />
     </LineIds>

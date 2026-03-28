@@ -4,11 +4,12 @@
     <Declaration><![CDATA[FUNCTION calculateTargetTemperatureOn : REAL
 VAR_INPUT
 	photovoltaicSurplus			: BOOL;
+	photovoltaicBoost			: BOOL;
 END_VAR
 
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF (photovoltaicSurplus) THEN
+      <ST><![CDATA[IF (photovoltaicSurplus OR photovoltaicBoost) THEN
     calculateTargetTemperatureOn := GVL.configValues.targetTemperatureOnPV;
 ELSE
     calculateTargetTemperatureOn := GVL.configValues.targetTemperatureOn;
