@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
+	<TargetInfo>
+		<TcTargetDesc>
+			<TargetType>CX51x0-CE</TargetType>
+			<TargetVersion>
+				<Version>3</Version>
+				<Revision>1</Revision>
+				<Build>4024</Build>
+			</TargetVersion>
+			<TargetFeatures>
+				<NetId>5.124.202.224.1.1</NetId>
+			</TargetFeatures>
+			<Hardware>
+				<Model>CX5110-0115</Model>
+				<SerialNo>000t5krb</SerialNo>
+				<CPUVersion>1.1</CPUVersion>
+				<Date>22.6.23</Date>
+				<CPUArchitecture>0</CPUArchitecture>
+			</Hardware>
+			<OsImage>
+				<ImageDevice>CX51x0</ImageDevice>
+				<ImageVersion>6.10a</ImageVersion>
+				<ImageLevel>HPS</ImageLevel>
+				<OsName>Windows CE</OsName>
+				<OsVersion>7.0</OsVersion>
+			</OsImage>
+		</TcTargetDesc>
+	</TargetInfo>
+	<LicenseInfo>
+		<SystemId Level="30" SerialNo="000t5krb" MacAddress="0001057ccae0">{6DCE6779-381E-B184-4BFB-1425D13BDD07}</SystemId>
+		<PurchaseOrder><![CDATA[TF2015]]></PurchaseOrder>
+		<CustomOrder><![CDATA[67026399]]></CustomOrder>
+		<IssueTime>2026-04-21T06:50:00</IssueTime>
+		<License ManuallyAdded="true">
+			<LicenseId>{CB3D4492-5E9E-43BC-AB3B-27CF3896EEC2}</LicenseId>
+			<Name>TC3 HMI Clients Pack 2</Name>
+			<OrderNo>TF2015</OrderNo>
+			<LicenseTAN>332V6-6$CWP</LicenseTAN>
+		</License>
+	</LicenseInfo>
+</TcLicenseInfo>
