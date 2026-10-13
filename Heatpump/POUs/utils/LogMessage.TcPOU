@@ -4,13 +4,13 @@
     <Declaration><![CDATA[FUNCTION LogMessage : BOOL
 VAR_INPUT
     eType 		: E_LogType;
-	sParam1 	: STRING;
-	sParam2  	: STRING;
+	sParam1 	: STRING(255);
+	sParam2  	: STRING(255);
 END_VAR
 VAR
     nIndex : INT;
 	i : INT;
-	sMsg : STRING;
+	sMsg : STRING(255);
 	sTypeName : STRING(20);
 END_VAR
 ]]></Declaration>
