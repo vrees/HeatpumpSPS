@@ -18,49 +18,54 @@ pMachine^.pd.actor.operatingStateWaterPump := FALSE;
 pMachine^.pd.actor.operatingStateIntermediateCircuitPump := FALSE;
 switchWaterVentil(bOpen := FALSE, pMachine);
 
-IF errorEvents.PressureDiffEvaporatorTooHigh.isTriggered THEN
+IF errorEvents.PressureDiffEvaporatorTooHigh.isTriggered AND i <= 6 THEN
 	GVL.lastErrorsOccurred[i] := errorEvents.PressureDiffEvaporatorTooHigh;
 	i := i + 1;
 END_IF
 
-IF errorEvents.EvaporatingTemperatureTooLow.isTriggered THEN
+IF errorEvents.EvaporatingTemperatureTooLow.isTriggered AND i <= 6 THEN
 	GVL.lastErrorsOccurred[i] := errorEvents.EvaporatingTemperatureTooLow;
 	i := i + 1;
 END_IF
 
-IF errorEvents.EvaporatingFlowRateTooLow.isTriggered THEN
+IF errorEvents.EvaporatingFlowRateTooLow.isTriggered AND i <= 6 THEN
 	GVL.lastErrorsOccurred[i] := errorEvents.EvaporatingFlowRateTooLow;
 	i := i + 1;
 END_IF
 
-IF errorEvents.IntermediateCircuitFlowRateTooLow.isTriggered THEN
+IF errorEvents.IntermediateCircuitFlowRateTooLow.isTriggered AND i <= 6 THEN
 	GVL.lastErrorsOccurred[i] := errorEvents.IntermediateCircuitFlowRateTooLow;
 	i := i + 1;
 END_IF
 
-IF errorEvents.LowPressureRefrigerationThermostat.isTriggered THEN
+IF errorEvents.LowPressureRefrigerationThermostat.isTriggered AND i <= 6 THEN
 	GVL.lastErrorsOccurred[i] := errorEvents.LowPressureRefrigerationThermostat;
 	i := i + 1;
 END_IF
 
-IF errorEvents.HighPressureRefrigerationThermostat.isTriggered THEN
+IF errorEvents.HighPressureRefrigerationThermostat.isTriggered AND i <= 6 THEN
 	GVL.lastErrorsOccurred[i] := errorEvents.HighPressureRefrigerationThermostat;
 	i := i + 1;
 END_IF
 
 
-IF errorEvents.LowPressureRefrigerationCalc.isTriggered THEN
+IF errorEvents.LowPressureRefrigerationCalc.isTriggered AND i <= 6 THEN
 	GVL.lastErrorsOccurred[i] := errorEvents.LowPressureRefrigerationCalc;
 	i := i + 1;
 END_IF
 
-IF errorEvents.MotorProtectionTriggered.isTriggered THEN
+IF errorEvents.MotorProtectionTriggered.isTriggered AND i <= 6 THEN
 	GVL.lastErrorsOccurred[i] := errorEvents.MotorProtectionTriggered;
 	i := i + 1;
 END_IF
 
-IF errorEvents.ExpansionValveTriggered.isTriggered THEN
+IF errorEvents.ExpansionValveTriggered.isTriggered AND i <= 6 THEN
 	GVL.lastErrorsOccurred[i] := errorEvents.ExpansionValveTriggered;
+	i := i + 1;
+END_IF
+
+IF errorEvents.TemperatureSourceWaterOutMinTooLow.isTriggered AND i <= 6 THEN
+	GVL.lastErrorsOccurred[i] := errorEvents.TemperatureSourceWaterOutMinTooLow;
 	i := i + 1;
 END_IF
 

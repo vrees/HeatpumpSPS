@@ -13,7 +13,9 @@ END_VAR
       <ST><![CDATA[stEvent.message := strMessage;
 stEvent.isTriggered := TRUE;
 updateEventWithTimestamp(stEvent := stEvent);
-events.errorsDetected := isError;]]></ST>
+IF isError THEN
+	events.errorsDetected := TRUE;
+END_IF]]></ST>
     </Implementation>
     <LineIds Name="setEventInfo">
       <LineId Id="14" Count="2" />
