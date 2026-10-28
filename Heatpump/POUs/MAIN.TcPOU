@@ -9,7 +9,9 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbProcessdata(pd := pd);
+      <ST><![CDATA[GVL.fbLocalTime(bEnable := TRUE, dwCycle := 5);
+
+fbProcessdata(pd := pd);
 
 fbStateMachine(pd := pd);
 
